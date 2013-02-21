@@ -34,7 +34,7 @@ refdes=CONN3
 T 40900 42950 5 10 0 0 180 0 1
 device=CONNECTOR_2
 T 40900 42750 5 10 0 0 180 0 1
-footprint=SIP2
+footprint=HC49
 }
 C 45100 44400 1 0 0 gnd-1.sym
 C 47400 44400 1 0 0 gnd-1.sym
@@ -151,5 +151,5 @@ refdes=CONN1
 T 41100 49550 5 10 0 0 180 0 1
 device=CONNECTOR_2
 T 41100 49350 5 10 0 0 180 0 1
-footprint=SIP2
+footprint=HC49
 }
