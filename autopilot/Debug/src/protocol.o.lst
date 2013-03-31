@@ -1,0 +1,588 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"protocol.c"
+  23              	.Ltext0:
+  24              		.file 1 "../src/protocol.c"
+ 25440              		.align	2
+ 25441              		.global	PROTOCOL_toByteArray
+ 25442              		.thumb
+ 25443              		.thumb_func
+ 25445              	PROTOCOL_toByteArray:
+ 25446              	.LFB110:
+   1:../src/protocol.c **** #include "protocol.h"
+   2:../src/protocol.c **** #include "usbd_cdc_vcp.h"
+   3:../src/protocol.c **** 
+   4:../src/protocol.c **** static void PROTOCOL_parseFrame(uint8_t *buf, PROTOCOL_Frame *f);
+   5:../src/protocol.c **** static uint32_t PROTOCOL_parseInt(uint8_t *mess);
+   6:../src/protocol.c **** static void PROTOCOL_intToByteArray(uint32_t val, uint8_t *arr);
+   7:../src/protocol.c **** 
+   8:../src/protocol.c **** uint32_t PROTOCOL_toByteArray(PROTOCOL_Protocol *p, uint8_t *buf) {
+ 25447              		.loc 1 8 0
+ 25448              		.cfi_startproc
+ 25449              		@ args = 0, pretend = 0, frame = 16
+ 25450              		@ frame_needed = 1, uses_anonymous_args = 0
+ 25451 0000 80B5     		push	{r7, lr}
+ 25452              	.LCFI0:
+ 25453              		.cfi_def_cfa_offset 8
+ 25454 0002 84B0     		sub	sp, sp, #16
+ 25455              	.LCFI1:
+ 25456              		.cfi_def_cfa_offset 24
+ 25457 0004 00AF     		add	r7, sp, #0
+ 25458              		.cfi_offset 14, -4
+ 25459              		.cfi_offset 7, -8
+ 25460              	.LCFI2:
+ 25461              		.cfi_def_cfa_register 7
+ 25462 0006 7860     		str	r0, [r7, #4]
+ 25463 0008 3960     		str	r1, [r7, #0]
+   9:../src/protocol.c ****     uint32_t bufLen = 12;
+ 25464              		.loc 1 9 0
+ 25465 000a 4FF00C03 		mov	r3, #12
+ 25466 000e FB60     		str	r3, [r7, #12]
+  10:../src/protocol.c ****     PROTOCOL_intToByteArray(p->num, &buf[8]);
+ 25467              		.loc 1 10 0
+ 25468 0010 7B68     		ldr	r3, [r7, #4]
+ 25469 0012 5A68     		ldr	r2, [r3, #4]
+ 25470 0014 3B68     		ldr	r3, [r7, #0]
+ 25471 0016 03F10803 		add	r3, r3, #8
+ 25472 001a 1046     		mov	r0, r2
+ 25473 001c 1946     		mov	r1, r3
+ 25474 001e FFF7FEFF 		bl	PROTOCOL_intToByteArray
+ 25475              	.LBB2:
+  11:../src/protocol.c **** 
+  12:../src/protocol.c ****     for (uint8_t i = 0; i < 2; i++) {
+ 25476              		.loc 1 12 0
+ 25477 0022 4FF00003 		mov	r3, #0
+ 25478 0026 FB72     		strb	r3, [r7, #11]
+ 25479 0028 59E0     		b	.L2
+ 25480              	.L5:
+  13:../src/protocol.c ****         buf[bufLen] = p->frames[i].cmd;
+ 25481              		.loc 1 13 0
+ 25482 002a 3A68     		ldr	r2, [r7, #0]
+ 25483 002c FB68     		ldr	r3, [r7, #12]
+ 25484 002e D318     		adds	r3, r2, r3
+ 25485 0030 F97A     		ldrb	r1, [r7, #11]	@ zero_extendqisi2
+ 25486 0032 7A68     		ldr	r2, [r7, #4]
+ 25487 0034 01F10101 		add	r1, r1, #1
+ 25488 0038 12F83120 		ldrb	r2, [r2, r1, lsl #3]	@ zero_extendqisi2
+ 25489 003c 1A70     		strb	r2, [r3, #0]
+  14:../src/protocol.c ****         bufLen++;
+ 25490              		.loc 1 14 0
+ 25491 003e FB68     		ldr	r3, [r7, #12]
+ 25492 0040 03F10103 		add	r3, r3, #1
+ 25493 0044 FB60     		str	r3, [r7, #12]
+  15:../src/protocol.c ****         buf[bufLen] = p->frames[i].type;
+ 25494              		.loc 1 15 0
+ 25495 0046 3A68     		ldr	r2, [r7, #0]
+ 25496 0048 FB68     		ldr	r3, [r7, #12]
+ 25497 004a D218     		adds	r2, r2, r3
+ 25498 004c FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 25499 004e 7968     		ldr	r1, [r7, #4]
+ 25500 0050 03F10103 		add	r3, r3, #1
+ 25501 0054 4FEAC303 		lsl	r3, r3, #3
+ 25502 0058 CB18     		adds	r3, r1, r3
+ 25503 005a 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 25504 005c 1370     		strb	r3, [r2, #0]
+  16:../src/protocol.c ****         bufLen++;
+ 25505              		.loc 1 16 0
+ 25506 005e FB68     		ldr	r3, [r7, #12]
+ 25507 0060 03F10103 		add	r3, r3, #1
+ 25508 0064 FB60     		str	r3, [r7, #12]
+  17:../src/protocol.c ****         if (p->frames[i].type == PROTOCOL_TYPE_BYTE) {
+ 25509              		.loc 1 17 0
+ 25510 0066 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 25511 0068 7A68     		ldr	r2, [r7, #4]
+ 25512 006a 03F10103 		add	r3, r3, #1
+ 25513 006e 4FEAC303 		lsl	r3, r3, #3
+ 25514 0072 D318     		adds	r3, r2, r3
+ 25515 0074 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 25516 0076 012B     		cmp	r3, #1
+ 25517 0078 10D1     		bne	.L3
+  18:../src/protocol.c ****             buf[bufLen] = p->frames[i].bData;
+ 25518              		.loc 1 18 0
+ 25519 007a 3A68     		ldr	r2, [r7, #0]
+ 25520 007c FB68     		ldr	r3, [r7, #12]
+ 25521 007e D218     		adds	r2, r2, r3
+ 25522 0080 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 25523 0082 7968     		ldr	r1, [r7, #4]
+ 25524 0084 03F10103 		add	r3, r3, #1
+ 25525 0088 4FEAC303 		lsl	r3, r3, #3
+ 25526 008c CB18     		adds	r3, r1, r3
+ 25527 008e 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 25528 0090 1370     		strb	r3, [r2, #0]
+  19:../src/protocol.c ****             bufLen++;
+ 25529              		.loc 1 19 0
+ 25530 0092 FB68     		ldr	r3, [r7, #12]
+ 25531 0094 03F10103 		add	r3, r3, #1
+ 25532 0098 FB60     		str	r3, [r7, #12]
+ 25533 009a 1CE0     		b	.L4
+ 25534              	.L3:
+  20:../src/protocol.c ****         } else if (p->frames[i].type == PROTOCOL_TYPE_INT) {
+ 25535              		.loc 1 20 0
+ 25536 009c FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 25537 009e 7A68     		ldr	r2, [r7, #4]
+ 25538 00a0 03F10103 		add	r3, r3, #1
+ 25539 00a4 4FEAC303 		lsl	r3, r3, #3
+ 25540 00a8 D318     		adds	r3, r2, r3
+ 25541 00aa 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 25542 00ac 022B     		cmp	r3, #2
+ 25543 00ae 12D1     		bne	.L4
+  21:../src/protocol.c ****             PROTOCOL_intToByteArray(p->frames[i].iData, &buf[bufLen]);
+ 25544              		.loc 1 21 0
+ 25545 00b0 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 25546 00b2 7A68     		ldr	r2, [r7, #4]
+ 25547 00b4 03F10103 		add	r3, r3, #1
+ 25548 00b8 4FEAC303 		lsl	r3, r3, #3
+ 25549 00bc D318     		adds	r3, r2, r3
+ 25550 00be 5A68     		ldr	r2, [r3, #4]
+ 25551 00c0 3968     		ldr	r1, [r7, #0]
+ 25552 00c2 FB68     		ldr	r3, [r7, #12]
+ 25553 00c4 CB18     		adds	r3, r1, r3
+ 25554 00c6 1046     		mov	r0, r2
+ 25555 00c8 1946     		mov	r1, r3
+ 25556 00ca FFF7FEFF 		bl	PROTOCOL_intToByteArray
+  22:../src/protocol.c ****             bufLen += 4;
+ 25557              		.loc 1 22 0
+ 25558 00ce FB68     		ldr	r3, [r7, #12]
+ 25559 00d0 03F10403 		add	r3, r3, #4
+ 25560 00d4 FB60     		str	r3, [r7, #12]
+ 25561              	.L4:
+  12:../src/protocol.c ****     for (uint8_t i = 0; i < 2; i++) {
+ 25562              		.loc 1 12 0
+ 25563 00d6 FB7A     		ldrb	r3, [r7, #11]
+ 25564 00d8 03F10103 		add	r3, r3, #1
+ 25565 00dc FB72     		strb	r3, [r7, #11]
+ 25566              	.L2:
+  12:../src/protocol.c ****     for (uint8_t i = 0; i < 2; i++) {
+ 25567              		.loc 1 12 0 is_stmt 0 discriminator 1
+ 25568 00de FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 25569 00e0 012B     		cmp	r3, #1
+ 25570 00e2 A2D9     		bls	.L5
+ 25571              	.LBE2:
+  23:../src/protocol.c ****         }
+  24:../src/protocol.c ****     }
+  25:../src/protocol.c **** 
+  26:../src/protocol.c ****     PROTOCOL_intToByteArray(bufLen, &buf[4]);
+ 25572              		.loc 1 26 0 is_stmt 1
+ 25573 00e4 3B68     		ldr	r3, [r7, #0]
+ 25574 00e6 03F10403 		add	r3, r3, #4
+ 25575 00ea F868     		ldr	r0, [r7, #12]
+ 25576 00ec 1946     		mov	r1, r3
+ 25577 00ee FFF7FEFF 		bl	PROTOCOL_intToByteArray
+  27:../src/protocol.c ****     PROTOCOL_intToByteArray(0x55555555, &buf[0]);
+ 25578              		.loc 1 27 0
+ 25579 00f2 4FF05530 		mov	r0, #1431655765
+ 25580 00f6 3968     		ldr	r1, [r7, #0]
+ 25581 00f8 FFF7FEFF 		bl	PROTOCOL_intToByteArray
+  28:../src/protocol.c ****     return bufLen;
+ 25582              		.loc 1 28 0
+ 25583 00fc FB68     		ldr	r3, [r7, #12]
+  29:../src/protocol.c **** }
+ 25584              		.loc 1 29 0
+ 25585 00fe 1846     		mov	r0, r3
+ 25586 0100 07F11007 		add	r7, r7, #16
+ 25587 0104 BD46     		mov	sp, r7
+ 25588 0106 80BD     		pop	{r7, pc}
+ 25589              		.cfi_endproc
+ 25590              	.LFE110:
+ 25592              		.section	.text.PROTOCOL_parseProtocol,"ax",%progbits
+ 25593              		.align	2
+ 25594              		.global	PROTOCOL_parseProtocol
+ 25595              		.thumb
+ 25596              		.thumb_func
+ 25598              	PROTOCOL_parseProtocol:
+ 25599              	.LFB111:
+  30:../src/protocol.c **** 
+  31:../src/protocol.c **** // TODO : fixed parse protocol. Added check control frame
+  32:../src/protocol.c **** void PROTOCOL_parseProtocol(uint8_t *buf, PROTOCOL_Protocol *p) {
+ 25600              		.loc 1 32 0
+ 25601              		.cfi_startproc
+ 25602              		@ args = 0, pretend = 0, frame = 24
+ 25603              		@ frame_needed = 1, uses_anonymous_args = 0
+ 25604 0000 80B5     		push	{r7, lr}
+ 25605              	.LCFI3:
+ 25606              		.cfi_def_cfa_offset 8
+ 25607 0002 86B0     		sub	sp, sp, #24
+ 25608              	.LCFI4:
+ 25609              		.cfi_def_cfa_offset 32
+ 25610 0004 00AF     		add	r7, sp, #0
+ 25611              		.cfi_offset 14, -4
+ 25612              		.cfi_offset 7, -8
+ 25613              	.LCFI5:
+ 25614              		.cfi_def_cfa_register 7
+ 25615 0006 7860     		str	r0, [r7, #4]
+ 25616 0008 3960     		str	r1, [r7, #0]
+  33:../src/protocol.c ****     uint32_t bufLen = PROTOCOL_parseInt(&buf[0]);
+ 25617              		.loc 1 33 0
+ 25618 000a 7868     		ldr	r0, [r7, #4]
+ 25619 000c FFF7FEFF 		bl	PROTOCOL_parseInt
+ 25620 0010 3861     		str	r0, [r7, #16]
+  34:../src/protocol.c ****     p->framesLen = 0;
+ 25621              		.loc 1 34 0
+ 25622 0012 3B68     		ldr	r3, [r7, #0]
+ 25623 0014 4FF00002 		mov	r2, #0
+ 25624 0018 1A60     		str	r2, [r3, #0]
+  35:../src/protocol.c ****     if (bufLen <= 0 || bufLen > PROTOCOL_MAX_LEN) {
+ 25625              		.loc 1 35 0
+ 25626 001a 3B69     		ldr	r3, [r7, #16]
+ 25627 001c 002B     		cmp	r3, #0
+ 25628 001e 41D0     		beq	.L16
+ 25629              		.loc 1 35 0 is_stmt 0 discriminator 1
+ 25630 0020 3B69     		ldr	r3, [r7, #16]
+ 25631 0022 202B     		cmp	r3, #32
+ 25632 0024 40D8     		bhi	.L17
+ 25633              	.L8:
+  36:../src/protocol.c ****         return;
+  37:../src/protocol.c ****     }
+  38:../src/protocol.c ****     p->num = PROTOCOL_parseInt(&buf[4]);
+ 25634              		.loc 1 38 0 is_stmt 1
+ 25635 0026 7B68     		ldr	r3, [r7, #4]
+ 25636 0028 03F10403 		add	r3, r3, #4
+ 25637 002c 1846     		mov	r0, r3
+ 25638 002e FFF7FEFF 		bl	PROTOCOL_parseInt
+ 25639 0032 0246     		mov	r2, r0
+ 25640 0034 3B68     		ldr	r3, [r7, #0]
+ 25641 0036 5A60     		str	r2, [r3, #4]
+ 25642              	.LBB3:
+  39:../src/protocol.c ****     PROTOCOL_Frame f;
+  40:../src/protocol.c ****     for (uint32_t i = 8; i < bufLen;) {
+ 25643              		.loc 1 40 0
+ 25644 0038 4FF00803 		mov	r3, #8
+ 25645 003c 7B61     		str	r3, [r7, #20]
+ 25646 003e 2CE0     		b	.L10
+ 25647              	.L15:
+  41:../src/protocol.c ****         PROTOCOL_parseFrame(&buf[i], &f);
+ 25648              		.loc 1 41 0
+ 25649 0040 7A68     		ldr	r2, [r7, #4]
+ 25650 0042 7B69     		ldr	r3, [r7, #20]
+ 25651 0044 D218     		adds	r2, r2, r3
+ 25652 0046 07F10803 		add	r3, r7, #8
+ 25653 004a 1046     		mov	r0, r2
+ 25654 004c 1946     		mov	r1, r3
+ 25655 004e FFF7FEFF 		bl	PROTOCOL_parseFrame
+  42:../src/protocol.c ****         switch (f.type) {
+ 25656              		.loc 1 42 0
+ 25657 0052 7B7A     		ldrb	r3, [r7, #9]	@ zero_extendqisi2
+ 25658 0054 012B     		cmp	r3, #1
+ 25659 0056 02D0     		beq	.L12
+ 25660 0058 022B     		cmp	r3, #2
+ 25661 005a 05D0     		beq	.L13
+  43:../src/protocol.c ****         case PROTOCOL_TYPE_BYTE:
+  44:../src/protocol.c ****             i += 3;
+  45:../src/protocol.c ****             break;
+  46:../src/protocol.c ****         case PROTOCOL_TYPE_INT:
+  47:../src/protocol.c ****             i += 6;
+  48:../src/protocol.c ****             break;
+  49:../src/protocol.c ****         default:
+  50:../src/protocol.c ****             return;
+ 25662              		.loc 1 50 0
+ 25663 005c 25E0     		b	.L6
+ 25664              	.L12:
+  44:../src/protocol.c ****             i += 3;
+ 25665              		.loc 1 44 0
+ 25666 005e 7B69     		ldr	r3, [r7, #20]
+ 25667 0060 03F10303 		add	r3, r3, #3
+ 25668 0064 7B61     		str	r3, [r7, #20]
+  45:../src/protocol.c ****             break;
+ 25669              		.loc 1 45 0
+ 25670 0066 04E0     		b	.L14
+ 25671              	.L13:
+  47:../src/protocol.c ****             i += 6;
+ 25672              		.loc 1 47 0
+ 25673 0068 7B69     		ldr	r3, [r7, #20]
+ 25674 006a 03F10603 		add	r3, r3, #6
+ 25675 006e 7B61     		str	r3, [r7, #20]
+  48:../src/protocol.c ****             break;
+ 25676              		.loc 1 48 0
+ 25677 0070 00BF     		nop
+ 25678              	.L14:
+  51:../src/protocol.c ****         }
+  52:../src/protocol.c ****         p->frames[p->framesLen] = f;
+ 25679              		.loc 1 52 0
+ 25680 0072 3B68     		ldr	r3, [r7, #0]
+ 25681 0074 1B68     		ldr	r3, [r3, #0]
+ 25682 0076 3A68     		ldr	r2, [r7, #0]
+ 25683 0078 03F10103 		add	r3, r3, #1
+ 25684 007c 4FEAC303 		lsl	r3, r3, #3
+ 25685 0080 D318     		adds	r3, r2, r3
+ 25686 0082 07F10802 		add	r2, r7, #8
+ 25687 0086 92E80300 		ldmia	r2, {r0, r1}
+ 25688 008a 83E80300 		stmia	r3, {r0, r1}
+  53:../src/protocol.c ****         p->framesLen++;
+ 25689              		.loc 1 53 0
+ 25690 008e 3B68     		ldr	r3, [r7, #0]
+ 25691 0090 1B68     		ldr	r3, [r3, #0]
+ 25692 0092 03F10102 		add	r2, r3, #1
+ 25693 0096 3B68     		ldr	r3, [r7, #0]
+ 25694 0098 1A60     		str	r2, [r3, #0]
+ 25695              	.L10:
+  40:../src/protocol.c ****     for (uint32_t i = 8; i < bufLen;) {
+ 25696              		.loc 1 40 0 discriminator 1
+ 25697 009a 7A69     		ldr	r2, [r7, #20]
+ 25698 009c 3B69     		ldr	r3, [r7, #16]
+ 25699 009e 9A42     		cmp	r2, r3
+ 25700 00a0 CED3     		bcc	.L15
+ 25701              	.LBE3:
+  54:../src/protocol.c ****     }
+  55:../src/protocol.c **** 
+  56:../src/protocol.c ****     return;
+ 25702              		.loc 1 56 0
+ 25703 00a2 02E0     		b	.L6
+ 25704              	.L16:
+  36:../src/protocol.c ****         return;
+ 25705              		.loc 1 36 0
+ 25706 00a4 00BF     		nop
+ 25707 00a6 00E0     		b	.L6
+ 25708              	.L17:
+ 25709 00a8 00BF     		nop
+ 25710              	.L6:
+  57:../src/protocol.c **** }
+ 25711              		.loc 1 57 0
+ 25712 00aa 07F11807 		add	r7, r7, #24
+ 25713 00ae BD46     		mov	sp, r7
+ 25714 00b0 80BD     		pop	{r7, pc}
+ 25715              		.cfi_endproc
+ 25716              	.LFE111:
+ 25718 00b2 00BF     		.section	.text.PROTOCOL_parseFrame,"ax",%progbits
+ 25719              		.align	2
+ 25720              		.thumb
+ 25721              		.thumb_func
+ 25723              	PROTOCOL_parseFrame:
+ 25724              	.LFB112:
+  58:../src/protocol.c **** 
+  59:../src/protocol.c **** static void PROTOCOL_parseFrame(uint8_t *buf, PROTOCOL_Frame *f) {
+ 25725              		.loc 1 59 0
+ 25726              		.cfi_startproc
+ 25727              		@ args = 0, pretend = 0, frame = 8
+ 25728              		@ frame_needed = 1, uses_anonymous_args = 0
+ 25729 0000 80B5     		push	{r7, lr}
+ 25730              	.LCFI6:
+ 25731              		.cfi_def_cfa_offset 8
+ 25732 0002 82B0     		sub	sp, sp, #8
+ 25733              	.LCFI7:
+ 25734              		.cfi_def_cfa_offset 16
+ 25735 0004 00AF     		add	r7, sp, #0
+ 25736              		.cfi_offset 14, -4
+ 25737              		.cfi_offset 7, -8
+ 25738              	.LCFI8:
+ 25739              		.cfi_def_cfa_register 7
+ 25740 0006 7860     		str	r0, [r7, #4]
+ 25741 0008 3960     		str	r1, [r7, #0]
+  60:../src/protocol.c ****     f->cmd = buf[0];
+ 25742              		.loc 1 60 0
+ 25743 000a 7B68     		ldr	r3, [r7, #4]
+ 25744 000c 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 25745 000e 3B68     		ldr	r3, [r7, #0]
+ 25746 0010 1A70     		strb	r2, [r3, #0]
+  61:../src/protocol.c ****     f->type = buf[1];
+ 25747              		.loc 1 61 0
+ 25748 0012 7B68     		ldr	r3, [r7, #4]
+ 25749 0014 03F10103 		add	r3, r3, #1
+ 25750 0018 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 25751 001a 3B68     		ldr	r3, [r7, #0]
+ 25752 001c 5A70     		strb	r2, [r3, #1]
+  62:../src/protocol.c ****     switch (f->type) {
+ 25753              		.loc 1 62 0
+ 25754 001e 3B68     		ldr	r3, [r7, #0]
+ 25755 0020 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 25756 0022 012B     		cmp	r3, #1
+ 25757 0024 02D0     		beq	.L20
+ 25758 0026 022B     		cmp	r3, #2
+ 25759 0028 07D0     		beq	.L21
+ 25760 002a 10E0     		b	.L18
+ 25761              	.L20:
+  63:../src/protocol.c ****     case PROTOCOL_TYPE_BYTE:
+  64:../src/protocol.c ****         f->bData = (uint32_t) buf[2];
+ 25762              		.loc 1 64 0
+ 25763 002c 7B68     		ldr	r3, [r7, #4]
+ 25764 002e 03F10203 		add	r3, r3, #2
+ 25765 0032 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 25766 0034 3B68     		ldr	r3, [r7, #0]
+ 25767 0036 9A70     		strb	r2, [r3, #2]
+  65:../src/protocol.c ****         break;
+ 25768              		.loc 1 65 0
+ 25769 0038 09E0     		b	.L18
+ 25770              	.L21:
+  66:../src/protocol.c ****     case PROTOCOL_TYPE_INT:
+  67:../src/protocol.c ****         f->iData = PROTOCOL_parseInt(&buf[2]);
+ 25771              		.loc 1 67 0
+ 25772 003a 7B68     		ldr	r3, [r7, #4]
+ 25773 003c 03F10203 		add	r3, r3, #2
+ 25774 0040 1846     		mov	r0, r3
+ 25775 0042 FFF7FEFF 		bl	PROTOCOL_parseInt
+ 25776 0046 0246     		mov	r2, r0
+ 25777 0048 3B68     		ldr	r3, [r7, #0]
+ 25778 004a 5A60     		str	r2, [r3, #4]
+  68:../src/protocol.c ****         break;
+ 25779              		.loc 1 68 0
+ 25780 004c 00BF     		nop
+ 25781              	.L18:
+  69:../src/protocol.c ****     }
+  70:../src/protocol.c ****     return;
+  71:../src/protocol.c **** }
+ 25782              		.loc 1 71 0
+ 25783 004e 07F10807 		add	r7, r7, #8
+ 25784 0052 BD46     		mov	sp, r7
+ 25785 0054 80BD     		pop	{r7, pc}
+ 25786              		.cfi_endproc
+ 25787              	.LFE112:
+ 25789 0056 00BF     		.section	.text.PROTOCOL_parseInt,"ax",%progbits
+ 25790              		.align	2
+ 25791              		.thumb
+ 25792              		.thumb_func
+ 25794              	PROTOCOL_parseInt:
+ 25795              	.LFB113:
+  72:../src/protocol.c **** 
+  73:../src/protocol.c **** static uint32_t PROTOCOL_parseInt(uint8_t *mess) {
+ 25796              		.loc 1 73 0
+ 25797              		.cfi_startproc
+ 25798              		@ args = 0, pretend = 0, frame = 16
+ 25799              		@ frame_needed = 1, uses_anonymous_args = 0
+ 25800              		@ link register save eliminated.
+ 25801 0000 80B4     		push	{r7}
+ 25802              	.LCFI9:
+ 25803              		.cfi_def_cfa_offset 4
+ 25804 0002 85B0     		sub	sp, sp, #20
+ 25805              	.LCFI10:
+ 25806              		.cfi_def_cfa_offset 24
+ 25807 0004 00AF     		add	r7, sp, #0
+ 25808              		.cfi_offset 7, -4
+ 25809              	.LCFI11:
+ 25810              		.cfi_def_cfa_register 7
+ 25811 0006 7860     		str	r0, [r7, #4]
+  74:../src/protocol.c ****     uint32_t res = (((uint32_t) (mess[0])) << 24);
+ 25812              		.loc 1 74 0
+ 25813 0008 7B68     		ldr	r3, [r7, #4]
+ 25814 000a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 25815 000c 4FEA0363 		lsl	r3, r3, #24
+ 25816 0010 FB60     		str	r3, [r7, #12]
+  75:../src/protocol.c ****     res |= (((uint32_t) (mess[1])) << 16);
+ 25817              		.loc 1 75 0
+ 25818 0012 7B68     		ldr	r3, [r7, #4]
+ 25819 0014 03F10103 		add	r3, r3, #1
+ 25820 0018 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 25821 001a 4FEA0343 		lsl	r3, r3, #16
+ 25822 001e FA68     		ldr	r2, [r7, #12]
+ 25823 0020 42EA0303 		orr	r3, r2, r3
+ 25824 0024 FB60     		str	r3, [r7, #12]
+  76:../src/protocol.c ****     res |= (((uint32_t) (mess[2])) << 8);
+ 25825              		.loc 1 76 0
+ 25826 0026 7B68     		ldr	r3, [r7, #4]
+ 25827 0028 03F10203 		add	r3, r3, #2
+ 25828 002c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 25829 002e 4FEA0323 		lsl	r3, r3, #8
+ 25830 0032 FA68     		ldr	r2, [r7, #12]
+ 25831 0034 42EA0303 		orr	r3, r2, r3
+ 25832 0038 FB60     		str	r3, [r7, #12]
+  77:../src/protocol.c ****     res |= (((uint32_t) mess[3]));
+ 25833              		.loc 1 77 0
+ 25834 003a 7B68     		ldr	r3, [r7, #4]
+ 25835 003c 03F10303 		add	r3, r3, #3
+ 25836 0040 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 25837 0042 FA68     		ldr	r2, [r7, #12]
+ 25838 0044 42EA0303 		orr	r3, r2, r3
+ 25839 0048 FB60     		str	r3, [r7, #12]
+  78:../src/protocol.c **** 
+  79:../src/protocol.c ****     return res;
+ 25840              		.loc 1 79 0
+ 25841 004a FB68     		ldr	r3, [r7, #12]
+  80:../src/protocol.c **** }
+ 25842              		.loc 1 80 0
+ 25843 004c 1846     		mov	r0, r3
+ 25844 004e 07F11407 		add	r7, r7, #20
+ 25845 0052 BD46     		mov	sp, r7
+ 25846 0054 80BC     		pop	{r7}
+ 25847 0056 7047     		bx	lr
+ 25848              		.cfi_endproc
+ 25849              	.LFE113:
+ 25851              		.section	.text.PROTOCOL_intToByteArray,"ax",%progbits
+ 25852              		.align	2
+ 25853              		.thumb
+ 25854              		.thumb_func
+ 25856              	PROTOCOL_intToByteArray:
+ 25857              	.LFB114:
+  81:../src/protocol.c **** 
+  82:../src/protocol.c **** static inline void PROTOCOL_intToByteArray(uint32_t val, uint8_t *arr) {
+ 25858              		.loc 1 82 0
+ 25859              		.cfi_startproc
+ 25860              		@ args = 0, pretend = 0, frame = 8
+ 25861              		@ frame_needed = 1, uses_anonymous_args = 0
+ 25862              		@ link register save eliminated.
+ 25863 0000 80B4     		push	{r7}
+ 25864              	.LCFI12:
+ 25865              		.cfi_def_cfa_offset 4
+ 25866 0002 83B0     		sub	sp, sp, #12
+ 25867              	.LCFI13:
+ 25868              		.cfi_def_cfa_offset 16
+ 25869 0004 00AF     		add	r7, sp, #0
+ 25870              		.cfi_offset 7, -4
+ 25871              	.LCFI14:
+ 25872              		.cfi_def_cfa_register 7
+ 25873 0006 7860     		str	r0, [r7, #4]
+ 25874 0008 3960     		str	r1, [r7, #0]
+  83:../src/protocol.c ****     arr[0] = (uint8_t) (val >> 24);
+ 25875              		.loc 1 83 0
+ 25876 000a 7B68     		ldr	r3, [r7, #4]
+ 25877 000c 4FEA1363 		lsr	r3, r3, #24
+ 25878 0010 DAB2     		uxtb	r2, r3
+ 25879 0012 3B68     		ldr	r3, [r7, #0]
+ 25880 0014 1A70     		strb	r2, [r3, #0]
+  84:../src/protocol.c ****     arr[1] = (uint8_t) (val >> 16);
+ 25881              		.loc 1 84 0
+ 25882 0016 3B68     		ldr	r3, [r7, #0]
+ 25883 0018 03F10103 		add	r3, r3, #1
+ 25884 001c 7A68     		ldr	r2, [r7, #4]
+ 25885 001e 4FEA1242 		lsr	r2, r2, #16
+ 25886 0022 D2B2     		uxtb	r2, r2
+ 25887 0024 1A70     		strb	r2, [r3, #0]
+  85:../src/protocol.c ****     arr[2] = (uint8_t) (val >> 8);
+ 25888              		.loc 1 85 0
+ 25889 0026 3B68     		ldr	r3, [r7, #0]
+ 25890 0028 03F10203 		add	r3, r3, #2
+ 25891 002c 7A68     		ldr	r2, [r7, #4]
+ 25892 002e 4FEA1222 		lsr	r2, r2, #8
+ 25893 0032 D2B2     		uxtb	r2, r2
+ 25894 0034 1A70     		strb	r2, [r3, #0]
+  86:../src/protocol.c ****     arr[3] = (uint8_t) val;
+ 25895              		.loc 1 86 0
+ 25896 0036 3B68     		ldr	r3, [r7, #0]
+ 25897 0038 03F10303 		add	r3, r3, #3
+ 25898 003c 7A68     		ldr	r2, [r7, #4]
+ 25899 003e D2B2     		uxtb	r2, r2
+ 25900 0040 1A70     		strb	r2, [r3, #0]
+  87:../src/protocol.c **** }
+ 25901              		.loc 1 87 0
+ 25902 0042 07F10C07 		add	r7, r7, #12
+ 25903 0046 BD46     		mov	sp, r7
+ 25904 0048 80BC     		pop	{r7}
+ 25905 004a 7047     		bx	lr
+ 25906              		.cfi_endproc
+ 25907              	.LFE114:
+ 25909              		.text
+ 25910              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 protocol.c
+                            *COM*:00000800 Data_buf
+                            *COM*:00000001 Data_get
+     /tmp/ccZZ7IYs.s:25440  .text.PROTOCOL_toByteArray:00000000 $t
+     /tmp/ccZZ7IYs.s:25445  .text.PROTOCOL_toByteArray:00000000 PROTOCOL_toByteArray
+     /tmp/ccZZ7IYs.s:25856  .text.PROTOCOL_intToByteArray:00000000 PROTOCOL_intToByteArray
+     /tmp/ccZZ7IYs.s:25593  .text.PROTOCOL_parseProtocol:00000000 $t
+     /tmp/ccZZ7IYs.s:25598  .text.PROTOCOL_parseProtocol:00000000 PROTOCOL_parseProtocol
+     /tmp/ccZZ7IYs.s:25794  .text.PROTOCOL_parseInt:00000000 PROTOCOL_parseInt
+     /tmp/ccZZ7IYs.s:25723  .text.PROTOCOL_parseFrame:00000000 PROTOCOL_parseFrame
+     /tmp/ccZZ7IYs.s:25719  .text.PROTOCOL_parseFrame:00000000 $t
+     /tmp/ccZZ7IYs.s:25790  .text.PROTOCOL_parseInt:00000000 $t
+     /tmp/ccZZ7IYs.s:25852  .text.PROTOCOL_intToByteArray:00000000 $t
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS
