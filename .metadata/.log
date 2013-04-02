@@ -1496,3 +1496,11 @@ org.eclipse.core.runtime.CoreException: No property tester contributes a propert
 
 !ENTRY org.eclipse.debug.core 4 120 2013-04-02 20:13:37.863
 !MESSAGE Variable references empty selection: ${project_loc}
+
+!ENTRY org.eclipse.ui.ide 4 4 2013-04-02 21:44:20.146
+!MESSAGE Problems saving workspace
+
+!ENTRY org.eclipse.ui.ide 2 1 2013-04-02 21:44:20.146
+!MESSAGE Problems occurred while trying to save the state of the workbench.
+!SUBENTRY 1 org.eclipse.core.resources 2 234 2013-04-02 21:44:20.146
+!MESSAGE The project description file (.project) for 'RemoteSystemsTempFiles' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
