@@ -13,211 +13,154 @@
   13              		.file	"main.c"
   23              	.Ltext0:
   24              		.file 1 "../src/main.c"
- 25531              		.align	2
- 25532              		.global	main
- 25533              		.thumb
- 25534              		.thumb_func
- 25536              	main:
- 25537              	.LFB110:
+ 25527              		.align	2
+ 25528              		.global	main
+ 25529              		.thumb
+ 25530              		.thumb_func
+ 25532              	main:
+ 25533              	.LFB110:
    1:../src/main.c **** /* Includes ------------------------------------------------------------------*/
    2:../src/main.c **** #include "main.h"
-   3:../src/main.c **** #include "stm32f4_discovery.h"
-   4:../src/main.c **** #include "lis302dl.h"
-   5:../src/main.c **** #include "periph_init.h"
-   6:../src/main.c **** #include "protocol.h"
-   7:../src/main.c **** #include "usbd_core.h"
-   8:../src/main.c **** #include "usbd_desc.h"
-   9:../src/main.c **** #include "usbd_cdc_core.h"
-  10:../src/main.c **** #include "usbd_cdc_vcp.h"
-  11:../src/main.c **** #include "usbd_usr.h"
-  12:../src/main.c **** 
-  13:../src/main.c **** /* Private typedef -----------------------------------------------------------*/
-  14:../src/main.c **** /* Private define ------------------------------------------------------------*/
+   3:../src/main.c **** 
+   4:../src/main.c **** /* Private typedef -----------------------------------------------------------*/
+   5:../src/main.c **** /* Private define ------------------------------------------------------------*/
+   6:../src/main.c **** 
+   7:../src/main.c **** /* Private macro -------------------------------------------------------------*/
+   8:../src/main.c **** /* Private variables ---------------------------------------------------------*/
+   9:../src/main.c **** #ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED
+  10:../src/main.c **** #if defined ( __ICCARM__ ) /*!< IAR Compiler */
+  11:../src/main.c **** #pragma data_alignment = 4
+  12:../src/main.c **** #endif
+  13:../src/main.c **** #endif /* USB_OTG_HS_INTERNAL_DMA_ENABLED */
+  14:../src/main.c **** __ALIGN_BEGIN USB_OTG_CORE_HANDLE USB_OTG_dev __ALIGN_END;
   15:../src/main.c **** 
-  16:../src/main.c **** /* Private macro -------------------------------------------------------------*/
-  17:../src/main.c **** /* Private variables ---------------------------------------------------------*/
-  18:../src/main.c **** #ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED
-  19:../src/main.c **** #if defined ( __ICCARM__ ) /*!< IAR Compiler */
-  20:../src/main.c **** #pragma data_alignment = 4
-  21:../src/main.c **** #endif
-  22:../src/main.c **** #endif /* USB_OTG_HS_INTERNAL_DMA_ENABLED */
-  23:../src/main.c **** __ALIGN_BEGIN USB_OTG_CORE_HANDLE USB_OTG_dev __ALIGN_END;
-  24:../src/main.c **** 
-  25:../src/main.c **** extern __I uint32_t SysTime;
-  26:../src/main.c **** extern CDC_IF_Prop_TypeDef  VCP_fops;
-  27:../src/main.c **** 
-  28:../src/main.c **** /* Private function prototypes -----------------------------------------------*/
-  29:../src/main.c **** static void sendData(void);
-  30:../src/main.c **** static void Delay(__IO uint32_t nTime);
-  31:../src/main.c **** static void getData(void);
-  32:../src/main.c **** 
-  33:../src/main.c **** /* Private functions ---------------------------------------------------------*/
-  34:../src/main.c **** 
-  35:../src/main.c **** /**
-  36:../src/main.c ****  * @brief  Main program.
-  37:../src/main.c ****  * @param  None
-  38:../src/main.c ****  * @retval None
-  39:../src/main.c ****  */
-  40:../src/main.c **** int main(void) {
- 25538              		.loc 1 40 0
- 25539              		.cfi_startproc
- 25540              		@ args = 0, pretend = 0, frame = 8
- 25541              		@ frame_needed = 1, uses_anonymous_args = 0
- 25542 0000 80B5     		push	{r7, lr}
- 25543              	.LCFI0:
- 25544              		.cfi_def_cfa_offset 8
- 25545 0002 84B0     		sub	sp, sp, #16
- 25546              	.LCFI1:
- 25547              		.cfi_def_cfa_offset 24
- 25548 0004 02AF     		add	r7, sp, #8
- 25549              		.cfi_offset 14, -4
- 25550              		.cfi_offset 7, -8
- 25551              	.LCFI2:
- 25552              		.cfi_def_cfa 7, 16
-  41:../src/main.c ****     Data_get = 0;
- 25553              		.loc 1 41 0
- 25554 0006 1C4B     		ldr	r3, .L4
- 25555 0008 4FF00002 		mov	r2, #0
- 25556 000c 1A70     		strb	r2, [r3, #0]
-  42:../src/main.c ****     uint32_t val = PWM_PERIOD;
- 25557              		.loc 1 42 0
- 25558 000e 4FF47A73 		mov	r3, #1000
- 25559 0012 7B60     		str	r3, [r7, #4]
+  16:../src/main.c **** extern __I uint32_t SysTime;
+  17:../src/main.c **** extern CDC_IF_Prop_TypeDef  VCP_fops;
+  18:../src/main.c **** 
+  19:../src/main.c **** /* Private function prototypes -----------------------------------------------*/
+  20:../src/main.c **** static void sendData(void);
+  21:../src/main.c **** static void Delay(__IO uint32_t nTime);
+  22:../src/main.c **** static void getData(void);
+  23:../src/main.c **** 
+  24:../src/main.c **** /* Private functions ---------------------------------------------------------*/
+  25:../src/main.c **** 
+  26:../src/main.c **** /**
+  27:../src/main.c ****  * @brief  Main program.
+  28:../src/main.c ****  * @param  None
+  29:../src/main.c ****  * @retval None
+  30:../src/main.c ****  */
+  31:../src/main.c **** int main(void) {
+ 25534              		.loc 1 31 0
+ 25535              		.cfi_startproc
+ 25536              		@ args = 0, pretend = 0, frame = 0
+ 25537              		@ frame_needed = 1, uses_anonymous_args = 0
+ 25538 0000 80B5     		push	{r7, lr}
+ 25539              	.LCFI0:
+ 25540              		.cfi_def_cfa_offset 8
+ 25541 0002 00AF     		add	r7, sp, #0
+ 25542              		.cfi_offset 14, -4
+ 25543              		.cfi_offset 7, -8
+ 25544              	.LCFI1:
+ 25545              		.cfi_def_cfa_register 7
+  32:../src/main.c ****     Data_get = 0;
+ 25546              		.loc 1 32 0
+ 25547 0004 0E4B     		ldr	r3, .L3
+ 25548 0006 4FF00002 		mov	r2, #0
+ 25549 000a 1A70     		strb	r2, [r3, #0]
+  33:../src/main.c **** 
+  34:../src/main.c ****     PERIPH_Init_SysTick();
+ 25550              		.loc 1 34 0
+ 25551 000c FFF7FEFF 		bl	PERIPH_Init_SysTick
+  35:../src/main.c ****     PERIPH_Init_Leds();
+ 25552              		.loc 1 35 0
+ 25553 0010 FFF7FEFF 		bl	PERIPH_Init_Leds
+  36:../src/main.c ****     PERIPH_Init_Timer();
+ 25554              		.loc 1 36 0
+ 25555 0014 FFF7FEFF 		bl	PERIPH_Init_Timer
+  37:../src/main.c ****     PERIPH_Init_PWM();
+ 25556              		.loc 1 37 0
+ 25557 0018 FFF7FEFF 		bl	PERIPH_Init_PWM
+ 25558              	.L2:
+  38:../src/main.c ****     /*PERIPH_Init_Spi();
+  39:../src/main.c ****     LIS302DL_Init();*/
+  40:../src/main.c **** 
+  41:../src/main.c ****     /* USB configuration */
+  42:../src/main.c ****     //USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
   43:../src/main.c **** 
-  44:../src/main.c ****     PERIPH_Init_SysTick();
- 25560              		.loc 1 44 0
- 25561 0014 FFF7FEFF 		bl	PERIPH_Init_SysTick
-  45:../src/main.c ****     PERIPH_Init_Leds();
- 25562              		.loc 1 45 0
- 25563 0018 FFF7FEFF 		bl	PERIPH_Init_Leds
-  46:../src/main.c ****     PERIPH_Init_Timer();
- 25564              		.loc 1 46 0
- 25565 001c FFF7FEFF 		bl	PERIPH_Init_Timer
-  47:../src/main.c ****     PERIPH_Init_PWM();
- 25566              		.loc 1 47 0
- 25567 0020 FFF7FEFF 		bl	PERIPH_Init_PWM
-  48:../src/main.c ****     PERIPH_Init_Spi();
- 25568              		.loc 1 48 0
- 25569 0024 FFF7FEFF 		bl	PERIPH_Init_Spi
-  49:../src/main.c ****     LIS302DL_Init();
- 25570              		.loc 1 49 0
- 25571 0028 FFF7FEFF 		bl	LIS302DL_Init
-  50:../src/main.c **** 
-  51:../src/main.c ****     /* USB configuration */
-  52:../src/main.c ****     USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
- 25572              		.loc 1 52 0
- 25573 002c 134B     		ldr	r3, .L4+4
- 25574 002e 0093     		str	r3, [sp, #0]
- 25575 0030 1348     		ldr	r0, .L4+8
- 25576 0032 4FF00101 		mov	r1, #1
- 25577 0036 134A     		ldr	r2, .L4+12
- 25578 0038 134B     		ldr	r3, .L4+16
- 25579 003a FFF7FEFF 		bl	USBD_Init
- 25580              	.L3:
-  53:../src/main.c **** 
-  54:../src/main.c ****     while (1) {
-  55:../src/main.c ****         val = PWM_PERIOD - val;
- 25581              		.loc 1 55 0
- 25582 003e 7B68     		ldr	r3, [r7, #4]
- 25583 0040 C3F57A73 		rsb	r3, r3, #1000
- 25584 0044 7B60     		str	r3, [r7, #4]
-  56:../src/main.c ****         TIM_SetCompare1(TIM4, val);
- 25585              		.loc 1 56 0
- 25586 0046 1148     		ldr	r0, .L4+20
- 25587 0048 7968     		ldr	r1, [r7, #4]
- 25588 004a FFF7FEFF 		bl	TIM_SetCompare1
-  57:../src/main.c **** 
-  58:../src/main.c ****         if (USBD_USR_DEVICE_CONFIGURED == SET) {
- 25589              		.loc 1 58 0
- 25590 004e 104B     		ldr	r3, .L4+24
- 25591 0050 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
- 25592 0052 012B     		cmp	r3, #1
- 25593 0054 0BD1     		bne	.L2
-  59:../src/main.c ****             sendData();
- 25594              		.loc 1 59 0
- 25595 0056 FFF7FEFF 		bl	sendData
-  60:../src/main.c **** 
-  61:../src/main.c ****             if (Data_get == 1) {
- 25596              		.loc 1 61 0
- 25597 005a 074B     		ldr	r3, .L4
- 25598 005c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
- 25599 005e 012B     		cmp	r3, #1
- 25600 0060 05D1     		bne	.L2
-  62:../src/main.c ****                 getData();
- 25601              		.loc 1 62 0
- 25602 0062 FFF7FEFF 		bl	getData
-  63:../src/main.c ****                 Data_get = 0;
- 25603              		.loc 1 63 0
- 25604 0066 044B     		ldr	r3, .L4
- 25605 0068 4FF00002 		mov	r2, #0
- 25606 006c 1A70     		strb	r2, [r3, #0]
- 25607              	.L2:
-  64:../src/main.c ****             }
-  65:../src/main.c ****         }
-  66:../src/main.c **** 
-  67:../src/main.c ****         Delay(10000);
- 25608              		.loc 1 67 0
- 25609 006e 42F21070 		movw	r0, #10000
- 25610 0072 FFF7FEFF 		bl	Delay
-  68:../src/main.c ****     }
- 25611              		.loc 1 68 0
- 25612 0076 E2E7     		b	.L3
- 25613              	.L5:
- 25614              		.align	2
- 25615              	.L4:
- 25616 0078 00000000 		.word	Data_get
- 25617 007c 00000000 		.word	USR_cb
- 25618 0080 00000000 		.word	USB_OTG_dev
- 25619 0084 00000000 		.word	USR_desc
- 25620 0088 00000000 		.word	USBD_CDC_cb
- 25621 008c 00080040 		.word	1073743872
- 25622 0090 00000000 		.word	USBD_USR_DEVICE_CONFIGURED
- 25623              		.cfi_endproc
- 25624              	.LFE110:
- 25626              		.section	.text.Delay,"ax",%progbits
- 25627              		.align	2
- 25628              		.thumb
- 25629              		.thumb_func
- 25631              	Delay:
- 25632              	.LFB111:
-  69:../src/main.c **** }
-  70:../src/main.c **** 
-  71:../src/main.c **** /**
-  72:../src/main.c ****  * @brief  Inserts a delay time.
-  73:../src/main.c ****  * @param  nTime: specifies the delay time length, in 10 ms.
-  74:../src/main.c ****  * @retval None
-  75:../src/main.c ****  */
-  76:../src/main.c **** static void Delay(__IO uint32_t nTime) {
- 25633              		.loc 1 76 0
- 25634              		.cfi_startproc
- 25635              		@ args = 0, pretend = 0, frame = 8
- 25636              		@ frame_needed = 1, uses_anonymous_args = 0
- 25637              		@ link register save eliminated.
- 25638 0000 80B4     		push	{r7}
- 25639              	.LCFI3:
- 25640              		.cfi_def_cfa_offset 4
- 25641 0002 83B0     		sub	sp, sp, #12
- 25642              	.LCFI4:
- 25643              		.cfi_def_cfa_offset 16
- 25644 0004 00AF     		add	r7, sp, #0
- 25645              		.cfi_offset 7, -4
- 25646              	.LCFI5:
- 25647              		.cfi_def_cfa_register 7
- 25648 0006 7860     		str	r0, [r7, #4]
-  77:../src/main.c ****     nTime += SysTime;
- 25649              		.loc 1 77 0
- 25650 0008 7A68     		ldr	r2, [r7, #4]
- 25651 000a 084B     		ldr	r3, .L9
- 25652 000c 1B68     		ldr	r3, [r3, #0]
- 25653 000e D318     		adds	r3, r2, r3
- 25654 0010 7B60     		str	r3, [r7, #4]
-  78:../src/main.c **** 
-  79:../src/main.c ****     while (nTime > SysTime) {
- 25655              		.loc 1 79 0
- 25656 0012 00E0     		b	.L7
- 25657              	.L8:
- 25658              	.LBB4:
- 25659              	.LBB5:
+  44:../src/main.c ****     while (1) {
+  45:../src/main.c ****         GPIO_SetBits(GPIOD, GPIO_Pin_12);
+ 25559              		.loc 1 45 0 discriminator 1
+ 25560 001c 0948     		ldr	r0, .L3+4
+ 25561 001e 4FF48051 		mov	r1, #4096
+ 25562 0022 FFF7FEFF 		bl	GPIO_SetBits
+  46:../src/main.c ****         Delay(500000);
+ 25563              		.loc 1 46 0 discriminator 1
+ 25564 0026 0848     		ldr	r0, .L3+8
+ 25565 0028 FFF7FEFF 		bl	Delay
+  47:../src/main.c ****         GPIO_ResetBits(GPIOD, GPIO_Pin_12);
+ 25566              		.loc 1 47 0 discriminator 1
+ 25567 002c 0548     		ldr	r0, .L3+4
+ 25568 002e 4FF48051 		mov	r1, #4096
+ 25569 0032 FFF7FEFF 		bl	GPIO_ResetBits
+  48:../src/main.c ****         Delay(500000);
+ 25570              		.loc 1 48 0 discriminator 1
+ 25571 0036 0448     		ldr	r0, .L3+8
+ 25572 0038 FFF7FEFF 		bl	Delay
+  49:../src/main.c ****     }
+ 25573              		.loc 1 49 0 discriminator 1
+ 25574 003c EEE7     		b	.L2
+ 25575              	.L4:
+ 25576 003e 00BF     		.align	2
+ 25577              	.L3:
+ 25578 0040 00000000 		.word	Data_get
+ 25579 0044 000C0240 		.word	1073875968
+ 25580 0048 20A10700 		.word	500000
+ 25581              		.cfi_endproc
+ 25582              	.LFE110:
+ 25584              		.section	.text.Delay,"ax",%progbits
+ 25585              		.align	2
+ 25586              		.thumb
+ 25587              		.thumb_func
+ 25589              	Delay:
+ 25590              	.LFB111:
+  50:../src/main.c **** }
+  51:../src/main.c **** 
+  52:../src/main.c **** /**
+  53:../src/main.c ****  * @brief  Inserts a delay time.
+  54:../src/main.c ****  * @param  nTime: specifies the delay time length, in 10 ms.
+  55:../src/main.c ****  * @retval None
+  56:../src/main.c ****  */
+  57:../src/main.c **** static void Delay(__IO uint32_t nTime) {
+ 25591              		.loc 1 57 0
+ 25592              		.cfi_startproc
+ 25593              		@ args = 0, pretend = 0, frame = 8
+ 25594              		@ frame_needed = 1, uses_anonymous_args = 0
+ 25595              		@ link register save eliminated.
+ 25596 0000 80B4     		push	{r7}
+ 25597              	.LCFI2:
+ 25598              		.cfi_def_cfa_offset 4
+ 25599 0002 83B0     		sub	sp, sp, #12
+ 25600              	.LCFI3:
+ 25601              		.cfi_def_cfa_offset 16
+ 25602 0004 00AF     		add	r7, sp, #0
+ 25603              		.cfi_offset 7, -4
+ 25604              	.LCFI4:
+ 25605              		.cfi_def_cfa_register 7
+ 25606 0006 7860     		str	r0, [r7, #4]
+  58:../src/main.c ****     nTime += SysTime;
+ 25607              		.loc 1 58 0
+ 25608 0008 7A68     		ldr	r2, [r7, #4]
+ 25609 000a 084B     		ldr	r3, .L8
+ 25610 000c 1B68     		ldr	r3, [r3, #0]
+ 25611 000e D318     		adds	r3, r2, r3
+ 25612 0010 7B60     		str	r3, [r7, #4]
+  59:../src/main.c **** 
+  60:../src/main.c ****     while (nTime > SysTime) {
+ 25613              		.loc 1 60 0
+ 25614 0012 00E0     		b	.L6
+ 25615              	.L7:
+ 25616              	.LBB4:
+ 25617              	.LBB5:
    1:/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h **** /**************************************************************************//**
    2:/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h ****  * @file     core_cmInstr.h
    3:/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h ****  * @brief    CMSIS Cortex-M Core Instruction Access Header File
@@ -489,347 +432,48 @@
  269:/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h **** __attribute__( ( always_inline ) ) static __INLINE void __NOP(void)
  270:/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h **** {
  271:/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h ****   __ASM volatile ("nop");
- 25660              		.loc 7 271 0
- 25661              	@ 271 "/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h" 1
- 25662 0014 00BF     		nop
- 25663              	@ 0 "" 2
- 25664              		.thumb
- 25665              	.L7:
- 25666              	.LBE5:
- 25667              	.LBE4:
- 25668              		.loc 1 79 0 discriminator 1
- 25669 0016 7A68     		ldr	r2, [r7, #4]
- 25670 0018 044B     		ldr	r3, .L9
- 25671 001a 1B68     		ldr	r3, [r3, #0]
- 25672 001c 9A42     		cmp	r2, r3
- 25673 001e F9D8     		bhi	.L8
-  80:../src/main.c ****         __NOP();
-  81:../src/main.c ****     }
-  82:../src/main.c **** }
- 25674              		.loc 1 82 0
- 25675 0020 07F10C07 		add	r7, r7, #12
- 25676 0024 BD46     		mov	sp, r7
- 25677 0026 80BC     		pop	{r7}
- 25678 0028 7047     		bx	lr
- 25679              	.L10:
- 25680 002a 00BF     		.align	2
- 25681              	.L9:
- 25682 002c 00000000 		.word	SysTime
- 25683              		.cfi_endproc
- 25684              	.LFE111:
- 25686              		.section	.text.sendData,"ax",%progbits
- 25687              		.align	2
- 25688              		.thumb
- 25689              		.thumb_func
- 25691              	sendData:
- 25692              	.LFB112:
-  83:../src/main.c **** 
-  84:../src/main.c **** static void sendData(void) {
- 25693              		.loc 1 84 0
- 25694              		.cfi_startproc
- 25695              		@ args = 0, pretend = 0, frame = 80
- 25696              		@ frame_needed = 1, uses_anonymous_args = 0
- 25697 0000 80B5     		push	{r7, lr}
- 25698              	.LCFI6:
- 25699              		.cfi_def_cfa_offset 8
- 25700 0002 94B0     		sub	sp, sp, #80
- 25701              	.LCFI7:
- 25702              		.cfi_def_cfa_offset 88
- 25703 0004 00AF     		add	r7, sp, #0
- 25704              		.cfi_offset 14, -4
- 25705              		.cfi_offset 7, -8
- 25706              	.LCFI8:
- 25707              		.cfi_def_cfa_register 7
-  85:../src/main.c ****     uint8_t buf[PROTOCOL_MAX_LEN];
-  86:../src/main.c ****     uint8_t status;
-  87:../src/main.c ****     int8_t acc;
-  88:../src/main.c ****     PROTOCOL_Protocol p;
-  89:../src/main.c **** 
-  90:../src/main.c ****     p.num = 2;
- 25708              		.loc 1 90 0
- 25709 0006 4FF00203 		mov	r3, #2
- 25710 000a 7B60     		str	r3, [r7, #4]
-  91:../src/main.c ****     p.framesLen = 0;
- 25711              		.loc 1 91 0
- 25712 000c 4FF00003 		mov	r3, #0
- 25713 0010 3B60     		str	r3, [r7, #0]
-  92:../src/main.c **** 
-  93:../src/main.c ****     LIS302DL_getSatus(&status);
- 25714              		.loc 1 93 0
- 25715 0012 07F12B03 		add	r3, r7, #43
- 25716 0016 1846     		mov	r0, r3
- 25717 0018 FFF7FEFF 		bl	LIS302DL_getSatus
-  94:../src/main.c **** 
-  95:../src/main.c ****     if ( status & 0x01) {
- 25718              		.loc 1 95 0
- 25719 001c 97F82B30 		ldrb	r3, [r7, #43]	@ zero_extendqisi2
- 25720 0020 03F00103 		and	r3, r3, #1
- 25721 0024 DBB2     		uxtb	r3, r3
- 25722 0026 002B     		cmp	r3, #0
- 25723 0028 12D0     		beq	.L12
-  96:../src/main.c ****         LIS302DL_ReadACCX(&acc);
- 25724              		.loc 1 96 0
- 25725 002a 07F12A03 		add	r3, r7, #42
- 25726 002e 1846     		mov	r0, r3
- 25727 0030 FFF7FEFF 		bl	LIS302DL_ReadACCX
-  97:../src/main.c ****         p.frames[0].cmd = PROTOCOL_ANGEL_X;
- 25728              		.loc 1 97 0
- 25729 0034 4FF00503 		mov	r3, #5
- 25730 0038 3B72     		strb	r3, [r7, #8]
-  98:../src/main.c ****         p.frames[0].type = PROTOCOL_TYPE_BYTE;
- 25731              		.loc 1 98 0
- 25732 003a 4FF00103 		mov	r3, #1
- 25733 003e 7B72     		strb	r3, [r7, #9]
-  99:../src/main.c ****         p.frames[0].bData = acc;
- 25734              		.loc 1 99 0
- 25735 0040 97F82A30 		ldrb	r3, [r7, #42]	@ zero_extendqisi2
- 25736 0044 DBB2     		uxtb	r3, r3
- 25737 0046 BB72     		strb	r3, [r7, #10]
- 100:../src/main.c ****         p.framesLen++;
- 25738              		.loc 1 100 0
- 25739 0048 3B68     		ldr	r3, [r7, #0]
- 25740 004a 03F10103 		add	r3, r3, #1
- 25741 004e 3B60     		str	r3, [r7, #0]
- 25742              	.L12:
- 101:../src/main.c ****     }
- 102:../src/main.c ****     if ( status & 0x02) {
- 25743              		.loc 1 102 0
- 25744 0050 97F82B30 		ldrb	r3, [r7, #43]	@ zero_extendqisi2
- 25745 0054 03F00203 		and	r3, r3, #2
- 25746 0058 002B     		cmp	r3, #0
- 25747 005a 12D0     		beq	.L13
- 103:../src/main.c ****         LIS302DL_ReadACCY(&acc);
- 25748              		.loc 1 103 0
- 25749 005c 07F12A03 		add	r3, r7, #42
- 25750 0060 1846     		mov	r0, r3
- 25751 0062 FFF7FEFF 		bl	LIS302DL_ReadACCY
- 104:../src/main.c ****         p.frames[1].cmd = PROTOCOL_ANGEL_Y;
- 25752              		.loc 1 104 0
- 25753 0066 4FF00603 		mov	r3, #6
- 25754 006a 3B74     		strb	r3, [r7, #16]
- 105:../src/main.c ****         p.frames[1].type = PROTOCOL_TYPE_BYTE;
- 25755              		.loc 1 105 0
- 25756 006c 4FF00103 		mov	r3, #1
- 25757 0070 7B74     		strb	r3, [r7, #17]
- 106:../src/main.c ****         p.frames[1].bData = acc;
- 25758              		.loc 1 106 0
- 25759 0072 97F82A30 		ldrb	r3, [r7, #42]	@ zero_extendqisi2
- 25760 0076 DBB2     		uxtb	r3, r3
- 25761 0078 BB74     		strb	r3, [r7, #18]
- 107:../src/main.c ****         p.framesLen++;
- 25762              		.loc 1 107 0
- 25763 007a 3B68     		ldr	r3, [r7, #0]
- 25764 007c 03F10103 		add	r3, r3, #1
- 25765 0080 3B60     		str	r3, [r7, #0]
- 25766              	.L13:
- 108:../src/main.c ****     }
- 109:../src/main.c **** 
- 110:../src/main.c ****     if (p.framesLen > 0) {
- 25767              		.loc 1 110 0
- 25768 0082 3B68     		ldr	r3, [r7, #0]
- 25769 0084 002B     		cmp	r3, #0
- 25770 0086 0ED0     		beq	.L11
- 25771              	.LBB6:
- 111:../src/main.c ****         uint32_t len = PROTOCOL_toByteArray(&p, buf);
- 25772              		.loc 1 111 0
- 25773 0088 3A46     		mov	r2, r7
- 25774 008a 07F12C03 		add	r3, r7, #44
- 25775 008e 1046     		mov	r0, r2
- 25776 0090 1946     		mov	r1, r3
- 25777 0092 FFF7FEFF 		bl	PROTOCOL_toByteArray
- 25778 0096 F864     		str	r0, [r7, #76]
- 112:../src/main.c ****         APP_FOPS.pIf_DataTx(buf, len);
- 25779              		.loc 1 112 0
- 25780 0098 054B     		ldr	r3, .L15
- 25781 009a DB68     		ldr	r3, [r3, #12]
- 25782 009c 07F12C02 		add	r2, r7, #44
- 25783 00a0 1046     		mov	r0, r2
- 25784 00a2 F96C     		ldr	r1, [r7, #76]
- 25785 00a4 9847     		blx	r3
- 25786              	.L11:
- 25787              	.LBE6:
- 113:../src/main.c ****     }
- 114:../src/main.c **** }
- 25788              		.loc 1 114 0
- 25789 00a6 07F15007 		add	r7, r7, #80
- 25790 00aa BD46     		mov	sp, r7
- 25791 00ac 80BD     		pop	{r7, pc}
- 25792              	.L16:
- 25793 00ae 00BF     		.align	2
- 25794              	.L15:
- 25795 00b0 00000000 		.word	VCP_fops
- 25796              		.cfi_endproc
- 25797              	.LFE112:
- 25799              		.section	.text.getData,"ax",%progbits
- 25800              		.align	2
- 25801              		.thumb
- 25802              		.thumb_func
- 25804              	getData:
- 25805              	.LFB113:
- 115:../src/main.c **** 
- 116:../src/main.c **** static void getData(void) {
- 25806              		.loc 1 116 0
- 25807              		.cfi_startproc
- 25808              		@ args = 0, pretend = 0, frame = 48
- 25809              		@ frame_needed = 1, uses_anonymous_args = 0
- 25810 0000 80B5     		push	{r7, lr}
- 25811              	.LCFI9:
- 25812              		.cfi_def_cfa_offset 8
- 25813 0002 8CB0     		sub	sp, sp, #48
- 25814              	.LCFI10:
- 25815              		.cfi_def_cfa_offset 56
- 25816 0004 00AF     		add	r7, sp, #0
- 25817              		.cfi_offset 14, -4
- 25818              		.cfi_offset 7, -8
- 25819              	.LCFI11:
- 25820              		.cfi_def_cfa_register 7
- 117:../src/main.c ****     PROTOCOL_Protocol p;
- 118:../src/main.c ****     PROTOCOL_parseProtocol(Data_buf, &p);
- 25821              		.loc 1 118 0
- 25822 0006 07F10403 		add	r3, r7, #4
- 25823 000a 3448     		ldr	r0, .L26
- 25824 000c 1946     		mov	r1, r3
- 25825 000e FFF7FEFF 		bl	PROTOCOL_parseProtocol
- 25826              	.LBB7:
- 119:../src/main.c ****     for (int32_t i = 0; i < p.framesLen; i++) {
- 25827              		.loc 1 119 0
- 25828 0012 4FF00003 		mov	r3, #0
- 25829 0016 FB62     		str	r3, [r7, #44]
- 25830 0018 58E0     		b	.L18
- 25831              	.L25:
- 120:../src/main.c ****         switch (p.frames[i].cmd) {
- 25832              		.loc 1 120 0
- 25833 001a FB6A     		ldr	r3, [r7, #44]
- 25834 001c 03F10103 		add	r3, r3, #1
- 25835 0020 4FEAC303 		lsl	r3, r3, #3
- 25836 0024 07F13002 		add	r2, r7, #48
- 25837 0028 D318     		adds	r3, r2, r3
- 25838 002a 13F82C3C 		ldrb	r3, [r3, #-44]	@ zero_extendqisi2
- 25839 002e 03F1FF33 		add	r3, r3, #-1
- 25840 0032 032B     		cmp	r3, #3
- 25841 0034 46D8     		bhi	.L19
- 25842 0036 01A2     		adr	r2, .L24
- 25843 0038 52F823F0 		ldr	pc, [r2, r3, lsl #2]
- 25844              		.align	2
- 25845              	.L24:
- 25846 003c 4D000000 		.word	.L20+1
- 25847 0040 6B000000 		.word	.L21+1
- 25848 0044 89000000 		.word	.L22+1
- 25849 0048 A7000000 		.word	.L23+1
- 25850              	.L20:
- 121:../src/main.c ****         case PROTOCOL_MOTOR_1:
- 122:../src/main.c ****             TIM_SetCompare1(TIM4, p.frames[i].iData);
- 25851              		.loc 1 122 0
- 25852 004c FB6A     		ldr	r3, [r7, #44]
- 25853 004e 03F10103 		add	r3, r3, #1
- 25854 0052 4FEAC303 		lsl	r3, r3, #3
- 25855 0056 07F13002 		add	r2, r7, #48
- 25856 005a D318     		adds	r3, r2, r3
- 25857 005c 53F8283C 		ldr	r3, [r3, #-40]
- 25858 0060 1F48     		ldr	r0, .L26+4
- 25859 0062 1946     		mov	r1, r3
- 25860 0064 FFF7FEFF 		bl	TIM_SetCompare1
- 123:../src/main.c ****             break;
- 25861              		.loc 1 123 0
- 25862 0068 2CE0     		b	.L19
- 25863              	.L21:
- 124:../src/main.c ****         case PROTOCOL_MOTOR_2:
- 125:../src/main.c ****             TIM_SetCompare2(TIM4, p.frames[i].iData);
- 25864              		.loc 1 125 0
- 25865 006a FB6A     		ldr	r3, [r7, #44]
- 25866 006c 03F10103 		add	r3, r3, #1
- 25867 0070 4FEAC303 		lsl	r3, r3, #3
- 25868 0074 07F13002 		add	r2, r7, #48
- 25869 0078 D318     		adds	r3, r2, r3
- 25870 007a 53F8283C 		ldr	r3, [r3, #-40]
- 25871 007e 1848     		ldr	r0, .L26+4
- 25872 0080 1946     		mov	r1, r3
- 25873 0082 FFF7FEFF 		bl	TIM_SetCompare2
- 126:../src/main.c ****             break;
- 25874              		.loc 1 126 0
- 25875 0086 1DE0     		b	.L19
- 25876              	.L22:
- 127:../src/main.c ****         case PROTOCOL_MOTOR_3:
- 128:../src/main.c ****             TIM_SetCompare3(TIM4, p.frames[i].iData);
- 25877              		.loc 1 128 0
- 25878 0088 FB6A     		ldr	r3, [r7, #44]
- 25879 008a 03F10103 		add	r3, r3, #1
- 25880 008e 4FEAC303 		lsl	r3, r3, #3
- 25881 0092 07F13002 		add	r2, r7, #48
- 25882 0096 D318     		adds	r3, r2, r3
- 25883 0098 53F8283C 		ldr	r3, [r3, #-40]
- 25884 009c 1048     		ldr	r0, .L26+4
- 25885 009e 1946     		mov	r1, r3
- 25886 00a0 FFF7FEFF 		bl	TIM_SetCompare3
- 129:../src/main.c ****             break;
- 25887              		.loc 1 129 0
- 25888 00a4 0EE0     		b	.L19
- 25889              	.L23:
- 130:../src/main.c ****         case PROTOCOL_MOTOR_4:
- 131:../src/main.c ****             TIM_SetCompare4(TIM4, p.frames[i].iData);
- 25890              		.loc 1 131 0
- 25891 00a6 FB6A     		ldr	r3, [r7, #44]
- 25892 00a8 03F10103 		add	r3, r3, #1
- 25893 00ac 4FEAC303 		lsl	r3, r3, #3
- 25894 00b0 07F13002 		add	r2, r7, #48
- 25895 00b4 D318     		adds	r3, r2, r3
- 25896 00b6 53F8283C 		ldr	r3, [r3, #-40]
- 25897 00ba 0948     		ldr	r0, .L26+4
- 25898 00bc 1946     		mov	r1, r3
- 25899 00be FFF7FEFF 		bl	TIM_SetCompare4
- 132:../src/main.c ****             break;
- 25900              		.loc 1 132 0
- 25901 00c2 00BF     		nop
- 25902              	.L19:
- 119:../src/main.c ****     for (int32_t i = 0; i < p.framesLen; i++) {
- 25903              		.loc 1 119 0
- 25904 00c4 FB6A     		ldr	r3, [r7, #44]
- 25905 00c6 03F10103 		add	r3, r3, #1
- 25906 00ca FB62     		str	r3, [r7, #44]
- 25907              	.L18:
- 119:../src/main.c ****     for (int32_t i = 0; i < p.framesLen; i++) {
- 25908              		.loc 1 119 0 is_stmt 0 discriminator 1
- 25909 00cc FA6A     		ldr	r2, [r7, #44]
- 25910 00ce 7B68     		ldr	r3, [r7, #4]
- 25911 00d0 9A42     		cmp	r2, r3
- 25912 00d2 A2D3     		bcc	.L25
- 25913              	.LBE7:
- 133:../src/main.c ****         }
- 134:../src/main.c ****     }
- 135:../src/main.c **** }
- 25914              		.loc 1 135 0 is_stmt 1
- 25915 00d4 07F13007 		add	r7, r7, #48
- 25916 00d8 BD46     		mov	sp, r7
- 25917 00da 80BD     		pop	{r7, pc}
- 25918              	.L27:
- 25919              		.align	2
- 25920              	.L26:
- 25921 00dc 00000000 		.word	Data_buf
- 25922 00e0 00080040 		.word	1073743872
- 25923              		.cfi_endproc
- 25924              	.LFE113:
- 25926              		.text
- 25927              	.Letext0:
+ 25618              		.loc 7 271 0
+ 25619              	@ 271 "/home/kvv/workspace/k-car/autopilot/inc/CMSIS/core_cmInstr.h" 1
+ 25620 0014 00BF     		nop
+ 25621              	@ 0 "" 2
+ 25622              		.thumb
+ 25623              	.L6:
+ 25624              	.LBE5:
+ 25625              	.LBE4:
+ 25626              		.loc 1 60 0 discriminator 1
+ 25627 0016 7A68     		ldr	r2, [r7, #4]
+ 25628 0018 044B     		ldr	r3, .L8
+ 25629 001a 1B68     		ldr	r3, [r3, #0]
+ 25630 001c 9A42     		cmp	r2, r3
+ 25631 001e F9D8     		bhi	.L7
+  61:../src/main.c ****         __NOP();
+  62:../src/main.c ****     }
+  63:../src/main.c **** }
+ 25632              		.loc 1 63 0
+ 25633 0020 07F10C07 		add	r7, r7, #12
+ 25634 0024 BD46     		mov	sp, r7
+ 25635 0026 80BC     		pop	{r7}
+ 25636 0028 7047     		bx	lr
+ 25637              	.L9:
+ 25638 002a 00BF     		.align	2
+ 25639              	.L8:
+ 25640 002c 00000000 		.word	SysTime
+ 25641              		.cfi_endproc
+ 25642              	.LFE111:
+ 25644              		.text
+ 25645              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
                             *COM*:00000800 Data_buf
                             *COM*:00000001 Data_get
                             *COM*:00000001 USBD_USR_DEVICE_CONFIGURED
                             *COM*:000005f0 USB_OTG_dev
-     /tmp/cca0wlEk.s:25531  .text.main:00000000 $t
-     /tmp/cca0wlEk.s:25536  .text.main:00000000 main
-     /tmp/cca0wlEk.s:25691  .text.sendData:00000000 sendData
-     /tmp/cca0wlEk.s:25804  .text.getData:00000000 getData
-     /tmp/cca0wlEk.s:25631  .text.Delay:00000000 Delay
-     /tmp/cca0wlEk.s:25616  .text.main:00000078 $d
-     /tmp/cca0wlEk.s:25627  .text.Delay:00000000 $t
-     /tmp/cca0wlEk.s:25682  .text.Delay:0000002c $d
-     /tmp/cca0wlEk.s:25687  .text.sendData:00000000 $t
-     /tmp/cca0wlEk.s:25795  .text.sendData:000000b0 $d
-     /tmp/cca0wlEk.s:25800  .text.getData:00000000 $t
-     /tmp/cca0wlEk.s:25846  .text.getData:0000003c $d
-     /tmp/cca0wlEk.s:25852  .text.getData:0000004c $t
-     /tmp/cca0wlEk.s:25921  .text.getData:000000dc $d
+     /tmp/ccrUGRTG.s:25527  .text.main:00000000 $t
+     /tmp/ccrUGRTG.s:25532  .text.main:00000000 main
+     /tmp/ccrUGRTG.s:25589  .text.Delay:00000000 Delay
+     /tmp/ccrUGRTG.s:25578  .text.main:00000040 $d
+     /tmp/ccrUGRTG.s:25585  .text.Delay:00000000 $t
+     /tmp/ccrUGRTG.s:25640  .text.Delay:0000002c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -837,20 +481,6 @@ PERIPH_Init_SysTick
 PERIPH_Init_Leds
 PERIPH_Init_Timer
 PERIPH_Init_PWM
-PERIPH_Init_Spi
-LIS302DL_Init
-USBD_Init
-TIM_SetCompare1
-USR_cb
-USR_desc
-USBD_CDC_cb
+GPIO_SetBits
+GPIO_ResetBits
 SysTime
-LIS302DL_getSatus
-LIS302DL_ReadACCX
-LIS302DL_ReadACCY
-PROTOCOL_toByteArray
-VCP_fops
-PROTOCOL_parseProtocol
-TIM_SetCompare2
-TIM_SetCompare3
-TIM_SetCompare4

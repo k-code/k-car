@@ -48,7 +48,7 @@ all: autopilot.elf secondary-outputs
 autopilot.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Sourcery Linux GCC C Linker'
-	arm-none-eabi-gcc -T"/home/kvv/workspace/k-car/autopilot/stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,autopilot.map -mcpu=cortex-m4 -mthumb -g3 -gdwarf-2 -o "autopilot.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -T"/home/kvv/workspace/k-car/autopilot/stm32_flash.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,autopilot.map -mcpu=cortex-m4 -mthumb -g3 -ggdb -o "autopilot.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -17,7 +17,7 @@ S_UPPER_DEPS += \
 %.o: ../%.S
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM Sourcery Linux GCC Assembler'
-	arm-none-eabi-gcc -x assembler-with-cpp -Wall -Wa,-adhlns="$@.lst" -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -mcpu=cortex-m4 -mthumb -g3 -gdwarf-2 -o "$@" "$<"
+	arm-none-eabi-gcc -x assembler-with-cpp -Wall -Wa,-adhlns="$@.lst" -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -mcpu=cortex-m4 -mthumb -g3 -ggdb -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

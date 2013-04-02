@@ -774,36 +774,36 @@
  25839              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_desc.c
-     /tmp/ccIWyJzh.s:25384  .data.USR_desc:00000000 USR_desc
-     /tmp/ccIWyJzh.s:25381  .data.USR_desc:00000000 $d
-     /tmp/ccIWyJzh.s:25448  .text.USBD_USR_DeviceDescriptor:00000000 USBD_USR_DeviceDescriptor
-     /tmp/ccIWyJzh.s:25493  .text.USBD_USR_LangIDStrDescriptor:00000000 USBD_USR_LangIDStrDescriptor
-     /tmp/ccIWyJzh.s:25608  .text.USBD_USR_ManufacturerStrDescriptor:00000000 USBD_USR_ManufacturerStrDescriptor
-     /tmp/ccIWyJzh.s:25545  .text.USBD_USR_ProductStrDescriptor:00000000 USBD_USR_ProductStrDescriptor
-     /tmp/ccIWyJzh.s:25661  .text.USBD_USR_SerialStrDescriptor:00000000 USBD_USR_SerialStrDescriptor
-     /tmp/ccIWyJzh.s:25724  .text.USBD_USR_ConfigStrDescriptor:00000000 USBD_USR_ConfigStrDescriptor
-     /tmp/ccIWyJzh.s:25786  .text.USBD_USR_InterfaceStrDescriptor:00000000 USBD_USR_InterfaceStrDescriptor
-     /tmp/ccIWyJzh.s:25397  .data.USBD_DeviceDesc:00000000 USBD_DeviceDesc
-     /tmp/ccIWyJzh.s:25394  .data.USBD_DeviceDesc:00000000 $d
-     /tmp/ccIWyJzh.s:25421  .data.USBD_DeviceQualifierDesc:00000000 USBD_DeviceQualifierDesc
-     /tmp/ccIWyJzh.s:25418  .data.USBD_DeviceQualifierDesc:00000000 $d
-     /tmp/ccIWyJzh.s:25437  .data.USBD_LangIDDesc:00000000 USBD_LangIDDesc
-     /tmp/ccIWyJzh.s:25434  .data.USBD_LangIDDesc:00000000 $d
-     /tmp/ccIWyJzh.s:25443  .text.USBD_USR_DeviceDescriptor:00000000 $t
-     /tmp/ccIWyJzh.s:25483  .text.USBD_USR_DeviceDescriptor:00000024 $d
-     /tmp/ccIWyJzh.s:25488  .text.USBD_USR_LangIDStrDescriptor:00000000 $t
-     /tmp/ccIWyJzh.s:25528  .text.USBD_USR_LangIDStrDescriptor:00000024 $d
-     /tmp/ccIWyJzh.s:25533  .rodata:00000000 $d
-     /tmp/ccIWyJzh.s:25540  .text.USBD_USR_ProductStrDescriptor:00000000 $t
-     /tmp/ccIWyJzh.s:25592  .text.USBD_USR_ProductStrDescriptor:00000034 $d
-     /tmp/ccIWyJzh.s:25603  .text.USBD_USR_ManufacturerStrDescriptor:00000000 $t
-     /tmp/ccIWyJzh.s:25643  .text.USBD_USR_ManufacturerStrDescriptor:00000024 $d
-     /tmp/ccIWyJzh.s:25656  .text.USBD_USR_SerialStrDescriptor:00000000 $t
-     /tmp/ccIWyJzh.s:25708  .text.USBD_USR_SerialStrDescriptor:00000034 $d
-     /tmp/ccIWyJzh.s:25719  .text.USBD_USR_ConfigStrDescriptor:00000000 $t
-     /tmp/ccIWyJzh.s:25771  .text.USBD_USR_ConfigStrDescriptor:00000034 $d
-     /tmp/ccIWyJzh.s:25781  .text.USBD_USR_InterfaceStrDescriptor:00000000 $t
-     /tmp/ccIWyJzh.s:25833  .text.USBD_USR_InterfaceStrDescriptor:00000034 $d
+     /tmp/cc9j8z2c.s:25384  .data.USR_desc:00000000 USR_desc
+     /tmp/cc9j8z2c.s:25381  .data.USR_desc:00000000 $d
+     /tmp/cc9j8z2c.s:25448  .text.USBD_USR_DeviceDescriptor:00000000 USBD_USR_DeviceDescriptor
+     /tmp/cc9j8z2c.s:25493  .text.USBD_USR_LangIDStrDescriptor:00000000 USBD_USR_LangIDStrDescriptor
+     /tmp/cc9j8z2c.s:25608  .text.USBD_USR_ManufacturerStrDescriptor:00000000 USBD_USR_ManufacturerStrDescriptor
+     /tmp/cc9j8z2c.s:25545  .text.USBD_USR_ProductStrDescriptor:00000000 USBD_USR_ProductStrDescriptor
+     /tmp/cc9j8z2c.s:25661  .text.USBD_USR_SerialStrDescriptor:00000000 USBD_USR_SerialStrDescriptor
+     /tmp/cc9j8z2c.s:25724  .text.USBD_USR_ConfigStrDescriptor:00000000 USBD_USR_ConfigStrDescriptor
+     /tmp/cc9j8z2c.s:25786  .text.USBD_USR_InterfaceStrDescriptor:00000000 USBD_USR_InterfaceStrDescriptor
+     /tmp/cc9j8z2c.s:25397  .data.USBD_DeviceDesc:00000000 USBD_DeviceDesc
+     /tmp/cc9j8z2c.s:25394  .data.USBD_DeviceDesc:00000000 $d
+     /tmp/cc9j8z2c.s:25421  .data.USBD_DeviceQualifierDesc:00000000 USBD_DeviceQualifierDesc
+     /tmp/cc9j8z2c.s:25418  .data.USBD_DeviceQualifierDesc:00000000 $d
+     /tmp/cc9j8z2c.s:25437  .data.USBD_LangIDDesc:00000000 USBD_LangIDDesc
+     /tmp/cc9j8z2c.s:25434  .data.USBD_LangIDDesc:00000000 $d
+     /tmp/cc9j8z2c.s:25443  .text.USBD_USR_DeviceDescriptor:00000000 $t
+     /tmp/cc9j8z2c.s:25483  .text.USBD_USR_DeviceDescriptor:00000024 $d
+     /tmp/cc9j8z2c.s:25488  .text.USBD_USR_LangIDStrDescriptor:00000000 $t
+     /tmp/cc9j8z2c.s:25528  .text.USBD_USR_LangIDStrDescriptor:00000024 $d
+     /tmp/cc9j8z2c.s:25533  .rodata:00000000 $d
+     /tmp/cc9j8z2c.s:25540  .text.USBD_USR_ProductStrDescriptor:00000000 $t
+     /tmp/cc9j8z2c.s:25592  .text.USBD_USR_ProductStrDescriptor:00000034 $d
+     /tmp/cc9j8z2c.s:25603  .text.USBD_USR_ManufacturerStrDescriptor:00000000 $t
+     /tmp/cc9j8z2c.s:25643  .text.USBD_USR_ManufacturerStrDescriptor:00000024 $d
+     /tmp/cc9j8z2c.s:25656  .text.USBD_USR_SerialStrDescriptor:00000000 $t
+     /tmp/cc9j8z2c.s:25708  .text.USBD_USR_SerialStrDescriptor:00000034 $d
+     /tmp/cc9j8z2c.s:25719  .text.USBD_USR_ConfigStrDescriptor:00000000 $t
+     /tmp/cc9j8z2c.s:25771  .text.USBD_USR_ConfigStrDescriptor:00000034 $d
+     /tmp/cc9j8z2c.s:25781  .text.USBD_USR_InterfaceStrDescriptor:00000000 $t
+     /tmp/cc9j8z2c.s:25833  .text.USBD_USR_InterfaceStrDescriptor:00000034 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

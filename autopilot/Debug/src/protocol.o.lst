@@ -573,16 +573,16 @@ DEFINED SYMBOLS
                             *ABS*:00000000 protocol.c
                             *COM*:00000800 Data_buf
                             *COM*:00000001 Data_get
-     /tmp/ccZZ7IYs.s:25440  .text.PROTOCOL_toByteArray:00000000 $t
-     /tmp/ccZZ7IYs.s:25445  .text.PROTOCOL_toByteArray:00000000 PROTOCOL_toByteArray
-     /tmp/ccZZ7IYs.s:25856  .text.PROTOCOL_intToByteArray:00000000 PROTOCOL_intToByteArray
-     /tmp/ccZZ7IYs.s:25593  .text.PROTOCOL_parseProtocol:00000000 $t
-     /tmp/ccZZ7IYs.s:25598  .text.PROTOCOL_parseProtocol:00000000 PROTOCOL_parseProtocol
-     /tmp/ccZZ7IYs.s:25794  .text.PROTOCOL_parseInt:00000000 PROTOCOL_parseInt
-     /tmp/ccZZ7IYs.s:25723  .text.PROTOCOL_parseFrame:00000000 PROTOCOL_parseFrame
-     /tmp/ccZZ7IYs.s:25719  .text.PROTOCOL_parseFrame:00000000 $t
-     /tmp/ccZZ7IYs.s:25790  .text.PROTOCOL_parseInt:00000000 $t
-     /tmp/ccZZ7IYs.s:25852  .text.PROTOCOL_intToByteArray:00000000 $t
+     /tmp/cc00lAWp.s:25440  .text.PROTOCOL_toByteArray:00000000 $t
+     /tmp/cc00lAWp.s:25445  .text.PROTOCOL_toByteArray:00000000 PROTOCOL_toByteArray
+     /tmp/cc00lAWp.s:25856  .text.PROTOCOL_intToByteArray:00000000 PROTOCOL_intToByteArray
+     /tmp/cc00lAWp.s:25593  .text.PROTOCOL_parseProtocol:00000000 $t
+     /tmp/cc00lAWp.s:25598  .text.PROTOCOL_parseProtocol:00000000 PROTOCOL_parseProtocol
+     /tmp/cc00lAWp.s:25794  .text.PROTOCOL_parseInt:00000000 PROTOCOL_parseInt
+     /tmp/cc00lAWp.s:25723  .text.PROTOCOL_parseFrame:00000000 PROTOCOL_parseFrame
+     /tmp/cc00lAWp.s:25719  .text.PROTOCOL_parseFrame:00000000 $t
+     /tmp/cc00lAWp.s:25790  .text.PROTOCOL_parseInt:00000000 $t
+     /tmp/cc00lAWp.s:25852  .text.PROTOCOL_intToByteArray:00000000 $t
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

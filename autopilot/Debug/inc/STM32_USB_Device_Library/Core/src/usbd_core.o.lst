@@ -1323,36 +1323,36 @@
  26221              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_core.c
-     /tmp/cc4Ynltg.s:25340  .data.USBD_DCD_INT_cb:00000000 USBD_DCD_INT_cb
-     /tmp/cc4Ynltg.s:25337  .data.USBD_DCD_INT_cb:00000000 $d
-     /tmp/cc4Ynltg.s:25546  .text.USBD_DataOutStage:00000000 USBD_DataOutStage
-     /tmp/cc4Ynltg.s:25688  .text.USBD_DataInStage:00000000 USBD_DataInStage
-     /tmp/cc4Ynltg.s:25464  .text.USBD_SetupStage:00000000 USBD_SetupStage
-     /tmp/cc4Ynltg.s:26008  .text.USBD_SOF:00000000 USBD_SOF
-     /tmp/cc4Ynltg.s:25867  .text.USBD_Reset:00000000 USBD_Reset
-     /tmp/cc4Ynltg.s:25966  .text.USBD_Suspend:00000000 USBD_Suspend
-     /tmp/cc4Ynltg.s:25924  .text.USBD_Resume:00000000 USBD_Resume
-     /tmp/cc4Ynltg.s:26147  .text.USBD_IsoINIncomplete:00000000 USBD_IsoINIncomplete
-     /tmp/cc4Ynltg.s:26186  .text.USBD_IsoOUTIncomplete:00000000 USBD_IsoOUTIncomplete
-     /tmp/cc4Ynltg.s:25356  .data.USBD_DCD_INT_fops:00000000 USBD_DCD_INT_fops
-     /tmp/cc4Ynltg.s:25353  .data.USBD_DCD_INT_fops:00000000 $d
-     /tmp/cc4Ynltg.s:25359  .text.USBD_Init:00000000 $t
-     /tmp/cc4Ynltg.s:25364  .text.USBD_Init:00000000 USBD_Init
-     /tmp/cc4Ynltg.s:25430  .text.USBD_DeInit:00000000 USBD_DeInit
-     /tmp/cc4Ynltg.s:25425  .text.USBD_DeInit:00000000 $t
-     /tmp/cc4Ynltg.s:25460  .text.USBD_SetupStage:00000000 $t
-     /tmp/cc4Ynltg.s:25542  .text.USBD_DataOutStage:00000000 $t
-     /tmp/cc4Ynltg.s:25684  .text.USBD_DataInStage:00000000 $t
-     /tmp/cc4Ynltg.s:25863  .text.USBD_Reset:00000000 $t
-     /tmp/cc4Ynltg.s:25920  .text.USBD_Resume:00000000 $t
-     /tmp/cc4Ynltg.s:25962  .text.USBD_Suspend:00000000 $t
-     /tmp/cc4Ynltg.s:26004  .text.USBD_SOF:00000000 $t
-     /tmp/cc4Ynltg.s:26050  .text.USBD_SetCfg:00000000 $t
-     /tmp/cc4Ynltg.s:26055  .text.USBD_SetCfg:00000000 USBD_SetCfg
-     /tmp/cc4Ynltg.s:26099  .text.USBD_ClrCfg:00000000 $t
-     /tmp/cc4Ynltg.s:26104  .text.USBD_ClrCfg:00000000 USBD_ClrCfg
-     /tmp/cc4Ynltg.s:26143  .text.USBD_IsoINIncomplete:00000000 $t
-     /tmp/cc4Ynltg.s:26182  .text.USBD_IsoOUTIncomplete:00000000 $t
+     /tmp/ccx650jf.s:25340  .data.USBD_DCD_INT_cb:00000000 USBD_DCD_INT_cb
+     /tmp/ccx650jf.s:25337  .data.USBD_DCD_INT_cb:00000000 $d
+     /tmp/ccx650jf.s:25546  .text.USBD_DataOutStage:00000000 USBD_DataOutStage
+     /tmp/ccx650jf.s:25688  .text.USBD_DataInStage:00000000 USBD_DataInStage
+     /tmp/ccx650jf.s:25464  .text.USBD_SetupStage:00000000 USBD_SetupStage
+     /tmp/ccx650jf.s:26008  .text.USBD_SOF:00000000 USBD_SOF
+     /tmp/ccx650jf.s:25867  .text.USBD_Reset:00000000 USBD_Reset
+     /tmp/ccx650jf.s:25966  .text.USBD_Suspend:00000000 USBD_Suspend
+     /tmp/ccx650jf.s:25924  .text.USBD_Resume:00000000 USBD_Resume
+     /tmp/ccx650jf.s:26147  .text.USBD_IsoINIncomplete:00000000 USBD_IsoINIncomplete
+     /tmp/ccx650jf.s:26186  .text.USBD_IsoOUTIncomplete:00000000 USBD_IsoOUTIncomplete
+     /tmp/ccx650jf.s:25356  .data.USBD_DCD_INT_fops:00000000 USBD_DCD_INT_fops
+     /tmp/ccx650jf.s:25353  .data.USBD_DCD_INT_fops:00000000 $d
+     /tmp/ccx650jf.s:25359  .text.USBD_Init:00000000 $t
+     /tmp/ccx650jf.s:25364  .text.USBD_Init:00000000 USBD_Init
+     /tmp/ccx650jf.s:25430  .text.USBD_DeInit:00000000 USBD_DeInit
+     /tmp/ccx650jf.s:25425  .text.USBD_DeInit:00000000 $t
+     /tmp/ccx650jf.s:25460  .text.USBD_SetupStage:00000000 $t
+     /tmp/ccx650jf.s:25542  .text.USBD_DataOutStage:00000000 $t
+     /tmp/ccx650jf.s:25684  .text.USBD_DataInStage:00000000 $t
+     /tmp/ccx650jf.s:25863  .text.USBD_Reset:00000000 $t
+     /tmp/ccx650jf.s:25920  .text.USBD_Resume:00000000 $t
+     /tmp/ccx650jf.s:25962  .text.USBD_Suspend:00000000 $t
+     /tmp/ccx650jf.s:26004  .text.USBD_SOF:00000000 $t
+     /tmp/ccx650jf.s:26050  .text.USBD_SetCfg:00000000 $t
+     /tmp/ccx650jf.s:26055  .text.USBD_SetCfg:00000000 USBD_SetCfg
+     /tmp/ccx650jf.s:26099  .text.USBD_ClrCfg:00000000 $t
+     /tmp/ccx650jf.s:26104  .text.USBD_ClrCfg:00000000 USBD_ClrCfg
+     /tmp/ccx650jf.s:26143  .text.USBD_IsoINIncomplete:00000000 $t
+     /tmp/ccx650jf.s:26182  .text.USBD_IsoOUTIncomplete:00000000 $t
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

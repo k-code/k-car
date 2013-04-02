@@ -25,6 +25,15 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
+#include "stm32f4_discovery.h"
+#include "lis302dl.h"
+#include "periph_init.h"
+#include "protocol.h"
+#include "usbd_core.h"
+#include "usbd_desc.h"
+#include "usbd_cdc_core.h"
+#include "usbd_cdc_vcp.h"
+#include "usbd_usr.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

@@ -622,16 +622,16 @@
  25248              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 usb_bsp.c
-     /tmp/ccr2rwN8.s:24989  .text.USB_OTG_BSP_Init:00000000 $t
-     /tmp/ccr2rwN8.s:24994  .text.USB_OTG_BSP_Init:00000000 USB_OTG_BSP_Init
-     /tmp/ccr2rwN8.s:25097  .text.USB_OTG_BSP_Init:000000d4 $d
-     /tmp/ccr2rwN8.s:25102  .text.USB_OTG_BSP_EnableInterrupt:00000000 $t
-     /tmp/ccr2rwN8.s:25107  .text.USB_OTG_BSP_EnableInterrupt:00000000 USB_OTG_BSP_EnableInterrupt
-     /tmp/ccr2rwN8.s:25152  .text.USB_OTG_BSP_uDelay:00000000 $t
-     /tmp/ccr2rwN8.s:25157  .text.USB_OTG_BSP_uDelay:00000000 USB_OTG_BSP_uDelay
-     /tmp/ccr2rwN8.s:25206  .text.USB_OTG_BSP_uDelay:00000044 $d
-     /tmp/ccr2rwN8.s:25211  .text.USB_OTG_BSP_mDelay:00000000 $t
-     /tmp/ccr2rwN8.s:25216  .text.USB_OTG_BSP_mDelay:00000000 USB_OTG_BSP_mDelay
+     /tmp/ccywsid4.s:24989  .text.USB_OTG_BSP_Init:00000000 $t
+     /tmp/ccywsid4.s:24994  .text.USB_OTG_BSP_Init:00000000 USB_OTG_BSP_Init
+     /tmp/ccywsid4.s:25097  .text.USB_OTG_BSP_Init:000000d4 $d
+     /tmp/ccywsid4.s:25102  .text.USB_OTG_BSP_EnableInterrupt:00000000 $t
+     /tmp/ccywsid4.s:25107  .text.USB_OTG_BSP_EnableInterrupt:00000000 USB_OTG_BSP_EnableInterrupt
+     /tmp/ccywsid4.s:25152  .text.USB_OTG_BSP_uDelay:00000000 $t
+     /tmp/ccywsid4.s:25157  .text.USB_OTG_BSP_uDelay:00000000 USB_OTG_BSP_uDelay
+     /tmp/ccywsid4.s:25206  .text.USB_OTG_BSP_uDelay:00000044 $d
+     /tmp/ccywsid4.s:25211  .text.USB_OTG_BSP_mDelay:00000000 $t
+     /tmp/ccywsid4.s:25216  .text.USB_OTG_BSP_mDelay:00000000 USB_OTG_BSP_mDelay
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

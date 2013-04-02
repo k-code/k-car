@@ -45,7 +45,6 @@ src/main.d src/main.o: ../src/main.c \
  /home/kvv/workspace/k-car/autopilot/inc/STM32_USB_OTG_Driver/inc/usb_defines.h \
  /home/kvv/workspace/k-car/autopilot/inc/STM32_USB_Device_Library/Core/inc/usbd_def.h \
  /home/kvv/workspace/k-car/autopilot/inc/usbd_conf.h \
- /home/kvv/workspace/k-car/autopilot/inc/stm32f4_discovery.h \
  /home/kvv/workspace/k-car/autopilot/inc/usbd_desc.h \
  /home/kvv/workspace/k-car/autopilot/inc/STM32_USB_Device_Library/Core/inc/usbd_def.h \
  /home/kvv/workspace/k-car/autopilot/inc/STM32_USB_Device_Library/Class/cdc/inc/usbd_cdc_core.h \
@@ -146,8 +145,6 @@ src/main.d src/main.o: ../src/main.c \
 /home/kvv/workspace/k-car/autopilot/inc/STM32_USB_Device_Library/Core/inc/usbd_def.h:
 
 /home/kvv/workspace/k-car/autopilot/inc/usbd_conf.h:
-
-/home/kvv/workspace/k-car/autopilot/inc/stm32f4_discovery.h:
 
 /home/kvv/workspace/k-car/autopilot/inc/usbd_desc.h:
 

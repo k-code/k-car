@@ -577,20 +577,20 @@
  25648              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_ioreq.c
-     /tmp/cc3vLNsh.s:25294  .text.USBD_CtlSendData:00000000 $t
-     /tmp/cc3vLNsh.s:25299  .text.USBD_CtlSendData:00000000 USBD_CtlSendData
-     /tmp/cc3vLNsh.s:25352  .text.USBD_CtlContinueSendData:00000000 $t
-     /tmp/cc3vLNsh.s:25357  .text.USBD_CtlContinueSendData:00000000 USBD_CtlContinueSendData
-     /tmp/cc3vLNsh.s:25398  .text.USBD_CtlPrepareRx:00000000 $t
-     /tmp/cc3vLNsh.s:25403  .text.USBD_CtlPrepareRx:00000000 USBD_CtlPrepareRx
-     /tmp/cc3vLNsh.s:25456  .text.USBD_CtlContinueRx:00000000 $t
-     /tmp/cc3vLNsh.s:25461  .text.USBD_CtlContinueRx:00000000 USBD_CtlContinueRx
-     /tmp/cc3vLNsh.s:25502  .text.USBD_CtlSendStatus:00000000 $t
-     /tmp/cc3vLNsh.s:25507  .text.USBD_CtlSendStatus:00000000 USBD_CtlSendStatus
-     /tmp/cc3vLNsh.s:25552  .text.USBD_CtlReceiveStatus:00000000 $t
-     /tmp/cc3vLNsh.s:25557  .text.USBD_CtlReceiveStatus:00000000 USBD_CtlReceiveStatus
-     /tmp/cc3vLNsh.s:25602  .text.USBD_GetRxCount:00000000 $t
-     /tmp/cc3vLNsh.s:25607  .text.USBD_GetRxCount:00000000 USBD_GetRxCount
+     /tmp/ccVmwIWg.s:25294  .text.USBD_CtlSendData:00000000 $t
+     /tmp/ccVmwIWg.s:25299  .text.USBD_CtlSendData:00000000 USBD_CtlSendData
+     /tmp/ccVmwIWg.s:25352  .text.USBD_CtlContinueSendData:00000000 $t
+     /tmp/ccVmwIWg.s:25357  .text.USBD_CtlContinueSendData:00000000 USBD_CtlContinueSendData
+     /tmp/ccVmwIWg.s:25398  .text.USBD_CtlPrepareRx:00000000 $t
+     /tmp/ccVmwIWg.s:25403  .text.USBD_CtlPrepareRx:00000000 USBD_CtlPrepareRx
+     /tmp/ccVmwIWg.s:25456  .text.USBD_CtlContinueRx:00000000 $t
+     /tmp/ccVmwIWg.s:25461  .text.USBD_CtlContinueRx:00000000 USBD_CtlContinueRx
+     /tmp/ccVmwIWg.s:25502  .text.USBD_CtlSendStatus:00000000 $t
+     /tmp/ccVmwIWg.s:25507  .text.USBD_CtlSendStatus:00000000 USBD_CtlSendStatus
+     /tmp/ccVmwIWg.s:25552  .text.USBD_CtlReceiveStatus:00000000 $t
+     /tmp/ccVmwIWg.s:25557  .text.USBD_CtlReceiveStatus:00000000 USBD_CtlReceiveStatus
+     /tmp/ccVmwIWg.s:25602  .text.USBD_GetRxCount:00000000 $t
+     /tmp/ccVmwIWg.s:25607  .text.USBD_GetRxCount:00000000 USBD_GetRxCount
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

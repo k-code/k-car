@@ -1,0 +1,265 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"lis302dl.c"
+  14              		.section	.text._ZL17LIS302DL_SendByteh,"ax",%progbits
+  15              		.align	1
+  16              		.thumb
+  17              		.thumb_func
+  19              	_ZL17LIS302DL_SendByteh:
+  20              		.fnstart
+  21              	.LFB115:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 38B5     		push	{r3, r4, r5, lr}
+  25              		.save {r3, r4, r5, lr}
+  26 0002 0546     		mov	r5, r0
+  27 0004 4FF48054 		mov	r4, #4096
+  28 0008 01E0     		b	.L2
+  29              	.L4:
+  30 000a E4B1     		cbz	r4, .L8
+  31 000c 013C     		subs	r4, r4, #1
+  32              	.L2:
+  33 000e 0F48     		ldr	r0, .L10
+  34 0010 0221     		movs	r1, #2
+  35 0012 FFF7FEFF 		bl	SPI_I2S_GetFlagStatus
+  36 0016 0028     		cmp	r0, #0
+  37 0018 F7D0     		beq	.L4
+  38 001a 0C48     		ldr	r0, .L10
+  39 001c 2946     		mov	r1, r5
+  40 001e FFF7FEFF 		bl	SPI_I2S_SendData
+  41 0022 41F20104 		movw	r4, #4097
+  42 0026 01E0     		b	.L5
+  43              	.L7:
+  44 0028 013C     		subs	r4, r4, #1
+  45 002a 0AD0     		beq	.L9
+  46              	.L5:
+  47 002c 0748     		ldr	r0, .L10
+  48 002e 0121     		movs	r1, #1
+  49 0030 FFF7FEFF 		bl	SPI_I2S_GetFlagStatus
+  50 0034 0028     		cmp	r0, #0
+  51 0036 F7D0     		beq	.L7
+  52 0038 0448     		ldr	r0, .L10
+  53 003a FFF7FEFF 		bl	SPI_I2S_ReceiveData
+  54 003e C0B2     		uxtb	r0, r0
+  55 0040 38BD     		pop	{r3, r4, r5, pc}
+  56              	.L9:
+  57 0042 2046     		mov	r0, r4
+  58 0044 38BD     		pop	{r3, r4, r5, pc}
+  59              	.L8:
+  60 0046 2046     		mov	r0, r4
+  61 0048 38BD     		pop	{r3, r4, r5, pc}
+  62              	.L11:
+  63 004a 00BF     		.align	2
+  64              	.L10:
+  65 004c 00300140 		.word	1073819648
+  66              		.fnend
+  68              		.section	.text._ZL13LIS302DL_ReadhPhh,"ax",%progbits
+  69              		.align	1
+  70              		.thumb
+  71              		.thumb_func
+  73              	_ZL13LIS302DL_ReadhPhh:
+  74              		.fnstart
+  75              	.LFB118:
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0000 70B5     		push	{r4, r5, r6, lr}
+  79              		.save {r4, r5, r6, lr}
+  80 0002 0546     		mov	r5, r0
+  81 0004 1646     		mov	r6, r2
+  82 0006 0F48     		ldr	r0, .L16
+  83 0008 0C46     		mov	r4, r1
+  84 000a 0821     		movs	r1, #8
+  85 000c FFF7FEFF 		bl	GPIO_ResetBits
+  86 0010 45F08000 		orr	r0, r5, #128
+  87 0014 012E     		cmp	r6, #1
+  88 0016 88BF     		it	hi
+  89 0018 40F04000 		orrhi	r0, r0, #64
+  90 001c FFF7FEFF 		bl	_ZL17LIS302DL_SendByteh
+  91 0020 0025     		movs	r5, #0
+  92 0022 06E0     		b	.L14
+  93              	.L15:
+  94 0024 0020     		movs	r0, #0
+  95 0026 FFF7FEFF 		bl	_ZL17LIS302DL_SendByteh
+  96 002a 0135     		adds	r5, r5, #1
+  97 002c 04F8010B 		strb	r0, [r4], #1
+  98 0030 EDB2     		uxtb	r5, r5
+  99              	.L14:
+ 100 0032 B542     		cmp	r5, r6
+ 101 0034 F6D1     		bne	.L15
+ 102 0036 0348     		ldr	r0, .L16
+ 103 0038 0821     		movs	r1, #8
+ 104 003a BDE87040 		pop	{r4, r5, r6, lr}
+ 105 003e FFF7FEBF 		b	GPIO_SetBits
+ 106              	.L17:
+ 107 0042 00BF     		.align	2
+ 108              	.L16:
+ 109 0044 00100240 		.word	1073876992
+ 110              		.fnend
+ 112              		.section	.text._Z13LIS302DL_Initv,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	_Z13LIS302DL_Initv
+ 115              		.thumb
+ 116              		.thumb_func
+ 118              	_Z13LIS302DL_Initv:
+ 119              		.fnstart
+ 120              	.LFB110:
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123 0000 10B5     		push	{r4, lr}
+ 124              		.save {r4, lr}
+ 125 0002 0821     		movs	r1, #8
+ 126 0004 0B48     		ldr	r0, .L19
+ 127 0006 FFF7FEFF 		bl	GPIO_SetBits
+ 128 000a 0821     		movs	r1, #8
+ 129 000c 0948     		ldr	r0, .L19
+ 130 000e FFF7FEFF 		bl	GPIO_ResetBits
+ 131 0012 2020     		movs	r0, #32
+ 132 0014 FFF7FEFF 		bl	_ZL17LIS302DL_SendByteh
+ 133 0018 4720     		movs	r0, #71
+ 134 001a FFF7FEFF 		bl	_ZL17LIS302DL_SendByteh
+ 135 001e 0821     		movs	r1, #8
+ 136 0020 0448     		ldr	r0, .L19
+ 137 0022 FFF7FEFF 		bl	GPIO_SetBits
+ 138 0026 0348     		ldr	r0, .L19
+ 139 0028 0821     		movs	r1, #8
+ 140 002a BDE81040 		pop	{r4, lr}
+ 141 002e FFF7FEBF 		b	GPIO_ResetBits
+ 142              	.L20:
+ 143 0032 00BF     		.align	2
+ 144              	.L19:
+ 145 0034 00100240 		.word	1073876992
+ 146              		.fnend
+ 148              		.section	.text._Z16LIS302DL_ReadACCPl,"ax",%progbits
+ 149              		.align	1
+ 150              		.global	_Z16LIS302DL_ReadACCPl
+ 151              		.thumb
+ 152              		.thumb_func
+ 154              	_Z16LIS302DL_ReadACCPl:
+ 155              		.fnstart
+ 156              	.LFB111:
+ 157              		@ args = 0, pretend = 0, frame = 8
+ 158              		@ frame_needed = 0, uses_anonymous_args = 0
+ 159 0000 13B5     		push	{r0, r1, r4, lr}
+ 160              		.save {r0, r1, r4, lr}
+ 161 0002 0622     		movs	r2, #6
+ 162 0004 0446     		mov	r4, r0
+ 163 0006 6946     		mov	r1, sp
+ 164 0008 2920     		movs	r0, #41
+ 165 000a FFF7FEFF 		bl	_ZL13LIS302DL_ReadhPhh
+ 166 000e 9DF90010 		ldrsb	r1, [sp, #0]
+ 167 0012 4822     		movs	r2, #72
+ 168 0014 2346     		mov	r3, r4
+ 169 0016 5143     		muls	r1, r2, r1
+ 170 0018 43F8041B 		str	r1, [r3], #4
+ 171 001c 9DF90210 		ldrsb	r1, [sp, #2]
+ 172 0020 5143     		muls	r1, r2, r1
+ 173 0022 6160     		str	r1, [r4, #4]
+ 174 0024 9DF90410 		ldrsb	r1, [sp, #4]
+ 175 0028 4A43     		muls	r2, r1, r2
+ 176 002a 5A60     		str	r2, [r3, #4]
+ 177 002c 1CBD     		pop	{r2, r3, r4, pc}
+ 178              		.fnend
+ 180              		.section	.text._Z17LIS302DL_ReadACCYPa,"ax",%progbits
+ 181              		.align	1
+ 182              		.global	_Z17LIS302DL_ReadACCYPa
+ 183              		.thumb
+ 184              		.thumb_func
+ 186              	_Z17LIS302DL_ReadACCYPa:
+ 187              		.fnstart
+ 188              	.LFB112:
+ 189              		@ args = 0, pretend = 0, frame = 8
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191 0000 13B5     		push	{r0, r1, r4, lr}
+ 192              		.save {r0, r1, r4, lr}
+ 193 0002 0122     		movs	r2, #1
+ 194 0004 0446     		mov	r4, r0
+ 195 0006 0DF10701 		add	r1, sp, #7
+ 196 000a 2B20     		movs	r0, #43
+ 197 000c FFF7FEFF 		bl	_ZL13LIS302DL_ReadhPhh
+ 198 0010 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 199 0014 2370     		strb	r3, [r4, #0]
+ 200 0016 1CBD     		pop	{r2, r3, r4, pc}
+ 201              		.fnend
+ 203              		.section	.text._Z17LIS302DL_ReadACCXPa,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	_Z17LIS302DL_ReadACCXPa
+ 206              		.thumb
+ 207              		.thumb_func
+ 209              	_Z17LIS302DL_ReadACCXPa:
+ 210              		.fnstart
+ 211              	.LFB113:
+ 212              		@ args = 0, pretend = 0, frame = 8
+ 213              		@ frame_needed = 0, uses_anonymous_args = 0
+ 214 0000 13B5     		push	{r0, r1, r4, lr}
+ 215              		.save {r0, r1, r4, lr}
+ 216 0002 0122     		movs	r2, #1
+ 217 0004 0446     		mov	r4, r0
+ 218 0006 0DF10701 		add	r1, sp, #7
+ 219 000a 2920     		movs	r0, #41
+ 220 000c FFF7FEFF 		bl	_ZL13LIS302DL_ReadhPhh
+ 221 0010 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 222 0014 2370     		strb	r3, [r4, #0]
+ 223 0016 1CBD     		pop	{r2, r3, r4, pc}
+ 224              		.fnend
+ 226              		.section	.text._Z17LIS302DL_getSatusPh,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	_Z17LIS302DL_getSatusPh
+ 229              		.thumb
+ 230              		.thumb_func
+ 232              	_Z17LIS302DL_getSatusPh:
+ 233              		.fnstart
+ 234              	.LFB114:
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237              		@ link register save eliminated.
+ 238 0000 0146     		mov	r1, r0
+ 239 0002 0122     		movs	r2, #1
+ 240 0004 2720     		movs	r0, #39
+ 241 0006 FFF7FEBF 		b	_ZL13LIS302DL_ReadhPhh
+ 242              		.cantunwind
+ 243              		.fnend
+ 245              		.ident	"GCC: (Sourcery G++ Lite 2011.03-42) 4.5.2"
+DEFINED SYMBOLS
+                            *ABS*:00000000 lis302dl.c
+     /tmp/ccPZlMFd.s:15     .text._ZL17LIS302DL_SendByteh:00000000 $t
+     /tmp/ccPZlMFd.s:19     .text._ZL17LIS302DL_SendByteh:00000000 _ZL17LIS302DL_SendByteh
+     /tmp/ccPZlMFd.s:65     .text._ZL17LIS302DL_SendByteh:0000004c $d
+.ARM.exidx.text._ZL17LIS302DL_SendByteh:00000000 $d
+     /tmp/ccPZlMFd.s:69     .text._ZL13LIS302DL_ReadhPhh:00000000 $t
+     /tmp/ccPZlMFd.s:73     .text._ZL13LIS302DL_ReadhPhh:00000000 _ZL13LIS302DL_ReadhPhh
+     /tmp/ccPZlMFd.s:109    .text._ZL13LIS302DL_ReadhPhh:00000044 $d
+.ARM.exidx.text._ZL13LIS302DL_ReadhPhh:00000000 $d
+     /tmp/ccPZlMFd.s:113    .text._Z13LIS302DL_Initv:00000000 $t
+     /tmp/ccPZlMFd.s:118    .text._Z13LIS302DL_Initv:00000000 _Z13LIS302DL_Initv
+     /tmp/ccPZlMFd.s:145    .text._Z13LIS302DL_Initv:00000034 $d
+.ARM.exidx.text._Z13LIS302DL_Initv:00000000 $d
+     /tmp/ccPZlMFd.s:149    .text._Z16LIS302DL_ReadACCPl:00000000 $t
+     /tmp/ccPZlMFd.s:154    .text._Z16LIS302DL_ReadACCPl:00000000 _Z16LIS302DL_ReadACCPl
+.ARM.exidx.text._Z16LIS302DL_ReadACCPl:00000000 $d
+     /tmp/ccPZlMFd.s:181    .text._Z17LIS302DL_ReadACCYPa:00000000 $t
+     /tmp/ccPZlMFd.s:186    .text._Z17LIS302DL_ReadACCYPa:00000000 _Z17LIS302DL_ReadACCYPa
+.ARM.exidx.text._Z17LIS302DL_ReadACCYPa:00000000 $d
+     /tmp/ccPZlMFd.s:204    .text._Z17LIS302DL_ReadACCXPa:00000000 $t
+     /tmp/ccPZlMFd.s:209    .text._Z17LIS302DL_ReadACCXPa:00000000 _Z17LIS302DL_ReadACCXPa
+.ARM.exidx.text._Z17LIS302DL_ReadACCXPa:00000000 $d
+     /tmp/ccPZlMFd.s:227    .text._Z17LIS302DL_getSatusPh:00000000 $t
+     /tmp/ccPZlMFd.s:232    .text._Z17LIS302DL_getSatusPh:00000000 _Z17LIS302DL_getSatusPh
+.ARM.exidx.text._Z17LIS302DL_getSatusPh:00000000 $d
+
+UNDEFINED SYMBOLS
+SPI_I2S_GetFlagStatus
+SPI_I2S_SendData
+SPI_I2S_ReceiveData
+__aeabi_unwind_cpp_pr0
+GPIO_ResetBits
+GPIO_SetBits

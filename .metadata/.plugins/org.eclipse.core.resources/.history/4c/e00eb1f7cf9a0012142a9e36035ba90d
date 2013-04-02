@@ -1,0 +1,3077 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+Data_get            0x1               ./src/main.o
+SysTime             0x4               ./src/stm32f4xx_it.o
+usbd_cdc_OtherCfgDesc
+                    0x43              ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+USB_Rx_Buffer       0x40              ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+USART_InitStructure
+                    0x10              ./src/usbd_cdc_vcp.o
+USBD_USR_DEVICE_CONFIGURED
+                    0x1               ./src/main.o
+CmdBuff             0x8               ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+USB_OTG_dev         0x5f0             ./src/main.o
+Data_buf            0x800             ./src/main.o
+APP_Rx_Buffer       0x800             ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+NVIC_InitStructure  0x4               ./src/stm32f4_discovery.o
+USBD_StrDesc        0x32              ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+
+Discarded input sections
+
+ .text          0x00000000        0x0 ./src/lis302dl.o
+ .data          0x00000000        0x0 ./src/lis302dl.o
+ .bss           0x00000000        0x0 ./src/lis302dl.o
+ .text.LIS302DL_Init
+                0x00000000       0x40 ./src/lis302dl.o
+ .text.LIS302DL_ReadACC
+                0x00000000       0x68 ./src/lis302dl.o
+ .text.LIS302DL_ReadACCY
+                0x00000000       0x2c ./src/lis302dl.o
+ .text.LIS302DL_ReadACCX
+                0x00000000       0x2c ./src/lis302dl.o
+ .text.LIS302DL_getSatus
+                0x00000000       0x20 ./src/lis302dl.o
+ .text.LIS302DL_SendByte
+                0x00000000       0x60 ./src/lis302dl.o
+ .text.LIS302DL_GetByte
+                0x00000000       0x5c ./src/lis302dl.o
+ .text.LIS302DL_Write
+                0x00000000       0x64 ./src/lis302dl.o
+ .text.LIS302DL_Read
+                0x00000000       0x80 ./src/lis302dl.o
+ .text          0x00000000        0x0 ./src/main.o
+ .data          0x00000000        0x0 ./src/main.o
+ .bss           0x00000000        0x0 ./src/main.o
+ .text          0x00000000        0x0 ./src/periph_init.o
+ .data          0x00000000        0x0 ./src/periph_init.o
+ .bss           0x00000000        0x0 ./src/periph_init.o
+ .bss.PrescalerValue
+                0x00000000        0x2 ./src/periph_init.o
+ .text.PERIPH_Init_Spi
+                0x00000000      0x110 ./src/periph_init.o
+ .text.PERIPH_Init_PWM
+                0x00000000       0x8c ./src/periph_init.o
+ .text          0x00000000        0x0 ./src/protocol.o
+ .data          0x00000000        0x0 ./src/protocol.o
+ .bss           0x00000000        0x0 ./src/protocol.o
+ .text.PROTOCOL_toByteArray
+                0x00000000      0x108 ./src/protocol.o
+ .text.PROTOCOL_parseProtocol
+                0x00000000       0xb4 ./src/protocol.o
+ .text.PROTOCOL_parseFrame
+                0x00000000       0x58 ./src/protocol.o
+ .text.PROTOCOL_parseInt
+                0x00000000       0x58 ./src/protocol.o
+ .text.PROTOCOL_intToByteArray
+                0x00000000       0x4c ./src/protocol.o
+ .text          0x00000000        0x0 ./src/stm32f4_discovery.o
+ .data          0x00000000        0x0 ./src/stm32f4_discovery.o
+ .bss           0x00000000        0x0 ./src/stm32f4_discovery.o
+ .data.GPIO_PORT
+                0x00000000       0x10 ./src/stm32f4_discovery.o
+ .rodata.GPIO_PIN
+                0x00000000        0x8 ./src/stm32f4_discovery.o
+ .rodata.GPIO_CLK
+                0x00000000       0x10 ./src/stm32f4_discovery.o
+ .data.BUTTON_PORT
+                0x00000000        0x4 ./src/stm32f4_discovery.o
+ .rodata.BUTTON_PIN
+                0x00000000        0x4 ./src/stm32f4_discovery.o
+ .rodata.BUTTON_CLK
+                0x00000000        0x4 ./src/stm32f4_discovery.o
+ .rodata.BUTTON_EXTI_LINE
+                0x00000000        0x4 ./src/stm32f4_discovery.o
+ .rodata.BUTTON_PORT_SOURCE
+                0x00000000        0x4 ./src/stm32f4_discovery.o
+ .rodata.BUTTON_PIN_SOURCE
+                0x00000000        0x4 ./src/stm32f4_discovery.o
+ .rodata.BUTTON_IRQn
+                0x00000000        0x4 ./src/stm32f4_discovery.o
+ .text.STM_EVAL_LEDInit
+                0x00000000       0x68 ./src/stm32f4_discovery.o
+ .text.STM_EVAL_LEDOn
+                0x00000000       0x30 ./src/stm32f4_discovery.o
+ .text.STM_EVAL_LEDOff
+                0x00000000       0x30 ./src/stm32f4_discovery.o
+ .text.STM_EVAL_LEDToggle
+                0x00000000       0x3c ./src/stm32f4_discovery.o
+ .text.STM_EVAL_PBInit
+                0x00000000       0xe0 ./src/stm32f4_discovery.o
+ .text.STM_EVAL_PBGetState
+                0x00000000       0x38 ./src/stm32f4_discovery.o
+ COMMON         0x00000000        0x4 ./src/stm32f4_discovery.o
+ .text          0x00000000        0x0 ./src/stm32f4xx_it.o
+ .data          0x00000000        0x0 ./src/stm32f4xx_it.o
+ .bss           0x00000000        0x0 ./src/stm32f4xx_it.o
+ .text          0x00000000        0x0 ./src/system_stm32f4xx.o
+ .data          0x00000000        0x0 ./src/system_stm32f4xx.o
+ .bss           0x00000000        0x0 ./src/system_stm32f4xx.o
+ .data.AHBPrescTable
+                0x00000000       0x10 ./src/system_stm32f4xx.o
+ .text.SystemCoreClockUpdate
+                0x00000000      0x114 ./src/system_stm32f4xx.o
+ .text          0x00000000        0x0 ./src/usb_bsp.o
+ .data          0x00000000        0x0 ./src/usb_bsp.o
+ .bss           0x00000000        0x0 ./src/usb_bsp.o
+ .text.USB_OTG_BSP_Init
+                0x00000000       0xd8 ./src/usb_bsp.o
+ .text.USB_OTG_BSP_EnableInterrupt
+                0x00000000       0x3c ./src/usb_bsp.o
+ .text.USB_OTG_BSP_mDelay
+                0x00000000       0x20 ./src/usb_bsp.o
+ .text          0x00000000        0x0 ./src/usbd_cdc_vcp.o
+ .data          0x00000000        0x0 ./src/usbd_cdc_vcp.o
+ .bss           0x00000000        0x0 ./src/usbd_cdc_vcp.o
+ COMMON         0x00000000       0x10 ./src/usbd_cdc_vcp.o
+ .text          0x00000000        0x0 ./src/usbd_desc.o
+ .data          0x00000000        0x0 ./src/usbd_desc.o
+ .bss           0x00000000        0x0 ./src/usbd_desc.o
+ .data.USR_desc
+                0x00000000       0x1c ./src/usbd_desc.o
+ .data.USBD_DeviceDesc
+                0x00000000       0x14 ./src/usbd_desc.o
+ .data.USBD_DeviceQualifierDesc
+                0x00000000        0xc ./src/usbd_desc.o
+ .data.USBD_LangIDDesc
+                0x00000000        0x4 ./src/usbd_desc.o
+ .text.USBD_USR_DeviceDescriptor
+                0x00000000       0x28 ./src/usbd_desc.o
+ .text.USBD_USR_LangIDStrDescriptor
+                0x00000000       0x28 ./src/usbd_desc.o
+ .rodata        0x00000000       0x98 ./src/usbd_desc.o
+ .text.USBD_USR_ProductStrDescriptor
+                0x00000000       0x40 ./src/usbd_desc.o
+ .text.USBD_USR_ManufacturerStrDescriptor
+                0x00000000       0x2c ./src/usbd_desc.o
+ .text.USBD_USR_SerialStrDescriptor
+                0x00000000       0x40 ./src/usbd_desc.o
+ .text.USBD_USR_ConfigStrDescriptor
+                0x00000000       0x3c ./src/usbd_desc.o
+ .text.USBD_USR_InterfaceStrDescriptor
+                0x00000000       0x3c ./src/usbd_desc.o
+ .text          0x00000000        0x0 ./src/usbd_usr.o
+ .data          0x00000000        0x0 ./src/usbd_usr.o
+ .bss           0x00000000        0x0 ./src/usbd_usr.o
+ .data.USR_cb   0x00000000       0x1c ./src/usbd_usr.o
+ .text.USBD_USR_Init
+                0x00000000       0x14 ./src/usbd_usr.o
+ .text.USBD_USR_DeviceReset
+                0x00000000       0x38 ./src/usbd_usr.o
+ .text.USBD_USR_DeviceConfigured
+                0x00000000       0x20 ./src/usbd_usr.o
+ .text.USBD_USR_DeviceConnected
+                0x00000000       0x14 ./src/usbd_usr.o
+ .text.USBD_USR_DeviceDisconnected
+                0x00000000        0xc ./src/usbd_usr.o
+ .text.USBD_USR_DeviceSuspended
+                0x00000000        0xc ./src/usbd_usr.o
+ .text.USBD_USR_DeviceResumed
+                0x00000000        0xc ./src/usbd_usr.o
+ .text          0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .data          0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .bss           0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_EnableCommonInt
+                0x00000000       0x44 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_CoreReset
+                0x00000000       0xa0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_SelectCore
+                0x00000000      0x1b0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_CoreInit
+                0x00000000      0x1f8 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_EnableGlobalInt
+                0x00000000       0x3c ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_DisableGlobalInt
+                0x00000000       0x40 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_FlushRxFifo
+                0x00000000       0x68 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_SetCurrentMode
+                0x00000000       0x64 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_IsHostMode
+                0x00000000       0x24 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_ReadOtgItr
+                0x00000000       0x1c ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_InitDevSpeed
+                0x00000000       0x38 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_CoreInitDev
+                0x00000000      0x2e8 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_EnableDevInt
+                0x00000000       0xa4 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_EPDeactivate
+                0x00000000       0xa0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_ActiveRemoteWakeup
+                0x00000000       0x98 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_StopDevice
+                0x00000000       0x9c ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_GetEPStatus
+                0x00000000       0xc0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text.USB_OTG_SetEPStatus
+                0x00000000      0x13c ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .text          0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .data          0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .bss           0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text.DCD_Init
+                0x00000000      0x12c ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text.DCD_EP_Close
+                0x00000000       0x7c ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text.DCD_EP_Flush
+                0x00000000       0x38 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text.DCD_DevConnect
+                0x00000000       0x30 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text.DCD_DevDisconnect
+                0x00000000       0x30 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text.DCD_GetEPStatus
+                0x00000000       0x68 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text.DCD_SetEPStatus
+                0x00000000       0x60 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .text          0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .data          0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .bss           0x00000000        0x0 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .data          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .bss           0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_Init
+                0x00000000       0x58 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_DeInit
+                0x00000000       0x18 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .data          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .bss           0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .text.USBD_CtlPrepareRx
+                0x00000000       0x48 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .text.USBD_GetRxCount
+                0x00000000       0x34 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .text          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .data          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .bss           0x00000000        0x0 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_GetString
+                0x00000000       0x9c ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_GetLen
+                0x00000000       0x38 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ COMMON         0x00000000       0x32 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .data          0x00000000        0x0 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .bss           0x00000000        0x0 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .data.usbd_cdc_CfgDesc
+                0x00000000       0x44 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .bss.usbd_cdc_AltSet
+                0x00000000        0x4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .bss.APP_Rx_ptr_out
+                0x00000000        0x4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .bss.APP_Rx_length
+                0x00000000        0x4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .bss.USB_Tx_State
+                0x00000000        0x1 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .data.cdcCmd   0x00000000        0x4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .bss.cdcLen    0x00000000        0x4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .data.USBD_CDC_cb
+                0x00000000       0x2c ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.usbd_cdc_Init
+                0x00000000       0xb4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.usbd_cdc_DeInit
+                0x00000000       0x48 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.usbd_cdc_Setup
+                0x00000000      0x140 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.usbd_cdc_EP0_RxReady
+                0x00000000       0x48 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.usbd_cdc_DataIn
+                0x00000000       0xd4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.usbd_cdc_DataOut
+                0x00000000       0x64 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.usbd_cdc_SOF
+                0x00000000       0x44 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.Handle_USBAsynchXfer
+                0x00000000      0x114 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text.USBD_cdc_GetCfgDesc
+                0x00000000       0x28 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .bss.FrameCount.8202
+                0x00000000        0x4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .text.NVIC_PriorityGroupConfig
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .text.NVIC_Init
+                0x00000000       0xd8 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .text.NVIC_SetVectorTable
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .text.NVIC_SystemLPConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .text.SysTick_CLKSourceConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_Init
+                0x00000000       0xc4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_StructInit
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_CommonInit
+                0x00000000       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_CommonStructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_Cmd  0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_AnalogWatchdogCmd
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_AnalogWatchdogThresholdsConfig
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_AnalogWatchdogSingleChannelConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_TempSensorVrefintCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_VBATCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_RegularChannelConfig
+                0x00000000      0x1d0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_SoftwareStartConv
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_GetSoftwareStartConvStatus
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_EOCOnEachRegularChannelCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_ContinuousModeCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_DiscModeChannelCountConfig
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_DiscModeCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_GetConversionValue
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_GetMultiModeConversionValue
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_DMACmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_DMARequestAfterLastTransferCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_MultiModeDMARequestAfterLastTransferCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_InjectedChannelConfig
+                0x00000000      0x150 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_InjectedSequencerLengthConfig
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_SetInjectedOffset
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_ExternalTrigInjectedConvConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_ExternalTrigInjectedConvEdgeConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_SoftwareStartInjectedConv
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_GetSoftwareStartInjectedConvCmdStatus
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_AutoInjectedConvCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_InjectedDiscModeCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_GetInjectedConversionValue
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_ITConfig
+                0x00000000       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_GetFlagStatus
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_ClearFlag
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_GetITStatus
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text.ADC_ClearITPendingBit
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_DeInit
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_Init
+                0x00000000      0x1c0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_FilterInit
+                0x00000000      0x19c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_StructInit
+                0x00000000       0x6c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_SlaveStartBank
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_DBGFreeze
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_TTComModeCmd
+                0x00000000       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_Transmit
+                0x00000000      0x1ec ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_TransmitStatus
+                0x00000000       0xf0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_CancelTransmit
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_Receive
+                0x00000000      0x1a8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_FIFORelease
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_MessagePending
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_OperatingModeRequest
+                0x00000000      0x114 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_Sleep
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_WakeUp
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_GetLastErrorCode
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_GetReceiveErrorCounter
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_GetLSBTransmitErrorCounter
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_ITConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_GetFlagStatus
+                0x00000000      0x104 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_ClearFlag
+                0x00000000       0x78 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_GetITStatus
+                0x00000000      0x1b8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CAN_ClearITPendingBit
+                0x00000000       0xf8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text.CheckITStatus
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .text.CRC_ResetDR
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .text.CRC_CalcCRC
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .text.CRC_CalcBlockCRC
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .text.CRC_GetCRC
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .text.CRC_SetIDRegister
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .text.CRC_GetIDRegister
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_Init
+                0x00000000       0xa8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_StructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_KeyInit
+                0x00000000       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_KeyStructInit
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_IVInit
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_IVStructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_FIFOFlush
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_Cmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_DataIn
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_DataOut
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_SaveContext
+                0x00000000      0x118 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_RestoreContext
+                0x00000000       0x8c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_DMACmd
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_ITConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_GetITStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text.CRYP_GetFlagStatus
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .text.CRYP_AES_ECB
+                0x00000000      0x4b0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .text.CRYP_AES_CBC
+                0x00000000      0x5cc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .text.CRYP_AES_CTR
+                0x00000000      0x550 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .text.CRYP_DES_ECB
+                0x00000000      0x160 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .text.CRYP_DES_CBC
+                0x00000000      0x1b0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .text.CRYP_TDES_ECB
+                0x00000000      0x1d0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .text.CRYP_TDES_CBC
+                0x00000000      0x268 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_Init
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_StructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_Cmd  0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_SoftwareTriggerCmd
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_DualSoftwareTriggerCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_WaveGenerationCmd
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_SetChannel1Data
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_SetChannel2Data
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_SetDualChannelData
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_GetDataOutputValue
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_DMACmd
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_ITConfig
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_GetFlagStatus
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_ClearFlag
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_GetITStatus
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text.DAC_ClearITPendingBit
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .text.DBGMCU_GetREVID
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .text.DBGMCU_GetDEVID
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .text.DBGMCU_Config
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .text.DBGMCU_APB1PeriphConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .text.DBGMCU_APB2PeriphConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_DeInit
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_Init
+                0x00000000       0x8c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_StructInit
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_CROPConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_CROPCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_SetEmbeddedSynchroCodes
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_JPEGCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_Cmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_CaptureCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_ReadData
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_ITConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_GetFlagStatus
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_ClearFlag
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_GetITStatus
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text.DCMI_ClearITPendingBit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_DeInit
+                0x00000000      0x1b4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_Init
+                0x00000000       0xb8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_StructInit
+                0x00000000       0x8c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_Cmd  0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_PeriphIncOffsetSizeConfig
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_FlowControllerConfig
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_SetCurrDataCounter
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_GetCurrDataCounter
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_DoubleBufferModeConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_DoubleBufferModeCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_MemoryTargetConfig
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_GetCurrentMemoryTarget
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_GetCmdStatus
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_GetFIFOStatus
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_GetFlagStatus
+                0x00000000       0x84 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_ClearFlag
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_ITConfig
+                0x00000000       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_GetITStatus
+                0x00000000       0xc4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text.DMA_ClearITPendingBit
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text.EXTI_DeInit
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text.EXTI_Init
+                0x00000000       0xfc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text.EXTI_StructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text.EXTI_GenerateSWInterrupt
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text.EXTI_GetFlagStatus
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text.EXTI_ClearFlag
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text.EXTI_GetITStatus
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_SetLatency
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_PrefetchBufferCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_InstructionCacheCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_DataCacheCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_InstructionCacheReset
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_DataCacheReset
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_Unlock
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_Lock
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_EraseSector
+                0x00000000       0xcc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_EraseAllSectors
+                0x00000000       0xac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_ProgramDoubleWord
+                0x00000000       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_ProgramWord
+                0x00000000       0x6c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_ProgramHalfWord
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_ProgramByte
+                0x00000000       0x6c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_Unlock
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_Lock
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_WRPConfig
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_RDPConfig
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_UserConfig
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_BORConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_Launch
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_GetUser
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_GetWRP
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_GetRDP
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_OB_GetBOR
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_ITConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_GetFlagStatus
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_ClearFlag
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_GetStatus
+                0x00000000       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text.FLASH_WaitForLastOperation
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NORSRAMDeInit
+                0x00000000       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NORSRAMInit
+                0x00000000      0x150 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NORSRAMStructInit
+                0x00000000      0x108 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NORSRAMCmd
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NANDDeInit
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NANDInit
+                0x00000000       0xe8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NANDStructInit
+                0x00000000       0x9c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NANDCmd
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_NANDECCCmd
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_GetECC
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_PCCARDDeInit
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_PCCARDInit
+                0x00000000       0xc8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_PCCARDStructInit
+                0x00000000       0xa4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_PCCARDCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_ITConfig
+                0x00000000       0xb0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_GetFlagStatus
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_ClearFlag
+                0x00000000       0x68 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_GetITStatus
+                0x00000000       0x94 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text.FSMC_ClearITPendingBit
+                0x00000000       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_DeInit
+                0x00000000      0x164 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_StructInit
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_PinLockConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_ReadInputDataBit
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_ReadInputData
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_ReadOutputDataBit
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_ReadOutputData
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_WriteBit
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_Write
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text.GPIO_ToggleBits
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_Init
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_StructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_Reset
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_SetLastWordValidBitsNbr
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_DataIn
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_GetInFIFOWordsNbr
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_GetDigest
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_StartDigest
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_SaveContext
+                0x00000000       0x68 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_RestoreContext
+                0x00000000       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_DMACmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_ITConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_GetFlagStatus
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_ClearFlag
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_GetITStatus
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text.HASH_ClearITPendingBit
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .text.HASH_MD5
+                0x00000000      0x140 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .text.HMAC_MD5
+                0x00000000      0x258 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .text.HASH_SHA1
+                0x00000000      0x158 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .text.HMAC_SHA1
+                0x00000000      0x270 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_DeInit
+                0x00000000       0x80 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_Init
+                0x00000000      0x1b0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_StructInit
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_Cmd  0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_GenerateSTART
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_GenerateSTOP
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_Send7bitAddress
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_AcknowledgeConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_OwnAddress2Config
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_DualAddressCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_GeneralCallCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_SoftwareResetCmd
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_StretchClockCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_FastModeDutyCycleConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_NACKPositionConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_SMBusAlertConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_ARPCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_SendData
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_ReceiveData
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_TransmitPEC
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_PECPositionConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_CalculatePEC
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_GetPEC
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_DMACmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_DMALastTransferCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_ReadRegister
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_ITConfig
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_CheckEvent
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_GetLastEvent
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_GetFlagStatus
+                0x00000000       0x7c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_ClearFlag
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_GetITStatus
+                0x00000000       0x68 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text.I2C_ClearITPendingBit
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .text.IWDG_WriteAccessCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .text.IWDG_SetPrescaler
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .text.IWDG_SetReload
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .text.IWDG_ReloadCounter
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .text.IWDG_Enable
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .text.IWDG_GetFlagStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_BackupAccessCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_PVDLevelConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_PVDCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_WakeUpPinCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_BackupRegulatorCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_MainRegulatorModeConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_FlashPowerDownCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_EnterSTOPMode
+                0x00000000       0x68 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_EnterSTANDBYMode
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_GetFlagStatus
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text.PWR_ClearFlag
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_DeInit
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_HSEConfig
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_WaitForHSEStartUp
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AdjustHSICalibrationValue
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_HSICmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_LSEConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_LSICmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_PLLConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_PLLCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_PLLI2SConfig
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_PLLI2SCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_ClockSecuritySystemCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_MCO1Config
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_MCO2Config
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_SYSCLKConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_GetSYSCLKSource
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_HCLKConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_PCLK1Config
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_PCLK2Config
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_RTCCLKConfig
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_RTCCLKCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_BackupResetCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_I2SCLKConfig
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB2PeriphClockCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB3PeriphClockCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_APB2PeriphClockCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB1PeriphResetCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB2PeriphResetCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB3PeriphResetCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_APB1PeriphResetCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_APB2PeriphResetCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB1PeriphClockLPModeCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB2PeriphClockLPModeCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_AHB3PeriphClockLPModeCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_APB1PeriphClockLPModeCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_APB2PeriphClockLPModeCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_ITConfig
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_GetFlagStatus
+                0x00000000       0x84 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_ClearFlag
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_GetITStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text.RCC_ClearITPendingBit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_Cmd  0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_GetRandomNumber
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_ITConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_GetFlagStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_ClearFlag
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_GetITStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text.RNG_ClearITPendingBit
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_DeInit
+                0x00000000      0x100 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_Init
+                0x00000000       0x8c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_StructInit
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_WriteProtectionCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_EnterInitMode
+                0x00000000       0x80 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_ExitInitMode
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_WaitForSynchro
+                0x00000000       0x88 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_RefClockCmd
+                0x00000000       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_BypassShadowCmd
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_SetTime
+                0x00000000      0x12c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TimeStructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetTime
+                0x00000000       0xa8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetSubSecond
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_SetDate
+                0x00000000      0x130 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_DateStructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetDate
+                0x00000000       0xa4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_SetAlarm
+                0x00000000      0x158 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_AlarmStructInit
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetAlarm
+                0x00000000       0xe4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_AlarmCmd
+                0x00000000       0xbc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_AlarmSubSecondConfig
+                0x00000000       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetAlarmSubSecond
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_WakeUpClockConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_SetWakeUpCounter
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetWakeUpCounter
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_WakeUpCmd
+                0x00000000       0xa8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_DayLightSavingConfig
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetStoreOperation
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_OutputConfig
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_CoarseCalibConfig
+                0x00000000       0x60 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_CoarseCalibCmd
+                0x00000000       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_CalibOutputCmd
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_CalibOutputConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_SmoothCalibConfig
+                0x00000000       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TimeStampCmd
+                0x00000000       0x6c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetTimeStamp
+                0x00000000      0x128 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetTimeStampSubSecond
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TamperTriggerConfig
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TamperCmd
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TamperFilterConfig
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TamperSamplingFreqConfig
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TamperPinsPrechargeDuration
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TimeStampOnTamperDetectionCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TamperPullUpCmd
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_WriteBackupRegister
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_ReadBackupRegister
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TamperPinSelection
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_TimeStampPinSelection
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_OutputTypeConfig
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_SynchroShiftConfig
+                0x00000000       0xb4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_ITConfig
+                0x00000000       0x8c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetFlagStatus
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_ClearFlag
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_GetITStatus
+                0x00000000       0x84 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_ClearITPendingBit
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_ByteToBcd2
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text.RTC_Bcd2ToByte
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_Init
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_StructInit
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_ClockCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_SetPowerState
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_GetPowerState
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_SendCommand
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_CmdStructInit
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_GetCommandResponse
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_GetResponse
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_DataConfig
+                0x00000000       0x60 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_DataStructInit
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_GetDataCounter
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_ReadData
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_WriteData
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_GetFIFOCount
+                0x00000000       0x14 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_StartSDIOReadWait
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_StopSDIOReadWait
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_SetSDIOReadWaitMode
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_SetSDIOOperation
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_SendSDIOSuspendCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_CommandCompletionCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_CEATAITCmd
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_SendCEATACmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_DMACmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_ITConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_GetFlagStatus
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_ClearFlag
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_GetITStatus
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text.SDIO_ClearITPendingBit
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_DeInit
+                0x00000000       0x80 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_Init
+                0x00000000       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.I2S_Init
+                0x00000000      0x1fc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_StructInit
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.I2S_StructInit
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_Cmd  0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.I2S_Cmd  0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_DataSizeConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_BiDirectionalLineConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_NSSInternalSoftwareConfig
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_SSOutputCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_TIModeCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.I2S_FullDuplexConfig
+                0x00000000       0xac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_ReceiveData
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_SendData
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_CalculateCRC
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_TransmitCRC
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_GetCRC
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_GetCRCPolynomial
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_DMACmd
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_ITConfig
+                0x00000000       0x70 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_GetFlagStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_ClearFlag
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_GetITStatus
+                0x00000000       0x8c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text.SPI_I2S_ClearITPendingBit
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .text.SYSCFG_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .text.SYSCFG_MemoryRemapConfig
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .text.SYSCFG_EXTILineConfig
+                0x00000000       0x9c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .text.SYSCFG_ETH_MediaInterfaceConfig
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .text.SYSCFG_CompensationCellCmd
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .text.SYSCFG_GetCompensationCellStatus
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_DeInit
+                0x00000000      0x220 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_TimeBaseStructInit
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_PrescalerConfig
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_CounterModeConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetCounter
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetAutoreload
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetCounter
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetPrescaler
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_UpdateDisableConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_UpdateRequestConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ARRPreloadConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectOnePulseMode
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetClockDivision
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_Cmd  0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC1Init
+                0x00000000      0x108 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC2Init
+                0x00000000      0x130 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC3Init
+                0x00000000      0x12c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC4Init
+                0x00000000       0xe4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OCStructInit
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectOCxM
+                0x00000000       0xc8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetCompare1
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetCompare2
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetCompare3
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetCompare4
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ForcedOC1Config
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ForcedOC2Config
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ForcedOC3Config
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ForcedOC4Config
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC1PreloadConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC2PreloadConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC3PreloadConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC4PreloadConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC1FastConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC2FastConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC3FastConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC4FastConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ClearOC1Ref
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ClearOC2Ref
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ClearOC3Ref
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ClearOC4Ref
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC1PolarityConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC1NPolarityConfig
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC2PolarityConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC2NPolarityConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC3PolarityConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC3NPolarityConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_OC4PolarityConfig
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_CCxCmd
+                0x00000000       0x60 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_CCxNCmd
+                0x00000000       0x60 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ICInit
+                0x00000000       0xa8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ICStructInit
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_PWMIConfig
+                0x00000000       0xc4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetCapture1
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetCapture2
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetCapture3
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetCapture4
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetIC1Prescaler
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetIC2Prescaler
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetIC3Prescaler
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SetIC4Prescaler
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_BDTRConfig
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_BDTRStructInit
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_CtrlPWMOutputs
+                0x00000000       0x50 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectCOM
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_CCPreloadControl
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ITConfig
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GenerateEvent
+                0x00000000       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetFlagStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ClearFlag
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_GetITStatus
+                0x00000000       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ClearITPendingBit
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_DMAConfig
+                0x00000000       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_DMACmd
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectCCDMA
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_InternalClockConfig
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ITRxExternalClockConfig
+                0x00000000       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_TIxExternalClockConfig
+                0x00000000       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ETRClockMode1Config
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ETRClockMode2Config
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectInputTrigger
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectOutputTrigger
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectSlaveMode
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectMasterSlaveMode
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_ETRConfig
+                0x00000000       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_EncoderInterfaceConfig
+                0x00000000       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_SelectHallSensor
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TIM_RemapConfig
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TI1_Config
+                0x00000000       0x84 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TI2_Config
+                0x00000000       0xa4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TI3_Config
+                0x00000000       0x94 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text.TI4_Config
+                0x00000000       0xac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_DeInit
+                0x00000000       0xf4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_Init
+                0x00000000      0x1a8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_StructInit
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_ClockInit
+                0x00000000       0x5c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_ClockStructInit
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_Cmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_SetPrescaler
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_OverSampling8Cmd
+                0x00000000       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_OneBitMethodCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_SendData
+                0x00000000       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_ReceiveData
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_SetAddress
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_ReceiverWakeUpCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_WakeUpConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_LINBreakDetectLengthConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_LINCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_SendBreak
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_HalfDuplexCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_SetGuardTime
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_SmartCardCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_SmartCardNACKCmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_IrDAConfig
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_IrDACmd
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_DMACmd
+                0x00000000       0x4c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_ITConfig
+                0x00000000       0xa8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_GetFlagStatus
+                0x00000000       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_ClearFlag
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_GetITStatus
+                0x00000000       0xcc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text.USART_ClearITPendingBit
+                0x00000000       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .text          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .data          0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .bss           0x00000000        0x0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_DeInit
+                0x00000000       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_SetPrescaler
+                0x00000000       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_SetWindowValue
+                0x00000000       0x3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_EnableIT
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_SetCounter
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_Enable
+                0x00000000       0x24 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_GetFlagStatus
+                0x00000000       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text.WWDG_ClearFlag
+                0x00000000       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .text          0x00000000       0x14 ./startup_stm32f4xx.o
+ .data          0x00000000        0x0 ./startup_stm32f4xx.o
+ .bss           0x00000000        0x0 ./startup_stm32f4xx.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+FLASH            0x08000000         0x00100000         xr
+RAM              0x20000000         0x00020000         xrw
+MEMORY_B1        0x60000000         0x00000000         xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./src/lis302dl.o
+LOAD ./src/main.o
+LOAD ./src/periph_init.o
+LOAD ./src/protocol.o
+LOAD ./src/stm32f4_discovery.o
+LOAD ./src/stm32f4xx_it.o
+LOAD ./src/system_stm32f4xx.o
+LOAD ./src/usb_bsp.o
+LOAD ./src/usbd_cdc_vcp.o
+LOAD ./src/usbd_desc.o
+LOAD ./src/usbd_usr.o
+LOAD ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+LOAD ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+LOAD ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+LOAD ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+LOAD ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+LOAD ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+LOAD ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+LOAD ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+LOAD ./startup_stm32f4xx.o
+START GROUP
+LOAD /home/kvv/stm32/apps/toolchain/bin/../lib/gcc/arm-none-eabi/4.5.2/thumb2/libgcc.a
+LOAD /home/kvv/stm32/apps/toolchain/bin/../lib/gcc/arm-none-eabi/4.5.2/../../../../arm-none-eabi/lib/thumb2/libc.a
+END GROUP
+                0x20020000                _estack = 0x20020000
+                0x00000000                _Min_Heap_Size = 0x0
+                0x00000400                _Min_Stack_Size = 0x400
+
+.isr_vector     0x08000000      0x188
+                0x08000000                . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x08000000      0x188 ./startup_stm32f4xx.o
+                0x08000000                g_pfnVectors
+                0x08000188                . = ALIGN (0x4)
+
+.text           0x08000188     0x33e0
+                0x08000188                . = ALIGN (0x4)
+ *(.text)
+ *(.text*)
+ .text.main     0x08000188       0x48 ./src/main.o
+                0x08000188                main
+ .text.Delay    0x080001d0       0x30 ./src/main.o
+ .text.NVIC_SetPriority
+                0x08000200       0x58 ./src/periph_init.o
+ .text.SysTick_Config
+                0x08000258       0x54 ./src/periph_init.o
+ .text.PERIPH_Init_Leds
+                0x080002ac       0x80 ./src/periph_init.o
+                0x080002ac                PERIPH_Init_Leds
+ .text.PERIPH_Init_Timer
+                0x0800032c       0x6c ./src/periph_init.o
+                0x0800032c                PERIPH_Init_Timer
+ .text.PERIPH_Init_SysTick
+                0x08000398       0x2c ./src/periph_init.o
+                0x08000398                PERIPH_Init_SysTick
+ .text.NMI_Handler
+                0x080003c4        0xc ./src/stm32f4xx_it.o
+                0x080003c4                NMI_Handler
+ .text.HardFault_Handler
+                0x080003d0        0x8 ./src/stm32f4xx_it.o
+                0x080003d0                HardFault_Handler
+ .text.MemManage_Handler
+                0x080003d8        0x8 ./src/stm32f4xx_it.o
+                0x080003d8                MemManage_Handler
+ .text.BusFault_Handler
+                0x080003e0        0x8 ./src/stm32f4xx_it.o
+                0x080003e0                BusFault_Handler
+ .text.UsageFault_Handler
+                0x080003e8        0x8 ./src/stm32f4xx_it.o
+                0x080003e8                UsageFault_Handler
+ .text.SVC_Handler
+                0x080003f0        0xc ./src/stm32f4xx_it.o
+                0x080003f0                SVC_Handler
+ .text.DebugMon_Handler
+                0x080003fc        0xc ./src/stm32f4xx_it.o
+                0x080003fc                DebugMon_Handler
+ .text.PendSV_Handler
+                0x08000408        0xc ./src/stm32f4xx_it.o
+                0x08000408                PendSV_Handler
+ .text.SysTick_Handler
+                0x08000414       0x1c ./src/stm32f4xx_it.o
+                0x08000414                SysTick_Handler
+ .text.EXTI0_IRQHandler
+                0x08000430       0x3c ./src/stm32f4xx_it.o
+                0x08000430                EXTI0_IRQHandler
+ .text.OTG_FS_WKUP_IRQHandler
+                0x0800046c       0x34 ./src/stm32f4xx_it.o
+                0x0800046c                OTG_FS_WKUP_IRQHandler
+ .text.OTG_FS_IRQHandler
+                0x080004a0       0x10 ./src/stm32f4xx_it.o
+                0x080004a0                OTG_FS_IRQHandler
+ .text.SystemInit
+                0x080004b0       0x5c ./src/system_stm32f4xx.o
+                0x080004b0                SystemInit
+ .text.SetSysClock
+                0x0800050c      0x130 ./src/system_stm32f4xx.o
+ .text.USB_OTG_BSP_uDelay
+                0x0800063c       0x48 ./src/usb_bsp.o
+                0x0800063c                USB_OTG_BSP_uDelay
+ .text.VCP_Init
+                0x08000684       0x1c ./src/usbd_cdc_vcp.o
+ .text.VCP_DeInit
+                0x080006a0       0x10 ./src/usbd_cdc_vcp.o
+ .text.VCP_Ctrl
+                0x080006b0       0xbc ./src/usbd_cdc_vcp.o
+ .text.VCP_DataTx
+                0x0800076c       0x68 ./src/usbd_cdc_vcp.o
+ .text.VCP_DataRx
+                0x080007d4       0x54 ./src/usbd_cdc_vcp.o
+ .text.USB_OTG_WritePacket
+                0x08000828       0x84 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000828                USB_OTG_WritePacket
+ .text.USB_OTG_ReadPacket
+                0x080008ac       0x68 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x080008ac                USB_OTG_ReadPacket
+ .text.USB_OTG_FlushTxFifo
+                0x08000914       0x7c ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000914                USB_OTG_FlushTxFifo
+ .text.USB_OTG_GetMode
+                0x08000990       0x20 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000990                USB_OTG_GetMode
+ .text.USB_OTG_IsDeviceMode
+                0x080009b0       0x24 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x080009b0                USB_OTG_IsDeviceMode
+ .text.USB_OTG_ReadCoreItr
+                0x080009d4       0x34 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x080009d4                USB_OTG_ReadCoreItr
+ .text.USB_OTG_GetDeviceSpeed
+                0x08000a08       0x50 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000a08                USB_OTG_GetDeviceSpeed
+ .text.USB_OTG_EP0Activate
+                0x08000a58       0x80 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000a58                USB_OTG_EP0Activate
+ .text.USB_OTG_EPActivate
+                0x08000ad8       0xf4 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000ad8                USB_OTG_EPActivate
+ .text.USB_OTG_EPStartXfer
+                0x08000bcc      0x2d4 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000bcc                USB_OTG_EPStartXfer
+ .text.USB_OTG_EP0StartXfer
+                0x08000ea0      0x204 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08000ea0                USB_OTG_EP0StartXfer
+ .text.USB_OTG_EPSetStall
+                0x080010a4       0x94 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x080010a4                USB_OTG_EPSetStall
+ .text.USB_OTG_EPClearStall
+                0x08001138       0x84 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08001138                USB_OTG_EPClearStall
+ .text.USB_OTG_ReadDevAllOutEp_itr
+                0x080011bc       0x30 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x080011bc                USB_OTG_ReadDevAllOutEp_itr
+ .text.USB_OTG_ReadDevOutEP_itr
+                0x080011ec       0x3c ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x080011ec                USB_OTG_ReadDevOutEP_itr
+ .text.USB_OTG_ReadDevAllInEPItr
+                0x08001228       0x34 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x08001228                USB_OTG_ReadDevAllInEPItr
+ .text.USB_OTG_EP0_OutStart
+                0x0800125c       0x78 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x0800125c                USB_OTG_EP0_OutStart
+ .text.USB_OTG_UngateClock
+                0x080012d4       0x54 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                0x080012d4                USB_OTG_UngateClock
+ .text.DCD_EP_Open
+                0x08001328       0xac ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+                0x08001328                DCD_EP_Open
+ .text.DCD_EP_PrepareRx
+                0x080013d4       0x8c ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+                0x080013d4                DCD_EP_PrepareRx
+ .text.DCD_EP_Tx
+                0x08001460       0x84 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+                0x08001460                DCD_EP_Tx
+ .text.DCD_EP_Stall
+                0x080014e4       0x80 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+                0x080014e4                DCD_EP_Stall
+ .text.DCD_EP_ClrStall
+                0x08001564       0x80 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+                0x08001564                DCD_EP_ClrStall
+ .text.DCD_EP_SetAddress
+                0x080015e4       0x40 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+                0x080015e4                DCD_EP_SetAddress
+ .text.USBD_OTG_ISR_Handler
+                0x08001624      0x178 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+                0x08001624                USBD_OTG_ISR_Handler
+ .text.DCD_HandleResume_ISR
+                0x0800179c       0x8c ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_HandleUSBSuspend_ISR
+                0x08001828       0xa8 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_HandleInEP_ISR
+                0x080018d0      0x230 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_HandleOutEP_ISR
+                0x08001b00      0x1ac ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_HandleSof_ISR
+                0x08001cac       0x3c ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_HandleRxStatusQueueLevel_ISR
+                0x08001ce8      0x11c ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_WriteEmptyTxFifo
+                0x08001e04      0x100 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_HandleUsbReset_ISR
+                0x08001f04      0x170 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_HandleEnumDone_ISR
+                0x08002074       0x88 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_IsoINIncomplete_ISR
+                0x080020fc       0x3c ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_IsoOUTIncomplete_ISR
+                0x08002138       0x3c ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.DCD_ReadDevInEP
+                0x08002174       0x5c ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .text.USBD_SetupStage
+                0x080021d0       0x70 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_DataOutStage
+                0x08002240       0xd4 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_DataInStage
+                0x08002314      0x114 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_Reset
+                0x08002428       0x54 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_Resume
+                0x0800247c       0x2c ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_Suspend
+                0x080024a8       0x2c ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_SOF
+                0x080024d4       0x30 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_SetCfg
+                0x08002504       0x34 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+                0x08002504                USBD_SetCfg
+ .text.USBD_ClrCfg
+                0x08002538       0x2c ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+                0x08002538                USBD_ClrCfg
+ .text.USBD_IsoINIncomplete
+                0x08002564       0x24 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_IsoOUTIncomplete
+                0x08002588       0x24 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .text.USBD_CtlSendData
+                0x080025ac       0x48 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+                0x080025ac                USBD_CtlSendData
+ .text.USBD_CtlContinueSendData
+                0x080025f4       0x30 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+                0x080025f4                USBD_CtlContinueSendData
+ .text.USBD_CtlContinueRx
+                0x08002624       0x30 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+                0x08002624                USBD_CtlContinueRx
+ .text.USBD_CtlSendStatus
+                0x08002654       0x3c ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+                0x08002654                USBD_CtlSendStatus
+ .text.USBD_CtlReceiveStatus
+                0x08002690       0x3c ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+                0x08002690                USBD_CtlReceiveStatus
+ .text.USBD_StdDevReq
+                0x080026cc       0xa4 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x080026cc                USBD_StdDevReq
+ .text.USBD_StdItfReq
+                0x08002770       0x70 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x08002770                USBD_StdItfReq
+ .text.USBD_StdEPReq
+                0x080027e0      0x1c0 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x080027e0                USBD_StdEPReq
+ .text.USBD_GetDescriptor
+                0x080029a0      0x1c8 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_SetAddress
+                0x08002b68       0x80 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_SetConfig
+                0x08002be8       0xf8 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_GetConfig
+                0x08002ce0       0x68 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_GetStatus
+                0x08002d48       0x5c ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_SetFeature
+                0x08002da4       0xe0 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_ClrFeature
+                0x08002e84       0x58 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .text.USBD_ParseSetupRequest
+                0x08002edc       0xbc ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x08002edc                USBD_ParseSetupRequest
+ .text.USBD_CtlError
+                0x08002f98       0x50 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x08002f98                USBD_CtlError
+ .text.EXTI_ClearITPendingBit
+                0x08002fe8       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+                0x08002fe8                EXTI_ClearITPendingBit
+ .text.GPIO_Init
+                0x08003004      0x148 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+                0x08003004                GPIO_Init
+ .text.GPIO_SetBits
+                0x0800314c       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+                0x0800314c                GPIO_SetBits
+ .text.GPIO_ResetBits
+                0x08003168       0x1c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+                0x08003168                GPIO_ResetBits
+ .text.GPIO_PinAFConfig
+                0x08003184       0xac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+                0x08003184                GPIO_PinAFConfig
+ .text.RCC_GetClocksFreq
+                0x08003230      0x17c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+                0x08003230                RCC_GetClocksFreq
+ .text.RCC_AHB1PeriphClockCmd
+                0x080033ac       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+                0x080033ac                RCC_AHB1PeriphClockCmd
+ .text.RCC_APB1PeriphClockCmd
+                0x080033f0       0x44 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+                0x080033f0                RCC_APB1PeriphClockCmd
+ .text.TIM_TimeBaseInit
+                0x08003434       0xdc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+                0x08003434                TIM_TimeBaseInit
+ .text.Reset_Handler
+                0x08003510       0x44 ./startup_stm32f4xx.o
+                0x08003510                Reset_Handler
+ .text.Default_Handler
+                0x08003554        0x2 ./startup_stm32f4xx.o
+                0x08003554                RTC_Alarm_IRQHandler
+                0x08003554                HASH_RNG_IRQHandler
+                0x08003554                EXTI2_IRQHandler
+                0x08003554                TIM8_CC_IRQHandler
+                0x08003554                TIM1_CC_IRQHandler
+                0x08003554                DMA2_Stream5_IRQHandler
+                0x08003554                DMA1_Stream5_IRQHandler
+                0x08003554                PVD_IRQHandler
+                0x08003554                SDIO_IRQHandler
+                0x08003554                TAMP_STAMP_IRQHandler
+                0x08003554                CAN2_RX1_IRQHandler
+                0x08003554                EXTI3_IRQHandler
+                0x08003554                TIM8_TRG_COM_TIM14_IRQHandler
+                0x08003554                TIM1_UP_TIM10_IRQHandler
+                0x08003554                TIM8_UP_TIM13_IRQHandler
+                0x08003554                I2C3_ER_IRQHandler
+                0x08003554                I2C2_EV_IRQHandler
+                0x08003554                DMA1_Stream2_IRQHandler
+                0x08003554                CAN1_RX0_IRQHandler
+                0x08003554                FPU_IRQHandler
+                0x08003554                OTG_HS_WKUP_IRQHandler
+                0x08003554                CAN2_SCE_IRQHandler
+                0x08003554                DMA2_Stream2_IRQHandler
+                0x08003554                SPI1_IRQHandler
+                0x08003554                TIM6_DAC_IRQHandler
+                0x08003554                TIM1_BRK_TIM9_IRQHandler
+                0x08003554                DCMI_IRQHandler
+                0x08003554                CAN2_RX0_IRQHandler
+                0x08003554                DMA2_Stream3_IRQHandler
+                0x08003554                USART6_IRQHandler
+                0x08003554                USART3_IRQHandler
+                0x08003554                CRYP_IRQHandler
+                0x08003554                CAN1_RX1_IRQHandler
+                0x08003554                UART5_IRQHandler
+                0x08003554                DMA2_Stream0_IRQHandler
+                0x08003554                TIM4_IRQHandler
+                0x08003554                I2C1_EV_IRQHandler
+                0x08003554                DMA1_Stream6_IRQHandler
+                0x08003554                DMA1_Stream1_IRQHandler
+                0x08003554                UART4_IRQHandler
+                0x08003554                TIM3_IRQHandler
+                0x08003554                RCC_IRQHandler
+                0x08003554                TIM8_BRK_TIM12_IRQHandler
+                0x08003554                Default_Handler
+                0x08003554                EXTI15_10_IRQHandler
+                0x08003554                ADC_IRQHandler
+                0x08003554                DMA1_Stream7_IRQHandler
+                0x08003554                TIM7_IRQHandler
+                0x08003554                CAN2_TX_IRQHandler
+                0x08003554                TIM5_IRQHandler
+                0x08003554                DMA2_Stream7_IRQHandler
+                0x08003554                I2C3_EV_IRQHandler
+                0x08003554                EXTI9_5_IRQHandler
+                0x08003554                RTC_WKUP_IRQHandler
+                0x08003554                ETH_WKUP_IRQHandler
+                0x08003554                SPI2_IRQHandler
+                0x08003554                OTG_HS_EP1_IN_IRQHandler
+                0x08003554                DMA1_Stream0_IRQHandler
+                0x08003554                CAN1_TX_IRQHandler
+                0x08003554                EXTI4_IRQHandler
+                0x08003554                FSMC_IRQHandler
+                0x08003554                ETH_IRQHandler
+                0x08003554                OTG_HS_EP1_OUT_IRQHandler
+                0x08003554                WWDG_IRQHandler
+                0x08003554                TIM2_IRQHandler
+                0x08003554                TIM1_TRG_COM_TIM11_IRQHandler
+                0x08003554                OTG_HS_IRQHandler
+                0x08003554                EXTI1_IRQHandler
+                0x08003554                USART2_IRQHandler
+                0x08003554                I2C2_ER_IRQHandler
+                0x08003554                DMA2_Stream1_IRQHandler
+                0x08003554                CAN1_SCE_IRQHandler
+                0x08003554                FLASH_IRQHandler
+                0x08003554                DMA2_Stream4_IRQHandler
+                0x08003554                USART1_IRQHandler
+                0x08003554                SPI3_IRQHandler
+                0x08003554                DMA1_Stream4_IRQHandler
+                0x08003554                I2C1_ER_IRQHandler
+                0x08003554                DMA2_Stream6_IRQHandler
+                0x08003554                DMA1_Stream3_IRQHandler
+ *(.rodata)
+ *fill*         0x08003556        0x2 00
+ .rodata        0x08003558       0x10 ./src/stm32f4xx_it.o
+ *(.rodata*)
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.eh_frame)
+ *(.init)
+ *(.fini)
+                0x08003568                . = ALIGN (0x4)
+                0x08003568                _etext = .
+
+.vfp11_veneer   0x08003568        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x08003568        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+
+.ARM            0x08003568        0x0
+                0x08003568                __exidx_start = .
+ *(.ARM.exidx*)
+                0x08003568                __exidx_end = .
+
+.preinit_array  0x08003568        0x0
+                0x08003568                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array*)
+                0x08003568                PROVIDE (__preinit_array_end, .)
+
+.init_array     0x08003568        0x0
+                0x08003568                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array*)
+                0x08003568                PROVIDE (__init_array_end, .)
+
+.fini_array     0x08003568        0x0
+                0x08003568                PROVIDE (__fini_array_start, .)
+ *(.fini_array*)
+ *(SORT(.fini_array.*))
+                0x08003568                PROVIDE (__fini_array_end, .)
+                0x08003568                _sidata = .
+
+.data           0x20000000       0x58 load address 0x08003568
+                0x20000000                . = ALIGN (0x4)
+                0x20000000                _sdata = .
+ *(.data)
+ *(.data*)
+ .data.SystemCoreClock
+                0x20000000        0x4 ./src/system_stm32f4xx.o
+                0x20000000                SystemCoreClock
+ .data.VCP_fops
+                0x20000004       0x14 ./src/usbd_cdc_vcp.o
+                0x20000004                VCP_fops
+ .data.USBD_DCD_INT_cb
+                0x20000018       0x2c ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+                0x20000018                USBD_DCD_INT_cb
+ .data.USBD_DCD_INT_fops
+                0x20000044        0x4 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+                0x20000044                USBD_DCD_INT_fops
+ .data.APBAHBPrescTable
+                0x20000048       0x10 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+                0x20000058                . = ALIGN (0x4)
+                0x20000058                _edata = .
+                0x20000058                . = ALIGN (0x4)
+
+.bss            0x20000058     0x1698 load address 0x080035c0
+                0x20000058                _sbss = .
+                0x20000058                __bss_start__ = _sbss
+ *(.bss)
+ *(.bss*)
+ .bss.USBD_ep_status
+                0x20000058        0x4 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x20000058                USBD_ep_status
+ .bss.USBD_default_cfg
+                0x2000005c        0x4 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x2000005c                USBD_default_cfg
+ .bss.USBD_cfg_status
+                0x20000060        0x4 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                0x20000060                USBD_cfg_status
+ .bss.cfgidx.8207
+                0x20000064        0x1 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ *fill*         0x20000065        0x3 00
+ .bss.APP_Rx_ptr_in
+                0x20000068        0x4 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+                0x20000068                APP_Rx_ptr_in
+ *(COMMON)
+ COMMON         0x2000006c      0xdf4 ./src/main.o
+                0x2000006c                Data_get
+                0x2000006d                USBD_USR_DEVICE_CONFIGURED
+                0x20000070                USB_OTG_dev
+                0x20000660                Data_buf
+ COMMON         0x20000e60        0x4 ./src/stm32f4xx_it.o
+                0x20000e60                SysTime
+ COMMON         0x20000e64      0x88c ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+                0x20000e64                usbd_cdc_OtherCfgDesc
+                0x20000ea8                USB_Rx_Buffer
+                0x20000ee8                CmdBuff
+                0x20000ef0                APP_Rx_Buffer
+                0x200016f0                . = ALIGN (0x4)
+                0x200016f0                _ebss = .
+                0x200016f0                __bss_end__ = _ebss
+
+._user_heap_stack
+                0x200016f0      0x400 load address 0x080035c0
+                0x200016f0                . = ALIGN (0x4)
+                0x200016f0                PROVIDE (end, .)
+                0x200016f0                PROVIDE (_end, .)
+                0x200016f0                . = (. + _Min_Heap_Size)
+                0x20001af0                . = (. + _Min_Stack_Size)
+ *fill*         0x200016f0      0x400 00
+                0x20001af0                . = ALIGN (0x4)
+
+.memory_b1_text
+ *(.mb1text)
+ *(.mb1text*)
+ *(.mb1rodata)
+ *(.mb1rodata*)
+
+/DISCARD/
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+
+.ARM.attributes
+                0x00000000       0x2f
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x00000000       0x31 ./src/lis302dl.o
+ .ARM.attributes
+                0x00000031       0x31 ./src/main.o
+ .ARM.attributes
+                0x00000062       0x31 ./src/periph_init.o
+ .ARM.attributes
+                0x00000093       0x31 ./src/protocol.o
+ .ARM.attributes
+                0x000000c4       0x31 ./src/stm32f4_discovery.o
+ .ARM.attributes
+                0x000000f5       0x31 ./src/stm32f4xx_it.o
+ .ARM.attributes
+                0x00000126       0x31 ./src/system_stm32f4xx.o
+ .ARM.attributes
+                0x00000157       0x31 ./src/usb_bsp.o
+ .ARM.attributes
+                0x00000188       0x31 ./src/usbd_cdc_vcp.o
+ .ARM.attributes
+                0x000001b9       0x31 ./src/usbd_desc.o
+ .ARM.attributes
+                0x000001ea       0x31 ./src/usbd_usr.o
+ .ARM.attributes
+                0x0000021b       0x31 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .ARM.attributes
+                0x0000024c       0x31 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .ARM.attributes
+                0x0000027d       0x31 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .ARM.attributes
+                0x000002ae       0x31 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .ARM.attributes
+                0x000002df       0x31 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .ARM.attributes
+                0x00000310       0x31 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .ARM.attributes
+                0x00000341       0x31 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .ARM.attributes
+                0x00000372       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .ARM.attributes
+                0x000003a3       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .ARM.attributes
+                0x000003d4       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .ARM.attributes
+                0x00000405       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .ARM.attributes
+                0x00000436       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .ARM.attributes
+                0x00000467       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .ARM.attributes
+                0x00000498       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .ARM.attributes
+                0x000004c9       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .ARM.attributes
+                0x000004fa       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .ARM.attributes
+                0x0000052b       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .ARM.attributes
+                0x0000055c       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .ARM.attributes
+                0x0000058d       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .ARM.attributes
+                0x000005be       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .ARM.attributes
+                0x000005ef       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .ARM.attributes
+                0x00000620       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .ARM.attributes
+                0x00000651       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .ARM.attributes
+                0x00000682       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .ARM.attributes
+                0x000006b3       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .ARM.attributes
+                0x000006e4       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .ARM.attributes
+                0x00000715       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .ARM.attributes
+                0x00000746       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .ARM.attributes
+                0x00000777       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .ARM.attributes
+                0x000007a8       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .ARM.attributes
+                0x000007d9       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .ARM.attributes
+                0x0000080a       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .ARM.attributes
+                0x0000083b       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .ARM.attributes
+                0x0000086c       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .ARM.attributes
+                0x0000089d       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .ARM.attributes
+                0x000008ce       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .ARM.attributes
+                0x000008ff       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .ARM.attributes
+                0x00000930       0x31 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .ARM.attributes
+                0x00000961       0x21 ./startup_stm32f4xx.o
+OUTPUT(autopilot.elf elf32-littlearm)
+
+.debug_abbrev   0x00000000     0x496d
+ .debug_abbrev  0x00000000      0x14d ./src/lis302dl.o
+ .debug_abbrev  0x0000014d      0x1bb ./src/main.o
+ .debug_abbrev  0x00000308      0x198 ./src/periph_init.o
+ .debug_abbrev  0x000004a0      0x156 ./src/protocol.o
+ .debug_abbrev  0x000005f6      0x17a ./src/stm32f4_discovery.o
+ .debug_abbrev  0x00000770      0x190 ./src/stm32f4xx_it.o
+ .debug_abbrev  0x00000900      0x144 ./src/system_stm32f4xx.o
+ .debug_abbrev  0x00000a44      0x1ca ./src/usb_bsp.o
+ .debug_abbrev  0x00000c0e      0x144 ./src/usbd_cdc_vcp.o
+ .debug_abbrev  0x00000d52      0x110 ./src/usbd_desc.o
+ .debug_abbrev  0x00000e62      0x145 ./src/usbd_usr.o
+ .debug_abbrev  0x00000fa7      0x27b ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_abbrev  0x00001222      0x20c ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_abbrev  0x0000142e      0x214 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_abbrev  0x00001642      0x1f8 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_abbrev  0x0000183a      0x169 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_abbrev  0x000019a3      0x257 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_abbrev  0x00001bfa      0x1ce ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_abbrev  0x00001dc8      0x12a ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_abbrev  0x00001ef2      0x18d ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_abbrev  0x0000207f      0x1b0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_abbrev  0x0000222f      0x10e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_abbrev  0x0000233d      0x184 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_abbrev  0x000024c1      0x1d6 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_abbrev  0x00002697      0x161 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_abbrev  0x000027f8      0x161 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_abbrev  0x00002959      0x176 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_abbrev  0x00002acf       0xde ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_abbrev  0x00002bad      0x17e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_abbrev  0x00002d2b      0x152 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_abbrev  0x00002e7d      0x19c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_abbrev  0x00003019      0x16c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_abbrev  0x00003185      0x16a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_abbrev  0x000032ef      0x186 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_abbrev  0x00003475      0x1a5 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_abbrev  0x0000361a      0x193 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_abbrev  0x000037ad      0x193 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_abbrev  0x00003940      0x161 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_abbrev  0x00003aa1       0xfe ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_abbrev  0x00003b9f      0x179 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_abbrev  0x00003d18      0x1bb ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_abbrev  0x00003ed3      0x13b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_abbrev  0x0000400e      0x16f ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_abbrev  0x0000417d      0x171 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_abbrev  0x000042ee      0x164 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_abbrev  0x00004452      0x12e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_abbrev  0x00004580      0x167 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_abbrev  0x000046e7      0x152 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_abbrev  0x00004839      0x122 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .debug_abbrev  0x0000495b       0x12 ./startup_stm32f4xx.o
+
+.debug_info     0x00000000    0x1f7f3
+ .debug_info    0x00000000      0x50f ./src/lis302dl.o
+ .debug_info    0x0000050f      0xd6f ./src/main.o
+ .debug_info    0x0000127e      0xed8 ./src/periph_init.o
+ .debug_info    0x00002156      0x300 ./src/protocol.o
+ .debug_info    0x00002456      0x96d ./src/stm32f4_discovery.o
+ .debug_info    0x00002dc3      0xfa0 ./src/stm32f4xx_it.o
+ .debug_info    0x00003d63      0x625 ./src/system_stm32f4xx.o
+ .debug_info    0x00004388     0x10ee ./src/usb_bsp.o
+ .debug_info    0x00005476      0x3ac ./src/usbd_cdc_vcp.o
+ .debug_info    0x00005822      0x3af ./src/usbd_desc.o
+ .debug_info    0x00005bd1      0x47c ./src/usbd_usr.o
+ .debug_info    0x0000604d     0x2804 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_info    0x00008851     0x118c ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_info    0x000099dd     0x2016 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_info    0x0000b9f3     0x1000 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_info    0x0000c9f3      0xdec ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_info    0x0000d7df     0x1123 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_info    0x0000e902     0x10c3 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_info    0x0000f9c5      0x59c ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_info    0x0000ff61      0xcfd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_info    0x00010c5e      0xc6a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_info    0x000118c8      0x213 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_info    0x00011adb      0x7a6 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_info    0x00012281     0x116c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_info    0x000133ed      0x568 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_info    0x00013955      0x6e7 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_info    0x0001403c      0x68b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_info    0x000146c7      0x1f7 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_info    0x000148be      0x5a5 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_info    0x00014e63      0x7ab ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_info    0x0001560e      0x37a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_info    0x00015988      0x77d ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_info    0x00016105      0x9ad ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_info    0x00016ab2      0x641 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_info    0x000170f3      0x58e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_info    0x00017681      0x4f1 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_info    0x00017b72      0x552 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_info    0x000180c4      0xb99 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_info    0x00018c5d      0x213 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_info    0x00018e70      0x546 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_info    0x000193b6      0xd2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_info    0x0001a0e2      0x299 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_info    0x0001a37b     0x122b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_info    0x0001b5a6      0x8ac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_info    0x0001be52      0xbd4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_info    0x0001ca26      0x282 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_info    0x0001cca8     0x1e30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_info    0x0001ead8      0xa57 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_info    0x0001f52f      0x25e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .debug_info    0x0001f78d       0x66 ./startup_stm32f4xx.o
+
+.debug_line     0x00000000    0x13c5c
+ .debug_line    0x00000000      0x549 ./src/lis302dl.o
+ .debug_line    0x00000549      0x676 ./src/main.o
+ .debug_line    0x00000bbf      0x515 ./src/periph_init.o
+ .debug_line    0x000010d4      0x686 ./src/protocol.o
+ .debug_line    0x0000175a      0x4df ./src/stm32f4_discovery.o
+ .debug_line    0x00001c39      0x6e1 ./src/stm32f4xx_it.o
+ .debug_line    0x0000231a      0x4ce ./src/system_stm32f4xx.o
+ .debug_line    0x000027e8      0x538 ./src/usb_bsp.o
+ .debug_line    0x00002d20      0x65f ./src/usbd_cdc_vcp.o
+ .debug_line    0x0000337f      0x5fd ./src/usbd_desc.o
+ .debug_line    0x0000397c      0x5f0 ./src/usbd_usr.o
+ .debug_line    0x00003f6c      0xa19 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_line    0x00004985      0x695 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_line    0x0000501a      0x711 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_line    0x0000572b      0x71c ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_line    0x00005e47      0x61a ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_line    0x00006461      0x7eb ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_line    0x00006c4c      0x70a ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_line    0x00007356      0x4c3 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_line    0x00007819      0x7c9 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_line    0x00007fe2      0x7e1 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_line    0x000087c3      0x4de ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_line    0x00008ca1      0x608 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_line    0x000092a9      0x918 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_line    0x00009bc1      0x55e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_line    0x0000a11f      0x5d7 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_line    0x0000a6f6      0x5cd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_line    0x0000acc3      0x4c1 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_line    0x0000b184      0x5b3 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_line    0x0000b737      0x650 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_line    0x0000bd87      0x519 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_line    0x0000c2a0      0x6fe ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_line    0x0000c99e      0x6c8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_line    0x0000d066      0x5b3 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_line    0x0000d619      0x5e3 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_line    0x0000dbfc      0x5c8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_line    0x0000e1c4      0x5e3 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_line    0x0000e7a7      0x73e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_line    0x0000eee5      0x4d1 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_line    0x0000f3b6      0x565 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_line    0x0000f91b      0x810 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_line    0x0001012b      0x4fd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_line    0x00010628      0xa84 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_line    0x000110ac      0x6b8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_line    0x00011764      0x6c8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_line    0x00011e2c      0x4d9 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_line    0x00012305      0xcee ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_line    0x00012ff3      0x702 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_line    0x000136f5      0x4fc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .debug_line    0x00013bf1       0x6b ./startup_stm32f4xx.o
+
+.debug_macinfo  0x00000000  0x116a83b
+ .debug_macinfo
+                0x00000000    0x5a8ac ./src/lis302dl.o
+ .debug_macinfo
+                0x0005a8ac    0x5c748 ./src/main.o
+ .debug_macinfo
+                0x000b6ff4    0x5a8db ./src/periph_init.o
+ .debug_macinfo
+                0x001118cf    0x5c549 ./src/protocol.o
+ .debug_macinfo
+                0x0016de18    0x5ab03 ./src/stm32f4_discovery.o
+ .debug_macinfo
+                0x001c891b    0x5c41b ./src/stm32f4xx_it.o
+ .debug_macinfo
+                0x00224d36    0x5a8da ./src/system_stm32f4xx.o
+ .debug_macinfo
+                0x0027f610    0x5b5fa ./src/usb_bsp.o
+ .debug_macinfo
+                0x002dac0a    0x5c392 ./src/usbd_cdc_vcp.o
+ .debug_macinfo
+                0x00336f9c    0x5c379 ./src/usbd_desc.o
+ .debug_macinfo
+                0x00393315    0x5c02a ./src/usbd_usr.o
+ .debug_macinfo
+                0x003ef33f    0x5b5fe ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_macinfo
+                0x0044a93d    0x5b6c8 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_macinfo
+                0x004a6005    0x5b7df ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_macinfo
+                0x005017e4    0x5c177 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_macinfo
+                0x0055d95b    0x5c014 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_macinfo
+                0x005b996f    0x5c12d ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_macinfo
+                0x00615a9c    0x5c467 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_macinfo
+                0x00671f03    0x5a8a6 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_macinfo
+                0x006cc7a9    0x5ab94 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_macinfo
+                0x0072733d    0x5aa82 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_macinfo
+                0x00781dbf    0x5a87a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_macinfo
+                0x007dc639    0x5a8ba ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_macinfo
+                0x00836ef3    0x5a8a4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_macinfo
+                0x00891797    0x5a8a4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_macinfo
+                0x008ec03b    0x5a8a5 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_macinfo
+                0x009468e0    0x5a998 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_macinfo
+                0x009a1278    0x5a8a5 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_macinfo
+                0x009fbb1d    0x5a87a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_macinfo
+                0x00a56397    0x5abba ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_macinfo
+                0x00ab0f51    0x5a89e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_macinfo
+                0x00b0b7ef    0x5a89f ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_macinfo
+                0x00b6608e    0x5a9bf ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_macinfo
+                0x00bc0a4d    0x5a87a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_macinfo
+                0x00c1b2c7    0x5a87a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_macinfo
+                0x00c75b41    0x5a8a4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_macinfo
+                0x00cd03e5    0x5a8a5 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_macinfo
+                0x00d2ac8a    0x5a8e4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_macinfo
+                0x00d8556e    0x5a8c0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_macinfo
+                0x00ddfe2e    0x5ab5f ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_macinfo
+                0x00e3a98d    0x5ad86 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_macinfo
+                0x00e95713    0x5a87a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_macinfo
+                0x00eeff8d    0x5aabb ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_macinfo
+                0x00f4aa48    0x5ae23 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_macinfo
+                0x00fa586b    0x5a967 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_macinfo
+                0x010001d2    0x5a9e8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_macinfo
+                0x0105abba    0x5a953 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_macinfo
+                0x010b550d    0x5a9a6 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_macinfo
+                0x0110feb3    0x5a988 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+
+.debug_loc      0x00000000     0xa4b6
+ .debug_loc     0x00000000      0x1f8 ./src/lis302dl.o
+ .debug_loc     0x000001f8       0x64 ./src/main.o
+ .debug_loc     0x0000025c      0x188 ./src/periph_init.o
+ .debug_loc     0x000003e4      0x118 ./src/protocol.o
+ .debug_loc     0x000004fc      0x150 ./src/stm32f4_discovery.o
+ .debug_loc     0x0000064c      0x21c ./src/stm32f4xx_it.o
+ .debug_loc     0x00000868       0x9c ./src/system_stm32f4xx.o
+ .debug_loc     0x00000904       0xe0 ./src/usb_bsp.o
+ .debug_loc     0x000009e4      0x100 ./src/usbd_cdc_vcp.o
+ .debug_loc     0x00000ae4      0x188 ./src/usbd_desc.o
+ .debug_loc     0x00000c6c      0x140 ./src/usbd_usr.o
+ .debug_loc     0x00000dac      0x7e0 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_loc     0x0000158c      0x2d8 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_loc     0x00001864      0x2d8 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_loc     0x00001b3c      0x2d8 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_loc     0x00001e14      0x188 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_loc     0x00001f9c      0x310 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_loc     0x000022ac      0x1f8 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_loc     0x000024a4      0x118 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_loc     0x000025bc      0x838 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_loc     0x00002df4      0x578 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_loc     0x0000336c      0x12c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_loc     0x00003498      0x394 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_loc     0x0000382c       0xae ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_loc     0x000038da       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_loc     0x0000394e       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_loc     0x000039c2      0x3ac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_loc     0x00003d6e      0x100 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_loc     0x00003e6e      0x330 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_loc     0x0000419e      0x428 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_loc     0x000045c6      0x1b4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_loc     0x0000477a      0x624 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_loc     0x00004d9e      0x41c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_loc     0x000051ba      0x310 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_loc     0x000054ca      0x388 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_loc     0x00005852       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_loc     0x000058c6       0x74 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_loc     0x0000593a      0x738 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_loc     0x00006072      0x138 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_loc     0x000061aa      0x288 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_loc     0x00006432      0x97c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_loc     0x00006dae      0x1a8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_loc     0x00006f56      0xc48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_loc     0x00007b9e      0x648 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_loc     0x000081e6      0x578 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_loc     0x0000875e      0x144 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_loc     0x000088a2     0x1420 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_loc     0x00009cc2      0x658 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_loc     0x0000a31a      0x19c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+
+.debug_pubnames
+                0x00000000     0x447a
+ .debug_pubnames
+                0x00000000       0x7b ./src/lis302dl.o
+ .debug_pubnames
+                0x0000007b       0x64 ./src/main.o
+ .debug_pubnames
+                0x000000df       0x90 ./src/periph_init.o
+ .debug_pubnames
+                0x0000016f       0x60 ./src/protocol.o
+ .debug_pubnames
+                0x000001cf      0x150 ./src/stm32f4_discovery.o
+ .debug_pubnames
+                0x0000031f      0x132 ./src/stm32f4xx_it.o
+ .debug_pubnames
+                0x00000451       0x61 ./src/system_stm32f4xx.o
+ .debug_pubnames
+                0x000004b2       0x75 ./src/usb_bsp.o
+ .debug_pubnames
+                0x00000527       0x51 ./src/usbd_cdc_vcp.o
+ .debug_pubnames
+                0x00000578      0x152 ./src/usbd_desc.o
+ .debug_pubnames
+                0x000006ca       0xfa ./src/usbd_usr.o
+ .debug_pubnames
+                0x000007c4      0x364 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_pubnames
+                0x00000b28      0x100 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_pubnames
+                0x00000c28       0x2b ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_pubnames
+                0x00000c53       0x7a ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_pubnames
+                0x00000ccd       0xb6 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_pubnames
+                0x00000d83       0xd7 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_pubnames
+                0x00000e5a       0xc9 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_pubnames
+                0x00000f23       0x89 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_pubnames
+                0x00000fac      0x446 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_pubnames
+                0x000013f2      0x208 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_pubnames
+                0x000015fa       0x82 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_pubnames
+                0x0000167c      0x14e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_pubnames
+                0x000017ca       0x45 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_pubnames
+                0x0000180f       0x34 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_pubnames
+                0x00001843       0x36 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_pubnames
+                0x00001879      0x17d ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_pubnames
+                0x000019f6       0x84 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_pubnames
+                0x00001a7a      0x13a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_pubnames
+                0x00001bb4      0x1c9 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_pubnames
+                0x00001d7d       0xbb ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_pubnames
+                0x00001e38      0x2bd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_pubnames
+                0x000020f5      0x1a3 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_pubnames
+                0x00002298      0x12d ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_pubnames
+                0x000023c5      0x170 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_pubnames
+                0x00002535       0x2c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_pubnames
+                0x00002561       0x2e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_pubnames
+                0x0000258f      0x2cb ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_pubnames
+                0x0000285a       0x91 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_pubnames
+                0x000028eb      0x120 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_pubnames
+                0x00002a0b      0x417 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_pubnames
+                0x00002e22       0xac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_pubnames
+                0x00002ece      0x514 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_pubnames
+                0x000033e2      0x2ac ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_pubnames
+                0x0000368e      0x221 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_pubnames
+                0x000038af       0xc3 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_pubnames
+                0x00003972      0x7c4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_pubnames
+                0x00004136      0x294 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_pubnames
+                0x000043ca       0xb0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+
+.debug_pubtypes
+                0x00000000     0x3d3c
+ .debug_pubtypes
+                0x00000000       0x70 ./src/lis302dl.o
+ .debug_pubtypes
+                0x00000070      0x296 ./src/main.o
+ .debug_pubtypes
+                0x00000306      0x187 ./src/periph_init.o
+ .debug_pubtypes
+                0x0000048d       0x8b ./src/protocol.o
+ .debug_pubtypes
+                0x00000518      0x16e ./src/stm32f4_discovery.o
+ .debug_pubtypes
+                0x00000686      0x2bb ./src/stm32f4xx_it.o
+ .debug_pubtypes
+                0x00000941       0x83 ./src/system_stm32f4xx.o
+ .debug_pubtypes
+                0x000009c4      0x333 ./src/usb_bsp.o
+ .debug_pubtypes
+                0x00000cf7       0x83 ./src/usbd_cdc_vcp.o
+ .debug_pubtypes
+                0x00000d7a       0x5b ./src/usbd_desc.o
+ .debug_pubtypes
+                0x00000dd5       0x7f ./src/usbd_usr.o
+ .debug_pubtypes
+                0x00000e54      0x675 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_pubtypes
+                0x000014c9      0x307 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_pubtypes
+                0x000017d0      0x5e1 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_pubtypes
+                0x00001db1      0x2df ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_pubtypes
+                0x00002090      0x295 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_pubtypes
+                0x00002325      0x2c8 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_pubtypes
+                0x000025ed      0x2ae ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_pubtypes
+                0x0000289b       0x8c ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_pubtypes
+                0x00002927       0xc9 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_pubtypes
+                0x000029f0      0x121 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_pubtypes
+                0x00002b11       0x54 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_pubtypes
+                0x00002b65       0xea ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_pubtypes
+                0x00002c4f       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_pubtypes
+                0x00002ce7       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_pubtypes
+                0x00002d7f       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_pubtypes
+                0x00002e17       0x98 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_pubtypes
+                0x00002eaf       0x52 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_pubtypes
+                0x00002f01       0xcd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_pubtypes
+                0x00002fce       0xa3 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_pubtypes
+                0x00003071       0xae ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_pubtypes
+                0x0000311f       0x97 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_pubtypes
+                0x000031b6      0x174 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_pubtypes
+                0x0000332a       0xce ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_pubtypes
+                0x000033f8       0xbe ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_pubtypes
+                0x000034b6       0x7c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_pubtypes
+                0x00003532       0x7c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_pubtypes
+                0x000035ae       0xbe ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_pubtypes
+                0x0000366c       0x64 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_pubtypes
+                0x000036d0       0x84 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_pubtypes
+                0x00003754       0xaa ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_pubtypes
+                0x000037fe       0x77 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_pubtypes
+                0x00003875       0xd8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_pubtypes
+                0x0000394d       0xbe ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_pubtypes
+                0x00003a0b       0xbc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_pubtypes
+                0x00003ac7       0x6d ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_pubtypes
+                0x00003b34       0xe4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_pubtypes
+                0x00003c18       0xcd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_pubtypes
+                0x00003ce5       0x57 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+
+.debug_aranges  0x00000000     0x1cc0
+ .debug_aranges
+                0x00000000       0x60 ./src/lis302dl.o
+ .debug_aranges
+                0x00000060       0x28 ./src/main.o
+ .debug_aranges
+                0x00000088       0x50 ./src/periph_init.o
+ .debug_aranges
+                0x000000d8       0x40 ./src/protocol.o
+ .debug_aranges
+                0x00000118       0x48 ./src/stm32f4_discovery.o
+ .debug_aranges
+                0x00000160       0x78 ./src/stm32f4xx_it.o
+ .debug_aranges
+                0x000001d8       0x30 ./src/system_stm32f4xx.o
+ .debug_aranges
+                0x00000208       0x38 ./src/usb_bsp.o
+ .debug_aranges
+                0x00000240       0x40 ./src/usbd_cdc_vcp.o
+ .debug_aranges
+                0x00000280       0x50 ./src/usbd_desc.o
+ .debug_aranges
+                0x000002d0       0x50 ./src/usbd_usr.o
+ .debug_aranges
+                0x00000320      0x138 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_aranges
+                0x00000458       0x80 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_aranges
+                0x000004d8       0x80 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_aranges
+                0x00000558       0x80 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_aranges
+                0x000005d8       0x50 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_aranges
+                0x00000628       0x88 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_aranges
+                0x000006b0       0x60 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_aranges
+                0x00000710       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_aranges
+                0x00000750      0x148 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_aranges
+                0x00000898       0xe0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_aranges
+                0x00000978       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_aranges
+                0x000009c0       0xa0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_aranges
+                0x00000a60       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_aranges
+                0x00000a90       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_aranges
+                0x00000ab8       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_aranges
+                0x00000ae0       0xa0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_aranges
+                0x00000b80       0x40 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_aranges
+                0x00000bc0       0x90 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_aranges
+                0x00000c50       0xb0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_aranges
+                0x00000d00       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_aranges
+                0x00000d58      0x108 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_aranges
+                0x00000e60       0xb0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_aranges
+                0x00000f10       0x88 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_aranges
+                0x00000f98       0xa0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_aranges
+                0x00001038       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_aranges
+                0x00001060       0x28 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_aranges
+                0x00001088      0x120 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_aranges
+                0x000011a8       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_aranges
+                0x000011f0       0x78 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_aranges
+                0x00001268      0x178 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_aranges
+                0x000013e0       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_aranges
+                0x00001438      0x1e0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_aranges
+                0x00001618      0x108 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_aranges
+                0x00001720       0xe0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_aranges
+                0x00001800       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_aranges
+                0x00001848      0x2f8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_aranges
+                0x00001b40      0x100 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_aranges
+                0x00001c40       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .debug_aranges
+                0x00001c98       0x28 ./startup_stm32f4xx.o
+
+.debug_ranges   0x00000000     0x19a8
+ .debug_ranges  0x00000000       0x50 ./src/lis302dl.o
+ .debug_ranges  0x00000050       0x18 ./src/main.o
+ .debug_ranges  0x00000068       0x40 ./src/periph_init.o
+ .debug_ranges  0x000000a8       0x30 ./src/protocol.o
+ .debug_ranges  0x000000d8       0x38 ./src/stm32f4_discovery.o
+ .debug_ranges  0x00000110       0x68 ./src/stm32f4xx_it.o
+ .debug_ranges  0x00000178       0x20 ./src/system_stm32f4xx.o
+ .debug_ranges  0x00000198       0x28 ./src/usb_bsp.o
+ .debug_ranges  0x000001c0       0x30 ./src/usbd_cdc_vcp.o
+ .debug_ranges  0x000001f0       0x40 ./src/usbd_desc.o
+ .debug_ranges  0x00000230       0x40 ./src/usbd_usr.o
+ .debug_ranges  0x00000270      0x128 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_ranges  0x00000398       0x70 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_ranges  0x00000408       0x70 ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_ranges  0x00000478       0x70 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_ranges  0x000004e8       0x40 ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_ranges  0x00000528       0x78 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_ranges  0x000005a0       0x50 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_ranges  0x000005f0       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_ranges  0x00000620      0x138 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_ranges  0x00000758       0xd0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_ranges  0x00000828       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_ranges  0x00000860       0x90 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_ranges  0x000008f0       0x20 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_ranges  0x00000910       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_ranges  0x00000928       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_ranges  0x00000940       0x90 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_ranges  0x000009d0       0x30 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_ranges  0x00000a00       0x80 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_ranges  0x00000a80       0xa0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_ranges  0x00000b20       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_ranges  0x00000b68       0xf8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_ranges  0x00000c60       0xa0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_ranges  0x00000d00       0x78 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_ranges  0x00000d78       0x90 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_ranges  0x00000e08       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_ranges  0x00000e20       0x18 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_ranges  0x00000e38      0x110 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_ranges  0x00000f48       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_ranges  0x00000f80       0x68 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_ranges  0x00000fe8      0x168 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_ranges  0x00001150       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_ranges  0x00001198      0x1d0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_ranges  0x00001368       0xf8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_ranges  0x00001460       0xd0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_ranges  0x00001530       0x38 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_ranges  0x00001568      0x2e8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_ranges  0x00001850       0xf0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_ranges  0x00001940       0x48 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+ .debug_ranges  0x00001988       0x20 ./startup_stm32f4xx.o
+
+.debug_str      0x00000000     0x889b
+ .debug_str     0x00000000      0x22e ./src/lis302dl.o
+                                0x285 (size before relaxing)
+ .debug_str     0x0000022e      0x68f ./src/main.o
+                                0x8f3 (size before relaxing)
+ .debug_str     0x000008bd      0xa5c ./src/periph_init.o
+                                0xc2b (size before relaxing)
+ .debug_str     0x00001319       0xc8 ./src/protocol.o
+                                0x1e0 (size before relaxing)
+ .debug_str     0x000013e1      0x2e5 ./src/stm32f4_discovery.o
+                                0xa8b (size before relaxing)
+ .debug_str     0x000016c6      0x142 ./src/stm32f4xx_it.o
+                                0xa06 (size before relaxing)
+ .debug_str     0x00001808      0x154 ./src/system_stm32f4xx.o
+                                0x305 (size before relaxing)
+ .debug_str     0x0000195c       0x79 ./src/usb_bsp.o
+                                0xff6 (size before relaxing)
+ .debug_str     0x000019d5      0x108 ./src/usbd_cdc_vcp.o
+                                0x260 (size before relaxing)
+ .debug_str     0x00001add      0x134 ./src/usbd_desc.o
+                                0x2ec (size before relaxing)
+ .debug_str     0x00001c11       0xbb ./src/usbd_usr.o
+                                0x331 (size before relaxing)
+ .debug_str     0x00001ccc      0xbde ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+                               0x15fe (size before relaxing)
+ .debug_str     0x000028aa      0x108 ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+                                0xa9e (size before relaxing)
+ .debug_str     0x000029b2      0x2ca ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+                               0x11fc (size before relaxing)
+ .debug_str     0x00002c7c      0x111 ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+                                0xa4c (size before relaxing)
+ .debug_str     0x00002d8d       0xbe ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+                                0x936 (size before relaxing)
+ .debug_str     0x00002e4b      0x15b ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+                                0xa77 (size before relaxing)
+ .debug_str     0x00002fa6      0x197 ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+                                0xa9a (size before relaxing)
+ .debug_str     0x0000313d      0x102 ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+                                0x34d (size before relaxing)
+ .debug_str     0x0000323f      0x62e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+                                0x778 (size before relaxing)
+ .debug_str     0x0000386d      0x509 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+                                0x6b2 (size before relaxing)
+ .debug_str     0x00003d76       0xbd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+                                0x1bf (size before relaxing)
+ .debug_str     0x00003e33      0x3a8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+                                0x531 (size before relaxing)
+ .debug_str     0x000041db      0x110 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+                                0x35b (size before relaxing)
+ .debug_str     0x000042eb       0x55 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+                                0x346 (size before relaxing)
+ .debug_str     0x00004340       0xa5 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+                                0x34c (size before relaxing)
+ .debug_str     0x000043e5      0x26b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+                                0x3c7 (size before relaxing)
+ .debug_str     0x00004650       0xc9 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+                                0x1c9 (size before relaxing)
+ .debug_str     0x00004719      0x2fd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+                                0x44d (size before relaxing)
+ .debug_str     0x00004a16      0x371 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+                                0x4c0 (size before relaxing)
+ .debug_str     0x00004d87       0xed ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+                                0x2e2 (size before relaxing)
+ .debug_str     0x00004e74      0x39a ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+                                0x4fb (size before relaxing)
+ .debug_str     0x0000520e      0x5c8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+                                0x708 (size before relaxing)
+ .debug_str     0x000057d6      0x175 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+                                0x417 (size before relaxing)
+ .debug_str     0x0000594b      0x25d ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+                                0x3a6 (size before relaxing)
+ .debug_str     0x00005ba8       0xa1 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+                                0x266 (size before relaxing)
+ .debug_str     0x00005c49       0x7b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+                                0x26b (size before relaxing)
+ .debug_str     0x00005cc4      0x3af ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+                                0x5d9 (size before relaxing)
+ .debug_str     0x00006073       0xd5 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+                                0x1e0 (size before relaxing)
+ .debug_str     0x00006148      0x168 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+                                0x305 (size before relaxing)
+ .debug_str     0x000062b0      0x4df ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+                                0x7c4 (size before relaxing)
+ .debug_str     0x0000678f       0xcc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+                                0x1f8 (size before relaxing)
+ .debug_str     0x0000685b      0x951 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+                                0xac7 (size before relaxing)
+ .debug_str     0x000071ac      0x46e ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+                                0x5bf (size before relaxing)
+ .debug_str     0x0000761a      0x2dd ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+                                0x5fe (size before relaxing)
+ .debug_str     0x000078f7      0x147 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+                                0x273 (size before relaxing)
+ .debug_str     0x00007a3e      0x9e2 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+                                0xd44 (size before relaxing)
+ .debug_str     0x00008420      0x3aa ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+                                0x603 (size before relaxing)
+ .debug_str     0x000087ca       0xd1 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+                                0x1f6 (size before relaxing)
+
+.comment        0x00000000       0x2a
+ .comment       0x00000000       0x2a ./src/lis302dl.o
+                                 0x2b (size before relaxing)
+ .comment       0x00000000       0x2b ./src/main.o
+ .comment       0x00000000       0x2b ./src/periph_init.o
+ .comment       0x00000000       0x2b ./src/protocol.o
+ .comment       0x00000000       0x2b ./src/stm32f4_discovery.o
+ .comment       0x00000000       0x2b ./src/stm32f4xx_it.o
+ .comment       0x00000000       0x2b ./src/system_stm32f4xx.o
+ .comment       0x00000000       0x2b ./src/usb_bsp.o
+ .comment       0x00000000       0x2b ./src/usbd_cdc_vcp.o
+ .comment       0x00000000       0x2b ./src/usbd_desc.o
+ .comment       0x00000000       0x2b ./src/usbd_usr.o
+ .comment       0x00000000       0x2b ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .comment       0x00000000       0x2b ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .comment       0x00000000       0x2b ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .comment       0x00000000       0x2b ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .comment       0x00000000       0x2b ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .comment       0x00000000       0x2b ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .comment       0x00000000       0x2b ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .comment       0x00000000       0x2b ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o
+
+.debug_frame    0x00000000     0x59c0
+ .debug_frame   0x00000000      0x130 ./src/lis302dl.o
+ .debug_frame   0x00000130       0x48 ./src/main.o
+ .debug_frame   0x00000178       0xec ./src/periph_init.o
+ .debug_frame   0x00000264       0xa8 ./src/protocol.o
+ .debug_frame   0x0000030c       0xc4 ./src/stm32f4_discovery.o
+ .debug_frame   0x000003d0      0x164 ./src/stm32f4xx_it.o
+ .debug_frame   0x00000534       0x64 ./src/system_stm32f4xx.o
+ .debug_frame   0x00000598       0x8c ./src/usb_bsp.o
+ .debug_frame   0x00000624       0x9c ./src/usbd_cdc_vcp.o
+ .debug_frame   0x000006c0       0xe8 ./src/usbd_desc.o
+ .debug_frame   0x000007a8       0xd8 ./src/usbd_usr.o
+ .debug_frame   0x00000880      0x434 ./inc/STM32_USB_OTG_Driver/src/usb_core.o
+ .debug_frame   0x00000cb4      0x1ac ./inc/STM32_USB_OTG_Driver/src/usb_dcd.o
+ .debug_frame   0x00000e60      0x1ac ./inc/STM32_USB_OTG_Driver/src/usb_dcd_int.o
+ .debug_frame   0x0000100c      0x1ac ./inc/STM32_USB_Device_Library/Core/src/usbd_core.o
+ .debug_frame   0x000011b8       0xec ./inc/STM32_USB_Device_Library/Core/src/usbd_ioreq.o
+ .debug_frame   0x000012a4      0x1c8 ./inc/STM32_USB_Device_Library/Core/src/usbd_req.o
+ .debug_frame   0x0000146c      0x12c ./inc/STM32_USB_Device_Library/Class/cdc/src/usbd_cdc_core.o
+ .debug_frame   0x00001598       0x9c ./inc/STM32F4xx_StdPeriph_Driver/src/misc.o
+ .debug_frame   0x00001634      0x438 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_adc.o
+ .debug_frame   0x00001a6c      0x2d4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_can.o
+ .debug_frame   0x00001d40       0xb8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_crc.o
+ .debug_frame   0x00001df8      0x1ec ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp.o
+ .debug_frame   0x00001fe4       0x7c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_aes.o
+ .debug_frame   0x00002060       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_des.o
+ .debug_frame   0x000020b8       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_cryp_tdes.o
+ .debug_frame   0x00002110      0x1ec ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dac.o
+ .debug_frame   0x000022fc       0x9c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dbgmcu.o
+ .debug_frame   0x00002398      0x1b4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dcmi.o
+ .debug_frame   0x0000254c      0x224 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_dma.o
+ .debug_frame   0x00002770       0xf0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_exti.o
+ .debug_frame   0x00002860      0x384 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_flash.o
+ .debug_frame   0x00002be4      0x224 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fsmc.o
+ .debug_frame   0x00002e08      0x19c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_gpio.o
+ .debug_frame   0x00002fa4      0x1ec ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash.o
+ .debug_frame   0x00003190       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_md5.o
+ .debug_frame   0x000031e8       0x58 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_hash_sha1.o
+ .debug_frame   0x00003240      0x3b4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_i2c.o
+ .debug_frame   0x000035f4       0xb8 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_iwdg.o
+ .debug_frame   0x000036ac      0x160 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_pwr.o
+ .debug_frame   0x0000380c      0x4e4 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rcc.o
+ .debug_frame   0x00003cf0       0xf0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rng.o
+ .debug_frame   0x00003de0      0x68c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_rtc.o
+ .debug_frame   0x0000446c      0x358 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_sdio.o
+ .debug_frame   0x000047c4      0x2d0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_spi.o
+ .debug_frame   0x00004a94       0xbc ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_syscfg.o
+ .debug_frame   0x00004b50      0xa3c ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_tim.o
+ .debug_frame   0x0000558c      0x344 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_usart.o
+ .debug_frame   0x000058d0       0xf0 ./inc/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_wwdg.o

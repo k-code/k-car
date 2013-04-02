@@ -1,3 +1,11 @@
 *.bak*
 *~
 *-
+.metadata/
+target/
+*.o
+*~
+*.class
+Debug/
+.idea/
+*.iml

@@ -44,7 +44,7 @@ void PERIPH_Init_Spi(void) {
 }
 
 void PERIPH_Init_Leds() {
-    GPIO_InitTypeDef GPIO_InitStructure;
+    /*GPIO_InitTypeDef GPIO_InitStructure;
 
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
 
@@ -58,7 +58,16 @@ void PERIPH_Init_Leds() {
     GPIO_PinAFConfig(GPIOD, GPIO_PinSource12, GPIO_AF_TIM4);
     GPIO_PinAFConfig(GPIOD, GPIO_PinSource13, GPIO_AF_TIM4);
     GPIO_PinAFConfig(GPIOD, GPIO_PinSource14, GPIO_AF_TIM4);
-    GPIO_PinAFConfig(GPIOD, GPIO_PinSource15, GPIO_AF_TIM4);
+    GPIO_PinAFConfig(GPIOD, GPIO_PinSource15, GPIO_AF_TIM4);*/
+
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+    GPIO_InitTypeDef gpio;
+    GPIO_StructInit(&gpio);
+    gpio.GPIO_Mode = GPIO_Mode_OUT;
+    gpio.GPIO_Pin = LEDS;
+    GPIO_Init(GPIOD, &gpio);
+
+    GPIO_SetBits(GPIOD, GPIO_Pin_12);
 }
 
 void PERIPH_Init_Timer() {
@@ -68,11 +77,11 @@ void PERIPH_Init_Timer() {
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
 
     /* Compute the prescaler value */
-    u32 PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 21000000) - 1;
+    u32 PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 5000000) - 1;
 
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     /* Time base configuration */
-    TIM_TimeBaseStructure.TIM_Period = PWM_PERIOD;
+    TIM_TimeBaseStructure.TIM_Period = TIMER_PERIOD;
     TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;
     TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;

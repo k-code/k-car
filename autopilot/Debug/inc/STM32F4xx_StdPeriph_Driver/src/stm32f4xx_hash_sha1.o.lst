@@ -1345,10 +1345,10 @@
  25241              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hash_sha1.c
-     /tmp/cc0WsoNw.s:24578  .text.HASH_SHA1:00000000 $t
-     /tmp/cc0WsoNw.s:24583  .text.HASH_SHA1:00000000 HASH_SHA1
-     /tmp/cc0WsoNw.s:24833  .text.HMAC_SHA1:00000000 $t
-     /tmp/cc0WsoNw.s:24838  .text.HMAC_SHA1:00000000 HMAC_SHA1
+     /tmp/cco7Vmkx.s:24578  .text.HASH_SHA1:00000000 $t
+     /tmp/cco7Vmkx.s:24583  .text.HASH_SHA1:00000000 HASH_SHA1
+     /tmp/cco7Vmkx.s:24833  .text.HMAC_SHA1:00000000 $t
+     /tmp/cco7Vmkx.s:24838  .text.HMAC_SHA1:00000000 HMAC_SHA1
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

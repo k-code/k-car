@@ -658,29 +658,29 @@
  25139              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 lis302dl.c
-     /tmp/cc6lNgEa.s:24582  .text.LIS302DL_Init:00000000 $t
-     /tmp/cc6lNgEa.s:24587  .text.LIS302DL_Init:00000000 LIS302DL_Init
-     /tmp/cc6lNgEa.s:24976  .text.LIS302DL_Write:00000000 LIS302DL_Write
-     /tmp/cc6lNgEa.s:24628  .text.LIS302DL_Init:0000003c $d
-     /tmp/cc6lNgEa.s:24633  .text.LIS302DL_ReadACC:00000000 $t
-     /tmp/cc6lNgEa.s:24638  .text.LIS302DL_ReadACC:00000000 LIS302DL_ReadACC
-     /tmp/cc6lNgEa.s:25052  .text.LIS302DL_Read:00000000 LIS302DL_Read
-     /tmp/cc6lNgEa.s:24705  .text.LIS302DL_ReadACCY:00000000 $t
-     /tmp/cc6lNgEa.s:24710  .text.LIS302DL_ReadACCY:00000000 LIS302DL_ReadACCY
-     /tmp/cc6lNgEa.s:24747  .text.LIS302DL_ReadACCX:00000000 $t
-     /tmp/cc6lNgEa.s:24752  .text.LIS302DL_ReadACCX:00000000 LIS302DL_ReadACCX
-     /tmp/cc6lNgEa.s:24789  .text.LIS302DL_getSatus:00000000 $t
-     /tmp/cc6lNgEa.s:24794  .text.LIS302DL_getSatus:00000000 LIS302DL_getSatus
-     /tmp/cc6lNgEa.s:24825  .text.LIS302DL_SendByte:00000000 $t
-     /tmp/cc6lNgEa.s:24829  .text.LIS302DL_SendByte:00000000 LIS302DL_SendByte
-     /tmp/cc6lNgEa.s:24904  .text.LIS302DL_GetByte:00000000 LIS302DL_GetByte
-     /tmp/cc6lNgEa.s:24895  .text.LIS302DL_SendByte:0000005c $d
-     /tmp/cc6lNgEa.s:24900  .text.LIS302DL_GetByte:00000000 $t
-     /tmp/cc6lNgEa.s:24967  .text.LIS302DL_GetByte:00000058 $d
-     /tmp/cc6lNgEa.s:24972  .text.LIS302DL_Write:00000000 $t
-     /tmp/cc6lNgEa.s:25043  .text.LIS302DL_Write:00000060 $d
-     /tmp/cc6lNgEa.s:25048  .text.LIS302DL_Read:00000000 $t
-     /tmp/cc6lNgEa.s:25134  .text.LIS302DL_Read:0000007c $d
+     /tmp/ccKuMN51.s:24582  .text.LIS302DL_Init:00000000 $t
+     /tmp/ccKuMN51.s:24587  .text.LIS302DL_Init:00000000 LIS302DL_Init
+     /tmp/ccKuMN51.s:24976  .text.LIS302DL_Write:00000000 LIS302DL_Write
+     /tmp/ccKuMN51.s:24628  .text.LIS302DL_Init:0000003c $d
+     /tmp/ccKuMN51.s:24633  .text.LIS302DL_ReadACC:00000000 $t
+     /tmp/ccKuMN51.s:24638  .text.LIS302DL_ReadACC:00000000 LIS302DL_ReadACC
+     /tmp/ccKuMN51.s:25052  .text.LIS302DL_Read:00000000 LIS302DL_Read
+     /tmp/ccKuMN51.s:24705  .text.LIS302DL_ReadACCY:00000000 $t
+     /tmp/ccKuMN51.s:24710  .text.LIS302DL_ReadACCY:00000000 LIS302DL_ReadACCY
+     /tmp/ccKuMN51.s:24747  .text.LIS302DL_ReadACCX:00000000 $t
+     /tmp/ccKuMN51.s:24752  .text.LIS302DL_ReadACCX:00000000 LIS302DL_ReadACCX
+     /tmp/ccKuMN51.s:24789  .text.LIS302DL_getSatus:00000000 $t
+     /tmp/ccKuMN51.s:24794  .text.LIS302DL_getSatus:00000000 LIS302DL_getSatus
+     /tmp/ccKuMN51.s:24825  .text.LIS302DL_SendByte:00000000 $t
+     /tmp/ccKuMN51.s:24829  .text.LIS302DL_SendByte:00000000 LIS302DL_SendByte
+     /tmp/ccKuMN51.s:24904  .text.LIS302DL_GetByte:00000000 LIS302DL_GetByte
+     /tmp/ccKuMN51.s:24895  .text.LIS302DL_SendByte:0000005c $d
+     /tmp/ccKuMN51.s:24900  .text.LIS302DL_GetByte:00000000 $t
+     /tmp/ccKuMN51.s:24967  .text.LIS302DL_GetByte:00000058 $d
+     /tmp/ccKuMN51.s:24972  .text.LIS302DL_Write:00000000 $t
+     /tmp/ccKuMN51.s:25043  .text.LIS302DL_Write:00000060 $d
+     /tmp/ccKuMN51.s:25048  .text.LIS302DL_Read:00000000 $t
+     /tmp/ccKuMN51.s:25134  .text.LIS302DL_Read:0000007c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

@@ -450,26 +450,26 @@
 DEFINED SYMBOLS
                             *ABS*:00000000 usbd_usr.c
                             *COM*:00000001 USBD_USR_DEVICE_CONFIGURED
-     /tmp/ccIlXSxr.s:25307  .data.USR_cb:00000000 USR_cb
-     /tmp/ccIlXSxr.s:25304  .data.USR_cb:00000000 $d
-     /tmp/ccIlXSxr.s:25321  .text.USBD_USR_Init:00000000 USBD_USR_Init
-     /tmp/ccIlXSxr.s:25354  .text.USBD_USR_DeviceReset:00000000 USBD_USR_DeviceReset
-     /tmp/ccIlXSxr.s:25410  .text.USBD_USR_DeviceConfigured:00000000 USBD_USR_DeviceConfigured
-     /tmp/ccIlXSxr.s:25508  .text.USBD_USR_DeviceSuspended:00000000 USBD_USR_DeviceSuspended
-     /tmp/ccIlXSxr.s:25535  .text.USBD_USR_DeviceResumed:00000000 USBD_USR_DeviceResumed
-     /tmp/ccIlXSxr.s:25448  .text.USBD_USR_DeviceConnected:00000000 USBD_USR_DeviceConnected
-     /tmp/ccIlXSxr.s:25481  .text.USBD_USR_DeviceDisconnected:00000000 USBD_USR_DeviceDisconnected
-     /tmp/ccIlXSxr.s:25316  .text.USBD_USR_Init:00000000 $t
-     /tmp/ccIlXSxr.s:25344  .text.USBD_USR_Init:00000010 $d
-     /tmp/ccIlXSxr.s:25349  .text.USBD_USR_DeviceReset:00000000 $t
-     /tmp/ccIlXSxr.s:25399  .text.USBD_USR_DeviceReset:00000030 $d
-     /tmp/ccIlXSxr.s:25405  .text.USBD_USR_DeviceConfigured:00000000 $t
-     /tmp/ccIlXSxr.s:25437  .text.USBD_USR_DeviceConfigured:00000018 $d
-     /tmp/ccIlXSxr.s:25443  .text.USBD_USR_DeviceConnected:00000000 $t
-     /tmp/ccIlXSxr.s:25471  .text.USBD_USR_DeviceConnected:00000010 $d
-     /tmp/ccIlXSxr.s:25476  .text.USBD_USR_DeviceDisconnected:00000000 $t
-     /tmp/ccIlXSxr.s:25503  .text.USBD_USR_DeviceSuspended:00000000 $t
-     /tmp/ccIlXSxr.s:25530  .text.USBD_USR_DeviceResumed:00000000 $t
+     /tmp/cceMamwm.s:25307  .data.USR_cb:00000000 USR_cb
+     /tmp/cceMamwm.s:25304  .data.USR_cb:00000000 $d
+     /tmp/cceMamwm.s:25321  .text.USBD_USR_Init:00000000 USBD_USR_Init
+     /tmp/cceMamwm.s:25354  .text.USBD_USR_DeviceReset:00000000 USBD_USR_DeviceReset
+     /tmp/cceMamwm.s:25410  .text.USBD_USR_DeviceConfigured:00000000 USBD_USR_DeviceConfigured
+     /tmp/cceMamwm.s:25508  .text.USBD_USR_DeviceSuspended:00000000 USBD_USR_DeviceSuspended
+     /tmp/cceMamwm.s:25535  .text.USBD_USR_DeviceResumed:00000000 USBD_USR_DeviceResumed
+     /tmp/cceMamwm.s:25448  .text.USBD_USR_DeviceConnected:00000000 USBD_USR_DeviceConnected
+     /tmp/cceMamwm.s:25481  .text.USBD_USR_DeviceDisconnected:00000000 USBD_USR_DeviceDisconnected
+     /tmp/cceMamwm.s:25316  .text.USBD_USR_Init:00000000 $t
+     /tmp/cceMamwm.s:25344  .text.USBD_USR_Init:00000010 $d
+     /tmp/cceMamwm.s:25349  .text.USBD_USR_DeviceReset:00000000 $t
+     /tmp/cceMamwm.s:25399  .text.USBD_USR_DeviceReset:00000030 $d
+     /tmp/cceMamwm.s:25405  .text.USBD_USR_DeviceConfigured:00000000 $t
+     /tmp/cceMamwm.s:25437  .text.USBD_USR_DeviceConfigured:00000018 $d
+     /tmp/cceMamwm.s:25443  .text.USBD_USR_DeviceConnected:00000000 $t
+     /tmp/cceMamwm.s:25471  .text.USBD_USR_DeviceConnected:00000010 $d
+     /tmp/cceMamwm.s:25476  .text.USBD_USR_DeviceDisconnected:00000000 $t
+     /tmp/cceMamwm.s:25503  .text.USBD_USR_DeviceSuspended:00000000 $t
+     /tmp/cceMamwm.s:25530  .text.USBD_USR_DeviceResumed:00000000 $t
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

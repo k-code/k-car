@@ -517,23 +517,23 @@ DEFINED SYMBOLS
                             *COM*:00000800 Data_buf
                             *COM*:00000001 Data_get
                             *COM*:00000010 USART_InitStructure
-     /tmp/cclpz08g.s:25402  .data.VCP_fops:00000000 VCP_fops
-     /tmp/cclpz08g.s:25399  .data.VCP_fops:00000000 $d
-     /tmp/cclpz08g.s:25413  .text.VCP_Init:00000000 VCP_Init
-     /tmp/cclpz08g.s:25450  .text.VCP_DeInit:00000000 VCP_DeInit
-     /tmp/cclpz08g.s:25479  .text.VCP_Ctrl:00000000 VCP_Ctrl
-     /tmp/cclpz08g.s:25563  .text.VCP_DataTx:00000000 VCP_DataTx
-     /tmp/cclpz08g.s:25643  .text.VCP_DataRx:00000000 VCP_DataRx
-     /tmp/cclpz08g.s:25409  .text.VCP_Init:00000000 $t
-     /tmp/cclpz08g.s:25441  .text.VCP_Init:00000018 $d
-     /tmp/cclpz08g.s:25446  .text.VCP_DeInit:00000000 $t
-     /tmp/cclpz08g.s:25475  .text.VCP_Ctrl:00000000 $t
-     /tmp/cclpz08g.s:25507  .text.VCP_Ctrl:00000018 $d
-     /tmp/cclpz08g.s:25545  .text.VCP_Ctrl:000000a8 $t
-     /tmp/cclpz08g.s:25559  .text.VCP_DataTx:00000000 $t
-     /tmp/cclpz08g.s:25633  .text.VCP_DataTx:00000060 $d
-     /tmp/cclpz08g.s:25639  .text.VCP_DataRx:00000000 $t
-     /tmp/cclpz08g.s:25703  .text.VCP_DataRx:0000004c $d
+     /tmp/cc36syoc.s:25402  .data.VCP_fops:00000000 VCP_fops
+     /tmp/cc36syoc.s:25399  .data.VCP_fops:00000000 $d
+     /tmp/cc36syoc.s:25413  .text.VCP_Init:00000000 VCP_Init
+     /tmp/cc36syoc.s:25450  .text.VCP_DeInit:00000000 VCP_DeInit
+     /tmp/cc36syoc.s:25479  .text.VCP_Ctrl:00000000 VCP_Ctrl
+     /tmp/cc36syoc.s:25563  .text.VCP_DataTx:00000000 VCP_DataTx
+     /tmp/cc36syoc.s:25643  .text.VCP_DataRx:00000000 VCP_DataRx
+     /tmp/cc36syoc.s:25409  .text.VCP_Init:00000000 $t
+     /tmp/cc36syoc.s:25441  .text.VCP_Init:00000018 $d
+     /tmp/cc36syoc.s:25446  .text.VCP_DeInit:00000000 $t
+     /tmp/cc36syoc.s:25475  .text.VCP_Ctrl:00000000 $t
+     /tmp/cc36syoc.s:25507  .text.VCP_Ctrl:00000018 $d
+     /tmp/cc36syoc.s:25545  .text.VCP_Ctrl:000000a8 $t
+     /tmp/cc36syoc.s:25559  .text.VCP_DataTx:00000000 $t
+     /tmp/cc36syoc.s:25633  .text.VCP_DataTx:00000060 $d
+     /tmp/cc36syoc.s:25639  .text.VCP_DataRx:00000000 $t
+     /tmp/cc36syoc.s:25703  .text.VCP_DataRx:0000004c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
