@@ -17,7 +17,7 @@ extern __I uint32_t SysTime;
 extern CDC_IF_Prop_TypeDef  VCP_fops;
 
 /* Private function prototypes -----------------------------------------------*/
-static void sendData(void);
+static void sendData();
 static void Delay(__IO uint32_t nTime);
 static void getData(void);
 
@@ -35,17 +35,36 @@ int main(void) {
     PERIPH_Init_Leds();
     PERIPH_Init_Timer();
     PERIPH_Init_PWM();
-    /*PERIPH_Init_Spi();
-    LIS302DL_Init();*/
+    PERIPH_Init_Spi();
+    LIS302DL_Init();
 
     /* USB configuration */
-    //USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
+    USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
 
     while (1) {
         GPIO_SetBits(GPIOD, GPIO_Pin_12);
         Delay(500000);
         GPIO_ResetBits(GPIOD, GPIO_Pin_12);
         Delay(500000);
+        sendData();
+    }
+}
+
+static void sendData() {
+    uint8_t buf[PROTOCOL_MAX_LEN];
+    PROTOCOL_Protocol p;
+
+    p.num = 1;
+    p.framesLen = 1;
+
+
+        p.frames[0].cmd = PROTOCOL_DISTANCE;
+        p.frames[0].type = PROTOCOL_TYPE_INT;
+        p.frames[0].iData = SysTime;
+
+    if (p.framesLen > 0) {
+        uint32_t len = PROTOCOL_toByteArray(&p, buf);
+        APP_FOPS.pIf_DataTx(buf, len);
     }
 }
 
