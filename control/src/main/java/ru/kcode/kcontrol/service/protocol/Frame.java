@@ -12,7 +12,10 @@ public class Frame {
     public static final byte ANGEL_Y = 0x06;
     public static final byte ANGEL_Z = 0x07;
     public static final byte ANGEL_R = 0x08;
-    
+    public static final byte MESSAGE = 0x09;
+
+    public static final byte DISTANCE = 0x0A;
+
     public static final byte TYPE_BYTE = 0x01;
     public static final byte TYPE_INT = 0x02;
     public static final byte TYPE_STR = 0x04;
@@ -20,6 +23,7 @@ public class Frame {
     private byte cmd;
     private byte type;
     private int data;
+    private String sData;
     
     static public Frame getFrame(byte[] buf, int offset) {
         if (buf.length < offset + 3) {
@@ -36,7 +40,8 @@ public class Frame {
             case Frame.TYPE_INT:
                 f.data = Utils.parseInt(buf, offset);
                 break;
-    
+            case Frame.TYPE_STR:
+                f.sData = Utils.parseString(buf, offset);
             default:
                 break;
         }

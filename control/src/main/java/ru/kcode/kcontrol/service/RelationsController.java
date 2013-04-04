@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import ru.kcode.kcontrol.service.drivers.DeviceDriver;
 import ru.kcode.kcontrol.view.JoystickViewListener;
 import ru.kcode.kcontrol.view.graphics.Copter3dView;
+import ru.kcode.kcontrol.view.panels.DistanceViewPanel;
 import ru.kcode.kcontrol.view.panels.JoystickViewPanel;
 
 import com.centralnexus.input.Joystick;
@@ -14,6 +15,7 @@ public class RelationsController {
     private static Logger log = LoggerFactory.getLogger(RelationsController.class);
     private static KJoystick joystick;
     private static JoystickViewPanel joystickView;
+    private static DistanceViewPanel distanceViewPanel;
     private static JoystickViewListener jvl;
     private static DriverJoystickListener djl;
     private static DeviceDriver driver;
@@ -43,6 +45,14 @@ public class RelationsController {
 
     public static JoystickViewPanel getJoystickView() {
         return joystickView;
+    }
+
+    public static DistanceViewPanel getDistanceViewPanel() {
+        return distanceViewPanel;
+    }
+
+    public static void setDistanceViewPanel(DistanceViewPanel distanceViewPanel) {
+        RelationsController.distanceViewPanel = distanceViewPanel;
     }
 
     public static void setJoystickView(JoystickViewPanel jv) {

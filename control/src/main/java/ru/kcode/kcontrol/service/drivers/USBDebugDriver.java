@@ -75,7 +75,7 @@ public class USBDebugDriver extends DeviceDriver implements Runnable {
     private DataOutputStream getWriter(NRSerialPort serial) {
         return new DataOutputStream(serial.getOutputStream());
     }
-    
+
     private DataInputStream getReader(NRSerialPort serial) {
         return new DataInputStream(serial.getInputStream());
     }
@@ -95,33 +95,26 @@ public class USBDebugDriver extends DeviceDriver implements Runnable {
                 if (available >= 12) {
                     //log.debug("Available bytes: {}", available);
                     len = getPackageLength();
-                    if ( len <= 0 ) {
+                    if (len <= 0) {
                         continue;
                     }
-                }
-                else {
+                } else {
                     continue;
                 }
-                len = reader.read(buf, 0, len-8);
+                len = reader.read(buf, 0, len - 8);
                 Protocol p = new Protocol(buf, len);
                 super.receiveData(p);
-                
+
                 for (Frame f : p.getFrames()) {
                     switch (f.getCmd()) {
-                    case Frame.ANGEL_X:
-                        accx = (int)(((f.getData()-1)*100)*k + (accx)*(1-k));
-                        RelationsController.getCopter3dView().setXAngle(accx/100);
-                        System.out.println(accx/100);
-                        break;
-                    case Frame.ANGEL_Y:
-                        accz = (int)(f.getData()*k + accz*(1-k));
-                        RelationsController.getCopter3dView().setZAngle(accz);
-                        break;
-                    default:
-                        break;
+                        case Frame.DISTANCE:
+                            RelationsController.getDistanceViewPanel().getDistanceValue().setText(f.getData() + " sm");
+                            break;
+                        default:
+                            break;
                     }
                 }
-                
+
                 Thread.sleep(1);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
@@ -136,7 +129,7 @@ public class USBDebugDriver extends DeviceDriver implements Runnable {
             }
         }
     }
-    
+
     private int getPackageLength() throws IOException {
         byte controlFrame[] = new byte[4];
         do {
@@ -146,11 +139,10 @@ public class USBDebugDriver extends DeviceDriver implements Runnable {
                     reader.read(controlFrame, 0, 4);
                     return Utils.parseInt(controlFrame, 0);
                 }
-            }
-            else {
+            } else {
                 return 0;
             }
-        } while(reader.available() >= 4);
+        } while (reader.available() >= 4);
         return 0;
     }
 }
