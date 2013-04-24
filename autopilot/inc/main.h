@@ -34,6 +34,7 @@
 #include "usbd_cdc_core.h"
 #include "usbd_cdc_vcp.h"
 #include "usbd_usr.h"
+#include "ultrasonic.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

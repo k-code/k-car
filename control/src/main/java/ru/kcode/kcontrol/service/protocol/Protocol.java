@@ -3,10 +3,11 @@ package ru.kcode.kcontrol.service.protocol;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import ru.kcode.kcontrol.service.Utils;
 
 public class Protocol {
-    public static final int MAX_LENGTH = 32;
+    public static final int MAX_LENGTH = 50;
 
     private static int num = 0;
     
@@ -23,19 +24,31 @@ public class Protocol {
     }
 
     public Protocol(byte[] buf, int len) {
+        mess = ArrayUtils.clone(buf);
+        this.len = len;
         frames = new ArrayList<Frame>();
         parseProtocol(buf, len);
     }
 
     public void addParam(byte id, byte val) {
-        addbyte(id);
-        addbyte(Frame.TYPE_BYTE);
+        Frame frame = new Frame();
+        frame.setCmd(id);
+        frame.setType(Frame.TYPE_BYTE);
+        frame.setByteData(val);
+        addFrame(frame);
+        addByte(id);
+        addByte(Frame.TYPE_BYTE);
         addInt(val);
     }
 
     public void addParam(byte id, int val) {
-        addbyte(id);
-        addbyte(Frame.TYPE_INT);
+        Frame frame = new Frame();
+        frame.setCmd(id);
+        frame.setType(Frame.TYPE_INT);
+        frame.setIntData(val);
+        addFrame(frame);
+        addByte(id);
+        addByte(Frame.TYPE_INT);
         addInt(val);
     }
     
@@ -62,7 +75,7 @@ public class Protocol {
         return str.toString();
     }
     
-    private void addbyte(byte val) {
+    private void addByte(byte val) {
         mess[len] = val;
         len++;
     }

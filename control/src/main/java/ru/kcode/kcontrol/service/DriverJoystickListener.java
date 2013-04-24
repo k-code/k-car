@@ -26,7 +26,7 @@ public class DriverJoystickListener implements JoystickListener {
         p.addParam(Frame.MOTOR_1, mc.getMotor0());
         p.addParam(Frame.MOTOR_2, mc.getMotor1());
         p.addParam(Frame.MOTOR_3, mc.getMotor2());
-        p.addParam(Frame.MOTOR_4, mc.getMotor3());
+        p.addParam(Frame.GET_DISTANCE, mc.getMotor3());
         
         driver.sendData(p);
     }

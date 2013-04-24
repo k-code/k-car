@@ -84,16 +84,20 @@ public class USBDebugDriver extends DeviceDriver implements Runnable {
     public void run() {
         byte buf[] = new byte[Protocol.MAX_LENGTH];
         int len = 0;
-        double k = 0.15;
-        int accx = 0;
-        int accz = 0;
         while (isRun) {
             try {
+                Thread.sleep(1000);
+                Protocol request = new Protocol();
+                request.addParam(Frame.GET_DISTANCE, (byte)0);
+                sendData(request);
+
+                Thread.sleep(100);
+
                 int available = reader.available();
 
                 //mast be available control frame (4B), package length (4B) and package number (4B)
                 if (available >= 12) {
-                    //log.debug("Available bytes: {}", available);
+                    log.debug("Available bytes: {}", available);
                     len = getPackageLength();
                     if (len <= 0) {
                         continue;
@@ -103,19 +107,18 @@ public class USBDebugDriver extends DeviceDriver implements Runnable {
                 }
                 len = reader.read(buf, 0, len - 8);
                 Protocol p = new Protocol(buf, len);
+                log.info("Received data: {}", p.toString());
                 super.receiveData(p);
 
                 for (Frame f : p.getFrames()) {
                     switch (f.getCmd()) {
                         case Frame.DISTANCE:
-                            RelationsController.getDistanceViewPanel().getDistanceValue().setText(f.getData() + " sm");
+                            RelationsController.getDistanceViewPanel().getDistanceValue().setText(f.getIntData() + " sm");
                             break;
                         default:
                             break;
                     }
                 }
-
-                Thread.sleep(1);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

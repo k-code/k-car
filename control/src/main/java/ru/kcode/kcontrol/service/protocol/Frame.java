@@ -15,6 +15,7 @@ public class Frame {
     public static final byte MESSAGE = 0x09;
 
     public static final byte DISTANCE = 0x0A;
+    public static final byte GET_DISTANCE = 0x0B;
 
     public static final byte TYPE_BYTE = 0x01;
     public static final byte TYPE_INT = 0x02;
@@ -22,8 +23,9 @@ public class Frame {
     
     private byte cmd;
     private byte type;
-    private int data;
-    private String sData;
+    private byte byteData;
+    private int intData;
+    private String stringData;
     
     static public Frame getFrame(byte[] buf, int offset) {
         if (buf.length < offset + 3) {
@@ -35,13 +37,13 @@ public class Frame {
         
         switch (f.type) {
             case Frame.TYPE_BYTE:
-                f.data = buf[offset];
+                f.byteData = buf[offset];
                 break;
             case Frame.TYPE_INT:
-                f.data = Utils.parseInt(buf, offset);
+                f.intData = Utils.parseInt(buf, offset);
                 break;
             case Frame.TYPE_STR:
-                f.sData = Utils.parseString(buf, offset);
+                f.stringData = Utils.parseString(buf, offset);
             default:
                 break;
         }
@@ -64,11 +66,27 @@ public class Frame {
         this.type = type;
     }
     
-    public int getData() {
-        return data;
+    public int getIntData() {
+        return intData;
     }
     
-    public void setData(int data) {
-        this.data = data;
+    public void setIntData(int intData) {
+        this.intData = intData;
+    }
+
+    public byte getByteData() {
+        return byteData;
+    }
+
+    public void setByteData(byte byteData) {
+        this.byteData = byteData;
+    }
+
+    public String getStringData() {
+        return stringData;
+    }
+
+    public void setStringData(String stringData) {
+        this.stringData = stringData;
     }
 }

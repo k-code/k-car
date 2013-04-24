@@ -14,6 +14,7 @@
 __ALIGN_BEGIN USB_OTG_CORE_HANDLE USB_OTG_dev __ALIGN_END;
 
 extern __I uint32_t SysTime;
+extern __IO uint32_t US_DISTANCE;
 extern CDC_IF_Prop_TypeDef  VCP_fops;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -34,19 +35,38 @@ int main(void) {
     PERIPH_Init_SysTick();
     PERIPH_Init_Leds();
     PERIPH_Init_Timer();
-    PERIPH_Init_PWM();
-    PERIPH_Init_Spi();
-    LIS302DL_Init();
+    //PERIPH_Init_PWM();
+    //PERIPH_Init_Spi();
+    //LIS302DL_Init();
+    ultrasonic_init();
 
     /* USB configuration */
-    USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
+    //USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
 
     while (1) {
         GPIO_SetBits(GPIOD, GPIO_Pin_12);
         Delay(500000);
         GPIO_ResetBits(GPIOD, GPIO_Pin_12);
         Delay(500000);
-        sendData();
+
+        /*if (USBD_USR_DEVICE_CONFIGURED == SET) {
+            if (Data_get == 1) {
+                getData();
+                Data_get = 0;
+            }
+        }*/
+    }
+}
+
+static void getData(void) {
+    PROTOCOL_Protocol p;
+    PROTOCOL_parseProtocol(Data_buf, &p);
+    for (int32_t i = 0; i < p.framesLen; i++) {
+        switch (p.frames[i].cmd) {
+        case PROTOCOL_GET_DISTANCE:
+            sendData();
+            break;
+        }
     }
 }
 
@@ -55,17 +75,17 @@ static void sendData() {
     PROTOCOL_Protocol p;
 
     p.num = 1;
-    p.framesLen = 1;
+    p.framesLen = 0;
 
 
-        p.frames[0].cmd = PROTOCOL_DISTANCE;
-        p.frames[0].type = PROTOCOL_TYPE_INT;
-        p.frames[0].iData = SysTime;
+    int32_t len = US_DISTANCE;
+    p.frames[0].cmd = PROTOCOL_DISTANCE;
+    p.frames[0].type = PROTOCOL_TYPE_INT;
+    p.frames[0].iData = len;
+    p.framesLen++;
 
-    if (p.framesLen > 0) {
-        uint32_t len = PROTOCOL_toByteArray(&p, buf);
-        APP_FOPS.pIf_DataTx(buf, len);
-    }
+    len = PROTOCOL_toByteArray(&p, buf);
+    APP_FOPS.pIf_DataTx(buf, len);
 }
 
 /**

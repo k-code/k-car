@@ -9,7 +9,7 @@ uint32_t PROTOCOL_toByteArray(PROTOCOL_Protocol *p, uint8_t *buf) {
     uint32_t bufLen = 12;
     PROTOCOL_intToByteArray(p->num, &buf[8]);
 
-    for (uint8_t i = 0; i < 2; i++) {
+    for (uint8_t i = 0; i < p->num; i++) {
         buf[bufLen] = p->frames[i].cmd;
         bufLen++;
         buf[bufLen] = p->frames[i].type;

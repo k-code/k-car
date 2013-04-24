@@ -110,7 +110,7 @@ USBD_Usr_cb_TypeDef USR_cb =
 */
 void USBD_USR_Init(void)
 {
-    TIM_SetCompare2(TIM4, 1000);
+    GPIO_SetBits(GPIOD, GPIO_Pin_15);
 }
 
 /**
@@ -121,7 +121,7 @@ void USBD_USR_Init(void)
 void USBD_USR_DeviceReset(uint8_t speed )
 {
     USBD_USR_DEVICE_CONFIGURED = RESET;
-    TIM_SetCompare3(TIM4, 0);
+    GPIO_ResetBits(GPIOD, GPIO_Pin_13);
  switch (speed)
  {
    case USB_OTG_SPEED_HIGH: 
@@ -145,7 +145,7 @@ void USBD_USR_DeviceReset(uint8_t speed )
 void USBD_USR_DeviceConfigured (void)
 {
     USBD_USR_DEVICE_CONFIGURED = SET;
-    TIM_SetCompare3(TIM4, 1000);
+    GPIO_SetBits(GPIOD, GPIO_Pin_13);
 }
 
 
@@ -157,7 +157,7 @@ void USBD_USR_DeviceConfigured (void)
 */
 void USBD_USR_DeviceConnected (void)
 {
-    TIM_SetCompare4(TIM4, 1000);
+    GPIO_SetBits(GPIOD, GPIO_Pin_14);
 }
 
 
@@ -169,6 +169,7 @@ void USBD_USR_DeviceConnected (void)
 */
 void USBD_USR_DeviceDisconnected (void)
 {
+    GPIO_ResetBits(GPIOD, GPIO_Pin_14);
 }
 
 /**

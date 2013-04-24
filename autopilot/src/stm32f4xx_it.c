@@ -162,14 +162,14 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void EXTI0_IRQHandler(void)
+/*void EXTI0_IRQHandler(void)
 {
   uint8_t test[12] = "Hello world\n";
   
   APP_FOPS.pIf_DataTx(&test[0],12);
-  /* Clear the EXTI line pending bit */
+   Clear the EXTI line pending bit
   EXTI_ClearITPendingBit(USER_BUTTON_EXTI_LINE);
-}
+}*/
 
 /**
   * @brief  This function handles EXTI15_10_IRQ Handler.

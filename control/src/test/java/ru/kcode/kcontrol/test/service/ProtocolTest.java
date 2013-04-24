@@ -30,7 +30,7 @@ public class ProtocolTest {
         p.addParam(Frame.MOTOR_1, 1000);
         p.addParam(Frame.MOTOR_2, 1000);
         p.addParam(Frame.MOTOR_3, 1000);
-        p.addParam(Frame.MOTOR_4, 1000);
+        p.addParam(Frame.GET_DISTANCE, 1000);
         dr.sendData(p);
         dr.stop();
     }
@@ -43,7 +43,7 @@ public class ProtocolTest {
         p.addParam(Frame.MOTOR_1, 1000);
         p.addParam(Frame.MOTOR_2, 1000);
         p.addParam(Frame.MOTOR_3, 1000);
-        p.addParam(Frame.MOTOR_4, 1000);
+        p.addParam(Frame.GET_DISTANCE, 1000);
         dr.sendData(p);
         dr.stop();
     }

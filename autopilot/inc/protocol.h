@@ -14,6 +14,7 @@
 #define PROTOCOL_ANGEL_R     (uint8_t) 0x08
 #define PROTOCOL_MESSAGE     (uint8_t) 0x09
 #define PROTOCOL_DISTANCE     (uint8_t) 0x0A
+#define PROTOCOL_GET_DISTANCE     (uint8_t) 0x0B
 
 #define PROTOCOL_MAX_LEN         32
 #define PROTOCOL_MAX_FRAMES      4
@@ -27,7 +28,6 @@ typedef struct _PROTOCOL_Frame {
     uint8_t type;
     uint8_t bData;
     uint32_t iData;
-    uint8_t *sData;
 } PROTOCOL_Frame;
 
 typedef struct _PROTOCOL_Protocol {
