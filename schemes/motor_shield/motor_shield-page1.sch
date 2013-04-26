@@ -325,7 +325,7 @@ symversion=0.1
 T 44600 47700 5 10 0 1 0 0 1
 value=100mF
 T 44500 48000 5 10 0 1 0 0 1
-footprint=HC49
+footprint=RCY150P
 }
 C 43700 45400 1 270 0 capacitor-2.sym
 {
@@ -338,7 +338,7 @@ symversion=0.1
 T 44100 44600 5 10 0 1 0 0 1
 value=100mF
 T 44000 44900 5 10 0 1 0 0 1
-footprint=HC49
+footprint=RCY150P
 }
 C 50200 42900 1 0 0 L293.sym
 {
@@ -358,7 +358,7 @@ refdes=R5
 T 44600 44500 5 10 0 1 180 0 1
 footprint=R025
 T 47000 42400 5 10 0 1 90 0 1
-value=100kOm
+value=4.7kOm
 }
 C 47900 41900 1 90 0 resistor-2.sym
 {
@@ -369,7 +369,7 @@ refdes=R6
 T 45200 44500 5 10 0 1 180 0 1
 footprint=R025
 T 47600 42400 5 10 0 1 90 0 1
-value=100kOm
+value=4.7kOm
 }
 C 48500 41900 1 90 0 resistor-2.sym
 {
@@ -380,7 +380,7 @@ refdes=R7
 T 45800 44500 5 10 0 1 180 0 1
 footprint=R025
 T 48200 42400 5 10 0 1 90 0 1
-value=100kOm
+value=4.7kOm
 }
 C 55800 41800 1 90 0 resistor-2.sym
 {
@@ -391,7 +391,7 @@ refdes=R10
 T 53100 44400 5 10 0 1 180 0 1
 footprint=R025
 T 55500 42300 5 10 0 1 90 0 1
-value=100kOm
+value=4.7kOm
 }
 C 55200 41800 1 90 0 resistor-2.sym
 {
@@ -402,7 +402,7 @@ refdes=R9
 T 52500 44400 5 10 0 1 180 0 1
 footprint=R025
 T 54900 42300 5 10 0 1 90 0 1
-value=100kOm
+value=4.7kOm
 }
 C 54600 41800 1 90 0 resistor-2.sym
 {
@@ -413,7 +413,7 @@ refdes=R8
 T 51900 44400 5 10 0 1 180 0 1
 footprint=R025
 T 54300 42300 5 10 0 1 90 0 1
-value=100kOm
+value=4.7kOm
 }
 N 48400 41900 47200 41900 4
 N 54500 41800 55700 41800 4
