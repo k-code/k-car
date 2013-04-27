@@ -102,7 +102,7 @@ device=RESISTOR
 T 42700 48200 5 10 1 1 0 0 1
 refdes=R1
 T 45100 50600 5 10 0 1 90 0 1
-footprint=R025
+footprint=ACY200
 T 43000 48200 5 10 0 1 0 0 1
 value=100Om
 }
@@ -202,7 +202,7 @@ device=RESISTOR
 T 42200 45100 5 10 1 1 0 0 1
 refdes=R3
 T 44600 47500 5 10 0 1 90 0 1
-footprint=R025
+footprint=ACY200
 T 42500 45100 5 10 0 1 0 0 1
 value=100Om
 }
@@ -325,7 +325,7 @@ symversion=0.1
 T 44600 47700 5 10 0 1 0 0 1
 value=100mF
 T 44500 48000 5 10 0 1 0 0 1
-footprint=RCY150P
+footprint=RCY100P
 }
 C 43700 45400 1 270 0 capacitor-2.sym
 {
@@ -338,7 +338,7 @@ symversion=0.1
 T 44100 44600 5 10 0 1 0 0 1
 value=100mF
 T 44000 44900 5 10 0 1 0 0 1
-footprint=RCY150P
+footprint=RCY100P
 }
 C 50200 42900 1 0 0 L293.sym
 {
@@ -356,7 +356,7 @@ device=RESISTOR
 T 47000 42100 5 10 1 1 90 0 1
 refdes=R5
 T 44600 44500 5 10 0 1 180 0 1
-footprint=R025
+footprint=ACY200
 T 47000 42400 5 10 0 1 90 0 1
 value=4.7kOm
 }
@@ -367,7 +367,7 @@ device=RESISTOR
 T 47600 42100 5 10 1 1 90 0 1
 refdes=R6
 T 45200 44500 5 10 0 1 180 0 1
-footprint=R025
+footprint=ACY200
 T 47600 42400 5 10 0 1 90 0 1
 value=4.7kOm
 }
@@ -378,7 +378,7 @@ device=RESISTOR
 T 48200 42100 5 10 1 1 90 0 1
 refdes=R7
 T 45800 44500 5 10 0 1 180 0 1
-footprint=R025
+footprint=ACY200
 T 48200 42400 5 10 0 1 90 0 1
 value=4.7kOm
 }
@@ -389,7 +389,7 @@ device=RESISTOR
 T 55500 42000 5 10 1 1 90 0 1
 refdes=R10
 T 53100 44400 5 10 0 1 180 0 1
-footprint=R025
+footprint=ACY200
 T 55500 42300 5 10 0 1 90 0 1
 value=4.7kOm
 }
@@ -400,7 +400,7 @@ device=RESISTOR
 T 54900 42000 5 10 1 1 90 0 1
 refdes=R9
 T 52500 44400 5 10 0 1 180 0 1
-footprint=R025
+footprint=ACY200
 T 54900 42300 5 10 0 1 90 0 1
 value=4.7kOm
 }
@@ -411,7 +411,7 @@ device=RESISTOR
 T 54300 42000 5 10 1 1 90 0 1
 refdes=R8
 T 51900 44400 5 10 0 1 180 0 1
-footprint=R025
+footprint=ACY200
 T 54300 42300 5 10 0 1 90 0 1
 value=4.7kOm
 }
