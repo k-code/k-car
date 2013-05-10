@@ -3,6 +3,7 @@
 #include "leds.h"
 #include "time.h"
 #include "ultrasonic.h"
+#include "motors.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -21,8 +22,15 @@ int main(void) {
 	LEDS_init();
 	TIME_init();
 	US_init();
+	MOTORS_init();
 
 	do {
+		if (US_distance > 20) {
+			MOTORS_forward(1000);
+		}
+		else {
+			MOTORS_forward(0);
+		}
 		LEDS_live(LEDS_On);
 		TIME_delay(US_distance*10);
 		LEDS_live(LEDS_Off);
