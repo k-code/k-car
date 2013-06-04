@@ -17,7 +17,7 @@
 #define US_GPIO 		GPIOD
 #define US_RCC 			RCC_AHB1Periph_GPIOD
 #define US_EXTI_Port 	EXTI_PortSourceGPIOD
-#define US_TRIGGER_PIN 	GPIO_Pin_1
+#define US_TRIGGER_PIN 	GPIO_Pin_2
 #define US_ECHO_PIN 	GPIO_Pin_0
 #define US_EXTI_PIN		EXTI_PinSource0
 #define US_EXTI_Line	EXTI_Line0

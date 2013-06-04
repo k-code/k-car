@@ -23,9 +23,9 @@ void MOTORS_init() {
 
 void MOTORS_forward(uint32_t speed) {
     TIM_SetCompare1(TIM3, speed);
+    TIM_SetCompare2(TIM3, speed);
     GPIO_SetBits(GPIOB, GPIO_Pin_6);
     GPIO_ResetBits(GPIOB, GPIO_Pin_7);
-    TIM_SetCompare2(TIM3, speed);
     GPIO_SetBits(GPIOB, GPIO_Pin_8);
     GPIO_ResetBits(GPIOB, GPIO_Pin_9);
 }
@@ -38,8 +38,13 @@ void MOTORS_left() {
 
 }
 
-void MOTORS_right() {
-
+void MOTORS_right(uint32_t speed) {
+    TIM_SetCompare1(TIM3, speed);
+    TIM_SetCompare2(TIM3, speed);
+    GPIO_ResetBits(GPIOB, GPIO_Pin_6);
+    GPIO_SetBits(GPIOB, GPIO_Pin_7);
+    GPIO_SetBits(GPIOB, GPIO_Pin_8);
+    GPIO_ResetBits(GPIOB, GPIO_Pin_9);
 }
 
 
@@ -51,8 +56,8 @@ static void initTimer() {
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 
     /* Compute the prescaler value */
-    //uint32_t PrescalerValue = RCC_Clocks.PCLK1_Frequency/1000000 - 1;
-    uint32_t PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 21000000) - 1;
+    uint32_t PrescalerValue = RCC_Clocks.PCLK1_Frequency/1000 - 1;
+    //uint32_t PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 21000000) - 1;
 
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     /* Time base configuration */

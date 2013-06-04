@@ -25,16 +25,17 @@ int main(void) {
 	MOTORS_init();
 
 	do {
-		if (US_distance > 20) {
+		TIME_delay(100);
+		if (US_distance > 30) {
 			MOTORS_forward(1000);
 		}
 		else {
-			MOTORS_forward(0);
+			MOTORS_right(800);
 		}
-		LEDS_live(LEDS_On);
+		/*LEDS_live(LEDS_On);
 		TIME_delay(US_distance*10);
 		LEDS_live(LEDS_Off);
-		TIME_delay(US_distance*10);
+		TIME_delay(US_distance*10);*/
 	} while (1);
 }
 
