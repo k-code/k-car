@@ -1,9 +1,9 @@
-all: libjkcp.so
+all: lib_so
 	
-libjkcp.so: jkcp.obj
+lib_so: c_obj
 	g++ -o bin/libjkcp.so -shared bin/libjkcp.o bin/protocol.o
 
-jkcp.obj: cpp_src/jkcp.cpp java_headers
+c_obj: cpp_src/jkcp.cpp cpp_src/protocol.c java_headers
 	g++ -o bin/libjkcp.o -I"/usr/lib/jvm/default-java/include" -I"/usr/lib/jvm/default-java/include/linux" -fpic -c cpp_src/jkcp.cpp
 	g++ -o bin/protocol.o -c cpp_src/protocol.c
 

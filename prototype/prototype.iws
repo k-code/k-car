@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b973fe43-25e8-46f4-949b-432ad94ed9ba" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/prototype/Protocol.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/prototype/Protocol.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/pro/kornev/kcar/prototype/test/ProtocolTest.java" afterPath="$PROJECT_DIR$/src/test/java/pro/kornev/kcar/prototype/test/ProtocolTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cpp_src/jkcp.cpp" afterPath="$PROJECT_DIR$/cpp_src/jkcp.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cpp_src/jkcp.h" afterPath="$PROJECT_DIR$/cpp_src/jkcp.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cpp_src/protocol.c" afterPath="$PROJECT_DIR$/cpp_src/protocol.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/prototype.iws" afterPath="$PROJECT_DIR$/prototype.iws" />
     </list>
     <ignored path="prototype.iws" />
@@ -20,9 +16,9 @@
     <file path="/protocol.h" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380768398222" ignored="false" />
     <file path="/pom.xml" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380711016778" ignored="false" />
     <file path="/ProtocolTest.java" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380774938789" ignored="false" />
-    <file path="/Dummy.txt" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380768539069" ignored="false" />
+    <file path="/Dummy.txt" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380776765895" ignored="false" />
     <file path="/fragment.java" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380770206072" ignored="false" />
-    <file path="/Makefile" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380712964670" ignored="false" />
+    <file path="/Makefile" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380793296281" ignored="false" />
     <file path="/protocol.c" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380776477656" ignored="false" />
     <file path="/a.dummy" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380714520003" ignored="false" />
     <file path="/test.c" changelist="b973fe43-25e8-46f4-949b-432ad94ed9ba" time="1380715206735" ignored="false" />
@@ -211,10 +207,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jkcp.cpp" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="jkcp.cpp" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cpp_src/jkcp.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="17" selection-start="1255" selection-end="1255" vertical-scroll-proportion="0.49833888">
+            <state line="32" column="17" selection-start="1255" selection-end="1255" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Makefile" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Makefile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -269,7 +274,6 @@
         <option value="$PROJECT_DIR$/bin/pro_kornev_kcar_prototype_Protocol.c" />
         <option value="$PROJECT_DIR$/bin/make" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/cpp_src/test.c" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/prototype/Data.java" />
         <option value="$PROJECT_DIR$/cpp_src/protocol.h" />
@@ -277,6 +281,7 @@
         <option value="$PROJECT_DIR$/src/test/java/pro/kornev/kcar/prototype/test/ProtocolTest.java" />
         <option value="$PROJECT_DIR$/cpp_src/protocol.c" />
         <option value="$PROJECT_DIR$/cpp_src/jkcp.cpp" />
+        <option value="$PROJECT_DIR$/Makefile" />
       </list>
     </option>
   </component>
@@ -645,7 +650,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2498618" sideWeight="0.67022413" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -692,7 +697,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added protocol to java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed protocol" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -706,6 +711,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Added protocol to java" />
+    <MESSAGE value="Fixed protocol" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -767,13 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Makefile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="12" selection-start="725" selection-end="725" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/prototype/Data.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0">
@@ -818,7 +817,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cpp_src/jkcp.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="17" selection-start="1255" selection-end="1255" vertical-scroll-proportion="0.49833888">
+        <state line="32" column="17" selection-start="1255" selection-end="1255" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
