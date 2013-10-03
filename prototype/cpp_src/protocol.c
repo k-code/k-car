@@ -8,7 +8,7 @@
 #define DATA_TYPE_CHAR 0x00
 #define DATA_TYPE_INT 0x01
 
-const uchar CRC8_Table[256] = {
+const t_byte CRC8_Table[256] = {
     0x00, 0x31, 0x62, 0x53, 0xC4, 0xF5, 0xA6, 0x97,
     0xB9, 0x88, 0xDB, 0xEA, 0x7D, 0x4C, 0x1F, 0x2E,
     0x43, 0x72, 0x21, 0x10, 0x87, 0xB6, 0xE5, 0xD4,
@@ -43,15 +43,21 @@ const uchar CRC8_Table[256] = {
     0x3B, 0x0A, 0x59, 0x68, 0xFF, 0xCE, 0x9D, 0xAC
 };
 
-static PROTOCOL_data byteArrayToData(uchar *buf);
-static uint byteArrayToInt(uchar *buf);
-static void intToByteArray(uint val, uchar *buf);
-static uint putIntToBuf(uchar *buf, uint bufLen, uint val);
-static uint putByteToBuf(uchar *buf, uint bufLen, uchar val);
-static uchar crc8(uchar *pcBlock, uchar len);
+static PROTOCOL_data byteArrayToData(t_byte *buf);
+static t_int byteArrayToInt(t_byte *buf);
+static void intToByteArray(t_int val, t_byte *buf);
+static t_int putIntToBuf(t_byte *buf, t_int bufLen, t_int val);
+static t_int putByteToBuf(t_byte *buf, t_int bufLen, t_byte val);
+static t_byte crc8(t_byte *pcBlock, t_byte len);
 
-uint PROTOCOL_toByteArray(PROTOCOL_data data, uchar *buf) {
-    uint bufLen = 0;
+t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf) {
+    /*printf("toByteArray\n");
+    printf("data.id %i\n", data.id);
+    printf("data.cmd %d\n", data.cmd);
+    printf("data.type %d\n", data.type);
+    printf("data.bData %d\n", data.bData);
+    printf("data.iData %d\n", data.iData);*/
+    t_int bufLen = 0;
     
     // Add frame head code
     bufLen = putIntToBuf(buf, bufLen, FRAME_HEAD);
@@ -79,14 +85,14 @@ uint PROTOCOL_toByteArray(PROTOCOL_data data, uchar *buf) {
     return bufLen;
 }
 
-PROTOCOL_data PROTOCOL_fromByteArray(uchar *buf, uint bufLen) {
+PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen) {
     PROTOCOL_data data = {0,0,0,0,0};
     
     // Search frame head
-    uint startFramePos = 0;
-    uint framePos = 0;
+    t_int startFramePos = 0;
+    t_int framePos = 0;
     for (int i=0; i<bufLen; i++) {
-        uint curFreameHead = byteArrayToInt(&buf[i]);
+        t_int curFreameHead = byteArrayToInt(&buf[i]);
         if (FRAME_HEAD == curFreameHead) {
             startFramePos = i;
             framePos += INT_SIZE;
@@ -98,7 +104,7 @@ PROTOCOL_data PROTOCOL_fromByteArray(uchar *buf, uint bufLen) {
     buf = &buf[startFramePos];
     
     // get frame length
-    uint frameLength = byteArrayToInt(&buf[framePos]);
+    t_int frameLength = byteArrayToInt(&buf[framePos]);
     framePos += INT_SIZE;
     
     // Check frame size
@@ -107,8 +113,8 @@ PROTOCOL_data PROTOCOL_fromByteArray(uchar *buf, uint bufLen) {
     }
     
     // Get and check CRC (exclude crc byte)
-    uchar crc = buf[frameLength-1];
-    uchar frameCRC = crc8(buf, frameLength-1);
+    t_byte crc = buf[frameLength-1];
+    t_byte frameCRC = crc8(buf, frameLength-1);
     if (crc != frameCRC) {
         return data;
     }
@@ -129,39 +135,41 @@ PROTOCOL_data PROTOCOL_fromByteArray(uchar *buf, uint bufLen) {
     return data;
 }
 
-inline uint putIntToBuf(uchar *buf, uint bufLen, uint val) {
-    buf = (uchar *) realloc(buf, bufLen + INT_SIZE);
+inline t_int putIntToBuf(t_byte *buf, t_int bufLen, t_int val) {
+    buf = (t_byte *) realloc(buf, bufLen + INT_SIZE);
     intToByteArray(val, &buf[bufLen]);
     return bufLen + INT_SIZE;
 }
 
-inline uint putByteToBuf(uchar *buf, uint bufLen, uchar val) {
-    buf = (uchar *) realloc(buf, bufLen + BYTE_SIZE);
+inline t_int putByteToBuf(t_byte *buf, t_int bufLen, t_byte val) {
+    buf = (t_byte *) realloc(buf, bufLen + BYTE_SIZE);
     buf[bufLen] = val;
     return bufLen + BYTE_SIZE;
 }
 
-inline uint byteArrayToInt(uchar *buf) {
-    uint res = (((uint) (buf[0])) << 24);
-    res |= (((uint) (buf[1])) << 16);
-    res |= (((uint) (buf[2])) << 8);
-    res |= (((uint) buf[3]));
+inline t_int byteArrayToInt(t_byte *buf) {
+    t_int res = (((t_int) (buf[0])) << 24);
+    res |= (((t_int) (buf[1])) << 16);
+    res |= (((t_int) (buf[2])) << 8);
+    res |= (((t_int) buf[3]));
 
     return res;
 }
 
-inline void intToByteArray(uint val, uchar *buf) {
-    buf[0] = (uchar) (val >> 24);
-    buf[1] = (uchar) (val >> 16);
-    buf[2] = (uchar) (val >> 8);
-    buf[3] = (uchar) val;
+inline void intToByteArray(t_int val, t_byte *buf) {
+    buf[0] = (t_byte) (val >> 24);
+    buf[1] = (t_byte) (val >> 16);
+    buf[2] = (t_byte) (val >> 8);
+    buf[3] = (t_byte) val;
 }
 
-inline uchar crc8(uchar *pcBlock, uchar len) {
-    uchar crc = 0xFF;
+inline t_byte crc8(t_byte *pcBlock, t_byte len) {
+    t_byte crc = 0xFF;
     while (len--) {
         crc = CRC8_Table[crc ^ *pcBlock++];
+        printf("%.2x ", crc);
     }
+    printf("\n");
     return crc;
 }
 
