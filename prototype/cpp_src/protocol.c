@@ -51,14 +51,16 @@ static t_int putByteToBuf(t_byte *buf, t_int bufLen, t_byte val);
 static t_byte crc8(t_byte *pcBlock, t_byte len);
 
 t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf) {
-    /*printf("toByteArray\n");
+    printf("toByteArray\n");
     printf("data.id %i\n", data.id);
     printf("data.cmd %d\n", data.cmd);
     printf("data.type %d\n", data.type);
     printf("data.bData %d\n", data.bData);
-    printf("data.iData %d\n", data.iData);*/
+    printf("data.iData %d\n", data.iData);
     t_int bufLen = 0;
-    
+
+    buf = (t_byte *)malloc(64);
+
     // Add frame head code
     bufLen = putIntToBuf(buf, bufLen, FRAME_HEAD);
     // Alloc memory fro frame length
@@ -81,7 +83,7 @@ t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf) {
     
     // Add CRC
     bufLen = putByteToBuf(buf, bufLen, crc8(buf, bufLen));
-    
+
     return bufLen;
 }
 
@@ -136,13 +138,13 @@ PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen) {
 }
 
 inline t_int putIntToBuf(t_byte *buf, t_int bufLen, t_int val) {
-    buf = (t_byte *) realloc(buf, bufLen + INT_SIZE);
+    //buf = (t_byte *) realloc(buf, bufLen + INT_SIZE);
     intToByteArray(val, &buf[bufLen]);
     return bufLen + INT_SIZE;
 }
 
 inline t_int putByteToBuf(t_byte *buf, t_int bufLen, t_byte val) {
-    buf = (t_byte *) realloc(buf, bufLen + BYTE_SIZE);
+    //buf = (t_byte *) realloc(buf, bufLen + 4);
     buf[bufLen] = val;
     return bufLen + BYTE_SIZE;
 }

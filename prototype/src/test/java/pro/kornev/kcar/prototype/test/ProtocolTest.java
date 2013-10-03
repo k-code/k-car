@@ -20,7 +20,19 @@ public class ProtocolTest {
         byte buf[] = Protocol.toByteArray(data);
         System.out.println("len: " + buf.length);
         for (int i=0; i<buf.length; i++) {
-            System.out.print(String.format("%x ", buf[i]));
+            System.out.print(String.format("%02x ", buf[i]));
         }
+    }
+
+    @Test
+    public void testFromByteArray() {
+        byte buf[] = {(byte) 0xaa, (byte) 0xaa, (byte) 0xaa, (byte) 0xaa, 0x0, 0x0, 0x0, 0x10, 0x0, 0x0, 0x0, 0x1, 0x2, 0x0, 0x3, 0x51};
+
+        Data data = Protocol.fromByteArray(buf, buf.length);
+        System.out.println("Data.id: " + data.id);
+        System.out.println("Data.cmd: " + data.cmd);
+        System.out.println("Data.type: " + data.type);
+        System.out.println("Data.bData: " + data.bData);
+        System.out.println("Data.iData: " + data.iData);
     }
 }

@@ -8,16 +8,17 @@ import java.nio.ByteBuffer;
  * Time: 10:34
  */
 public class Protocol {
-/*
 
     static
     {
         System.loadLibrary("jkcp");
     }
 
-    native public static int toByteArray(Data data, boolean[] buf);
-    native public static Data fromByteArray(char[] buf, int len);
-*/
+    native public static byte[] toByteArray(Data data);
+    native public static Data fromByteArray(byte[] buf, int len);
+
+
+/*
 
     private static final byte PROTOCOL_VERSION = 0x00;
     private static final int FRAME_HEAD = 0xAAAAAAAA;
@@ -87,13 +88,80 @@ public class Protocol {
         bufLen = buf.position() + 1;
         buf.position(INT_SIZE);
         buf.putInt(bufLen);
-        buf.position(bufLen);
+        buf.position(bufLen-1);
 
         // Add CRC
         buf.put(crc8(buf.array(), bufLen - 1));
+        byte res[] = new byte[bufLen];
+        buf.position(0);
+        for (int i=0; i<bufLen; i++) {
+            res[i] = buf.get();
+        }
 
-        return buf.array();
-    }/*
+        return res;
+    }
+
+
+    public static Data fromByteArray(byte buf[], int bufLen) {
+        Data data = new Data();
+        ByteBuffer bb = ByteBuffer.wrap(buf);
+
+        // Search frame head
+        int startFramePos = 0;
+        int framePos = 0;
+        for (int i=0; i<bufLen; i++) {
+            bb.position(i);
+            int curFreameHead = bb.getInt();
+            if (FRAME_HEAD == curFreameHead) {
+                startFramePos = i;
+                framePos += INT_SIZE;
+                break;
+            }
+        }
+
+        // seek buf to frame length
+        bb.position(startFramePos + INT_SIZE);
+
+        // get frame length
+        int frameLength = bb.getInt();
+        framePos += INT_SIZE;
+
+        // Check frame size
+        if (startFramePos + frameLength > bb.limit()) {
+            return data;
+        }
+
+        // Get and check CRC (exclude crc byte)
+        bb.position(startFramePos + frameLength -1);
+        byte crc = bb.get();
+
+        bb.position(startFramePos);
+
+        byte frameCRC = crc8(buf, startFramePos, frameLength).array(), frameLength-1);
+        if (crc != frameCRC) {
+            return data;
+        }
+
+        bb.position(framePos);
+
+        // Fill data
+        data.id = bb.getInt();
+        framePos += INT_SIZE;
+        data.cmd = bb.get();
+        framePos += BYTE_SIZE;
+        data.type = bb.get();
+        framePos += BYTE_SIZE;
+        if (data.type == DATA_TYPE_CHAR) {
+            data.bData = bb.get();
+        } else if (data.type == DATA_TYPE_INT) {
+            data.iData = bb.getInt();
+        }
+
+        return data;
+    }
+
+    */
+/*
 
     public static Data fromByteArray(char[] buf, int len) {
         return null;
@@ -108,7 +176,9 @@ public class Protocol {
     private static int putByteToBuf(ByteBuffer buf, int bufLen, byte val) {
         buf.put(val);
         return buf.position();
-    }*/
+    }*//*
+
+*/
 /*
 
     inline t_int byteArrayToInt(t_byte *buf) {
@@ -126,17 +196,19 @@ public class Protocol {
         buf[2] = (t_byte) (val >> 8);
         buf[3] = (t_byte) val;
     }
-*/
+*//*
+
 
     private static byte crc8(byte buf[], int len) {
         byte crc = (byte) 0xFF;
         for (int i = 0; i < len; i++) {
             crc = (byte) CRC8_Table[(crc ^ buf[i]) & 0xFF];
-            System.out.print(String.format("%02x ", crc));
+            //System.out.print(String.format("%02x ", crc));
         }
-        System.out.println();
+        //System.out.println();
         return crc;
     }
+*/
 
 
 }

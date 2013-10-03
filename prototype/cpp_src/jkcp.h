@@ -10,18 +10,18 @@ extern "C" {
 /*
  * Class:     pro_kornev_kcar_prototype_Protocol
  * Method:    toByteArray
- * Signature: (Lpro/kornev/kcar/prototype/Data;[Z)I
+ * Signature: (Lpro/kornev/kcar/prototype/Data;)[B
  */
-JNIEXPORT jint JNICALL Java_pro_kornev_kcar_prototype_Protocol_toByteArray
-  (JNIEnv *, jclass, jobject, jbooleanArray);
+JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_prototype_Protocol_toByteArray
+  (JNIEnv *, jclass, jobject);
 
 /*
  * Class:     pro_kornev_kcar_prototype_Protocol
  * Method:    fromByteArray
- * Signature: ([CI)Lpro/kornev/kcar/prototype/Data;
+ * Signature: ([BI)Lpro/kornev/kcar/prototype/Data;
  */
 JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_prototype_Protocol_fromByteArray
-  (JNIEnv *, jclass, jcharArray, jint);
+  (JNIEnv *, jclass, jbyteArray, jint);
 
 #ifdef __cplusplus
 }
