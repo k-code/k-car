@@ -23,6 +23,14 @@ JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray
 JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_protocol_Protocol_fromByteArray
   (JNIEnv *, jclass, jbyteArray, jint);
 
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol
+ * Method:    getVersion
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_getVersion
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,6 +1,5 @@
 #include "protocol.h"
 
-#define PROTOCOL_VERSION = 0x00
 #define FRAME_HEAD 0xAAAAAAAA
 #define INT_SIZE 4
 #define BYTE_SIZE 1

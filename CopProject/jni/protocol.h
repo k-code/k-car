@@ -1,8 +1,11 @@
 #ifndef __PROTOCOL_H
 #define __PROTOCOL_H
 
+// TODO : add protocol version to frame
+
 // Max frame len 4-header, 4-length, 4-id, 1-command, 1-type, 4-max data size, 4-crc
 #define PROTOCOL_MAX_FRAME_SIZE 22
+#define PROTOCOL_VERSION 0x01
 
 typedef unsigned char t_byte;
 typedef unsigned int t_int;

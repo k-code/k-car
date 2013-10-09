@@ -62,10 +62,14 @@ JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_protocol_Protocol_fromByteArray(J
     PROTOCOL_data data = PROTOCOL_fromByteArray(buf, jlen);
 
     env->SetIntField(jdata, env->GetFieldID(jdc, "id", "I" ), (jint)data.id);
-    env->SetByteField(jdata, env->GetFieldID(jdc, "cmd", "B" ), (jint)data.cmd);
-    env->SetByteField(jdata, env->GetFieldID(jdc, "type", "B" ), (jint)data.type);
-    env->SetByteField(jdata, env->GetFieldID(jdc, "bData", "B" ), (jint)data.bData);
-    env->SetByteField(jdata, env->GetFieldID(jdc, "iData", "I" ), (jint)data.iData);
+    env->SetByteField(jdata, env->GetFieldID(jdc, "cmd", "B" ), (jbyte)data.cmd);
+    env->SetByteField(jdata, env->GetFieldID(jdc, "type", "B" ), (jbyte)data.type);
+    env->SetByteField(jdata, env->GetFieldID(jdc, "bData", "B" ), (jbyte)data.bData);
+    env->SetIntField(jdata, env->GetFieldID(jdc, "iData", "I" ), (jint)data.iData);
 
     return jdata;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_getVersion(JNIEnv *env, jclass jc) {
+    return (jbyte)PROTOCOL_VERSION;
 }

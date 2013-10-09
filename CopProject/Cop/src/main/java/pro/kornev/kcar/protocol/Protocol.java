@@ -16,4 +16,5 @@ public class Protocol {
 
     native public static byte[] toByteArray(Data data);
     native public static Data fromByteArray(byte[] buf, int len);
+    native public static byte getVersion();
 }
