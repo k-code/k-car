@@ -1,10 +1,10 @@
-#include "jkcp.h"
+#include "jniprotocol.h"
 #include "protocol.h"
 #include <stdlib.h>
 
-JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_prototype_Protocol_toByteArray(JNIEnv *env, jclass cl, jobject jdata) {
+JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(JNIEnv *env, jclass cl, jobject jdata) {
     // Crate Data class
-    jclass clazz = env->FindClass("Lpro/kornev/kcar/prototype/Data;");
+    jclass clazz = env->FindClass("pro/kornev/kcar/protocol/Data");
     jfieldID fid = env->GetFieldID(clazz, "id", "I");
     jfieldID fcmd = env->GetFieldID(clazz, "cmd", "B");
     jfieldID ftype = env->GetFieldID(clazz, "type", "B");
@@ -13,9 +13,9 @@ JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_prototype_Protocol_toByteArray
 
     // Extract data from Data object
     jint id = env->GetIntField(jdata, fid);
-    jbyte cmd = env->GetIntField(jdata, fcmd);
-    jbyte type = env->GetIntField(jdata, ftype);
-    jbyte bData = env->GetIntField(jdata, fbData);
+    jbyte cmd = env->GetByteField(jdata, fcmd);
+    jbyte type = env->GetByteField(jdata, ftype);
+    jbyte bData = env->GetByteField(jdata, fbData);
     jint iData = env->GetIntField(jdata, fiData);
 
     // Create and fill POTOCOL_data
@@ -44,11 +44,11 @@ JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_prototype_Protocol_toByteArray
     return buf;
 }
 
-JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_prototype_Protocol_fromByteArray(JNIEnv *env, jclass jc, jbyteArray jbuf, jint jlen) {
+JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_protocol_Protocol_fromByteArray(JNIEnv *env, jclass jc, jbyteArray jbuf, jint jlen) {
     jclass jdc;
     jobject jdata;
 
-    jdc =  env->FindClass("Lpro/kornev/kcar/prototype/Data;");
+    jdc =  env->FindClass("pro/kornev/kcar/protocol/Data");
     jdata = env->AllocObject( jdc );
     jbyte *jb = (jbyte *)malloc(jlen);
 

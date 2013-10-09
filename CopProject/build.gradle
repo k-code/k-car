@@ -1,0 +1,12 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+task makeJniLibs(type:Exec) {
+    workingDir './'
+
+    //on linux
+    commandLine 'make'
+}
+
+tasks.withType(Compile) {
+    compileTask -> compileTask.dependsOn(makeJniLibs)
+}

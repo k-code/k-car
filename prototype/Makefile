@@ -20,3 +20,8 @@ install: all
 
 clean:
 	rm -rf bin/*
+
+test:
+	gcc cpp_src/test.c cpp_src/protocol.c -o test
+	./test
+	rm test

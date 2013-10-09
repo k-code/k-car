@@ -17,8 +17,8 @@ typedef struct {
 
 const PROTOCOL_data PROTOCOL_empty_data = {0,0,0,0,0};
 
-PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen);
-t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf);
+extern PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen);
+extern t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf);
 
 #endif //__PROTOCOL_H
 

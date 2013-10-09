@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Cop</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="TestProtocolButton">New Button</string>
+    <string name="TestProtocolOutput">Large Text</string>
+
+</resources>

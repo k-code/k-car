@@ -85,8 +85,7 @@ PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen) {
     // Search frame head
     t_int startFramePos = 0;
     t_int framePos = 0;
-    int i;
-    for (i=0; i<bufLen; i++) {
+    for (int i=0; i<bufLen; i++) {
         t_int curFreameHead = byteArrayToInt(&buf[i]);
         if (FRAME_HEAD == curFreameHead) {
             startFramePos = i;
