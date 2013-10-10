@@ -18,8 +18,10 @@ java_class_files: Cop/src/main/java/pro/kornev/kcar/protocol/Protocol.java Cop/s
 	javac -d bin -cp bin Cop/src/main/java/pro/kornev/kcar/protocol/Protocol.java
 
 clean:
-	rm -rf bin/
-	rm -f  Cop/lib/protocol.jar
+	rm -rf bin
 	rm -rf obj
 	rm -rf lib
 	rm -rf libs
+
+mrproper: clean
+	rm -f Cop/lib/protocol.jar
