@@ -44,5 +44,6 @@ public class UsbDevicesActivity extends Activity {
 
         ListView devicesList = (ListView)findViewById(R.id.uaDevicesList);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.abc_action_menu_item_layout, (String[])usbList.keySet().toArray());
+        devicesList.setAdapter(adapter);
     }
 }
