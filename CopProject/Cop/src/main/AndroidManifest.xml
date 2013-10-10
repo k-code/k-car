@@ -34,6 +34,10 @@
             android:name="pro.kornev.kcar.cop.TestProtocolActivity"
             android:label="@string/title_activity_test_protocol" >
         </activity>
+        <activity
+            android:name="pro.kornev.kcar.cop.UsbDevicesActivity"
+            android:label="@string/title_activity_usb_devices" >
+        </activity>
     </application>
 
 </manifest>

@@ -7,6 +7,4 @@ target/
 *~
 *.class
 Debug/
-.idea/
-*.iml
 RemoteSystemsTempFiles
