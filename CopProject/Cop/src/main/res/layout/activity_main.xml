@@ -28,5 +28,11 @@
             android:text="Select USB device"
             android:id="@+id/maSelectUsbButton"
             android:onClick="chooseUsbDeviceClick" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Run"
+            android:id="@+id/maRun" />
     </LinearLayout>
 </RelativeLayout>

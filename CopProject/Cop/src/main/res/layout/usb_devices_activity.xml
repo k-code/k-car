@@ -22,12 +22,13 @@
             android:id="@+id/uaRefreshButton" />
 
         <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:id="@+id/uaDevicesList"
             android:layout_gravity="left|center_vertical"
             android:clickable="true"
-            android:choiceMode="none" />
+            tools:listitem="@layout/simple_list_item_1"
+            android:choiceMode="singleChoice" />
 
     </LinearLayout>
 </RelativeLayout>

@@ -56,6 +56,8 @@ t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf) {
     bufLen = putIntToBuf(buf, bufLen, FRAME_HEAD);
     // Alloc memory fro frame length
     bufLen = putIntToBuf(buf, bufLen, 0); // frames length will be set in the end of build whole frame
+    // Add protocol version
+    bufLen = putByteToBuf(buf, bufLen, PROTOCOL_VERSION);
     // Add data ID
     bufLen = putIntToBuf(buf, bufLen, data.id);
     // Add command
@@ -111,6 +113,13 @@ PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen) {
     if (crc != frameCRC) {
         return data;
     }
+    // Get and check version
+    t_byte version = buf[framePos];
+    framePos += BYTE_SIZE;
+    if (PROTOCOL_VERSION != version) {
+        return data;
+    }
+
 
     // Fill data
     data.id = byteArrayToInt(&buf[framePos]);

@@ -1,4 +1,4 @@
-package pro.kornev.kcar.cop;
+package pro.kornev.kcar.cop.activities;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 

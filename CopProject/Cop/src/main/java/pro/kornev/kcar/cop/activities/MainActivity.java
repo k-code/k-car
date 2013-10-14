@@ -1,16 +1,12 @@
-package pro.kornev.kcar.cop;
+package pro.kornev.kcar.cop.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import pro.kornev.kcar.protocol.Data;
-import pro.kornev.kcar.protocol.Protocol;
+import pro.kornev.kcar.cop.R;
 
 public class MainActivity extends Activity {
 
@@ -28,6 +24,10 @@ public class MainActivity extends Activity {
     public void chooseUsbDeviceClick(View v) {
         Intent intent = new Intent(this, UsbDevicesActivity.class);
         startActivity(intent);
+    }
+
+    public void runClick(View v) {
+
     }
 
     @Override
