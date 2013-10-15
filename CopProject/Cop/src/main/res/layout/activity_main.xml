@@ -34,5 +34,13 @@
             android:layout_height="wrap_content"
             android:text="Run"
             android:id="@+id/maRun" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Show logs"
+            android:id="@+id/maShowLogsButton"
+            android:onClick="onShowLogsClick" />
+
     </LinearLayout>
 </RelativeLayout>

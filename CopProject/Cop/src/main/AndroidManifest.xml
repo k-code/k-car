@@ -38,6 +38,10 @@
             android:name="pro.kornev.kcar.cop.activities.UsbDevicesActivity"
             android:label="@string/title_activity_usb_devices" >
         </activity>
+        <activity
+            android:name="pro.kornev.kcar.cop.activities.LogsActivity"
+            android:label="@string/title_activity_run" >
+        </activity>
     </application>
 
 </manifest>

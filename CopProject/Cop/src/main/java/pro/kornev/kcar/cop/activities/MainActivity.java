@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.View;
 
 import pro.kornev.kcar.cop.R;
+import pro.kornev.kcar.cop.providers.LogData;
+import pro.kornev.kcar.cop.providers.LogsDB;
 
 public class MainActivity extends Activity {
 
@@ -14,6 +16,21 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new Thread(new Runnable() {
+
+            private LogsDB db = new LogsDB(getApplicationContext());
+
+            @Override
+            public void run() {
+                LogData ld = new LogData();
+                db.putLog("qwe");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+
+                }
+            }
+        }).start();
     }
 
     public void testProtocolClick(View v) {
@@ -26,13 +43,13 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
-    public void runClick(View v) {
-
+    public void onShowLogsClick(View v) {
+        Intent intent = new Intent(this, LogsActivity.class);
+        startActivity(intent);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
