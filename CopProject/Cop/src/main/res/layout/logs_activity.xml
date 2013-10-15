@@ -16,7 +16,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_above="@+id/raClearButton" />
+        android:layout_above="@+id/raClearButton"
+        android:maxLines="100"
+        android:scrollbars="vertical|horizontal"
+        android:autoText="false" />
 
     <Button
         android:layout_width="fill_parent"

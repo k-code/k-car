@@ -27,11 +27,8 @@ public class LogsDB extends SQLiteOpenHelper {
     final String SELECTIONS = "_id > ?";
     final String LIMIT = "10";
 
-    Context mContext;
-
     public LogsDB(Context context) {
         super(context, DB_NAME, null, DB_VER);
-        mContext = context;
     }
 
     @Override
@@ -78,5 +75,14 @@ public class LogsDB extends SQLiteOpenHelper {
         long id = db.insert(TABLE_NAME, null, values);
         db.close();
         return id;
+    }
+
+    public void clear() {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db == null || db.isReadOnly()) {
+            throw new IllegalStateException("Database " + DB_NAME + "is can't be write");
+        }
+        db.execSQL("DELETE FROM " + TABLE_NAME);
+        db.execSQL("DELETE FROM sqlite_sequence WHERE name = '" + TABLE_NAME +"'");
     }
 }
