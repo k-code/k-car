@@ -7,8 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.SparseArray;
 
-import java.util.HashMap;
-import java.util.Map;
+import pro.kornev.kcar.cop.State;
 
 /**
  * @author vkornev
@@ -44,13 +43,19 @@ public class LogsDB extends SQLiteOpenHelper {
 
     public SparseArray<LogData> getLogs(int from) {
         SparseArray<LogData> result = new SparseArray<LogData>();
+
+        if (!State.isLogsEnabled()) return result;
+
         String[] selArgs = {String.valueOf(from)};
         SQLiteDatabase db = getReadableDatabase();
         if (db == null) {
             throw new IllegalStateException("Database " + DB_NAME + " is not exists");
         }
         Cursor cursor = db.query(TABLE_NAME, COLUMNS, SELECTIONS, selArgs, null, null, COLUMNS[0], LIMIT);
-        cursor.moveToFirst();
+
+        if ( !cursor.moveToFirst() ) {
+            return result;
+        }
 
         int i =0;
         do {
@@ -66,23 +71,27 @@ public class LogsDB extends SQLiteOpenHelper {
     }
 
     public long putLog(String logData) {
+        if (!State.isLogsEnabled()) return 0;
+
         SQLiteDatabase db = getWritableDatabase();
         if (db == null || db.isReadOnly()) {
             throw new IllegalStateException("Database " + DB_NAME + "is can't be write");
         }
-        ContentValues values = new ContentValues(2);
+        ContentValues values = new ContentValues(1);
         values.put(COLUMNS[1], logData);
         long id = db.insert(TABLE_NAME, null, values);
         db.close();
+
         return id;
     }
 
-    public void clear() {
+    public void clearLogs() {
         SQLiteDatabase db = getWritableDatabase();
         if (db == null || db.isReadOnly()) {
             throw new IllegalStateException("Database " + DB_NAME + "is can't be write");
         }
         db.execSQL("DELETE FROM " + TABLE_NAME);
         db.execSQL("DELETE FROM sqlite_sequence WHERE name = '" + TABLE_NAME +"'");
+        db.close();
     }
 }
