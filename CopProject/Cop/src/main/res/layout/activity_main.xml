@@ -33,7 +33,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Run"
-            android:id="@+id/maRun" />
+            android:id="@+id/maRunButton"
+            android:onClick="onServiceRunClick" />
 
         <Button
             android:layout_width="fill_parent"

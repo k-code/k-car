@@ -42,6 +42,7 @@
             android:name="pro.kornev.kcar.cop.activities.LogsActivity"
             android:label="@string/title_activity_run" >
         </activity>
+        <service android:name=".services.MainService" />
     </application>
 
 </manifest>

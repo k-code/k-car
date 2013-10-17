@@ -9,7 +9,7 @@ import android.hardware.usb.UsbDevice;
  */
 public class State {
     private static UsbDevice usbDevice;
-    private static boolean isUsbDeviceConnected;
+    private static boolean isServiceRunning;
     private static boolean isLogsEnabled;
 
     public static UsbDevice getUsbDevice() {
@@ -20,12 +20,12 @@ public class State {
         State.usbDevice = usbDevice;
     }
 
-    public static boolean isUsbDeviceConnected() {
-        return isUsbDeviceConnected;
+    public static boolean isServiceRunning() {
+        return isServiceRunning;
     }
 
-    public static void setUsbDeviceConnected(boolean usbDeviceConnected) {
-        isUsbDeviceConnected = usbDeviceConnected;
+    public static void setServiceRunning(boolean serviceRunning) {
+        isServiceRunning = serviceRunning;
     }
 
     public static boolean isLogsEnabled() {

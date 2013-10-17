@@ -19,7 +19,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Refresh"
-            android:id="@+id/uaRefreshButton" />
+            android:id="@+id/uaRefreshButton"
+            android:onClick="refreshButtonClick" />
 
         <ListView
             android:layout_width="fill_parent"
@@ -27,7 +28,7 @@
             android:id="@+id/uaDevicesList"
             android:layout_gravity="left|center_vertical"
             android:clickable="true"
-            tools:listitem="@layout/simple_list_item_1"
+            tools:listitem="@layout/usb_devices_list_item"
             android:choiceMode="singleChoice" />
 
     </LinearLayout>
