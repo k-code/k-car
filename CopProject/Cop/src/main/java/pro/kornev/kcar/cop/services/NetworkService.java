@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.protocol.Data;
 
 /**
  * @author vkornev
@@ -36,7 +41,7 @@ public class NetworkService extends Service {
         super.onStartCommand(intent, flags, startId);
         Toast.makeText(this, "Network service starting", Toast.LENGTH_SHORT).show();
         try {
-            Socket s = new Socket("kornev.pro", 7850);
+            Socket s = new Socket("10.0.0.115", 6780);
             Writer l = new Writer(s);
             new Thread(l).start();
             Reader r = new Reader(s);
@@ -55,11 +60,13 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
+            Gson gson = new Gson();
             while (State.isServiceRunning()) {
                 try {
                     BufferedReader input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    String answer = input.readLine();
-                    db.putLog("NR: " + answer);
+                    String s = input.readLine();
+                    Data data = gson.fromJson(s, Data.class);
+                    db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -80,12 +87,21 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
+            Gson gson = new Gson();
             while (State.isServiceRunning()) {
                 try {
-                    BufferedReader input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    String answer = input.readLine();
-                    db.putLog("NR: " + answer);
+                    Data data = new Data();
+                    data.id = 1;
+                    data.cmd = 2;
+                    data.type = 0;
+                    data.bData = 3;
+                    db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
+                    BufferedWriter output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+                    output.write(gson.toJson(data));
+                    Thread.sleep(1000);
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
