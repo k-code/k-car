@@ -9,7 +9,8 @@ import android.widget.Button;
 
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
-import pro.kornev.kcar.cop.services.MainService;
+import pro.kornev.kcar.cop.services.NetworkService;
+import pro.kornev.kcar.cop.services.UsbService;
 
 public class MainActivity extends Activity {
     private Button runButton;
@@ -43,7 +44,9 @@ public class MainActivity extends Activity {
         }
         else {
             State.setServiceRunning(true);
-            Intent i = new Intent(this, MainService.class);
+            /*Intent i = new Intent(this, UsbService.class);
+            startService(i);*/
+            Intent i = new Intent(this, NetworkService.class);
             startService(i);
         }
         setRunButtonText();
@@ -57,10 +60,10 @@ public class MainActivity extends Activity {
 
     private void setRunButtonText() {
         if (State.isServiceRunning()) {
-            runButton.setText("Run");
+            runButton.setText("Stop services");
         }
         else {
-            runButton.setText("Stop");
+            runButton.setText("Run services");
         }
     }
 }

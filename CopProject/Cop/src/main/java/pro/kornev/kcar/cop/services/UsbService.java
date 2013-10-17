@@ -9,17 +9,18 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.IBinder;
-import android.os.Looper;
 import android.widget.Toast;
 
 import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 
 /**
  * @author vkornev
  * @since 14.10.13
  */
-public class MainService extends Service {
+public class UsbService extends Service {
     private LogsDB db;
 
     @Override
@@ -42,12 +43,12 @@ public class MainService extends Service {
     }
 
     class Process implements Runnable {
-        MainService mainService;
+        UsbService mainService;
         private byte[] bytes = new byte[64];
         private int TIMEOUT = 10;
         private boolean forceClaim = true;
 
-        Process(MainService mainService) {
+        Process(UsbService mainService) {
             this.mainService = mainService;
         }
 
@@ -64,9 +65,9 @@ public class MainService extends Service {
                         break;
                     }
                     connection.claimInterface(intf, forceClaim);
-                    connection.bulkTransfer(endpoint, bytes, bytes.length, TIMEOUT);
-                    db.putLog("Service is work");
-                    db.putLog(new String(bytes));
+                    int len = connection.bulkTransfer(endpoint, bytes, bytes.length, TIMEOUT);
+                    Data data = Protocol.fromByteArray(bytes, len);
+                    db.putLog(String.format("Data id: %d; cmd: %d; type: %d; bData: %d; iData: %d", data.id, data.cmd, data.type, data.bData, data.iData));
                 }
                 try {
                     Thread.sleep(200);
