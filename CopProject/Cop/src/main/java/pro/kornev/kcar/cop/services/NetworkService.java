@@ -40,15 +40,20 @@ public class NetworkService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         Toast.makeText(this, "Network service starting", Toast.LENGTH_SHORT).show();
-        try {
-            Socket s = new Socket("10.0.0.115", 6780);
-            Writer l = new Writer(s);
-            new Thread(l).start();
-            Reader r = new Reader(s);
-            new Thread(r).start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Socket s = new Socket("10.69.30.50", 6780);
+                    Writer l = new Writer(s);
+                    new Thread(l).start();
+                    Reader r = new Reader(s);
+                    new Thread(r).start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         return START_STICKY;
     }
 
@@ -97,11 +102,12 @@ public class NetworkService extends Service {
                     data.bData = 3;
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
                     BufferedWriter output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-                    output.write(gson.toJson(data));
+                    String s = gson.toJson(data);
+                    output.write(s);
+                    output.newLine();
+                    output.flush();
                     Thread.sleep(1000);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
