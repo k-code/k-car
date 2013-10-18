@@ -11,6 +11,7 @@ public class State {
     private static UsbDevice usbDevice;
     private static boolean isServiceRunning;
     private static boolean isLogsEnabled;
+    private static String proxyServer;
 
     public static UsbDevice getUsbDevice() {
         return usbDevice;
@@ -34,5 +35,13 @@ public class State {
 
     public static void setLogsEnabled(boolean logsEnabled) {
         isLogsEnabled = logsEnabled;
+    }
+
+    public static String getProxyServer() {
+        return proxyServer;
+    }
+
+    public static void setProxyServer(String proxyServer) {
+        State.proxyServer = proxyServer;
     }
 }

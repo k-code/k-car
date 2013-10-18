@@ -44,7 +44,7 @@ public class NetworkService extends Service {
             @Override
             public void run() {
                 try {
-                    Socket s = new Socket("10.69.30.50", 6780);
+                    Socket s = new Socket(State.getProxyServer(), 6780);
                     Writer l = new Writer(s);
                     new Thread(l).start();
                     Reader r = new Reader(s);

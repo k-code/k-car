@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
@@ -43,6 +45,12 @@ public class MainActivity extends Activity {
             State.setServiceRunning(false);
         }
         else {
+            EditText proxy = (EditText)findViewById(R.id.maProxyIp);
+            if (proxy.getText() == null || proxy.getText().toString().length() == 0) {
+                // TODO : show error message
+                return;
+            }
+            State.setProxyServer(proxy.getText().toString());
             State.setServiceRunning(true);
             /*Intent i = new Intent(this, UsbService.class);
             startService(i);*/
@@ -50,6 +58,11 @@ public class MainActivity extends Activity {
             startService(i);
         }
         setRunButtonText();
+    }
+
+    public void onEnableLogsClick(View v) {
+        CheckBox cb = (CheckBox)v;
+        State.setLogsEnabled(cb.isChecked());
     }
 
     @Override

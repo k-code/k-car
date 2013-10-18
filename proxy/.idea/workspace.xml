@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/res/layout/activity_main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="proxy.iws" />
@@ -12,7 +10,7 @@
     <file path="/CopService.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382086274974" ignored="false" />
     <file path="/ControlService.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382018247461" ignored="false" />
     <file path="/Data.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382086287886" ignored="false" />
-    <file path="/Dummy.txt" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382086324494" ignored="false" />
+    <file path="/Dummy.txt" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382091722693" ignored="false" />
     <file path="/NetworkService.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382091616183" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -462,7 +460,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed proxy project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added proxy and logging settings" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -477,6 +475,7 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Added proxy project" />
     <MESSAGE value="Fixed proxy project" />
+    <MESSAGE value="Added proxy and logging settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
