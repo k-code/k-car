@@ -5,7 +5,7 @@ package pro.kornev.kcar.proxy.model;
  * Date: 17.10.13
  * Time: 21:00
  */
-public class Data {
+public final class Data {
     public int id;
     public byte cmd;
     public byte type;

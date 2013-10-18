@@ -106,7 +106,7 @@ public class NetworkService extends Service {
                     output.write(s);
                     output.newLine();
                     output.flush();
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

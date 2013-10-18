@@ -2,20 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/CopService.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/CopService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/ControlService.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/CopService.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/NetworkService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/NetworkService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/.idea/gradle.xml" afterPath="$PROJECT_DIR$/../CopProject/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/proxy.iml" afterPath="$PROJECT_DIR$/proxy.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/make.bat" afterPath="$PROJECT_DIR$/../CopProject/make.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="proxy.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Proxy.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382019687737" ignored="false" />
-    <file path="/CopService.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382067151634" ignored="false" />
+    <file path="/Proxy.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382086279884" ignored="false" />
+    <file path="/CopService.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382086274974" ignored="false" />
     <file path="/ControlService.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382018247461" ignored="false" />
-    <file path="/Data.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382018494711" ignored="false" />
-    <file path="/Dummy.txt" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382064589431" ignored="false" />
+    <file path="/Data.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382086287886" ignored="false" />
+    <file path="/Dummy.txt" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382081911600" ignored="false" />
+    <file path="/NetworkService.java" changelist="8d6a04cb-921b-43b8-bd9a-e50a45d63b98" time="1382084072284" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +34,7 @@
   </component>
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -65,7 +69,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -87,34 +90,29 @@
       <file leaf-file-name="Proxy.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="10" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="12" column="13" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#341#347#0" expanded="true" />
+                <element signature="e#418#424#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CopService.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/CopService.java">
+      <file leaf-file-name="NetworkService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="37" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.67164177">
+            <state line="17" column="13" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Data.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Data.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="21" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControlService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/ControlService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="16" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0">
+            <state line="7" column="12" selection-start="104" selection-end="104" vertical-scroll-proportion="0.17412935">
               <folding />
             </state>
           </provider>
@@ -138,11 +136,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/ControlService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/ControlService.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/CopService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java" />
       </list>
     </option>
   </component>
@@ -186,7 +185,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -205,8 +203,65 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proxy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proxy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proxy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proxy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proxy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="proxy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,9 +276,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.Proxy">
     <configuration default="false" name="Proxy" type="Application" factoryName="Application" temporary="true">
@@ -444,35 +499,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="105" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="16" column="10" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#341#347#0" expanded="true" />
+            <element signature="e#418#424#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/CopService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="81" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="21" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/ControlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="16" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/ControlService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="16" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0">
+        <state line="37" column="37" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -493,14 +531,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="10" selection-start="385" selection-end="385" vertical-scroll-proportion="0.0">
+        <state line="7" column="105" selection-start="106" selection-end="106" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#341#347#0" expanded="true" />
+            <element signature="e#418#424#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="81" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/CopService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="37" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.67164177">
+        <state line="12" column="21" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="89" column="0" selection-start="3195" selection-end="3195" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/default-java/src.zip!/java/util/Queue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="143" column="17" selection-start="5059" selection-end="5059" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/NetworkService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="13" selection-start="324" selection-end="324" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/Proxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#341#347#0" expanded="true" />
+            <element signature="e#418#424#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcar/proxy/model/Data.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="12" selection-start="104" selection-end="104" vertical-scroll-proportion="0.17412935">
           <folding />
         </state>
       </provider>
