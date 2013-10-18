@@ -65,7 +65,7 @@ public final class NetworkService implements Runnable {
                 while (!client.isClosed()) {
                     if (errors > MAX_ERRORS) {
                         client.close();
-                        return;
+                        break;
                     }
                     String s = input.readLine();
                     if (s == null) {
@@ -82,6 +82,7 @@ public final class NetworkService implements Runnable {
 
                     inputQueue.add(data);
                 }
+                log.debug("Read socket closed");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -109,6 +110,7 @@ public final class NetworkService implements Runnable {
                     output.newLine();
                     output.flush();
                 }
+                log.debug("Write socket closed");
             } catch (IOException e) {
                 e.printStackTrace();
             }

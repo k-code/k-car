@@ -43,5 +43,33 @@
             android:id="@+id/maShowLogsButton"
             android:onClick="onShowLogsClick" />
 
+        <CheckBox
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:text="Enable system logs"
+            android:id="@+id/maEnableLogsCheckBox"
+            android:checked="false"
+            android:onClick="onEnableLogsClick" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="45dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="fill_parent"
+                android:text="Proxy IP:"
+                android:id="@+id/textView"
+                android:gravity="center_vertical"
+                android:textSize="7pt" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:ems="10"
+                android:text="kornev.pro"
+                android:id="@+id/maProxyIp" />
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>
