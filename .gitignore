@@ -8,3 +8,4 @@ target/
 *.class
 Debug/
 RemoteSystemsTempFiles
+workspace.xml
