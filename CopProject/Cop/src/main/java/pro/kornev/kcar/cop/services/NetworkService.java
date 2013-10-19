@@ -3,6 +3,7 @@ package pro.kornev.kcar.cop.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Queue;
 
 import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.providers.LogsDB;
@@ -44,12 +46,14 @@ public class NetworkService extends Service {
             @Override
             public void run() {
                 try {
+                    db.putLog("Connect to: " + State.getProxyServer() + ":" + 6780);
+                    Log.d("DEBUG", "Connect to: " + State.getProxyServer() + ":" + 6780);
                     Socket s = new Socket(State.getProxyServer(), 6780);
                     Writer l = new Writer(s);
                     new Thread(l).start();
                     Reader r = new Reader(s);
                     new Thread(r).start();
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -59,8 +63,11 @@ public class NetworkService extends Service {
 
     class Reader implements Runnable {
         Socket client;
+        Queue<Data> queue;
+
         Reader(Socket s) {
             client = s;
+            queue = State.getFromControlQueue();
         }
 
         @Override
@@ -72,6 +79,7 @@ public class NetworkService extends Service {
                     String s = input.readLine();
                     Data data = gson.fromJson(s, Data.class);
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
+                    queue.add(data);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -86,8 +94,10 @@ public class NetworkService extends Service {
 
     class Writer implements Runnable {
         Socket client;
+        Queue<Data> queue;
         Writer(Socket s) {
-                client = s;
+            client = s;
+            queue = State.getToControlQueue();
         }
 
         @Override
@@ -95,18 +105,14 @@ public class NetworkService extends Service {
             Gson gson = new Gson();
             while (State.isServiceRunning()) {
                 try {
-                    Data data = new Data();
-                    data.id = 1;
-                    data.cmd = 2;
-                    data.type = 0;
-                    data.bData = 3;
+                    if (queue.isEmpty()) continue;
+                    Data data = queue.poll();
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
                     BufferedWriter output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
                     String s = gson.toJson(data);
                     output.write(s);
                     output.newLine();
                     output.flush();
-                    Thread.sleep(2000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
