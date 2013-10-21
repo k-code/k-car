@@ -47,6 +47,7 @@
         </activity>
         <service android:name=".services.UsbService" />
         <service android:name=".services.NetworkService" />
+        <service android:name=".services.DistributionService" />
     </application>
 
 </manifest>
