@@ -44,22 +44,19 @@ public class LogsActivity extends Activity {
     protected void onStart() {
         super.onStart();
         Log.d("DEBUG", "la start");
-        clear();
+        clear(false);
         runDbReader();
-        State.setLogsEnabled(true);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         Log.d("DEBUG", "la stop");
-        State.setLogsEnabled(false);
-        clear();
         executor.shutdown();
     }
 
     public void onClearButtonClick(View v) {
-        clear();
+        clear(true);
     }
 
     @Override
@@ -115,9 +112,11 @@ public class LogsActivity extends Activity {
         executor.scheduleAtFixedRate(logsViewUpdater, 0, 100, TimeUnit.MILLISECONDS);
     }
 
-    private void clear() {
+    private void clear(boolean clearDb) {
         text.setText("");
-        db.clearLogs();
+        if (clearDb) {
+            db.clearLogs();
+        }
         logsViewUpdater.setLastRecordId(0);
     }
 }

@@ -6,6 +6,9 @@
 
     <uses-feature android:name="android.hardware.usb.host" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-sdk
         android:minSdkVersion="12"
         android:targetSdkVersion="18" />
@@ -42,6 +45,9 @@
             android:name="pro.kornev.kcar.cop.activities.LogsActivity"
             android:label="@string/title_activity_run" >
         </activity>
+        <service android:name=".services.UsbService" />
+        <service android:name=".services.NetworkService" />
+        <service android:name=".services.DistributionService" />
     </application>
 
 </manifest>

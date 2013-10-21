@@ -2,6 +2,11 @@ package pro.kornev.kcar.cop;
 
 import android.hardware.usb.UsbDevice;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import pro.kornev.kcar.protocol.Data;
+
 /**
  *
  * @author vkornev
@@ -9,8 +14,13 @@ import android.hardware.usb.UsbDevice;
  */
 public class State {
     private static UsbDevice usbDevice;
-    private static boolean isUsbDeviceConnected;
+    private static boolean isServiceRunning;
     private static boolean isLogsEnabled;
+    private static String proxyServer;
+    private static Queue<Data> toControlQueue = new LinkedBlockingQueue<Data>();
+    private static Queue<Data> fromControlQueue = new LinkedBlockingQueue<Data>();
+    private static Queue<Data> toUsbQueue = new LinkedBlockingQueue<Data>();
+    private static Queue<Data> fromUsbQueue = new LinkedBlockingQueue<Data>();
 
     public static UsbDevice getUsbDevice() {
         return usbDevice;
@@ -20,12 +30,12 @@ public class State {
         State.usbDevice = usbDevice;
     }
 
-    public static boolean isUsbDeviceConnected() {
-        return isUsbDeviceConnected;
+    public static boolean isServiceRunning() {
+        return isServiceRunning;
     }
 
-    public static void setUsbDeviceConnected(boolean usbDeviceConnected) {
-        isUsbDeviceConnected = usbDeviceConnected;
+    public static void setServiceRunning(boolean serviceRunning) {
+        isServiceRunning = serviceRunning;
     }
 
     public static boolean isLogsEnabled() {
@@ -34,5 +44,29 @@ public class State {
 
     public static void setLogsEnabled(boolean logsEnabled) {
         isLogsEnabled = logsEnabled;
+    }
+
+    public static String getProxyServer() {
+        return proxyServer;
+    }
+
+    public static void setProxyServer(String proxyServer) {
+        State.proxyServer = proxyServer;
+    }
+
+    public static Queue<Data> getToControlQueue() {
+        return toControlQueue;
+    }
+
+    public static Queue<Data> getFromControlQueue() {
+        return fromControlQueue;
+    }
+
+    public static Queue<Data> getToUsbQueue() {
+        return toUsbQueue;
+    }
+
+    public static Queue<Data> getFromUsbQueue() {
+        return fromUsbQueue;
     }
 }

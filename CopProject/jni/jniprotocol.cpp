@@ -2,7 +2,7 @@
 #include "protocol.h"
 #include <stdlib.h>
 
-JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(JNIEnv *env, jclass cl, jobject jdata) {
+JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(JNIEnv *env, jclass jc, jobject jdata, jbyteArray jbuf) {
     // Crate Data class
     jclass clazz = env->FindClass("pro/kornev/kcar/protocol/Data");
     jfieldID fid = env->GetFieldID(clazz, "id", "I");
@@ -36,12 +36,12 @@ JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(
         jb[i] = b[i];
     }
 
-    jbyteArray buf = env->NewByteArray(len);  // allocate
-    env->SetByteArrayRegion(buf, 0, len, jb);  // copy
+    //jbyteArray buf = env->NewByteArray(len);  // allocate
+    env->SetByteArrayRegion(jbuf, 0, len, jb);  // copy
 
     free(jb);
 
-    return buf;
+    return len;
 }
 
 JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_protocol_Protocol_fromByteArray(JNIEnv *env, jclass jc, jbyteArray jbuf, jint jlen) {
@@ -72,4 +72,8 @@ JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_protocol_Protocol_fromByteArray(J
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_getVersion(JNIEnv *env, jclass jc) {
     return (jbyte)PROTOCOL_VERSION;
+}
+
+JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_getMaxLength(JNIEnv *env, jclass jc) {
+    return (jint)PROTOCOL_MAX_FRAME_SIZE;
 }

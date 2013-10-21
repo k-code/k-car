@@ -44,8 +44,6 @@ public class LogsDB extends SQLiteOpenHelper {
     public SparseArray<LogData> getLogs(int from) {
         SparseArray<LogData> result = new SparseArray<LogData>();
 
-        if (!State.isLogsEnabled()) return result;
-
         String[] selArgs = {String.valueOf(from)};
         SQLiteDatabase db = getReadableDatabase();
         if (db == null) {

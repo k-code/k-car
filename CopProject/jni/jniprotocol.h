@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol
  * Method:    toByteArray
- * Signature: (Lpro/kornev/kcar/protocol/Data;)[B
+ * Signature: (Lpro/kornev/kcar/protocol/Data;[B)I
  */
-JNIEXPORT jbyteArray JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray
-  (JNIEnv *, jclass, jobject);
+JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray
+  (JNIEnv *, jclass, jobject, jbyteArray);
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol
@@ -29,6 +29,14 @@ JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_protocol_Protocol_fromByteArray
  * Signature: ()B
  */
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_getVersion
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol
+ * Method:    getMaxLength
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_getMaxLength
   (JNIEnv *, jclass);
 
 #ifdef __cplusplus
