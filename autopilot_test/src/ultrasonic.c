@@ -13,6 +13,7 @@
 #include "stm32f4xx_exti.h"
 #include "stm32f4xx_syscfg.h"
 #include "stm32f4xx_tim.h"
+#include "misc.h"
 
 #define US_GPIO 		GPIOD
 #define US_RCC 			RCC_AHB1Periph_GPIOD

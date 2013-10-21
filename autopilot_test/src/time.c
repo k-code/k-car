@@ -29,7 +29,6 @@ void TIME_delayNano(uint32_t nano) {
 	}
 }
 
-void SysTick_Handler(void)
-{
+void SysTick_Handler(void) {
 	TIME_nano++;
 }

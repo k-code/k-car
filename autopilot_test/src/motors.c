@@ -56,8 +56,8 @@ static void initTimer() {
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
 
     /* Compute the prescaler value */
-    uint32_t PrescalerValue = RCC_Clocks.PCLK1_Frequency/1000 - 1;
-    //uint32_t PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 21000000) - 1;
+    //uint32_t PrescalerValue = RCC_Clocks.PCLK1_Frequency/1000 - 1;
+    uint32_t PrescalerValue = (uint16_t) ((SystemCoreClock / 2) / 21000000) - 1;
 
     TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
     /* Time base configuration */
@@ -72,9 +72,10 @@ static void initTimer() {
 static void initPWM() {
     TIM_OCInitTypeDef TIM_OCInitStructure;
 
+    TIM_OCStructInit(&TIM_OCInitStructure);
     TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
     TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-    TIM_OCInitStructure.TIM_Pulse = 0;
+    TIM_OCInitStructure.TIM_Pulse = 50;
     TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
 
     /* PWM1 Mode configuration: Channel1 (GPIOB Pin 4)*/
