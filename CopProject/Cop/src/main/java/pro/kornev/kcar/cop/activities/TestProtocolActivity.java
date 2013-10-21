@@ -29,22 +29,23 @@ public class TestProtocolActivity extends Activity {
         data.cmd = 2;
         data.type = 0;
         data.bData = 3;
-        byte[] buf = Protocol.toByteArray(data);
+        byte[] buf = new byte[Protocol.getMaxLength()];
+        int len = Protocol.toByteArray(data, buf);
 
         text.append("Convert data to byte buffer:\n");
         text.append(String.format("Data:\n\tid: %d\n\tcmd: %d\n\ttype: %d\n\tbData: %d\n\tiData: %d\n",
                 data.id, data.cmd, data.type, data.bData, data.iData));
-        text.append("Byte buffer:\n");
-        for (byte b: buf) {
-            text.append(String.format("%02x ", b));
+        text.append("Byte buffer (len: "+len+"):\n");
+        for (int i=0; i<len; i++) {
+            text.append(String.format("%02x ", buf[i]));
         }
         text.append("\n");
 
         text.append("Convert byte buffer to data:\n");
         Data newData = Protocol.fromByteArray(buf, buf.length);
         text.append("Byte buffer:\n");
-        for (byte b: buf) {
-            text.append(String.format("%02x ", b));
+        for (int i=0; i<len; i++) {
+            text.append(String.format("%02x ", buf[i]));
         }
         text.append("\n");
         text.append(String.format("Data:\n\tid: %d\n\tcmd: %d\n\ttype: %d\n\tbData: %d\n\tiData: %d\n",

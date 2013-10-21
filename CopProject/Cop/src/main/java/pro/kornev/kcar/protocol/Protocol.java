@@ -14,7 +14,8 @@ public class Protocol {
         System.loadLibrary("protocol");
     }
 
-    native public static byte[] toByteArray(Data data);
+    native public static int toByteArray(Data data, byte[] buf);
     native public static Data fromByteArray(byte[] buf, int len);
     native public static byte getVersion();
+    native public static int getMaxLength();
 }
