@@ -23,25 +23,11 @@ android {
 }
 
 dependencies {
-	compile 'com.android.support:appcompat-v7:18.0.0'
-	compile 'com.android.support:support-v4:18.0.0'
+    compile 'com.android.support:appcompat-v7:18.0.0'
+    compile 'com.android.support:support-v4:18.0.0'
     compile 'com.google.code.gson:gson:2.2.4'
 }
 
 dependencies {
     compile fileTree(dir: 'lib', include: '*.jar')
 }
-
-// compile fileTree(dir: 'lib', include: '*.jar')
-
-/*
-task makeJniLibs(type:Exec) {
-    workingDir '../'
-
-    commandLine 'make'
-}
-
-tasks.withType(JavaCompile) {
-    compileTask -> compileTask.dependsOn(makeJniLibs)
-}
-*/
