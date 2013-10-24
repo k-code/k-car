@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>pro.kornev</groupId>
-    <artifactId>kcar.proxy</artifactId>
+    <artifactId>kcar.protocol</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
@@ -41,11 +41,6 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>pro.kornev.kcar.proxy.Proxy</mainClass>
-                        </manifest>
-                    </archive>
                 </configuration>
                 <executions>
                     <execution>
@@ -61,37 +56,11 @@
     </build>
 
     <dependencies>
-        <!-- K-Car -->
+        <!-- Tests -->
         <dependency>
-            <groupId>pro.kornev</groupId>
-            <artifactId>kcar.protocol</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <!-- Logs -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.4</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
         </dependency>
     </dependencies>
 

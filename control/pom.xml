@@ -57,6 +57,12 @@
 	</build>
 
 	<dependencies>
+        <!-- K-Car -->
+        <dependency>
+            <groupId>pro.kornev</groupId>
+            <artifactId>kcar.protocol</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 		<!-- For install this is dependencies, run install_maven_dependencies.sh -->
 		<dependency>
 			<groupId>com.centralnexus</groupId>

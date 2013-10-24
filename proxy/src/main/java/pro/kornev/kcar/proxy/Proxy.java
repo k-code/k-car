@@ -1,6 +1,6 @@
 package pro.kornev.kcar.proxy;
 
-import pro.kornev.kcar.proxy.model.Data;
+import pro.kornev.kcar.protocol.Data;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;

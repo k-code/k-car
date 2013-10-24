@@ -1,11 +1,13 @@
-package pro.kornev.kcar.proxy.model;
+package pro.kornev.kcar.protocol;
 
 /**
- * User: kvv
- * Date: 17.10.13
- * Time: 21:00
+ * User: vkornev
+ * Date: 02.10.13
+ * Time: 16:08
  */
-public final class Data {
+
+
+public class Data {
     public int id;
     public byte cmd;
     public byte type;

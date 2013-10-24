@@ -5,10 +5,10 @@ javac -d bin -cp bin Cop/src/main/java/pro/kornev/kcar/protocol/Protocol.java
 javah -jni -o jni/jniprotocol.h -classpath bin pro.kornev.kcar.protocol.Protocol
 
 rem Compile jni files
-start ndk-build
+start /wait "ndk-build & exit"
 
 rem Repack .so files to .jar
-del lib
+del /P/Q lib
 move libs lib
 mkdir ./Cop/lib
 7z a -r -y ./Cop/lib/protocol.zip ./lib
