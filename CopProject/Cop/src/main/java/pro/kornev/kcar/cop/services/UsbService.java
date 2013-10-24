@@ -101,6 +101,8 @@ public class UsbService extends Service {
             }
             UsbManager mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
             UsbDeviceConnection connection = mUsbManager.openDevice(device);
+
+
             if (connection == null) {
                 db.putLog("Failed to open connection to USB device");
                 return;
@@ -109,10 +111,23 @@ public class UsbService extends Service {
                 db.putLog("Failed claim exclusive access to a USB interface");
                 return;
             }
-            Reader reader = new Reader(inputEndpoint, connection);
-            Writer writer = new Writer(outputEndpoint, connection);
-            new Thread(reader).start();
-            new Thread(writer).start();
+            connection.controlTransfer(0x40, 0, 0, 0, null, 0, 0);//reset
+            connection.controlTransfer(0x40, 0, 1, 0, null, 0, 0);//clear Rx
+            connection.controlTransfer(0x40, 0, 2, 0, null, 0, 0);//clear Tx
+            connection.controlTransfer(0x40, 0x03, 0x4138, 0, null, 0, 0);//baudrate 9600
+
+            Thread reader = new Thread(new Reader(inputEndpoint, connection));
+            Thread writer = new Thread(new Writer(outputEndpoint, connection));
+
+            reader.start();
+            writer.start();
+
+            try {
+                reader.join();
+                writer.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             mainService.stopSelf();
         }
@@ -136,8 +151,11 @@ class Reader implements Runnable {
     public void run() {
         db.putLog("Start USB reader");
         while (State.isServiceRunning()) {
+            db.putLog("Read bulk data");
             int len = connection.bulkTransfer(endpoint, bytes, bytes.length, TIMEOUT);
-            if (len == 0) continue;
+            String s = connection.getSerial();
+            db.putLog("Read data len: " + len);
+            if (len <= 0) continue;
             Data data = Protocol.fromByteArray(bytes, len);
             db.putLog(String.format("USB read: Data id: %d; cmd: %d; type: %d; bData: %d; iData: %d", data.id, data.cmd, data.type, data.bData, data.iData));
             queue.add(data);
@@ -149,7 +167,7 @@ class Writer implements Runnable {
     UsbEndpoint endpoint;
     UsbDeviceConnection connection;
     Queue<Data> queue;
-    private byte[] bytes;
+    private byte[] bytes = new byte[Protocol.getMaxLength()];
     private int TIMEOUT = 10;
 
     Writer(UsbEndpoint endpoint, UsbDeviceConnection connection) {
@@ -163,6 +181,7 @@ class Writer implements Runnable {
         db.putLog("Start USB writer");
         while (State.isServiceRunning()) {
             if (queue.size() == 0) continue;
+            db.putLog("Write bulk data");
             Data data = queue.poll();
             int bLen = Protocol.toByteArray(data, bytes);
             connection.bulkTransfer(endpoint, bytes, bLen, TIMEOUT);

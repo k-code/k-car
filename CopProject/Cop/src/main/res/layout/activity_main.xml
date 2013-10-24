@@ -48,7 +48,7 @@
             android:layout_height="45dp"
             android:text="Enable system logs"
             android:id="@+id/maEnableLogsCheckBox"
-            android:checked="false"
+            android:checked="true"
             android:onClick="onEnableLogsClick" />
 
         <LinearLayout
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:ems="10"
-                android:text="kornev.pro"
+                android:text="10.0.0.143"
                 android:id="@+id/maProxyIp" />
         </LinearLayout>
 

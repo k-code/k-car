@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
         IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
         mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
         registerReceiver(mUsbReceiver, filter);
+        State.setLogsEnabled(true);
     }
 
     public void testProtocolClick(View v) {
