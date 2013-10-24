@@ -151,34 +151,34 @@ static uint16_t VCP_Ctrl (uint32_t Cmd, uint8_t* Buf, uint32_t Len)
   */
 static uint16_t VCP_DataTx (uint8_t* Buf, uint32_t Len)
 {
-	uint32_t i;
-	//loop through buffer
-	for( i = 0; i < Len; i++ )
-	{
-		APP_Rx_Buffer[APP_Rx_ptr_in] = (uint8_t) Buf[i];
-		//increase pointer value
-		APP_Rx_ptr_in++;
-		/* To avoid buffer overflow */
-		if(APP_Rx_ptr_in == APP_RX_DATA_SIZE)
-		{
-			APP_Rx_ptr_in = 0;
-		}
-	}
-        
-	return USBD_OK;
+    uint32_t i;
+    //loop through buffer
+    for( i = 0; i < Len; i++ )
+    {
+        APP_Rx_Buffer[APP_Rx_ptr_in] = (uint8_t) Buf[i];
+        //increase pointer value
+        APP_Rx_ptr_in++;
+        /* To avoid buffer overflow */
+        if(APP_Rx_ptr_in == APP_RX_DATA_SIZE)
+        {
+            APP_Rx_ptr_in = 0;
+        }
+    }
+
+    return USBD_OK;
 }
 
 /**
   * @brief  VCP_DataRx
   *         Data received over USB OUT endpoint are sent over CDC interface 
   *         through this function.
-  *           
+  *
   *         @note
   *         This function will block any OUT packet reception on USB endpoint 
   *         untill exiting this function. If you exit this function before transfer
   *         is complete on CDC interface (ie. using DMA controller) it will result 
   *         in receiving more data while previous ones are still not sent.
-  *                 
+  *
   * @param  Buf: Buffer of data to be received
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the opeartion: USBD_OK if all operations are OK else VCP_FAIL
@@ -192,7 +192,7 @@ static uint16_t VCP_DataRx (uint8_t* Buf, uint32_t Len)
     }
     Data_get = 1;
 
-	return USBD_OK;
+    return USBD_OK;
 }
 
 

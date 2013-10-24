@@ -7,7 +7,7 @@ java_jar: lib_so
 	zip -r Cop/lib/protocol.jar lib
 
 lib_so: java_headers jni/jniprotocol.cpp jni/protocol.h jni/protocol.c jni/Android.mk
-	$(NDK_PATH)/ndk-build
+	$(NDK_HOME)/ndk-build
 
 java_headers: java_class_files
 	javah -jni -o jni/jniprotocol.h -classpath bin pro.kornev.kcar.protocol.Protocol

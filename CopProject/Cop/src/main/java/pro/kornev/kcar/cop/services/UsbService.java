@@ -60,11 +60,22 @@ public class UsbService extends Service {
                 db.putLog("USB device is null. USB service exit");
                 return;
             }
+            UsbInterface usbInterface = null;
             if (device.getInterfaceCount() > 1) {
-                db.putLog("Unknown USB device. USB interfaces more than one");
+                for (int i=0; i< device.getInterfaceCount(); i++) {
+                    usbInterface = device.getInterface(i);
+                    if (usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA) {
+                        break;
+                    }
+                    else {
+                        usbInterface = null;
+                    }
+                }
+            }
+            if (usbInterface == null) {
+                db.putLog("Unknown USB device. CDC USB interfaces not found");
                 return;
             }
-            UsbInterface usbInterface = device.getInterface(0);
             if (usbInterface.getEndpointCount() != 2) {
                 db.putLog("Unknown USB device. USB endpoints not equals two");
                 return;

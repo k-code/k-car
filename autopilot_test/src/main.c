@@ -4,6 +4,8 @@
 #include "time.h"
 #include "ultrasonic.h"
 #include "motors.h"
+#include "usb.h"
+#include "protocol.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -23,19 +25,33 @@ int main(void) {
 	TIME_init();
 	US_init();
 	MOTORS_init();
+	USB_init();
+	//int x = 500;
 
 	do {
-		TIME_delay(100);
-		if (US_distance > 30) {
+		TIME_delay(1000);
+		/*if (US_distance > 30) {
 			MOTORS_forward(1000);
 		}
 		else {
-			MOTORS_right(800);
-		}
+			MOTORS_right(100);
+		}*/
+		PROTOCOL_data data = {0,0,0,0,0};//PROTOCOL_emptyData;
+		data.id = 1;
+		data.cmd = 2;
+		data.type = 0;
+		data.bData = 3;
+		USB_write(data);
 		/*LEDS_live(LEDS_On);
 		TIME_delay(US_distance*10);
 		LEDS_live(LEDS_Off);
 		TIME_delay(US_distance*10);*/
+
+		/*if (x > 1000) x = 600;
+		TIME_delay(1000);
+		MOTORS_forward(x);
+		x+= 10;*/
+
 	} while (1);
 }
 
