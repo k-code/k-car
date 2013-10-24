@@ -41,10 +41,14 @@ public final class NetworkService implements Runnable {
                 log.info("Accept client");
                 Reader r = new Reader(client);
                 Writer w = new Writer(client);
-                new Thread(r).start();
-                new Thread(w).start();
+                Thread reader = new Thread(r);
+                Thread writer = new Thread(w);
+                reader.start();
+                writer.start();
+                reader.join();
+                writer.join();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
