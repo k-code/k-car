@@ -1,8 +1,12 @@
 package pro.kornev.kcar.cop.activities;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
@@ -13,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Map;
 
@@ -20,15 +25,23 @@ import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
 
 public class UsbDevicesActivity extends Activity {
-    private Map<String, UsbDevice> usbList;
+    private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
+
+    private PendingIntent mPermissionIntent;
+    private UsbManager mUsbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usb_devices_activity);
+        mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
+        IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+        mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        registerReceiver(mUsbReceiver, filter);
         refresh();
     }
 
+    @SuppressWarnings("unused")
     public void refreshButtonClick(View v) {
         refresh();
     }
@@ -42,8 +55,8 @@ public class UsbDevicesActivity extends Activity {
 
     private void refresh() {
         UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        usbList = manager.getDeviceList();
-        if (usbList==null || usbList.isEmpty()) return;
+        Map<String, UsbDevice> usbList = manager.getDeviceList();
+        if (usbList ==null || usbList.isEmpty()) return;
 
         ListView devicesList = (ListView)findViewById(R.id.uaDevicesList);
         String[] array = new String[usbList.keySet().size()];
@@ -57,6 +70,7 @@ public class UsbDevicesActivity extends Activity {
                 TextView item = (TextView)view;
                 if (item.getText() == null) return;
                 showMessageBox("Item", item.getText().toString());
+                mUsbManager.requestPermission(State.getUsbDevice(), mPermissionIntent);
             }
         });
     }
@@ -67,7 +81,6 @@ public class UsbDevicesActivity extends Activity {
         dlgAlert.setMessage(deviceName);
         dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                State.setUsbDevice(usbList.get(deviceName));
                 finish();
             }
         });
@@ -79,4 +92,25 @@ public class UsbDevicesActivity extends Activity {
         dlgAlert.setCancelable(true);
         dlgAlert.create().show();
     }
+
+    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
+
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (ACTION_USB_PERMISSION.equals(action)) {
+                synchronized (this) {
+                    UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+
+                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
+                        if(device != null){
+                            State.setUsbDevice(device);
+                        }
+                    }
+                    else {
+                        Toast.makeText(context, "Permission restricted", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        }
+    };
 }
