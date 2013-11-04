@@ -13,7 +13,7 @@ import pro.kornev.kcar.protocol.Data;
  * @since 14.10.13
  */
 public class State {
-    private static UsbDevice usbDevice;
+    private static UsbDeviceEntry usbDeviceEntry;
     private static boolean isServiceRunning;
     private static boolean isLogsEnabled;
     private static String proxyServer;
@@ -22,12 +22,12 @@ public class State {
     private static Queue<Data> toUsbQueue = new LinkedBlockingQueue<Data>();
     private static Queue<Data> fromUsbQueue = new LinkedBlockingQueue<Data>();
 
-    public static UsbDevice getUsbDevice() {
-        return usbDevice;
+    public static UsbDeviceEntry getUsbDeviceEntry() {
+        return usbDeviceEntry;
     }
 
-    public static void setUsbDevice(UsbDevice usbDevice) {
-        State.usbDevice = usbDevice;
+    public static void setUsbDeviceEntry(UsbDeviceEntry usbDeviceEntry) {
+        State.usbDeviceEntry = usbDeviceEntry;
     }
 
     public static boolean isServiceRunning() {

@@ -19,10 +19,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hoho.android.usbserial.driver.UsbSerialDriver;
+import com.hoho.android.usbserial.driver.UsbSerialProber;
+
 import java.util.Map;
 
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
+import pro.kornev.kcar.cop.UsbDeviceEntry;
 
 public class UsbDevicesActivity extends Activity {
     private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
@@ -34,9 +38,10 @@ public class UsbDevicesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usb_devices_activity);
+
+        mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
         mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
         IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
-        mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
         registerReceiver(mUsbReceiver, filter);
         refresh();
     }
@@ -55,12 +60,12 @@ public class UsbDevicesActivity extends Activity {
 
     private void refresh() {
         UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        Map<String, UsbDevice> usbList = manager.getDeviceList();
-        if (usbList ==null || usbList.isEmpty()) return;
+        final Map<String, UsbDevice> usbMap = manager.getDeviceList();
+        if (usbMap ==null || usbMap.isEmpty()) return;
 
         ListView devicesList = (ListView)findViewById(R.id.uaDevicesList);
-        String[] array = new String[usbList.keySet().size()];
-        array = usbList.keySet().toArray(array);
+        String[] array = new String[usbMap.keySet().size()];
+        array = usbMap.keySet().toArray(array);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.usb_devices_list_item, array);
         devicesList.setAdapter(adapter);
 
@@ -68,9 +73,9 @@ public class UsbDevicesActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView item = (TextView)view;
-                if (item.getText() == null) return;
+                if (item == null || item.getText() == null) return;
                 showMessageBox("Item", item.getText().toString());
-                mUsbManager.requestPermission(State.getUsbDevice(), mPermissionIntent);
+                mUsbManager.requestPermission(usbMap.get(item.getText()), mPermissionIntent);
             }
         });
     }
@@ -103,7 +108,9 @@ public class UsbDevicesActivity extends Activity {
 
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         if(device != null){
-                            State.setUsbDevice(device);
+                            UsbSerialDriver driver = UsbSerialProber.acquire(mUsbManager, device);
+                            UsbDeviceEntry deviceEntry = new UsbDeviceEntry(device, driver);
+                            State.setUsbDeviceEntry(deviceEntry);
                         }
                     }
                     else {

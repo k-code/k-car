@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="usb-serial-for-android-v010">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Cop/libs/usb-serial-for-android-v010.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

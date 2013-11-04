@@ -10,9 +10,17 @@ import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.hoho.android.usbserial.driver.UsbSerialDriver;
+import com.hoho.android.usbserial.util.HexDump;
+import com.hoho.android.usbserial.util.SerialInputOutputManager;
+
+import java.io.IOException;
 import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.providers.LogsDB;
@@ -24,7 +32,12 @@ import pro.kornev.kcar.protocol.Protocol;
  * @since 14.10.13
  */
 public class UsbService extends Service {
+    private final String TAG = UsbService.class.getSimpleName();
+
     private LogsDB db;
+    private static UsbSerialDriver sDriver = null;
+    private SerialInputOutputManager mSerialIoManager;
+    private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,8 +54,68 @@ public class UsbService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
-        new Thread(new Process(this)).start();
+        //new Thread(new Process(this)).start();
+        sDriver = State.getUsbDeviceEntry().driver;
+        onResume();
         return START_STICKY;
+    }
+
+    protected void onResume() {
+        Log.d(TAG, "Resumed, sDriver=" + sDriver);
+        if (sDriver == null) {
+            db.putLog("No serial device.");
+        } else {
+            try {
+                sDriver.open();
+            } catch (IOException e) {
+                db.putLog("Error setting up device: " + e.getMessage());
+                try {
+                    sDriver.close();
+                } catch (IOException e2) {
+                    // Ignore.
+                }
+                sDriver = null;
+                return;
+            }
+            db.putLog("Serial device: " + sDriver.getClass().getSimpleName());
+        }
+        onDeviceStateChange();
+    }
+    private final SerialInputOutputManager.Listener mListener =
+            new SerialInputOutputManager.Listener() {
+
+                @Override
+                public void onRunError(Exception e) {
+                    Log.d(TAG, "Runner stopped.");
+                }
+
+                @Override
+                public void onNewData(final byte[] data) {
+                    db.putLog("Read data len: " + data.length);
+                    db.putLog("Read data: " + HexDump.dumpHexString(data));
+                }
+            };
+
+    private void stopIoManager() {
+        if (mSerialIoManager != null) {
+            Log.i(TAG, "Stopping io manager ..");
+            mSerialIoManager.stop();
+            mSerialIoManager = null;
+        }
+    }
+
+    private void startIoManager() {
+        if (sDriver != null) {
+            Log.i(TAG, "Starting io manager ..");
+            mSerialIoManager = new SerialInputOutputManager(sDriver, mListener);
+            mExecutor.submit(mSerialIoManager);
+        }
+    }
+
+
+    private void onDeviceStateChange() {
+        stopIoManager();
+        startIoManager();
     }
 
     class Process implements Runnable {
@@ -55,7 +128,7 @@ public class UsbService extends Service {
 
         @Override
         public void run() {
-            UsbDevice device = State.getUsbDevice();
+            UsbDevice device = State.getUsbDeviceEntry().device;
             if (device == null) {
                 db.putLog("USB device is null. USB service exit");
                 return;

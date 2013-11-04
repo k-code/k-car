@@ -73,6 +73,8 @@
     <orderEntry type="library" exported="" name="ComAndroidSupportAppcompatV71800.aar" level="project" />
     <orderEntry type="library" exported="" name="protocol" level="project" />
     <orderEntry type="library" exported="" name="gson-2.2.4" level="project" />
+    <orderEntry type="library" exported="" name="usb-serial-for-android-v010" level="project" />
+    <orderEntry type="library" exported="" name="usb-serial-for-android-v010-src" level="project" />
   </component>
 </module>
 
