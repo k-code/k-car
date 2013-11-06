@@ -19,8 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hoho.android.usbserial.driver.FtdiSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
-import com.hoho.android.usbserial.driver.UsbSerialProber;
 
 import java.util.Map;
 
@@ -59,8 +59,7 @@ public class UsbDevicesActivity extends Activity {
     }
 
     private void refresh() {
-        UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        final Map<String, UsbDevice> usbMap = manager.getDeviceList();
+        Map<String, UsbDevice> usbMap = mUsbManager.getDeviceList();
         if (usbMap ==null || usbMap.isEmpty()) return;
 
         ListView devicesList = (ListView)findViewById(R.id.uaDevicesList);
@@ -74,8 +73,9 @@ public class UsbDevicesActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView item = (TextView)view;
                 if (item == null || item.getText() == null) return;
-                showMessageBox("Item", item.getText().toString());
-                mUsbManager.requestPermission(usbMap.get(item.getText()), mPermissionIntent);
+                String usbPath = item.getText().toString();
+                showMessageBox("Item", usbPath);
+                mUsbManager.requestPermission(mUsbManager.getDeviceList().get(usbPath), mPermissionIntent);
             }
         });
     }
@@ -108,7 +108,7 @@ public class UsbDevicesActivity extends Activity {
 
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         if(device != null){
-                            UsbSerialDriver driver = UsbSerialProber.acquire(mUsbManager, device);
+                            UsbSerialDriver driver = new FtdiSerialDriver(device, mUsbManager.openDevice(device));
                             UsbDeviceEntry deviceEntry = new UsbDeviceEntry(device, driver);
                             State.setUsbDeviceEntry(deviceEntry);
                         }

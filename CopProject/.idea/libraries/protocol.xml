@@ -2,6 +2,7 @@
   <library name="protocol">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/Cop/libs/protocol.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Cop/lib/protocol.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
