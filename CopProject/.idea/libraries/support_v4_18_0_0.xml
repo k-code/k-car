@@ -2,11 +2,8 @@
   <library name="support-v4-18.0.0">
     <CLASSES>
       <root url="jar://$APPLICATION_HOME_DIR$/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Cop/libs/usb-serial-for-android-v010.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/Cop/libs/usb-serial-for-android-v010-src.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

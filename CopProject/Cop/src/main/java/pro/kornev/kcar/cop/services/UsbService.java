@@ -61,7 +61,7 @@ public class UsbService extends Service {
     }
 
     protected void onResume() {
-        Log.d(TAG, "Resumed, sDriver=" + sDriver);
+        db.putLog("Resumed, sDriver=" + sDriver);
         if (sDriver == null) {
             db.putLog("No serial device.");
         } else {
@@ -86,7 +86,7 @@ public class UsbService extends Service {
 
                 @Override
                 public void onRunError(Exception e) {
-                    Log.d(TAG, "Runner stopped.");
+                    db.putLog("Runner stopped.");
                 }
 
                 @Override

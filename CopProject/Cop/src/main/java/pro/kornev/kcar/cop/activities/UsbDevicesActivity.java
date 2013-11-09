@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hoho.android.usbserial.driver.CdcAcmSerialDriver;
 import com.hoho.android.usbserial.driver.FtdiSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 
@@ -108,7 +109,7 @@ public class UsbDevicesActivity extends Activity {
 
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         if(device != null){
-                            UsbSerialDriver driver = new FtdiSerialDriver(device, mUsbManager.openDevice(device));
+                            UsbSerialDriver driver = new CdcAcmSerialDriver(device, mUsbManager.openDevice(device));
                             UsbDeviceEntry deviceEntry = new UsbDeviceEntry(device, driver);
                             State.setUsbDeviceEntry(deviceEntry);
                         }
