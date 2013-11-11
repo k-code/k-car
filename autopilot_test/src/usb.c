@@ -3,6 +3,7 @@
 #include "usbd_usr.h"
 #include "usbd_desc.h"
 #include "usbd_cdc_vcp.h"
+#include "leds.h"
 
 #ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED
   #if defined ( __ICCARM__ ) /*!< IAR Compiler */
@@ -49,6 +50,15 @@ void USB_read(uint8_t *buf, uint32_t len) {
 	if (data.id == 0) {
 		return;
 	}
+	if (data.cmd == 1) {
+		if (data.iData == 0) {
+			LEDS_live(LEDS_Off);
+		}
+		else {
+			LEDS_live(LEDS_On);
+		}
+	}
+	/*
 	dataStackType tmp;
 	tmp.data = data;
 
@@ -58,6 +68,6 @@ void USB_read(uint8_t *buf, uint32_t len) {
 	}
 	else {
 		stackHead = stackTail = &tmp;
-	}
+	}*/
 }
 
