@@ -1,14 +1,7 @@
 package pro.kornev.kcar.cop.services;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.usb.UsbConstants;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbDeviceConnection;
-import android.hardware.usb.UsbEndpoint;
-import android.hardware.usb.UsbInterface;
-import android.hardware.usb.UsbManager;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -18,6 +11,7 @@ import com.hoho.android.usbserial.util.HexDump;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -38,6 +32,8 @@ public class UsbService extends Service {
     private static UsbSerialDriver sDriver = null;
     private SerialInputOutputManager mSerialIoManager;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+    private Writer writer;
+    private Thread writerThread;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -54,8 +50,7 @@ public class UsbService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
-        //new Thread(new Process(this)).start();
-        sDriver = State.getUsbDeviceEntry().driver;
+        sDriver = State.getUsbSerialDriver();
         onResume();
         return START_STICKY;
     }
@@ -80,7 +75,18 @@ public class UsbService extends Service {
             db.putLog("Serial device: " + sDriver.getClass().getSimpleName());
         }
         onDeviceStateChange();
+
+        writer = new Writer();
+        writerThread = new Thread(writer);
+        writerThread.start();
     }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        writerThread.interrupt();
+    }
+
     private final SerialInputOutputManager.Listener mListener =
             new SerialInputOutputManager.Listener() {
 
@@ -93,6 +99,7 @@ public class UsbService extends Service {
                 public void onNewData(final byte[] data) {
                     db.putLog("Read data len: " + data.length);
                     db.putLog("Read data: " + HexDump.dumpHexString(data));
+                    State.getToControlQueue().add(Protocol.fromByteArray(data, data.length));
                 }
             };
 
@@ -112,141 +119,20 @@ public class UsbService extends Service {
         }
     }
 
-
     private void onDeviceStateChange() {
         stopIoManager();
         startIoManager();
     }
 
-    class Process implements Runnable {
-        UsbService mainService;
-        private boolean forceClaim = true;
-
-        Process(UsbService mainService) {
-            this.mainService = mainService;
-        }
-
-        @Override
-        public void run() {
-            UsbDevice device = State.getUsbDeviceEntry().device;
-            if (device == null) {
-                db.putLog("USB device is null. USB service exit");
-                return;
-            }
-            UsbInterface usbInterface = null;
-            if (device.getInterfaceCount() > 1) {
-                for (int i=0; i< device.getInterfaceCount(); i++) {
-                    usbInterface = device.getInterface(i);
-                    if (usbInterface.getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA) {
-                        break;
-                    }
-                    else {
-                        usbInterface = null;
-                    }
-                }
-            }
-            if (usbInterface == null) {
-                db.putLog("Unknown USB device. CDC USB interfaces not found");
-                return;
-            }
-            if (usbInterface.getEndpointCount() != 2) {
-                db.putLog("Unknown USB device. USB endpoints not equals two");
-                return;
-            }
-            UsbEndpoint inputEndpoint = null;
-            UsbEndpoint outputEndpoint = null;
-            for (int i=0; i<2; i++) {
-                UsbEndpoint endpoint = usbInterface.getEndpoint(i);
-                if (endpoint.getDirection() == UsbConstants.USB_DIR_IN) {
-                    inputEndpoint = endpoint;
-                }
-                else if (endpoint.getDirection() == UsbConstants.USB_DIR_OUT) {
-                    outputEndpoint = endpoint;
-                }
-            }
-            if (inputEndpoint == null) {
-                db.putLog("USB input endpoint not found");
-                return;
-            }
-            if (outputEndpoint == null) {
-                db.putLog("USB output endpoint not found");
-                return;
-            }
-            UsbManager mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
-            UsbDeviceConnection connection = mUsbManager.openDevice(device);
-
-
-            if (connection == null) {
-                db.putLog("Failed to open connection to USB device");
-                return;
-            }
-            if (!connection.claimInterface(usbInterface, forceClaim)) {
-                db.putLog("Failed claim exclusive access to a USB interface");
-                return;
-            }
-            connection.controlTransfer(0x40, 0, 0, 0, null, 0, 0);//reset
-            connection.controlTransfer(0x40, 0, 1, 0, null, 0, 0);//clear Rx
-            connection.controlTransfer(0x40, 0, 2, 0, null, 0, 0);//clear Tx
-            connection.controlTransfer(0x40, 0x03, 0x4138, 0, null, 0, 0);//baudrate 9600
-
-            Thread reader = new Thread(new Reader(inputEndpoint, connection));
-            Thread writer = new Thread(new Writer(outputEndpoint, connection));
-
-            reader.start();
-            writer.start();
-
-            try {
-                reader.join();
-                writer.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            mainService.stopSelf();
-        }
-    }
-
-class Reader implements Runnable {
-    UsbEndpoint endpoint;
-    UsbDeviceConnection connection;
-    Queue<Data> queue;
-    private byte[] bytes;
-    private int TIMEOUT = 10;
-
-    Reader(UsbEndpoint endpoint, UsbDeviceConnection connection) {
-        this.endpoint = endpoint;
-        this.connection = connection;
-        queue = State.getFromUsbQueue();
-        bytes = new byte[Protocol.getMaxLength()];
-    }
-
-    @Override
-    public void run() {
-        db.putLog("Start USB reader");
-        while (State.isServiceRunning()) {
-            db.putLog("Read bulk data");
-            int len = connection.bulkTransfer(endpoint, bytes, bytes.length, TIMEOUT);
-            String s = connection.getSerial();
-            db.putLog("Read data len: " + len);
-            if (len <= 0) continue;
-            Data data = Protocol.fromByteArray(bytes, len);
-            db.putLog(String.format("USB read: Data id: %d; cmd: %d; type: %d; bData: %d; iData: %d", data.id, data.cmd, data.type, data.bData, data.iData));
-            queue.add(data);
-        }
-    }
-}
-
 class Writer implements Runnable {
-    UsbEndpoint endpoint;
-    UsbDeviceConnection connection;
     Queue<Data> queue;
     private byte[] bytes = new byte[Protocol.getMaxLength()];
     private int TIMEOUT = 10;
+    UsbSerialDriver driver;
 
-    Writer(UsbEndpoint endpoint, UsbDeviceConnection connection) {
-        this.endpoint = endpoint;
-        this.connection = connection;
+    Writer() {
         queue = State.getToUsbQueue();
+        driver = State.getUsbSerialDriver();
     }
 
     @Override
@@ -254,10 +140,14 @@ class Writer implements Runnable {
         db.putLog("Start USB writer");
         while (State.isServiceRunning()) {
             if (queue.size() == 0) continue;
-            db.putLog("Write bulk data");
+            db.putLog("Write data to USB");
             Data data = queue.poll();
             int bLen = Protocol.toByteArray(data, bytes);
-            connection.bulkTransfer(endpoint, bytes, bLen, TIMEOUT);
+            try {
+                driver.write(Arrays.copyOf(bytes, bLen), TIMEOUT);
+            } catch (IOException e) {
+                db.putLog("Error: Failed send data to USB: " + e.getMessage());
+            }
             db.putLog(String.format("USB write: Data id: %d; cmd: %d; type: %d; bData: %d; iData: %d", data.id, data.cmd, data.type, data.bData, data.iData));
         }
     }
