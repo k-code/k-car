@@ -80,6 +80,14 @@ public class NetworkService extends Service {
                     Data data = gson.fromJson(s, Data.class);
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
                     queue.add(data);
+                    if (data.cmd == 1 && data.bData == 0) {
+                        Data response = new Data();
+                        response.id = data.id;
+                        response.cmd = data.cmd;
+                        response.type = data.type;
+                        response.bData = 2;
+                        State.getToControlQueue().add(response);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
