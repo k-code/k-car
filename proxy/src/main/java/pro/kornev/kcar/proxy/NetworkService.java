@@ -85,6 +85,14 @@ public final class NetworkService implements Runnable {
                     }
 
                     inputQueue.add(data);
+                    if (data.cmd == 1 && data.bData == 0) {
+                        Data response = new Data();
+                        response.id = data.id;
+                        response.cmd = data.cmd;
+                        response.type = data.type;
+                        response.bData = 1;
+                        outputQueue.add(response);
+                    }
                 }
                 log.debug("Read socket closed");
             } catch (IOException e) {

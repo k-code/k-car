@@ -11,7 +11,7 @@
 		<file>/var/log/kcar-proxy.log</file>
 
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/var/log/kcar-proxy.%d{yyyy-MM-dd}.log
+			<fileNamePattern>/var/log/kcar/proxy.%d{yyyy-MM-dd}.log
 			</fileNamePattern>
 		</rollingPolicy>
 
