@@ -39,7 +39,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>ru.kcode.kcontrol.Runner</mainClass>
+							<mainClass>pro.kornev.kcontrol.Runner</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -57,12 +57,6 @@
 	</build>
 
 	<dependencies>
-        <!-- K-Car -->
-        <dependency>
-            <groupId>pro.kornev</groupId>
-            <artifactId>kcar.protocol</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
 		<!-- For install this is dependencies, run install_maven_dependencies.sh -->
 		<dependency>
 			<groupId>com.centralnexus</groupId>
@@ -84,14 +78,27 @@
 			<artifactId>gluegen-rt</artifactId>
 			<version>1.0</version>
 		</dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.neuronrobotics</groupId>
             <artifactId>nrjavaserial</artifactId>
             <version>3.8.4</version>
-        </dependency>
+        </dependency>-->
         <!-- End: For install this is dependencies, run install_maven_dependencies.sh -->
 
-		<!-- Logs -->
+        <!-- K-Car -->
+        <dependency>
+            <groupId>pro.kornev</groupId>
+            <artifactId>kcar.protocol</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+
+        <!-- Logs -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

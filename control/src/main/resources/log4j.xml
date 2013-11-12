@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="ru.kcoode">
+	<logger name="pro.kcoode">
 		<level value="debug" />
 	</logger>
 	
