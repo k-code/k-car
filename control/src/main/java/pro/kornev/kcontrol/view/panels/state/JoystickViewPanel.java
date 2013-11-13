@@ -4,8 +4,9 @@ import javax.swing.JLabel;
 
 import com.centralnexus.input.Joystick;
 import com.centralnexus.input.JoystickListener;
+import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
-import pro.kornev.kcontrol.service.network.NetworkService;
+import pro.kornev.kcontrol.service.network.ProxyService;
 import pro.kornev.kcontrol.view.MainWindow;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
 import pro.kornev.kcontrol.view.panels.settings.SettingsListener;
@@ -71,10 +72,10 @@ public class JoystickViewPanel extends CustomPanel {
             }
 
             @Override
-            public void changeProxy(NetworkService networkService) {
+            public void changeProxy(ProxyService networkService) {
             }
         };
-        MainWindow.settingsPanel.addListener(settingsListener);
+        SettingService.i.addListener(settingsListener);
     }
 
     private JoystickListener joystickListener = new JoystickListener() {

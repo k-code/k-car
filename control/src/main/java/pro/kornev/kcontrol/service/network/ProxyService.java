@@ -17,8 +17,8 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Date: 17.10.13
  * Time: 20:32
  */
-public final class NetworkService {
-    private static final Logger log = LoggerFactory.getLogger(NetworkService.class);
+public final class ProxyService {
+    private static final Logger log = LoggerFactory.getLogger(ProxyService.class);
     private static final int MAX_ERRORS = 10;
 
     private Queue<Data> inputQueue;
@@ -27,7 +27,7 @@ public final class NetworkService {
     private Socket client;
     private Set<NetworkServiceListener> listeners;
 
-    public NetworkService(String host, int port) {
+    public ProxyService(String host, int port) {
         this.inputQueue = new LinkedBlockingQueue<>();
         this.outputQueue = new LinkedBlockingQueue<>();
         this.listeners = new HashSet<>();

@@ -1,8 +1,9 @@
 package pro.kornev.kcontrol.view.panels.state;
 
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
-import pro.kornev.kcontrol.service.network.NetworkService;
+import pro.kornev.kcontrol.service.network.ProxyService;
 import pro.kornev.kcontrol.service.network.NetworkServiceListener;
 import pro.kornev.kcontrol.view.GBLHelper;
 import pro.kornev.kcontrol.view.MainWindow;
@@ -28,7 +29,7 @@ public class PingPanel extends JPanel {
     private JLabel proxyStatus;
     private JLabel androidStatus;
     private JLabel stmStatus;
-    private NetworkService networkService;
+    private ProxyService proxyService;
 
     public PingPanel() {
         super();
@@ -56,7 +57,7 @@ public class PingPanel extends JPanel {
         ActionListener pingButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (networkService == null) {
+                if (proxyService == null) {
                     return;
                 }
                 new Thread(new Ping()).start();
@@ -70,12 +71,12 @@ public class PingPanel extends JPanel {
             }
 
             @Override
-            public void changeProxy(NetworkService ns) {
-                networkService = ns;
-                networkService.addListener(networkServiceListener);
+            public void changeProxy(ProxyService ns) {
+                proxyService = ns;
+                proxyService.addListener(networkServiceListener);
             }
         };
-        MainWindow.settingsPanel.addListener(sl);
+        SettingService.i.addListener(sl);
     }
 
     private NetworkServiceListener networkServiceListener = new NetworkServiceListener() {
@@ -110,7 +111,7 @@ public class PingPanel extends JPanel {
             data.type = 0;
             data.bData = 0;
 
-            networkService.send(data);
+            proxyService.send(data);
 
             try {
                 Thread.sleep(PING_TIMEOUT);

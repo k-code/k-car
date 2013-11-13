@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 import com.centralnexus.input.Joystick;
 
-import pro.kornev.kcontrol.service.RelationsController;
+import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.view.GBLHelper;
 
@@ -23,12 +23,9 @@ public class JoystickSettingsPanel extends JPanel {
 
     private JComboBox<Joystick> joysticksBox;
     private JButton updateDevicesButton;
-    private Set<SettingsListener> settingsListeners;
-    private KJoystick joystick;
 
-    public JoystickSettingsPanel(Set<SettingsListener> listeners) {
+    public JoystickSettingsPanel() {
         super();
-        this.settingsListeners = listeners;
         setBorder(BorderFactory.createTitledBorder("Joystick settings"));
         setLayout(new GridBagLayout());
         init();
@@ -66,13 +63,8 @@ public class JoystickSettingsPanel extends JPanel {
     
     private void fireChangeJoystickSettings() {
         Joystick j = (Joystick)joysticksBox.getSelectedItem();
-        if (joystick != null) {
-            joystick.removeAllListeners();
-        }
         if (j != null) {
-            for (SettingsListener listener: settingsListeners) {
-                listener.changeJoystick(new KJoystick(j));
-            }
+            SettingService.i.fireChangeJoystick(new KJoystick(j));
         }
     }
 

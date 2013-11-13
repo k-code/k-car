@@ -1,8 +1,9 @@
 package pro.kornev.kcontrol.view.panels.state;
 
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
-import pro.kornev.kcontrol.service.network.NetworkService;
+import pro.kornev.kcontrol.service.network.ProxyService;
 import pro.kornev.kcontrol.service.network.NetworkServiceListener;
 import pro.kornev.kcontrol.view.MainWindow;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
@@ -15,13 +16,13 @@ public class DistanceViewPanel extends CustomPanel {
 	private static final long serialVersionUID = -3113982496558550127L;
 
     private JLabel distanceValue;
-    private NetworkService networkService;
+    private ProxyService proxyService;
 
 	public DistanceViewPanel() {
         super("Distance");
 		initLabels();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleWithFixedDelay(new DistanceRequest(), 0, 1, TimeUnit.SECONDS);
+        executor.scheduleWithFixedDelay(new DistanceRequest(), 0, 10, TimeUnit.SECONDS);
 	}
 
 	private void initLabels() {
@@ -29,15 +30,15 @@ public class DistanceViewPanel extends CustomPanel {
 		this.add(distanceLabel, gbl.setGrid(0, 0));
 		distanceValue = new JLabel("0");
 		this.add(distanceValue, gbl.setGrid(1, 0));
-        MainWindow.settingsPanel.addListener(new SettingsListener() {
+        SettingService.i.addListener(new SettingsListener() {
             @Override
             public void changeJoystick(KJoystick joystick) {
             }
 
             @Override
-            public void changeProxy(NetworkService ns) {
-                networkService = ns;
-                networkService.addListener(networkServiceListener);
+            public void changeProxy(ProxyService ns) {
+                proxyService = ns;
+                proxyService.addListener(networkServiceListener);
             }
         });
 	}
@@ -56,7 +57,7 @@ public class DistanceViewPanel extends CustomPanel {
 
         @Override
         public void run() {
-            if (networkService == null) {
+            if (proxyService == null) {
                 return;
             }
             Data data = new Data();
@@ -64,7 +65,7 @@ public class DistanceViewPanel extends CustomPanel {
             data.cmd = 3;
             data.type = 0;
             data.bData = 0;
-            networkService.send(data);
+            proxyService.send(data);
         }
     }
 }

@@ -13,8 +13,6 @@ public final class MainWindow extends JFrame implements Runnable {
     private static final long serialVersionUID = 6690894233205194578L;
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
-    // TODO : remove this porn
-    public static SettingsPanel settingsPanel;
 
     @Override
     public void run() {
@@ -29,11 +27,9 @@ public final class MainWindow extends JFrame implements Runnable {
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
 
-        settingsPanel = new SettingsPanel();
-
         JTabbedPane mainTabbedPane = new JTabbedPane();
         mainTabbedPane.add("State view", new SystemStatePanel());
-        mainTabbedPane.add("Settings panel", settingsPanel);
+        mainTabbedPane.add("Settings panel", new SettingsPanel());
 
         mainPanel.add(mainTabbedPane, GBLHelper.create().setGrid(0, 0).fillB().anchorT().colSpan().fillB());
 

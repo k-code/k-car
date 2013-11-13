@@ -1,6 +1,7 @@
 package pro.kornev.kcontrol.view.panels.settings;
 
-import pro.kornev.kcontrol.service.network.NetworkService;
+import pro.kornev.kcontrol.service.SettingService;
+import pro.kornev.kcontrol.service.network.ProxyService;
 import pro.kornev.kcontrol.view.GBLHelper;
 
 import javax.swing.*;
@@ -19,12 +20,10 @@ import java.util.Set;
 public class ProxySettingsPanel extends JPanel {
     private JTextField proxyHost;
     private JTextField proxyPort;
-    private Set<SettingsListener> settingsListeners;
-    private NetworkService networkService;
+    private ProxyService proxyService;
 
-    public ProxySettingsPanel(Set<SettingsListener> listeners) {
+    public ProxySettingsPanel() {
         super();
-        this.settingsListeners = listeners;
         setBorder(BorderFactory.createTitledBorder("Proxy settings"));
         setLayout(new GridBagLayout());
 
@@ -36,16 +35,14 @@ public class ProxySettingsPanel extends JPanel {
         ActionListener connectButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (networkService != null) {
-                    networkService.shutdown();
+                if (proxyService != null) {
+                    proxyService.shutdown();
                 }
                 String host = proxyHost.getText();
                 int port = Integer.valueOf(proxyPort.getText());
-                networkService = new NetworkService(host, port);
+                proxyService = new ProxyService(host, port);
 
-                for (SettingsListener listener: settingsListeners) {
-                    listener.changeProxy(networkService);
-                }
+                SettingService.i.fireChangeProxy(proxyService);
             }
         };
         connectButton.addActionListener(connectButtonListener);
