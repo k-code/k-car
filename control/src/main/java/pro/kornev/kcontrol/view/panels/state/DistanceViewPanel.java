@@ -4,7 +4,7 @@ import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
-import pro.kornev.kcontrol.service.network.NetworkServiceListener;
+import pro.kornev.kcontrol.service.network.ProxyServiceListener;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
 import pro.kornev.kcontrol.service.SettingsListener;
 
@@ -37,12 +37,12 @@ public class DistanceViewPanel extends CustomPanel {
             @Override
             public void changeProxy(ProxyService ns) {
                 proxyService = ns;
-                proxyService.addListener(networkServiceListener);
+                proxyService.addListener(proxyServiceListener);
             }
         });
 	}
 
-    private NetworkServiceListener networkServiceListener = new NetworkServiceListener() {
+    private ProxyServiceListener proxyServiceListener = new ProxyServiceListener() {
         @Override
         public void onPackageReceive(Data data) {
             if (data.cmd != 4) {

@@ -4,7 +4,7 @@ import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
-import pro.kornev.kcontrol.service.network.NetworkServiceListener;
+import pro.kornev.kcontrol.service.network.ProxyServiceListener;
 import pro.kornev.kcontrol.view.GBLHelper;
 import pro.kornev.kcontrol.service.SettingsListener;
 
@@ -72,13 +72,13 @@ public class PingPanel extends JPanel {
             @Override
             public void changeProxy(ProxyService ns) {
                 proxyService = ns;
-                proxyService.addListener(networkServiceListener);
+                proxyService.addListener(proxyServiceListener);
             }
         };
         SettingService.i.addListener(sl);
     }
 
-    private NetworkServiceListener networkServiceListener = new NetworkServiceListener() {
+    private ProxyServiceListener proxyServiceListener = new ProxyServiceListener() {
         @Override
         public void onPackageReceive(Data data) {
             if (data.cmd != 1) {

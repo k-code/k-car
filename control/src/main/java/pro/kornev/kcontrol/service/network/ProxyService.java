@@ -25,7 +25,7 @@ public final class ProxyService {
     private Queue<Data> outputQueue;
     private Gson gson;
     private Socket client;
-    private Set<NetworkServiceListener> listeners;
+    private Set<ProxyServiceListener> listeners;
 
     public ProxyService(String host, int port) {
         this.inputQueue = new LinkedBlockingQueue<>();
@@ -60,7 +60,7 @@ public final class ProxyService {
         }
     }
 
-    public void addListener(NetworkServiceListener listener) {
+    public void addListener(ProxyServiceListener listener) {
         this.listeners.add(listener);
     }
 
@@ -135,7 +135,7 @@ public final class ProxyService {
                     continue;
                 }
                 Data data = inputQueue.poll();
-                for (NetworkServiceListener listener: listeners) {
+                for (ProxyServiceListener listener: listeners) {
                     listener.onPackageReceive(data);
                 }
             }

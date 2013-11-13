@@ -1,5 +1,6 @@
 package pro.kornev.kcontrol.service;
 
+import pro.kornev.kcontrol.service.joystick.JoystickService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
 
@@ -15,12 +16,15 @@ import java.util.Set;
 public enum  SettingService {
     i; 
     private Set<SettingsListener> settingsListeners;
+    private JoystickService joystickService;
 
     private SettingService() {
+        joystickService = new JoystickService();
         settingsListeners = new HashSet<>();
     }
 
     public void fireChangeJoystick(KJoystick joystick) {
+        joystick.addListener(joystickService);
         for (SettingsListener l: settingsListeners) {
             l.changeJoystick(joystick);
         }

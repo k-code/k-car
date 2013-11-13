@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import com.centralnexus.input.Joystick;
 
 import pro.kornev.kcontrol.service.SettingService;
+import pro.kornev.kcontrol.service.joystick.JoystickService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.view.GBLHelper;
 
@@ -64,7 +65,8 @@ public class JoystickSettingsPanel extends JPanel {
     private void fireChangeJoystickSettings() {
         Joystick j = (Joystick)joysticksBox.getSelectedItem();
         if (j != null) {
-            SettingService.i.fireChangeJoystick(new KJoystick(j));
+            KJoystick joystick = new KJoystick(j);
+            SettingService.i.fireChangeJoystick(joystick);
         }
     }
 
@@ -78,7 +80,6 @@ public class JoystickSettingsPanel extends JPanel {
             } else if (source.equals(joysticksBox)) {
                 fireChangeJoystickSettings();
             }
-
         }
     }
 }
