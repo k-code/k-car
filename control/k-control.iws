@@ -2,27 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingService.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/MotorComputing.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/Utils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/joystick/DriverJoystickListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/ViewCopter3dJoysticListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/ViewRotorJoysticListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/listeners/JoystickViewListener.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/network/NetworkService.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/network/ProxyService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/SettingsListener.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingsListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/DistanceViewPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/DistanceViewPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/JoystickSettingsPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/JoystickSettingsPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/JoystickViewPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/JoystickViewPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/MainWindow.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/MainWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PingPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PingPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/ProxySettingsPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/ProxySettingsPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/SettingsListener.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/SettingsListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/SettingsPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/SettingsPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingService.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-control.iws" afterPath="$PROJECT_DIR$/k-control.iws" />
     </list>
     <ignored path="k-control.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384330146120" ignored="false" />
+    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384330981489" ignored="false" />
     <file path="/pom.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384244564635" ignored="false" />
     <file path="/DriverJoystickListener.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384227835674" ignored="false" />
     <file path="/MainWindow.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384329245725" ignored="false" />
@@ -101,7 +90,7 @@
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PingPanel.java" line="74" class="pro.kornev.kcontrol.view.panels.state.PingPanel$3" package="pro.kornev.kcontrol.view.panels.state">
+      <breakpoint url="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PingPanel.java" line="73" class="pro.kornev.kcontrol.view.panels.state.PingPanel$3" package="pro.kornev.kcontrol.view.panels.state">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -125,27 +114,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProxyService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/network/ProxyService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="0" selection-start="930" selection-end="930" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PingPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PingPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="24" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.0">
+            <state line="77" column="24" selection-start="2650" selection-end="2650" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2003#2266#0" expanded="true" />
-                <element signature="e#2255#2256#0" expanded="true" />
-                <element signature="e#2792#3278#0" expanded="true" />
-                <element signature="e#3271#3272#0" expanded="true" />
+                <element signature="e#1946#2209#0" expanded="true" />
+                <element signature="e#2198#2199#0" expanded="true" />
+                <element signature="e#2735#3221#0" expanded="true" />
+                <element signature="e#3214#3215#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,10 +149,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JoystickSettingsPanel.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="JoystickSettingsPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/JoystickSettingsPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="33" selection-start="790" selection-end="790" vertical-scroll-proportion="-0.4423408">
+            <state line="26" column="33" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingsListener.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingsListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="35" selection-start="186" selection-end="186" vertical-scroll-proportion="0.12908778">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -185,7 +174,7 @@
       <file leaf-file-name="JoystickViewPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/JoystickViewPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="28" selection-start="2415" selection-end="2415" vertical-scroll-proportion="0.0">
+            <state line="81" column="28" selection-start="2358" selection-end="2358" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -207,11 +196,11 @@
       <file leaf-file-name="DistanceViewPanel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/DistanceViewPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="25" selection-start="1234" selection-end="1234" vertical-scroll-proportion="0.0">
+            <state line="31" column="25" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1637#1885#0" expanded="true" />
-                <element signature="e#1878#1879#0" expanded="true" />
+                <element signature="e#1580#1828#0" expanded="true" />
+                <element signature="e#1821#1822#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -220,19 +209,10 @@
       <file leaf-file-name="SettingService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="40" selection-start="968" selection-end="968" vertical-scroll-proportion="0.0">
+            <state line="35" column="40" selection-start="902" selection-end="902" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GBLHelper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/GBLHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="13" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -256,7 +236,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/SystemStatePanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/network/NetworkServiceListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/ChangeSettingsListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/JoysticSettingsPanel.java" />
@@ -272,6 +251,7 @@
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/SettingsPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/ProxySettingsPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/JoystickSettingsPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingsListener.java" />
       </list>
     </option>
   </component>
@@ -475,79 +455,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="state" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="k-control" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="control" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kcontrol" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="settings" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="k-control" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="control" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kcontrol" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="graphics" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -812,15 +720,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/SettingsListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/SystemStatePanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="0" selection-start="528" selection-end="528" vertical-scroll-proportion="0.0">
@@ -860,7 +759,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="40" selection-start="968" selection-end="968" vertical-scroll-proportion="0.0">
+        <state line="35" column="40" selection-start="902" selection-end="902" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -878,18 +777,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/DistanceViewPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="25" selection-start="1234" selection-end="1234" vertical-scroll-proportion="0.0">
+        <state line="31" column="25" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1637#1885#0" expanded="true" />
-            <element signature="e#1878#1879#0" expanded="true" />
+            <element signature="e#1580#1828#0" expanded="true" />
+            <element signature="e#1821#1822#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/JoystickViewPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="28" selection-start="2415" selection-end="2415" vertical-scroll-proportion="0.0">
+        <state line="81" column="28" selection-start="2358" selection-end="2358" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -898,13 +797,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PingPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="24" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.0">
+        <state line="77" column="24" selection-start="2650" selection-end="2650" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2003#2266#0" expanded="true" />
-            <element signature="e#2255#2256#0" expanded="true" />
-            <element signature="e#2792#3278#0" expanded="true" />
-            <element signature="e#3271#3272#0" expanded="true" />
+            <element signature="e#1946#2209#0" expanded="true" />
+            <element signature="e#2198#2199#0" expanded="true" />
+            <element signature="e#2735#3221#0" expanded="true" />
+            <element signature="e#3214#3215#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -925,9 +824,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/RotorView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Copter3dView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="239" selection-end="239" vertical-scroll-proportion="-4.473322">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/JoystickSettingsPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="33" selection-start="790" selection-end="790" vertical-scroll-proportion="-0.4423408">
+        <state line="26" column="33" selection-start="790" selection-end="790" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/service/SettingsListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="35" selection-start="186" selection-end="186" vertical-scroll-proportion="0.12908778">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

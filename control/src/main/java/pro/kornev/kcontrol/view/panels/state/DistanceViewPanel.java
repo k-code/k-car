@@ -5,9 +5,8 @@ import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
 import pro.kornev.kcontrol.service.network.NetworkServiceListener;
-import pro.kornev.kcontrol.view.MainWindow;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
-import pro.kornev.kcontrol.view.panels.settings.SettingsListener;
+import pro.kornev.kcontrol.service.SettingsListener;
 
 import javax.swing.*;
 import java.util.concurrent.*;

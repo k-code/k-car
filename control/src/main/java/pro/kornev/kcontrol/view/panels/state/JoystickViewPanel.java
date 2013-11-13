@@ -7,9 +7,8 @@ import com.centralnexus.input.JoystickListener;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
-import pro.kornev.kcontrol.view.MainWindow;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
-import pro.kornev.kcontrol.view.panels.settings.SettingsListener;
+import pro.kornev.kcontrol.service.SettingsListener;
 
 public class JoystickViewPanel extends CustomPanel {
 	private static final long serialVersionUID = -3113982496558550127L;

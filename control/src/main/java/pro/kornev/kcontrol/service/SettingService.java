@@ -2,7 +2,6 @@ package pro.kornev.kcontrol.service;
 
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
-import pro.kornev.kcontrol.view.panels.settings.SettingsListener;
 
 import java.util.HashSet;
 import java.util.Set;
