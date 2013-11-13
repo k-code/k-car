@@ -23,21 +23,24 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
-#include "periph_init.h"
+#include "main.h"
 #include "usb_core.h"
 #include "usbd_core.h"
-#include "stm32f4_discovery.h"
+#include "stm32f4xx_exti.h"
 #include "usbd_cdc_core.h"
 #include "usbd_cdc_vcp.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+//extern uint8_t Buffer[64];
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+//extern __IO uint8_t DemoEnterCondition;
+uint8_t Counter  = 0x00;
+//extern __IO uint8_t UserButtonPressed;
 /* Private function prototypes -----------------------------------------------*/
 extern USB_OTG_CORE_HANDLE           USB_OTG_dev;
 extern uint32_t USBD_OTG_ISR_Handler (USB_OTG_CORE_HANDLE *pdev);
-extern CDC_IF_Prop_TypeDef  VCP_fops;
 
 /******************************************************************************/
 /*            Cortex-M3 Processor Exceptions Handlers                         */
@@ -136,10 +139,11 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler(void)
+/*void SysTick_Handler(void)
 {
-    SysTime++;
-}
+
+    TimingDelay_Decrement();
+}*/
 
 /******************************************************************************/
 /*                 STM32Fxxx Peripherals Interrupt Handlers                   */
@@ -164,11 +168,12 @@ void SysTick_Handler(void)
   */
 /*void EXTI0_IRQHandler(void)
 {
-  uint8_t test[12] = "Hello world\n";
+#define len 12
+  static uint8_t test[len] = " - ping - \n";
+     Clear the EXTI line pending bit
   
-  APP_FOPS.pIf_DataTx(&test[0],12);
-   Clear the EXTI line pending bit
-  EXTI_ClearITPendingBit(USER_BUTTON_EXTI_LINE);
+  VCP_DataTx (&test[0], len);
+  EXTI_ClearITPendingBit(EXTI_Line0);
 }*/
 
 /**

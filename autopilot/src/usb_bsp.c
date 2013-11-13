@@ -22,6 +22,11 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usb_bsp.h"
+#include "usbd_conf.h"
+#include "stm32f4xx_rcc.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx_exti.h"
+#include "misc.h"
 
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
 * @{
@@ -289,6 +294,7 @@ void USB_OTG_BSP_Init(USB_OTG_CORE_HANDLE *pdev)
   EXTI_ClearITPendingBit(EXTI_Line20);    
 #endif   
 
+  EXTI_ClearITPendingBit(EXTI_Line0);
 }
 /**
 * @brief  USB_OTG_BSP_EnableInterrupt
@@ -300,7 +306,7 @@ void USB_OTG_BSP_EnableInterrupt(USB_OTG_CORE_HANDLE *pdev)
 {
   NVIC_InitTypeDef NVIC_InitStructure; 
   
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+  //NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 #ifdef USE_USB_OTG_HS   
   NVIC_InitStructure.NVIC_IRQChannel = OTG_HS_IRQn;
 #else
@@ -334,12 +340,16 @@ void USB_OTG_BSP_EnableInterrupt(USB_OTG_CORE_HANDLE *pdev)
 */
 void USB_OTG_BSP_uDelay (const uint32_t usec)
 {
-  uint32_t utime = (120 * usec / 7);
+  uint32_t count = 0;
+  const uint32_t utime = (120 * usec / 7);
   do
   {
-      utime--;
+    if ( ++count > utime )
+    {
+      return ;
+    }
   }
-  while (utime > 0);
+  while (1);
 }
 
 

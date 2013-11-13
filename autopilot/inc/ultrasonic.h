@@ -10,9 +10,8 @@
 
 #include "stm32f4xx.h"
 
-__IO uint32_t US_DISTANCE;
+__IO uint32_t US_distance;
 
-void ultrasonic_init();
-void trigger();
+void US_init();
 
 #endif /* ULTRASONIC_H_ */

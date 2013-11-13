@@ -41,7 +41,7 @@ const t_byte CRC8_Table[256] = {
     0x3B, 0x0A, 0x59, 0x68, 0xFF, 0xCE, 0x9D, 0xAC
 };
 
-static PROTOCOL_data byteArrayToData(t_byte *buf);
+// static PROTOCOL_data byteArrayToData(t_byte *buf);
 static t_int byteArrayToInt(t_byte *buf);
 static void intToByteArray(t_int val, t_byte *buf);
 static t_int putIntToBuf(t_byte *buf, t_int bufLen, t_int val);

@@ -47,27 +47,27 @@
 /** @defgroup USBD_DESC_Private_Defines
   * @{
   */ 
-#define USBD_VID                        0x0483
+#define USBD_VID                        0x1d50
 
-#define USBD_PID                        0x5740
+#define USBD_PID                        0x602f
 
 /** @defgroup USB_String_Descriptors
   * @{
   */ 
 #define USBD_LANGID_STRING              0x409
-#define USBD_MANUFACTURER_STRING        (uint8_t *) "STMicroelectronics"
+#define USBD_MANUFACTURER_STRING        "STMicroelectronics"
 
-#define USBD_PRODUCT_HS_STRING          (uint8_t *) "STM32 Virtual ComPort in HS mode"
-#define USBD_SERIALNUMBER_HS_STRING     (uint8_t *) "00000000050B"
+#define USBD_PRODUCT_HS_STRING          "STM32 Virtual ComPort in HS mode"
+#define USBD_SERIALNUMBER_HS_STRING     "00000000050B"
 
-#define USBD_PRODUCT_FS_STRING          (uint8_t *) "STM32 Virtual ComPort in FS Mode"
-#define USBD_SERIALNUMBER_FS_STRING     (uint8_t *) "00000000050C"
+#define USBD_PRODUCT_FS_STRING          "STM32 Virtual ComPort in FS Mode"
+#define USBD_SERIALNUMBER_FS_STRING     "00000000050C"
 
-#define USBD_CONFIGURATION_HS_STRING    (uint8_t *) "VCP Config"
-#define USBD_INTERFACE_HS_STRING        (uint8_t *) "VCP Interface"
+#define USBD_CONFIGURATION_HS_STRING    "VCP Config"
+#define USBD_INTERFACE_HS_STRING        "VCP Interface"
 
-#define USBD_CONFIGURATION_FS_STRING    (uint8_t *) "VCP Config"
-#define USBD_INTERFACE_FS_STRING        (uint8_t *) "VCP Interface"
+#define USBD_CONFIGURATION_FS_STRING    "VCP Config"
+#define USBD_INTERFACE_FS_STRING        "VCP Interface"
 /**
   * @}
   */ 

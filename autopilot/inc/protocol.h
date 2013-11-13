@@ -16,7 +16,7 @@ typedef struct {
     t_int iData;
 } PROTOCOL_data;
 
-const PROTOCOL_data PROTOCOL_empty_data = {0,0,0,0,0};
+#define PROTOCOL_empty_data {0,0,0,0,0}
 
 extern PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen);
 extern t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf);

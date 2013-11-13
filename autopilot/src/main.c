@@ -1,27 +1,18 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "leds.h"
+#include "time.h"
+#include "ultrasonic.h"
+#include "motors.h"
+#include "usb.h"
+#include "protocol.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-#ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED
-#if defined ( __ICCARM__ ) /*!< IAR Compiler */
-#pragma data_alignment = 4
-#endif
-#endif /* USB_OTG_HS_INTERNAL_DMA_ENABLED */
-__ALIGN_BEGIN USB_OTG_CORE_HANDLE USB_OTG_dev __ALIGN_END;
-
-extern __I uint32_t SysTime;
-extern __IO uint32_t US_DISTANCE;
-extern CDC_IF_Prop_TypeDef  VCP_fops;
-
 /* Private function prototypes -----------------------------------------------*/
-static void sendData();
-static void Delay(__IO uint32_t nTime);
-static void getData(void);
-
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -30,62 +21,38 @@ static void getData(void);
  * @retval None
  */
 int main(void) {
-    Data_get = 0;
+	LEDS_init();
+	TIME_init();
+	US_init();
+	MOTORS_init();
+	USB_init();
+	//int x = 500;
 
-    PERIPH_Init_SysTick();
-    PERIPH_Init_Leds();
-    PERIPH_Init_Timer();
-    //PERIPH_Init_PWM();
-    //PERIPH_Init_Spi();
-    //LIS302DL_Init();
-    ultrasonic_init();
+	do {
+		TIME_delay(1000);
+		/*if (US_distance > 30) {
+			MOTORS_forward(1000);
+		}
+		else {
+			MOTORS_right(100);
+		}*/
+		PROTOCOL_data data = {0,0,0,0,0};//PROTOCOL_emptyData;
+		data.id = 1;
+		data.cmd = 2;
+		data.type = 0;
+		data.bData = 3;
+		USB_write(data);
+		/*LEDS_live(LEDS_On);
+		TIME_delay(US_distance*10);
+		LEDS_live(LEDS_Off);
+		TIME_delay(US_distance*10);*/
 
-    /* USB configuration */
-    //USBD_Init(&USB_OTG_dev, USB_OTG_FS_CORE_ID, &USR_desc, &USBD_CDC_cb, &USR_cb);
+		/*if (x > 1000) x = 600;
+		TIME_delay(1000);
+		MOTORS_forward(x);
+		x+= 10;*/
 
-    while (1) {
-        GPIO_SetBits(GPIOD, GPIO_Pin_12);
-        Delay(500000);
-        GPIO_ResetBits(GPIOD, GPIO_Pin_12);
-        Delay(500000);
-
-        /*if (USBD_USR_DEVICE_CONFIGURED == SET) {
-            if (Data_get == 1) {
-                getData();
-                Data_get = 0;
-            }
-        }*/
-    }
-}
-
-static void getData(void) {
-    PROTOCOL_Protocol p;
-    PROTOCOL_parseProtocol(Data_buf, &p);
-    for (int32_t i = 0; i < p.framesLen; i++) {
-        switch (p.frames[i].cmd) {
-        case PROTOCOL_GET_DISTANCE:
-            sendData();
-            break;
-        }
-    }
-}
-
-static void sendData() {
-    uint8_t buf[PROTOCOL_MAX_LEN];
-    PROTOCOL_Protocol p;
-
-    p.num = 1;
-    p.framesLen = 0;
-
-
-    int32_t len = US_DISTANCE;
-    p.frames[0].cmd = PROTOCOL_DISTANCE;
-    p.frames[0].type = PROTOCOL_TYPE_INT;
-    p.frames[0].iData = len;
-    p.framesLen++;
-
-    len = PROTOCOL_toByteArray(&p, buf);
-    APP_FOPS.pIf_DataTx(buf, len);
+	} while (1);
 }
 
 /**
@@ -93,13 +60,6 @@ static void sendData() {
  * @param  nTime: specifies the delay time length, in 10 ms.
  * @retval None
  */
-static void Delay(__IO uint32_t nTime) {
-    nTime += SysTime;
-
-    while (nTime > SysTime) {
-        __NOP();
-    }
-}
 
 
 #ifdef  USE_FULL_ASSERT

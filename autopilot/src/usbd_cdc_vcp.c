@@ -26,8 +26,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_cdc_vcp.h"
 #include "usbd_cdc_core.h"
-#include "stm32f4_discovery.h"
-#include "stm32f4xx_tim.h"
+#include "usb.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -45,11 +44,6 @@ extern uint32_t APP_Rx_ptr_in;    /* Increment this pointer or roll it back to
                                      in the buffer APP_Rx_Buffer. */
 
 /* Private function prototypes -----------------------------------------------*/
-static uint16_t VCP_Init     (void);
-static uint16_t VCP_DeInit   (void);
-static uint16_t VCP_Ctrl     (uint32_t Cmd, uint8_t* Buf, uint32_t Len);
-static uint16_t VCP_DataTx   (uint8_t* Buf, uint32_t Len);
-static uint16_t VCP_DataRx   (uint8_t* Buf, uint32_t Len);
 
 
 //����� ��� ������ �� usbd_cdc_core.c
@@ -70,8 +64,7 @@ CDC_IF_Prop_TypeDef VCP_fops =
   * @retval Result of the opeartion (USBD_OK in all cases)
   */
 static uint16_t VCP_Init(void)
-{
-    Data_get = 0;
+{ 
   return USBD_OK;
 }
 
@@ -119,11 +112,10 @@ static uint16_t VCP_Ctrl (uint32_t Cmd, uint8_t* Buf, uint32_t Len)
     /* Not  needed for this driver */
     break;
 
-  case SET_LINE_CODING://������� ��������� ����������
-    //��� ������� �����������, ���� �� ���������� �������� ��������� �����
+  case SET_LINE_CODING:
     break;
 
-  case GET_LINE_CODING://������� ������� ��������� �� �����������
+  case GET_LINE_CODING:
     break;
 
   case SET_CONTROL_LINE_STATE:
@@ -149,50 +141,45 @@ static uint16_t VCP_Ctrl (uint32_t Cmd, uint8_t* Buf, uint32_t Len)
   * @param  Len: Number of data to be sent (in bytes)
   * @retval Result of the opeartion: USBD_OK if all operations are OK else VCP_FAIL
   */
-static uint16_t VCP_DataTx (uint8_t* Buf, uint32_t Len)
+uint16_t VCP_DataTx (uint8_t* Buf, uint32_t Len)
 {
-    uint32_t i;
-    //loop through buffer
-    for( i = 0; i < Len; i++ )
-    {
-        APP_Rx_Buffer[APP_Rx_ptr_in] = (uint8_t) Buf[i];
-        //increase pointer value
-        APP_Rx_ptr_in++;
-        /* To avoid buffer overflow */
-        if(APP_Rx_ptr_in == APP_RX_DATA_SIZE)
-        {
-            APP_Rx_ptr_in = 0;
-        }
-    }
-
-    return USBD_OK;
+	uint32_t i;
+	//loop through buffer
+	for( i = 0; i < Len; i++ )
+	{
+		APP_Rx_Buffer[APP_Rx_ptr_in] = (uint8_t) Buf[i];
+		//increase pointer value
+		APP_Rx_ptr_in++;
+		/* To avoid buffer overflow */
+		if(APP_Rx_ptr_in == APP_RX_DATA_SIZE)
+		{
+			APP_Rx_ptr_in = 0;
+		}
+	}
+        
+	return USBD_OK;
 }
 
 /**
   * @brief  VCP_DataRx
   *         Data received over USB OUT endpoint are sent over CDC interface 
   *         through this function.
-  *
+  *           
   *         @note
   *         This function will block any OUT packet reception on USB endpoint 
   *         untill exiting this function. If you exit this function before transfer
   *         is complete on CDC interface (ie. using DMA controller) it will result 
   *         in receiving more data while previous ones are still not sent.
-  *
+  *                 
   * @param  Buf: Buffer of data to be received
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the opeartion: USBD_OK if all operations are OK else VCP_FAIL
   */
-static uint16_t VCP_DataRx (uint8_t* Buf, uint32_t Len)
+static uint16_t VCP_DataRx (uint8_t* buf, uint32_t len)
 {
-    //VCP_DataTx(Buf, Len);
-
-    for (uint32_t i =0 ; i < Len; i++) {
-        Data_buf[i] = Buf[i];
-    }
-    Data_get = 1;
-
-    return USBD_OK;
+	//VCP_DataTx(buf, len);
+	USB_read(buf, len);
+	return USBD_OK;
 }
 
 

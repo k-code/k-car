@@ -586,7 +586,6 @@ static uint8_t  usbd_cdc_Setup (void  *pdev,
       }
       break;
     }
-        break;
   }
   return USBD_OK;
 }

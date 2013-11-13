@@ -24,24 +24,11 @@
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx.h"
-#include "stm32f4_discovery.h"
-#include "lis302dl.h"
-#include "periph_init.h"
-#include "protocol.h"
-#include "usbd_core.h"
-#include "usbd_desc.h"
-#include "usbd_cdc_core.h"
-#include "usbd_cdc_vcp.h"
-#include "usbd_usr.h"
-#include "ultrasonic.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
 /* Exported macro ------------------------------------------------------------*/
-#define ABS(x)         (x < 0) ? (-x) : x
-#define MAX(a,b)       (a < b) ? (b) : a
 
 /* Exported functions ------------------------------------------------------- */
 void Fail_Handler(void);

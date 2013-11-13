@@ -68,7 +68,7 @@
 
 /** @defgroup USB_BSP_Exported_FunctionsPrototype
   * @{
-  */ 
+  */
 void BSP_Init(void);
 
 void USB_OTG_BSP_Init (USB_OTG_CORE_HANDLE *pdev);

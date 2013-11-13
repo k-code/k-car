@@ -71,8 +71,6 @@ USBD_Usr_cb_TypeDef USR_cb =
   
   USBD_USR_DeviceConnected,
   USBD_USR_DeviceDisconnected,  
-  
-  
 };
 
 
@@ -109,8 +107,8 @@ USBD_Usr_cb_TypeDef USR_cb =
 * @retval None
 */
 void USBD_USR_Init(void)
-{
-    GPIO_SetBits(GPIOD, GPIO_Pin_15);
+{   
+
 }
 
 /**
@@ -120,8 +118,6 @@ void USBD_USR_Init(void)
 */
 void USBD_USR_DeviceReset(uint8_t speed )
 {
-    USBD_USR_DEVICE_CONFIGURED = RESET;
-    GPIO_ResetBits(GPIOD, GPIO_Pin_13);
  switch (speed)
  {
    case USB_OTG_SPEED_HIGH: 
@@ -144,8 +140,6 @@ void USBD_USR_DeviceReset(uint8_t speed )
 */
 void USBD_USR_DeviceConfigured (void)
 {
-    USBD_USR_DEVICE_CONFIGURED = SET;
-    GPIO_SetBits(GPIOD, GPIO_Pin_13);
 }
 
 
@@ -157,7 +151,6 @@ void USBD_USR_DeviceConfigured (void)
 */
 void USBD_USR_DeviceConnected (void)
 {
-    GPIO_SetBits(GPIOD, GPIO_Pin_14);
 }
 
 
@@ -169,7 +162,6 @@ void USBD_USR_DeviceConnected (void)
 */
 void USBD_USR_DeviceDisconnected (void)
 {
-    GPIO_ResetBits(GPIOD, GPIO_Pin_14);
 }
 
 /**
@@ -204,3 +196,33 @@ void USBD_USR_DeviceResumed(void)
 */ 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
