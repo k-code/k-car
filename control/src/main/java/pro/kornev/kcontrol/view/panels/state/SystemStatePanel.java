@@ -21,8 +21,5 @@ public class SystemStatePanel extends CustomPanel {
         add(new PingPanel(), gbl.setGrid(0,0));
         add(joystickViewPanel, gbl.setGrid(1,0));
         add(distanceViewPanel, gbl.setGrid(2,0));
-
-        RelationsController.setJoystickView(joystickViewPanel);
-        RelationsController.setDistanceViewPanel(distanceViewPanel);
     }
 }

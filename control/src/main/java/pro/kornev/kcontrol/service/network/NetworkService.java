@@ -4,64 +4,71 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pro.kornev.kcar.protocol.Data;
-import pro.kornev.kcontrol.service.RelationsController;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashSet;
 import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * User: kvv
  * Date: 17.10.13
  * Time: 20:32
  */
-public final class NetworkService implements Runnable {
+public final class NetworkService {
     private static final Logger log = LoggerFactory.getLogger(NetworkService.class);
     private static final int MAX_ERRORS = 10;
 
-    private String host;
-    private int port;
     private Queue<Data> inputQueue;
     private Queue<Data> outputQueue;
     private Gson gson;
+    private Socket client;
+    private Set<NetworkServiceListener> listeners;
 
     public NetworkService(String host, int port) {
-        this.host = host;
-        this.port = port;
-        this.inputQueue = RelationsController.getInputQueue();
-        this.outputQueue = RelationsController.getOutputQueue();
+        this.inputQueue = new LinkedBlockingQueue<>();
+        this.outputQueue = new LinkedBlockingQueue<>();
+        this.listeners = new HashSet<>();
+
         gson = new Gson();
-    }
+        client = null;
 
-    @Override
-    public void run() {
+        log.debug("Connect to host {} on port {}", host, port);
         try {
-            Socket socket = new Socket(host, port);
-            log.debug("Connect to host {} on port {}", host, port);
-            if (!socket.isBound()) {
-                throw new IllegalStateException("Failed connect to host " + host + " on port " + port);
-            }
-            Reader r = new Reader(socket);
-            Writer w = new Writer(socket);
-            Thread reader = new Thread(r);
-            Thread writer = new Thread(w);
-            reader.start();
-            writer.start();
-            reader.join();
-            writer.join();
-            // TODO : added ability to stop service
-        } catch (Exception e) {
-            e.printStackTrace();
+            client = new Socket(host, port);
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed connect to host " + host + " on port " + port);
+        }
+        if (!client.isBound()) {
+            throw new IllegalStateException("Failed connect to host " + host + " on port " + port + " Cannot bound socket");
+        }
+
+        new Thread(new Reader()).start();
+        new Thread(new Writer()).start();
+        new Thread(new ListenersProcessor()).start();
+    }
+
+    public void shutdown() {
+        try {
+            client.shutdownInput();
+            client.shutdownOutput();
+            client.close();
+        } catch (IOException e) {
+            log.warn("Close network socket is throw exception", e);
         }
     }
 
-    class Reader implements Runnable {
-        private Socket client;
+    public void addListener(NetworkServiceListener listener) {
+        this.listeners.add(listener);
+    }
 
-        Reader(Socket client) {
-            this.client = client;
-        }
+    public void send(Data data) {
+        outputQueue.add(data);
+    }
+
+    private class Reader implements Runnable {
 
         @Override
         public void run() {
@@ -96,12 +103,7 @@ public final class NetworkService implements Runnable {
         }
     }
 
-    class Writer implements Runnable {
-        private Socket client;
-
-        Writer(Socket client) {
-            this.client = client;
-        }
+    private class Writer implements Runnable {
 
         @Override
         public void run() {
@@ -120,6 +122,22 @@ public final class NetworkService implements Runnable {
                 log.debug("Write socket closed");
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private class ListenersProcessor implements Runnable {
+
+        @Override
+        public void run() {
+            while (!client.isClosed()) {
+                if (inputQueue.isEmpty()) {
+                    continue;
+                }
+                Data data = inputQueue.poll();
+                for (NetworkServiceListener listener: listeners) {
+                    listener.onPackageReceive(data);
+                }
             }
         }
     }

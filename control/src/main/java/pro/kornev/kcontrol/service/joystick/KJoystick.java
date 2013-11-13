@@ -9,30 +9,34 @@ import com.centralnexus.input.JoystickListener;
 public class KJoystick {
     private Joystick joystick;
     private List<JoystickListener> listeners = new ArrayList<JoystickListener>();
-    
+
     public KJoystick(Joystick j) {
         joystick = j;
     }
-    
+
     public void addListener(JoystickListener listener) {
         joystick.addJoystickListener(listener);
         listeners.add(listener);
     }
     
-    public void remmoveListener(JoystickListener listener) {
+    public void removeListener(JoystickListener listener) {
         joystick.removeJoystickListener(listener);
         listeners.remove(listener);
     }
     
     public void removeAllListeners() {
-        List<JoystickListener> tmpListeners = new ArrayList<JoystickListener>(listeners);
+        List<JoystickListener> tmpListeners = new ArrayList<>(listeners);
         for (JoystickListener l : tmpListeners) {
-            remmoveListener(l);
+            removeListener(l);
         }
     }
-    
-    public Joystick getJoystick() {
-        return joystick;
+
+    public void setListeners(List<JoystickListener> listeners) {
+        this.listeners = listeners;
+    }
+
+    public List<JoystickListener> getListeners() {
+        return listeners;
     }
     
     public float getX() {

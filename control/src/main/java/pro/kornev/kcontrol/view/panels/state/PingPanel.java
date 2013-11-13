@@ -1,8 +1,12 @@
 package pro.kornev.kcontrol.view.panels.state;
 
 import pro.kornev.kcar.protocol.Data;
-import pro.kornev.kcontrol.service.RelationsController;
+import pro.kornev.kcontrol.service.joystick.KJoystick;
+import pro.kornev.kcontrol.service.network.NetworkService;
+import pro.kornev.kcontrol.service.network.NetworkServiceListener;
 import pro.kornev.kcontrol.view.GBLHelper;
+import pro.kornev.kcontrol.view.MainWindow;
+import pro.kornev.kcontrol.view.panels.settings.SettingsListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,10 +28,11 @@ public class PingPanel extends JPanel {
     private JLabel proxyStatus;
     private JLabel androidStatus;
     private JLabel stmStatus;
+    private NetworkService networkService;
 
     public PingPanel() {
         super();
-        setBorder(BorderFactory.createTitledBorder("Proxy settings"));
+        setBorder(BorderFactory.createTitledBorder("Ping all systems"));
         setLayout(new GridBagLayout());
 
         JButton pingButton = new JButton("Ping");
@@ -51,11 +56,45 @@ public class PingPanel extends JPanel {
         ActionListener pingButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (networkService == null) {
+                    return;
+                }
                 new Thread(new Ping()).start();
             }
         };
         pingButton.addActionListener(pingButtonListener);
+
+        SettingsListener sl = new SettingsListener() {
+            @Override
+            public void changeJoystick(KJoystick joystick) {
+            }
+
+            @Override
+            public void changeProxy(NetworkService ns) {
+                networkService = ns;
+                networkService.addListener(networkServiceListener);
+            }
+        };
+        MainWindow.settingsPanel.addListener(sl);
     }
+
+    private NetworkServiceListener networkServiceListener = new NetworkServiceListener() {
+        @Override
+        public void onPackageReceive(Data data) {
+            if (data.cmd != 1) {
+                return;
+            }
+            if (data.bData == 1) {
+                proxyStatus.setText(STATUS_OK);
+            }
+            else if (data.bData == 2) {
+                androidStatus.setText(STATUS_OK);
+            }
+            else if (data.bData == 3) {
+                stmStatus.setText(STATUS_OK);
+            }
+        }
+    };
 
     private class Ping implements Runnable {
 
@@ -65,33 +104,19 @@ public class PingPanel extends JPanel {
             androidStatus.setText(STATUS_DEFAULT);
             stmStatus.setText(STATUS_DEFAULT);
 
-            Data ping = new Data();
-            ping.id = 1;
-            ping.cmd = 1;
-            ping.type = 0;
-            ping.bData = 0;
+            Data data = new Data();
+            data.id = 1;
+            data.cmd = 1;
+            data.type = 0;
+            data.bData = 0;
 
-            RelationsController.getOutputQueue().add(ping);
-            long endTime = System.currentTimeMillis() + PING_TIMEOUT;
-            while (endTime > System.currentTimeMillis()) {
-                if (RelationsController.getInputQueue().isEmpty()) {
-                    continue;
-                }
-                Data response = RelationsController.getInputQueue().peek();
-                if (response.cmd != 1) {
-                    continue;
-                }
-                RelationsController.getInputQueue().remove(response);
-                if (response.bData == 1) {
-                    proxyStatus.setText(STATUS_OK);
-                }
-                else if (response.bData == 2) {
-                    androidStatus.setText(STATUS_OK);
-                }
-                else if (response.bData == 3) {
-                    stmStatus.setText(STATUS_OK);
-                }
+            networkService.send(data);
+
+            try {
+                Thread.sleep(PING_TIMEOUT);
+            } catch (InterruptedException e) {
             }
+
             if (proxyStatus.getText().equals(STATUS_DEFAULT)) {
                 proxyStatus.setText(STATUS_ERROR);
             }

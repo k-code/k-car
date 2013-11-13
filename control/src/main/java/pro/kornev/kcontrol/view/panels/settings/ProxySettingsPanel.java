@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,10 +19,12 @@ import java.awt.event.ActionListener;
 public class ProxySettingsPanel extends JPanel {
     private JTextField proxyHost;
     private JTextField proxyPort;
+    private Set<SettingsListener> settingsListeners;
+    private NetworkService networkService;
 
-
-    public ProxySettingsPanel() {
+    public ProxySettingsPanel(Set<SettingsListener> listeners) {
         super();
+        this.settingsListeners = listeners;
         setBorder(BorderFactory.createTitledBorder("Proxy settings"));
         setLayout(new GridBagLayout());
 
@@ -30,6 +33,21 @@ public class ProxySettingsPanel extends JPanel {
         proxyHost = new JTextField("kornev.pro");
         proxyPort = new JTextField("6781");
         JButton connectButton = new JButton("Connect");
+        ActionListener connectButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (networkService != null) {
+                    networkService.shutdown();
+                }
+                String host = proxyHost.getText();
+                int port = Integer.valueOf(proxyPort.getText());
+                networkService = new NetworkService(host, port);
+
+                for (SettingsListener listener: settingsListeners) {
+                    listener.changeProxy(networkService);
+                }
+            }
+        };
         connectButton.addActionListener(connectButtonListener);
 
         GBLHelper gbl = GBLHelper.create().weightH(1).fillH().margin(2, 3);
@@ -41,13 +59,4 @@ public class ProxySettingsPanel extends JPanel {
         add(connectButton, gbl.setGrid(0, 2).colSpan(2));
     }
 
-    private ActionListener connectButtonListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String host = proxyHost.getText();
-            int port = Integer.valueOf(proxyPort.getText());
-            NetworkService networkService = new NetworkService(host, port);
-            new Thread(networkService).start();
-        }
-    };
 }
