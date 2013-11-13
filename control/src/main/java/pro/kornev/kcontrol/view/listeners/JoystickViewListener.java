@@ -1,7 +1,7 @@
-package pro.kornev.kcontrol.view;
+package pro.kornev.kcontrol.view.listeners;
 
 import pro.kornev.kcontrol.service.joystick.KJoystick;
-import pro.kornev.kcontrol.view.panels.JoystickViewPanel;
+import pro.kornev.kcontrol.view.panels.state.JoystickViewPanel;
 
 import com.centralnexus.input.Joystick;
 import com.centralnexus.input.JoystickListener;

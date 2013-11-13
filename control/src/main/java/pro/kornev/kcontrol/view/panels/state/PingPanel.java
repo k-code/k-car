@@ -1,4 +1,4 @@
-package pro.kornev.kcontrol.view.panels;
+package pro.kornev.kcontrol.view.panels.state;
 
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcontrol.service.RelationsController;
@@ -48,17 +48,29 @@ public class PingPanel extends JPanel {
         add(stmStatus, gbl.setGrid(1,2));
         add(pingButton, gbl.setGrid(0,3).colSpan());
 
+        ActionListener pingButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Thread(new Ping()).start();
+            }
+        };
         pingButton.addActionListener(pingButtonListener);
     }
-    
-    private ActionListener pingButtonListener = new ActionListener() {
+
+    private class Ping implements Runnable {
+
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void run() {
+            proxyStatus.setText(STATUS_DEFAULT);
+            androidStatus.setText(STATUS_DEFAULT);
+            stmStatus.setText(STATUS_DEFAULT);
+
             Data ping = new Data();
             ping.id = 1;
             ping.cmd = 1;
             ping.type = 0;
             ping.bData = 0;
+
             RelationsController.getOutputQueue().add(ping);
             long endTime = System.currentTimeMillis() + PING_TIMEOUT;
             while (endTime > System.currentTimeMillis()) {
@@ -90,5 +102,5 @@ public class PingPanel extends JPanel {
                 stmStatus.setText(STATUS_ERROR);
             }
         }
-    };
+    }
 }

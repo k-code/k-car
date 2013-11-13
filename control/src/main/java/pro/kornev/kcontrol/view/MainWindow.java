@@ -11,11 +11,13 @@ import javax.swing.event.ChangeListener;
 import com.centralnexus.input.Joystick;
 
 import pro.kornev.kcontrol.service.RelationsController;
-import pro.kornev.kcontrol.view.panels.DistanceViewPanel;
-import pro.kornev.kcontrol.view.panels.JoystickViewPanel;
-import pro.kornev.kcontrol.view.panels.PingPanel;
+import pro.kornev.kcontrol.view.panels.state.DistanceViewPanel;
+import pro.kornev.kcontrol.view.panels.state.JoystickViewPanel;
+import pro.kornev.kcontrol.view.panels.state.PingPanel;
 import pro.kornev.kcontrol.view.panels.settings.ChangeSettingsListener;
 import pro.kornev.kcontrol.view.panels.settings.SettingsPanel;
+import pro.kornev.kcontrol.view.panels.state.SystemStatePanel;
+import pro.kornev.kcontrol.view.panels.state.SystemStatePanel;
 
 public final class MainWindow extends JFrame implements Runnable {
     private static final long serialVersionUID = 6690894233205194578L;
@@ -35,20 +37,8 @@ public final class MainWindow extends JFrame implements Runnable {
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
 
-        JoystickViewPanel joystickViewPanel = new JoystickViewPanel();
-        DistanceViewPanel distanceViewPanel = new DistanceViewPanel();
-
-        RelationsController.setJoystickView(joystickViewPanel);
-        RelationsController.setDistanceViewPanel(distanceViewPanel);
-
-        JPanel statusViewPanel = new JPanel(new GridBagLayout());
-
-        statusViewPanel.add(joystickViewPanel, GBLHelper.create().setGrid(0, 0).fillH().anchorT().margin(0, 3));
-        statusViewPanel.add(distanceViewPanel, GBLHelper.create().setGrid(0, 1).fillH().anchorT().margin(0, 3));
-        statusViewPanel.add(new PingPanel(), GBLHelper.create().setGrid(0, 2).fillH().anchorT().margin(0, 3));
-
         JTabbedPane mainTabbedPane = new JTabbedPane();
-        mainTabbedPane.add("Status view", statusViewPanel);
+        mainTabbedPane.add("State view", new SystemStatePanel());
 
         mainTabbedPane.addChangeListener(new ChangeListener() {
             @Override

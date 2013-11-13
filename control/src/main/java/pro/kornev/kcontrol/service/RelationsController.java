@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcontrol.service.joystick.DriverJoystickListener;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
-import pro.kornev.kcontrol.view.JoystickViewListener;
+import pro.kornev.kcontrol.view.listeners.JoystickViewListener;
 import pro.kornev.kcontrol.view.graphics.Copter3dView;
-import pro.kornev.kcontrol.view.panels.DistanceViewPanel;
-import pro.kornev.kcontrol.view.panels.JoystickViewPanel;
+import pro.kornev.kcontrol.view.panels.state.DistanceViewPanel;
+import pro.kornev.kcontrol.view.panels.state.JoystickViewPanel;
 
 import com.centralnexus.input.Joystick;
 
