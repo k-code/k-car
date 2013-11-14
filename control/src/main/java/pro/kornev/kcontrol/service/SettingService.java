@@ -14,13 +14,14 @@ import java.util.Set;
  * Time: 15:13
  */
 public enum  SettingService {
-    i; 
+    i;
     private Set<SettingsListener> settingsListeners;
     private JoystickService joystickService;
 
     private SettingService() {
-        joystickService = new JoystickService();
         settingsListeners = new HashSet<>();
+        joystickService = new JoystickService();
+        settingsListeners.add(joystickService);
     }
 
     public void fireChangeJoystick(KJoystick joystick) {

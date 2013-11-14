@@ -14,21 +14,20 @@ import pro.kornev.kcontrol.service.network.ProxyService;
  * Date: 13.11.13
  * Time: 15:51
  */
-public class JoystickService implements JoystickListener {
+public class JoystickService implements JoystickListener, SettingsListener {
     private ProxyService proxyService;
     private boolean liveLed = false;
 
     public JoystickService() {
-        SettingService.i.addListener(new SettingsListener() {
-            @Override
-            public void changeJoystick(KJoystick j) {
-            }
+    }
 
-            @Override
-            public void changeProxy(ProxyService ps) {
-                proxyService = ps;
-            }
-        });
+    @Override
+    public void changeJoystick(KJoystick j) {
+    }
+
+    @Override
+    public void changeProxy(ProxyService ps) {
+        proxyService = ps;
     }
 
     @Override

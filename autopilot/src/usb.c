@@ -51,6 +51,10 @@ void USB_read(uint8_t *buf, uint32_t len) {
 		return;
 	}
 	if (data.cmd == 1) {
+		data.bData = 3;
+		USB_write(data);
+	}
+	if (data.cmd == 2) {
 		if (data.bData == 0) {
 			LEDS_live(LEDS_Off);
 		}

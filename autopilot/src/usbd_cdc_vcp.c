@@ -178,6 +178,7 @@ uint16_t VCP_DataTx (uint8_t* Buf, uint32_t Len)
 static uint16_t VCP_DataRx (uint8_t* buf, uint32_t len)
 {
 	//VCP_DataTx(buf, len);
+	LEDS_trigger(!LEDS_trigger_state());
 	USB_read(buf, len);
 	return USBD_OK;
 }

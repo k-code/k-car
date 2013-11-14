@@ -36,12 +36,12 @@ int main(void) {
 		else {
 			MOTORS_right(100);
 		}*/
-		PROTOCOL_data data = {0,0,0,0,0};//PROTOCOL_emptyData;
+		/*PROTOCOL_data data = {0,0,0,0,0};//PROTOCOL_emptyData;
 		data.id = 1;
 		data.cmd = 2;
 		data.type = 0;
 		data.bData = 3;
-		USB_write(data);
+		USB_write(data);*/
 		/*LEDS_live(LEDS_On);
 		TIME_delay(US_distance*10);
 		LEDS_live(LEDS_Off);

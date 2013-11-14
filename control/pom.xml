@@ -7,7 +7,7 @@
 	<name>k-control</name>
 
 	<properties>
-		<java.version>1.6</java.version>
+		<java.version>1.7</java.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<logback.version>1.0.0</logback.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

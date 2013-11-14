@@ -1,6 +1,5 @@
 package pro.kornev.kcontrol.view.panels.state;
 
-import pro.kornev.kcontrol.service.RelationsController;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
 
 import javax.swing.*;

@@ -29,8 +29,8 @@
         <module name="proxy" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="proxy" target="1.6" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="proxy" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

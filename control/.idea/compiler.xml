@@ -32,7 +32,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
-      <module name="k-control" target="1.6" />
+      <module name="k-control" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
