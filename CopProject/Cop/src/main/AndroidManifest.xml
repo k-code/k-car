@@ -4,10 +4,15 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-feature android:name="android.hardware.usb.host" />
+    <uses-feature android:name="android.hardware.usb.host" android:required="true" />
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-sdk
         android:minSdkVersion="12"
@@ -48,6 +53,7 @@
         <service android:name=".services.UsbService" />
         <service android:name=".services.NetworkService" />
         <service android:name=".services.DistributionService" />
+        <service android:name=".services.VideoService" />
     </application>
 
 </manifest>

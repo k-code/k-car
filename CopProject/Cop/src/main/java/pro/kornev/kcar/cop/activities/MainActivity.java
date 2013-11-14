@@ -19,6 +19,7 @@ import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.services.NetworkService;
 import pro.kornev.kcar.cop.services.UsbService;
+import pro.kornev.kcar.cop.services.VideoService;
 
 public class MainActivity extends Activity {
     private Button runButton;
@@ -63,6 +64,8 @@ public class MainActivity extends Activity {
             startService(usbServiceIntent);
             Intent networkServiceIntent = new Intent(this, NetworkService.class);
             startService(networkServiceIntent);
+            Intent videoServiceIntent = new Intent(this, VideoService.class);
+            startService(videoServiceIntent);
         }
         setRunButtonText();
     }
