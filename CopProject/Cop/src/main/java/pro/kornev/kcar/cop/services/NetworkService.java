@@ -113,6 +113,11 @@ public class NetworkService extends Service {
             Gson gson = new Gson();
             while (State.isServiceRunning()) {
                 try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
                     if (queue.isEmpty()) continue;
                     Data data = queue.poll();
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));

@@ -139,6 +139,11 @@ class Writer implements Runnable {
     public void run() {
         db.putLog("Start USB writer");
         while (State.isServiceRunning()) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             if (queue.size() == 0) continue;
             db.putLog("Write data to USB");
             Data data = queue.poll();

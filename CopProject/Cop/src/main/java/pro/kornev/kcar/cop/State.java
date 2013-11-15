@@ -19,8 +19,8 @@ public class State {
     private static String proxyServer;
     private static Queue<Data> toControlQueue = new LinkedBlockingQueue<Data>();
     private static Queue<Data> fromControlQueue = new LinkedBlockingQueue<Data>();
-    private static Queue<Data> toUsbQueue = new LinkedBlockingQueue<Data>();
-    private static Queue<Data> fromUsbQueue = new LinkedBlockingQueue<Data>();
+    private static Queue<Data> toUsbQueue = fromControlQueue;
+    private static Queue<Data> fromUsbQueue = toControlQueue;
 
     public static UsbSerialDriver getUsbSerialDriver() {
         return usbSerialDriver;
