@@ -10,6 +10,8 @@ JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(JNIEnv
     jfieldID ftype = env->GetFieldID(clazz, "type", "B");
     jfieldID fbData = env->GetFieldID(clazz, "bData", "B");
     jfieldID fiData = env->GetFieldID(clazz, "iData", "I");
+    jfieldID faSize = env->GetFieldID(clazz, "aSize", "I");
+    jfieldID faData = env->GetFieldID(clazz, "aData", "[B");
 
     // Extract data from Data object
     jint id = env->GetIntField(jdata, fid);
@@ -17,6 +19,8 @@ JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(JNIEnv
     jbyte type = env->GetByteField(jdata, ftype);
     jbyte bData = env->GetByteField(jdata, fbData);
     jint iData = env->GetIntField(jdata, fiData);
+    jint aSize = env->GetIntField(jdata, faSize);
+    jbyteArray aData = static_cast<jbyteArray>( env->GetObjectField( jdata, faData ) );
 
     // Create and fill POTOCOL_data
     PROTOCOL_data data;
@@ -25,6 +29,15 @@ JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(JNIEnv
     data.type = (unsigned char)type;
     data.bData = (unsigned char)bData;
     data.iData = (unsigned int)iData;
+    data.aSize = (unsigned int)aSize;
+
+    data.aData = (unsigned char *)malloc(sizeof(unsigned char)*aSize);
+    jbyte *jaData = (jbyte *)malloc(sizeof(jbyte)*aSize);
+
+    env->GetByteArrayRegion(aData, 0, aSize, jaData);
+    for (int i=0; i<data.aSize; i++) {
+        data.aData[i] = (unsigned char)jaData[i];
+    }
 
     // Convert data to array
     unsigned char b[PROTOCOL_MAX_FRAME_SIZE];
@@ -66,6 +79,21 @@ JNIEXPORT jobject JNICALL Java_pro_kornev_kcar_protocol_Protocol_fromByteArray(J
     env->SetByteField(jdata, env->GetFieldID(jdc, "type", "B" ), (jbyte)data.type);
     env->SetByteField(jdata, env->GetFieldID(jdc, "bData", "B" ), (jbyte)data.bData);
     env->SetIntField(jdata, env->GetFieldID(jdc, "iData", "I" ), (jint)data.iData);
+    env->SetIntField(jdata, env->GetFieldID(jdc, "aSize", "I" ), (jint)data.aSize);
+
+    jbyteArray jaData = env->NewByteArray(data.aSize);
+
+    jbyte *aData = (jbyte *)malloc(sizeof(jbyte)*data.aSize);
+
+    for (int i=0; i<data.aSize; i++) {
+        aData[i] = data.aData[i];
+    }
+
+    //jbyteArray buf = env->NewByteArray(len);  // allocate
+    env->SetByteArrayRegion(jaData, 0, data.aSize, aData);  // copy
+
+
+    env->SetObjectField(jdata, env->GetFieldID(jdc, "aData", "[B" ), (jbyteArray)jaData);
 
     return jdata;
 }

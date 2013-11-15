@@ -13,4 +13,6 @@ public class Data {
     public byte type;
     public byte bData;
     public int iData;
+    public int aSize;
+    public byte[] aData;
 }

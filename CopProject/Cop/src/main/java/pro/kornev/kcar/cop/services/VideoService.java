@@ -1,13 +1,10 @@
 package pro.kornev.kcar.cop.services;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
@@ -16,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import pro.kornev.kcar.protocol.Data;
 
 /**
  *
@@ -36,7 +35,16 @@ public class VideoService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        startStopRecord();
+        //startStopRecord();
+
+        mCamera = getCameraInstance();
+        mCamera.setPreviewCallback(new Camera.PreviewCallback() {
+            @Override
+            public void onPreviewFrame(byte[] buf, Camera camera) {
+                Data data = new Data();
+
+            }
+        });
         return START_STICKY;
     }
 
@@ -102,25 +110,20 @@ public class VideoService extends Service {
         }
     }
 
-    /** Create a file Uri for saving an image or video */
-    private static Uri getOutputMediaFileUri(int type){
-        return Uri.fromFile(getOutputMediaFile(type));
-    }
-
     /** Create a File for saving an image or video */
     private static File getOutputMediaFile(int type){
         // To be safe, you should check that the SDCard is mounted
         // using Environment.getExternalStorageState() before doing this.
 
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "MyCameraApp");
+        File mediaStorageDir = new File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), "cop");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
 
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
-                Log.d("MyCameraApp", "failed to create directory");
+                Log.d("cop", "failed to create directory");
                 return null;
             }
         }
