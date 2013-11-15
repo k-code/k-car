@@ -3,8 +3,6 @@
 #define FRAME_HEAD 0xAAAAAAAA
 #define INT_SIZE 4
 #define BYTE_SIZE 1
-#define DATA_TYPE_CHAR 0x00
-#define DATA_TYPE_INT 0x01
 
 const t_byte CRC8_Table[256] = {
     0x00, 0x31, 0x62, 0x53, 0xC4, 0xF5, 0xA6, 0x97,
@@ -46,6 +44,7 @@ static t_int byteArrayToInt(t_byte *buf);
 static void intToByteArray(t_int val, t_byte *buf);
 static t_int putIntToBuf(t_byte *buf, t_int bufLen, t_int val);
 static t_int putByteToBuf(t_byte *buf, t_int bufLen, t_byte val);
+static t_int putArrayToBuf(t_byte *buf, t_int bufLen, t_byte *array, t_int aSize);
 static t_byte crc8(t_byte *pcBlock, t_byte len);
 
 t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf) {
@@ -53,29 +52,32 @@ t_int PROTOCOL_toByteArray(PROTOCOL_data data, t_byte *buf) {
     t_int bufLen = 0;
 
     // Add frame head code
-    bufLen = putIntToBuf(buf, bufLen, FRAME_HEAD);
+    bufLen += putIntToBuf(buf, bufLen, FRAME_HEAD);
     // Alloc memory fro frame length
-    bufLen = putIntToBuf(buf, bufLen, 0); // frames length will be set in the end of build whole frame
+    bufLen += putIntToBuf(buf, bufLen, 0); // frames length will be set in the end of build whole frame
     // Add protocol version
-    bufLen = putByteToBuf(buf, bufLen, PROTOCOL_VERSION);
+    bufLen += putByteToBuf(buf, bufLen, PROTOCOL_VERSION);
     // Add data ID
-    bufLen = putIntToBuf(buf, bufLen, data.id);
+    bufLen += putIntToBuf(buf, bufLen, data.id);
     // Add command
-    bufLen = putByteToBuf(buf, bufLen, data.cmd);
+    bufLen += putByteToBuf(buf, bufLen, data.cmd);
     // Add type
-    bufLen = putByteToBuf(buf, bufLen, data.type);
+    bufLen += putByteToBuf(buf, bufLen, data.type);
     // Add data vale
     if (data.type == DATA_TYPE_CHAR) {
-        bufLen = putByteToBuf(buf, bufLen, data.bData);
+        bufLen += putByteToBuf(buf, bufLen, data.bData);
     } else if (data.type == DATA_TYPE_INT) {
-        bufLen = putIntToBuf(buf, bufLen, data.iData);
+        bufLen += putIntToBuf(buf, bufLen, data.iData);
+    } else if (data.type == DATA_TYPE_ARRAY) {
+        bufLen += putIntToBuf(buf, bufLen, data.aSize);
+        bufLen += putArrayToBuf(buf, bufLen, data.aData, data.aSize);
     }
 
     // Set frame size
     intToByteArray(bufLen+BYTE_SIZE, &buf[INT_SIZE]);
 
     // Add CRC
-    bufLen = putByteToBuf(buf, bufLen, crc8(buf, bufLen));
+    bufLen += putByteToBuf(buf, bufLen, crc8(buf, bufLen));
 
     return bufLen;
 }
@@ -132,21 +134,30 @@ PROTOCOL_data PROTOCOL_fromByteArray(t_byte *buf, t_int bufLen) {
         data.bData = buf[framePos];
     } else if (data.type == DATA_TYPE_INT) {
         data.iData = byteArrayToInt(&buf[framePos]);
+    } else if (data.type == DATA_TYPE_ARRAY) {
+        data.aSize = byteArrayToInt(&buf[framePos]);
+        framePos += INT_SIZE;
+        data.aData = &buf[framePos];
     }
 
     return data;
 }
 
 inline t_int putIntToBuf(t_byte *buf, t_int bufLen, t_int val) {
-    //buf = (t_byte *) realloc(buf, bufLen + INT_SIZE);
     intToByteArray(val, &buf[bufLen]);
-    return bufLen + INT_SIZE;
+    return INT_SIZE;
 }
 
 inline t_int putByteToBuf(t_byte *buf, t_int bufLen, t_byte val) {
-    //buf = (t_byte *) realloc(buf, bufLen + 4);
     buf[bufLen] = val;
-    return bufLen + BYTE_SIZE;
+    return BYTE_SIZE;
+}
+
+inline t_int putArrayToBuf(t_byte *buf, t_int bufLen, t_byte *array, t_int aSize) {
+        for (int i=0; i<aSize; i++) {
+            buf[bufLen+i] = array[i];
+        }
+    return aSize;
 }
 
 inline t_int byteArrayToInt(t_byte *buf) {
