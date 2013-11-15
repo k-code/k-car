@@ -21,7 +21,7 @@ public class DistanceViewPanel extends CustomPanel {
         super("Distance");
 		initLabels();
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleWithFixedDelay(new DistanceRequest(), 0, 10, TimeUnit.SECONDS);
+        //executor.scheduleWithFixedDelay(new DistanceRequest(), 0, 10, TimeUnit.SECONDS);
 	}
 
 	private void initLabels() {

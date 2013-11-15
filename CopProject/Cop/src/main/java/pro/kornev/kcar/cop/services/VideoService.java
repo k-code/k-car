@@ -2,18 +2,31 @@ package pro.kornev.kcar.cop.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.SurfaceView;
+import android.widget.Button;
+import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
+import pro.kornev.kcar.cop.R;
+import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.protocol.Data;
 
 /**
@@ -38,13 +51,36 @@ public class VideoService extends Service {
         //startStopRecord();
 
         mCamera = getCameraInstance();
+
+        Camera.Parameters parameters = mCamera.getParameters();
+        parameters.setPreviewFpsRange(1, 1);
+        parameters.setPreviewSize(64, 48);
+        parameters.setPictureFormat(ImageFormat.JPEG);
+        mCamera.setParameters(parameters);
+
         mCamera.setPreviewCallback(new Camera.PreviewCallback() {
             @Override
             public void onPreviewFrame(byte[] buf, Camera camera) {
-                Data data = new Data();
+                Camera.Parameters parameters = camera.getParameters();
+                Camera.Size size = parameters.getPreviewSize();
+                if (size == null) return;
 
+                YuvImage image = new YuvImage(buf, parameters.getPreviewFormat(),
+                        size.width, size.height, null);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), 90, baos);
+
+                Data data = new Data();
+                data.id = 3;
+                data.cmd = 5;
+                data.type = 2;
+                data.aSize = buf.length;
+                data.aData = baos.toByteArray();
+                State.getToControlQueue().add(data);
             }
         });
+        mCamera.startPreview();
         return START_STICKY;
     }
 
@@ -165,6 +201,7 @@ public class VideoService extends Service {
         startStopRecord();
         releaseMediaRecorder();       // if you are using MediaRecorder, release it first
         releaseCamera();
+        mCamera.stopPreview();
         return true;
     }
 
