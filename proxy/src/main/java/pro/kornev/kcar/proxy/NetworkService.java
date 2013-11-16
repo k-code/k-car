@@ -16,16 +16,20 @@ import java.util.Queue;
  * Time: 20:32
  */
 public final class NetworkService implements Runnable {
-    private static final Logger log = LoggerFactory.getLogger(NetworkService.class);
     private static final int MAX_ERRORS = 10;
 
+    private final Logger log;
     private int port;
     private Queue<Data> inputQueue;
     private Queue<Data> outputQueue;
     private Gson gson;
+    private Reader reader = null;
+    private Writer writer = null;
+    private volatile boolean clientAccepted = false;
 
     public NetworkService(int port, Queue<Data> inputQueue, Queue<Data> outputQueue) {
         this.port = port;
+        this.log = LoggerFactory.getLogger("Network service: " + port);
         this.inputQueue = inputQueue;
         this.outputQueue = outputQueue;
         gson = new Gson();
@@ -34,19 +38,29 @@ public final class NetworkService implements Runnable {
     @Override
     public void run() {
         try {
+            log.info("Run listener on port {}", port);
             ServerSocket listener = new ServerSocket(port);
-            log.debug("Run listener on port {}", port);
+            log.debug("Start cleaner", port);
+            new Thread(new Cleaner(listener)).start();
             while (!listener.isClosed()) {
                 Socket client = listener.accept();
-                log.info("Accept client");
-                Reader r = new Reader(client);
-                Writer w = new Writer(client);
-                Thread reader = new Thread(r);
-                Thread writer = new Thread(w);
-                reader.start();
-                writer.start();
-                reader.join();
-                writer.join();
+                log.info("Client accepted");
+
+                log.debug("Shutdown reader and writer");
+                if (reader != null) {
+                    reader.shutdown();
+                }
+                if (writer != null) {
+                    writer.shutdown();
+                }
+
+                log.debug("Start new reader and writer");
+                reader = new Reader(client);
+                writer = new Writer(client);
+                new Thread(reader).start();
+                new Thread(writer).start();
+                log.debug("Paused cleaner");
+                clientAccepted = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,9 +68,11 @@ public final class NetworkService implements Runnable {
     }
 
     class Reader implements Runnable {
+        private final Logger log;
         private Socket client;
 
         Reader(Socket client) {
+            this.log = LoggerFactory.getLogger("Reader: " + port);
             this.client = client;
         }
 
@@ -94,7 +110,16 @@ public final class NetworkService implements Runnable {
                         outputQueue.add(response);
                     }
                 }
-                log.debug("Read socket closed");
+                log.info("Read socket was closed", port);
+                clientAccepted = false;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void shutdown() {
+            try {
+                client.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -102,9 +127,11 @@ public final class NetworkService implements Runnable {
     }
 
     class Writer implements Runnable {
+        private final Logger log;
         private Socket client;
 
         Writer(Socket client) {
+            this.log = LoggerFactory.getLogger("Writer: " + port);
             this.client = client;
         }
 
@@ -115,17 +142,66 @@ public final class NetworkService implements Runnable {
 
                 while (!client.isClosed()) {
                     Data data = outputQueue.poll();
-                    if (data == null) continue;
+                    if (data == null) {
+                        sleep();
+                        continue;
+                    }
                     String s = gson.toJson(data);
                     log.debug("Write line: " + s);
                     output.write(gson.toJson(data));
                     output.newLine();
                     output.flush();
                 }
-                log.debug("Write socket closed");
+                log.info("Write socket was closed", port);
+                clientAccepted = false;
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        public void shutdown() {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    class Cleaner implements Runnable {
+        private final Logger log;
+        private ServerSocket listener;
+
+        Cleaner(ServerSocket listener) {
+            this.log = LoggerFactory.getLogger("Cleaner: " + port);
+            this.listener = listener;
+        }
+
+        @Override
+        public void run() {
+            while (!listener.isClosed()) {
+                if (!clientAccepted) {
+                    Data data = outputQueue.poll();
+                    if (data == null) {
+                        sleep();
+                    }
+                    else {
+                        log.debug("Data with id {} removed", data.id);
+                    }
+                }
+                else {
+                    sleep();
+                }
+            }
+            log.info("Cleaner was closed", port);
+        }
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

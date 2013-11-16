@@ -144,7 +144,7 @@ class Writer implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (queue.size() == 0) continue;
+            if (queue.size() == 0 || driver == null) continue;
             db.putLog("Write data to USB");
             Data data = queue.poll();
             int bLen = Protocol.toByteArray(data, bytes);

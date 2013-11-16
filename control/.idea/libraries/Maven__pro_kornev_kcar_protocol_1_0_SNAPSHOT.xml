@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/pro/kornev/kcar.protocol/1.0-SNAPSHOT/kcar.protocol-1.0-SNAPSHOT-sources.jar!/" />
+      <root url="file://$PROJECT_DIR$/../protocol/src/main/java" />
     </SOURCES>
   </library>
 </component>

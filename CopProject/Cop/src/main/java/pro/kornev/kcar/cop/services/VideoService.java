@@ -50,13 +50,12 @@ public class VideoService extends Service {
         super.onStartCommand(intent, flags, startId);
         //startStopRecord();
 
-        mCamera = getCameraInstance();
+        mCamera = State.getCamera();
 
-        Camera.Parameters parameters = mCamera.getParameters();
+        /*Camera.Parameters parameters = mCamera.getParameters();
         parameters.setPreviewFpsRange(1, 1);
         parameters.setPreviewSize(64, 48);
-        parameters.setPictureFormat(ImageFormat.JPEG);
-        mCamera.setParameters(parameters);
+        mCamera.setParameters(parameters);*/
 
         mCamera.setPreviewCallback(new Camera.PreviewCallback() {
             @Override
@@ -79,7 +78,13 @@ public class VideoService extends Service {
                 data.aData = baos.toByteArray();
                 State.getToControlQueue().add(data);
             }
-        });
+        });/*
+        SurfaceView view = new SurfaceView(this);
+        try {
+            mCamera.setPreviewDisplay(view.getHolder());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
         mCamera.startPreview();
         return START_STICKY;
     }

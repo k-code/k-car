@@ -29,7 +29,7 @@ public class ProxySettingsPanel extends JPanel {
 
         JLabel proxyHostLabel = new JLabel("Proxy host");
         JLabel proxyPartLabel = new JLabel("Proxy port");
-        proxyHost = new JTextField("10.69.30.50");
+        proxyHost = new JTextField("kornev.pro");
         proxyPort = new JTextField("6781");
         JButton connectButton = new JButton("Connect");
         ActionListener connectButtonListener = new ActionListener() {

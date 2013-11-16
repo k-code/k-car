@@ -19,7 +19,7 @@ lib_so: c_obj
 c_obj: jni/jniprotocol.cpp jni/protocol.c java_headers
 	mkdir -p bin
 	g++ -o bin/libprotocol.o -I"/usr/lib/jvm/default-java/include" -I"/usr/lib/jvm/default-java/include/linux" -fpic -c jni/jniprotocol.cpp
-	g++ -o bin/protocol.o -c jni/protocol.c
+	g++ -fPIC -o bin/protocol.o -c jni/protocol.c
 
 java_headers: java_class_files
 	javah -jni -o jni/jniprotocol.h -classpath classes pro.kornev.kcar.protocol.Protocol
