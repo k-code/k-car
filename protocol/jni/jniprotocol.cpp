@@ -31,12 +31,13 @@ JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_toByteArray(JNIEnv
     data.iData = (unsigned int)iData;
     data.aSize = (unsigned int)aSize;
 
-    data.aData = (unsigned char *)malloc(sizeof(unsigned char)*aSize);
-    jbyte *jaData = (jbyte *)malloc(sizeof(jbyte)*aSize);
-
-    env->GetByteArrayRegion(aData, 0, aSize, jaData);
-    for (int i=0; i<data.aSize; i++) {
-        data.aData[i] = (unsigned char)jaData[i];
+    if (type == DATA_TYPE_ARRAY) {
+        data.aData = (unsigned char *)malloc(sizeof(unsigned char)*aSize);
+        jbyte *jaData = (jbyte *)malloc(sizeof(jbyte)*aSize);
+        env->GetByteArrayRegion(aData, 0, aSize, jaData);
+        for (int i=0; i<data.aSize; i++) {
+            data.aData[i] = (unsigned char)jaData[i];
+        }
     }
 
     // Convert data to array
