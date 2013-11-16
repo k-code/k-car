@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
@@ -33,13 +34,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         runButton = (Button)findViewById(R.id.maRunButton);
-        Camera c = State.getCamera();
-        SurfaceView sv = (SurfaceView)findViewById(R.id.maSurfaceView);
-        try {
-            c.setPreviewDisplay(sv.getHolder());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         setRunButtonText();
         State.setLogsEnabled(true);
     }
@@ -71,12 +65,15 @@ public class MainActivity extends Activity {
             }
             State.setProxyServer(proxy.getText().toString());
             State.setServiceRunning(true);
-            Intent usbServiceIntent = new Intent(this, UsbService.class);
-            startService(usbServiceIntent);
-            Intent networkServiceIntent = new Intent(this, NetworkService.class);
-            startService(networkServiceIntent);
+
+            if (State.getUsbSerialDriver() != null) {
+                Intent usbServiceIntent = new Intent(this, UsbService.class);
+                startService(usbServiceIntent);
+            }
             Intent videoServiceIntent = new Intent(this, VideoService.class);
             startService(videoServiceIntent);
+            Intent networkServiceIntent = new Intent(this, NetworkService.class);
+            startService(networkServiceIntent);
         }
         setRunButtonText();
     }

@@ -11,7 +11,9 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.Queue;
@@ -19,6 +21,7 @@ import java.util.Queue;
 import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 
 /**
  * @author vkornev
@@ -72,12 +75,19 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
-            Gson gson = new Gson();
-            while (State.isServiceRunning()) {
-                try {
-                    BufferedReader input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    String s = input.readLine();
-                    Data data = gson.fromJson(s, Data.class);
+            try {
+                InputStream input = client.getInputStream();
+                while (State.isServiceRunning()) {
+
+                    if (input.available() == 0) {
+                        sleep();
+                        continue;
+                    }
+
+                    byte[] buf = new byte[Protocol.getMaxLength()];
+                    int len = read(buf, input);
+                    Data data = Protocol.fromByteArray(buf, len);
+
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
                     if (data.cmd == 1 && data.bData == 0) {
                         Data response = new Data();
@@ -88,15 +98,20 @@ public class NetworkService extends Service {
                         State.getToControlQueue().add(response);
                     }
                     queue.add(data);
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-            }
-            try {
                 client.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        private int read(byte[] buf, InputStream input) throws IOException {
+            int len = 0;
+            while (input.available() > 0) {
+                len = input.read(buf, 0, buf.length-len);
+                sleep();
+            }
+            return len;
         }
     }
 
@@ -110,27 +125,21 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
-            Gson gson = new Gson();
-            while (State.isServiceRunning()) {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    if (queue.isEmpty()) continue;
+            try {
+                OutputStream output = client.getOutputStream();
+                while (State.isServiceRunning()) {
+                    if (queue.isEmpty()) {
+                        sleep();
+                        continue;
+                    }
                     Data data = queue.poll();
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
-                    BufferedWriter output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-                    String s = gson.toJson(data);
-                    output.write(s);
-                    output.newLine();
+
+                    byte[] buf = new byte[Protocol.getMaxLength()];
+                    int len = Protocol.toByteArray(data, buf);
+                    output.write(buf, 0, len);
                     output.flush();
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-            try {
                 client.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -142,5 +151,13 @@ public class NetworkService extends Service {
     public void onDestroy() {
         Toast.makeText(this, "Network service done", Toast.LENGTH_SHORT).show();
         State.setServiceRunning(false);
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

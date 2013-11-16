@@ -27,8 +27,8 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     public PreviewPanel(String title) {
         super(title);
         SettingService.i.addListener(this);
-        setMinimumSize(new Dimension(30, 30));
         label = new JLabel("qwew");
+        label.setMaximumSize(new Dimension(200, 200));
         add(label);
     }
 

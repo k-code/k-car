@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 
 import java.io.*;
 import java.net.Socket;
@@ -74,25 +75,24 @@ public final class ProxyService {
         public void run() {
             int errors = 0;
             try {
-                BufferedReader input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                InputStream input = client.getInputStream();
 
                 while (!client.isClosed()) {
                     if (errors > MAX_ERRORS) {
                         client.close();
                         break;
                     }
-                    String s = input.readLine();
-                    if (s == null) {
-                        errors++;
+                    if (input.available() == 0) {
+                        sleep();
                         continue;
                     }
-                    log.debug("Read line: " + s);
 
-                    Data data = gson.fromJson(s, Data.class);
-                    if (data == null) {
-                        errors++;
-                        continue;
-                    }
+                    byte[] buf = new byte[Protocol.getMaxLength()];
+
+                    int len = read(buf, input);
+
+                    Data data = Protocol.fromByteArray(buf, len);
+                    log.debug("Read command: " + data.cmd);
 
                     inputQueue.add(data);
                 }
@@ -101,6 +101,15 @@ public final class ProxyService {
                 e.printStackTrace();
             }
         }
+
+        private int read(byte[] buf, InputStream input) throws IOException {
+            int len = 0;
+            while (input.available() > 0) {
+                len = input.read(buf, len, buf.length-len);
+                sleep();
+            }
+            return len;
+        }
     }
 
     private class Writer implements Runnable {
@@ -108,15 +117,19 @@ public final class ProxyService {
         @Override
         public void run() {
             try {
-                BufferedWriter output = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+                OutputStream output = client.getOutputStream();
 
                 while (!client.isClosed()) {
                     Data data = outputQueue.poll();
-                    if (data == null) continue;
-                    String s = gson.toJson(data);
-                    log.debug("Write line: " + s);
-                    output.write(gson.toJson(data));
-                    output.newLine();
+                    if (data == null) {
+                        sleep();
+                        continue;
+                    }
+                    byte[] buf = new byte[Protocol.getMaxLength()];
+
+                    int len = Protocol.toByteArray(data, buf);
+                    log.debug("Write command: " + data.cmd);
+                    output.write(buf, 0, len);
                     output.flush();
                 }
                 log.debug("Write socket closed");
@@ -139,6 +152,14 @@ public final class ProxyService {
                     listener.onPackageReceive(data);
                 }
             }
+        }
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

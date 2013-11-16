@@ -23,7 +23,6 @@ public class State {
     private static Queue<Data> fromControlQueue = new LinkedBlockingQueue<Data>();
     private static Queue<Data> toUsbQueue = fromControlQueue;
     private static Queue<Data> fromUsbQueue = toControlQueue;
-    private static Camera camera = Camera.open();
 
     public static UsbSerialDriver getUsbSerialDriver() {
         return usbSerialDriver;
@@ -71,9 +70,5 @@ public class State {
 
     public static Queue<Data> getFromUsbQueue() {
         return fromUsbQueue;
-    }
-
-    public static Camera getCamera() {
-        return camera;
     }
 }
