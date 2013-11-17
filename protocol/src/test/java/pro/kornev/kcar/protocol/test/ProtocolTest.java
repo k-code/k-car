@@ -5,6 +5,11 @@ import org.junit.Test;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -54,5 +59,28 @@ public class ProtocolTest {
         for (int i=0; i < data.aSize; i++) {
             assertEquals(data.aData[i], newData.aData[i]);
         }
+    }
+
+    @Test
+    public void testStreams() throws Exception{
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        DataOutputStream outputStream = new DataOutputStream(byteArrayOutputStream);
+        for (int i=0; i<10; i++) {
+            Data data = new Data();
+            data.id = i;
+            data.cmd = (byte)i;
+            data.type = 0;
+            data.bData = 0;
+
+            Protocol.toOutputStream(data, outputStream);
+
+            DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+            Data newData = Protocol.fromInputStream(inputStream);
+            byteArrayOutputStream.reset();
+
+            assertEquals(data.id, newData.id);
+            assertEquals(data.cmd, newData.cmd);
+        }
+
     }
 }

@@ -71,7 +71,6 @@ public final class NetworkService implements Runnable {
     class Reader implements Runnable {
         private final Logger log;
         private Socket client;
-        private InputStream input;
 
         Reader(Socket client) {
             this.log = LoggerFactory.getLogger("Reader: " + port);
@@ -81,7 +80,7 @@ public final class NetworkService implements Runnable {
         @Override
         public void run() {
             try {
-                input = client.getInputStream();
+                DataInputStream input = new DataInputStream(client.getInputStream());
 
                 while (!client.isClosed()) {
                     if (input.available() == 0) {
@@ -89,9 +88,7 @@ public final class NetworkService implements Runnable {
                         continue;
                     }
 
-                    byte[] buf = new byte[Protocol.getMaxLength()];
-                    int len = read(buf, input);
-                    Data data = Protocol.fromByteArray(buf, len);
+                    Data data = Protocol.fromInputStream(input);
                     log.debug("Read command: " + data.cmd);
                     inputQueue.add(data);
 
@@ -109,15 +106,6 @@ public final class NetworkService implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
-        private int read(byte[] buf, InputStream input) throws IOException {
-            int len = 0;
-            while (input.available() > 0) {
-                len += input.read(buf, len, buf.length-len);
-                sleep();
-            }
-            return len;
         }
 
         public void shutdown() {
@@ -141,7 +129,7 @@ public final class NetworkService implements Runnable {
         @Override
         public void run() {
             try {
-                OutputStream output = client.getOutputStream();
+                DataOutputStream output = new DataOutputStream(client.getOutputStream());
 
                 while (!client.isClosed()) {
                     Data data = outputQueue.poll();
@@ -150,11 +138,8 @@ public final class NetworkService implements Runnable {
                         continue;
                     }
 
-                    byte[] buf = new byte[Protocol.getMaxLength()];
-                    int len = Protocol.toByteArray(data, buf);
                     log.debug("Write command: " + data.cmd);
-                    output.write(buf, 0, len);
-                    output.flush();
+                    Protocol.toOutputStream(data, output);
                 }
                 log.info("Write socket was closed", port);
                 clientAccepted = false;
