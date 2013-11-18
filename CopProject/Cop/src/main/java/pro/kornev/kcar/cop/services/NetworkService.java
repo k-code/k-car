@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -76,7 +78,7 @@ public class NetworkService extends Service {
         @Override
         public void run() {
             try {
-                InputStream input = client.getInputStream();
+                DataInputStream input = new DataInputStream(client.getInputStream());
                 while (State.isServiceRunning()) {
 
                     if (input.available() == 0) {
@@ -84,9 +86,7 @@ public class NetworkService extends Service {
                         continue;
                     }
 
-                    byte[] buf = new byte[Protocol.getMaxLength()];
-                    int len = read(buf, input);
-                    Data data = Protocol.fromByteArray(buf, len);
+                    Data data = Protocol.fromInputStream(input);
 
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
                     if (data.cmd == 1 && data.bData == 0) {
@@ -104,15 +104,6 @@ public class NetworkService extends Service {
                 e.printStackTrace();
             }
         }
-
-        private int read(byte[] buf, InputStream input) throws IOException {
-            int len = 0;
-            while (input.available() > 0) {
-                len = input.read(buf, 0, buf.length-len);
-                sleep();
-            }
-            return len;
-        }
     }
 
     class Writer implements Runnable {
@@ -126,7 +117,7 @@ public class NetworkService extends Service {
         @Override
         public void run() {
             try {
-                OutputStream output = client.getOutputStream();
+                DataOutputStream output = new DataOutputStream(client.getOutputStream());
                 while (State.isServiceRunning()) {
                     if (queue.isEmpty()) {
                         sleep();
@@ -135,10 +126,7 @@ public class NetworkService extends Service {
                     Data data = queue.poll();
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
 
-                    byte[] buf = new byte[Protocol.getMaxLength()];
-                    int len = Protocol.toByteArray(data, buf);
-                    output.write(buf, 0, len);
-                    output.flush();
+                    Protocol.toOutputStream(data, output);
                 }
                 client.close();
             } catch (IOException e) {
