@@ -116,3 +116,17 @@ static void initPins() {
 
     GPIO_ResetBits(GPIOB, GPIO_Pin_6|GPIO_Pin_7|GPIO_Pin_8|GPIO_Pin_9);
 }
+
+
+
+void MOTORS_LMS(uint32_t speed) {
+	if (speed >= 0) {
+		TIM_SetCompare1(TIM3, speed);
+		GPIO_ResetBits(GPIOB, GPIO_Pin_6);
+		GPIO_SetBits(GPIOB, GPIO_Pin_7);
+	} else {
+		TIM_SetCompare1(TIM3, speed);
+		GPIO_ResetBits(GPIOB, GPIO_Pin_6);
+		GPIO_SetBits(GPIOB, GPIO_Pin_7);
+	}
+}

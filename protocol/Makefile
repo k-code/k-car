@@ -1,5 +1,7 @@
 all: lib_so ndk_jar
-	
+	cp jni/protocol.c ../autopilot/src/
+	cp jni/protocol.h ../autopilot/inc/
+
 ndk_jar: ndk_lib_so
 	rm -rf jar
 	mv libs lib

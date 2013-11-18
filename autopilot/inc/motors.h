@@ -15,5 +15,7 @@ void MOTORS_forward(uint32_t speed);
 void MOTORS_back();
 void MOTORS_left();
 void MOTORS_right(uint32_t speed);
+void MOTORS_LMS(uint32_t speed);
+void MOTORS_RMS(uint32_t speed);
 
 #endif /* MOTORS_H_ */

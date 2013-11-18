@@ -20,8 +20,8 @@ public class DistanceViewPanel extends CustomPanel implements ProxyServiceListen
 	public DistanceViewPanel() {
         super("Distance");
 		initLabels();
-        /*ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleWithFixedDelay(new DistanceRequest(), 0, 10, TimeUnit.SECONDS);*/
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleWithFixedDelay(new DistanceRequest(), 0, 10, TimeUnit.SECONDS);
 	}
 
 	private void initLabels() {

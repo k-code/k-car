@@ -4,6 +4,7 @@
 #include "usbd_desc.h"
 #include "usbd_cdc_vcp.h"
 #include "leds.h"
+#include "ultrasonic.h"
 
 #ifdef USB_OTG_HS_INTERNAL_DMA_ENABLED
   #if defined ( __ICCARM__ ) /*!< IAR Compiler */
@@ -49,18 +50,24 @@ void USB_read(uint8_t *buf, uint32_t len) {
 	PROTOCOL_data data = PROTOCOL_fromByteArray(buf, len);
 	if (data.id == 0) {
 		return;
-	}
-	if (data.cmd == 1) {
+	} else if (data.cmd == 1) {
 		data.bData = 3;
 		USB_write(data);
-	}
-	if (data.cmd == 2) {
+	} else if (data.cmd == 2) {
 		if (data.bData == 0) {
 			LEDS_live(LEDS_Off);
 		}
 		else {
 			LEDS_live(LEDS_On);
 		}
+	} else if (data.cmd == 3) {
+		PROTOCOL_data data = PROTOCOL_empty_data;
+		data.id = 12;
+		data.cmd = 4;
+		data.type = 1;
+		data.iData = US_distance;
+		USB_write(data);
+	} else if (data.cmd == 9) {
 	}
 	/*
 	dataStackType tmp;
