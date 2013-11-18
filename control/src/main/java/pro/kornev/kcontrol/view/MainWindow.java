@@ -29,7 +29,7 @@ public final class MainWindow extends JFrame implements Runnable {
 
         JTabbedPane mainTabbedPane = new JTabbedPane();
         mainTabbedPane.add("State view", new SystemStatePanel());
-        mainTabbedPane.add("Settings panel", new SettingsPanel());
+        mainTabbedPane.add("Settings panel", new SettingsPanel(null));
 
         mainPanel.add(mainTabbedPane, GBLHelper.create().setGrid(0, 0).fillB().anchorT().colSpan().fillB());
 

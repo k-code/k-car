@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 import pro.kornev.kcar.cop.State;
@@ -31,6 +33,7 @@ import pro.kornev.kcar.protocol.Protocol;
  */
 public class NetworkService extends Service {
     private LogsDB db;
+    private static List<NetworkListener> listeners = new ArrayList<NetworkListener>();
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -68,11 +71,9 @@ public class NetworkService extends Service {
 
     class Reader implements Runnable {
         Socket client;
-        Queue<Data> queue;
 
         Reader(Socket s) {
             client = s;
-            queue = State.getFromControlQueue();
         }
 
         @Override
@@ -97,7 +98,9 @@ public class NetworkService extends Service {
                         response.bData = 2;
                         State.getToControlQueue().add(response);
                     }
-                    queue.add(data);
+                    for (NetworkListener l: listeners) {
+                        l.onDataReceived(data);
+                    }
                 }
                 client.close();
             } catch (IOException e) {
@@ -147,5 +150,13 @@ public class NetworkService extends Service {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void addListener(NetworkListener listener) {
+        listeners.add(listener);
+    }
+
+    public static void removeAllListeners() {
+        listeners.clear();
     }
 }

@@ -23,17 +23,15 @@ public final class NetworkService implements Runnable {
     private int port;
     private Queue<Data> inputQueue;
     private Queue<Data> outputQueue;
-    private Gson gson;
     private Reader reader = null;
     private Writer writer = null;
-    private volatile boolean clientAccepted = false;
+    private boolean clientAccepted = false;
 
     public NetworkService(int port, Queue<Data> inputQueue, Queue<Data> outputQueue) {
         this.port = port;
         this.log = LoggerFactory.getLogger("Network service: " + port);
         this.inputQueue = inputQueue;
         this.outputQueue = outputQueue;
-        gson = new Gson();
     }
 
     @Override
@@ -61,7 +59,7 @@ public final class NetworkService implements Runnable {
                 new Thread(reader).start();
                 new Thread(writer).start();
                 log.debug("Paused cleaner");
-                clientAccepted = true;
+                setClientAccepted(true);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +100,6 @@ public final class NetworkService implements Runnable {
                     }
                 }
                 log.info("Read socket was closed", port);
-                clientAccepted = false;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -111,6 +108,7 @@ public final class NetworkService implements Runnable {
         public void shutdown() {
             try {
                 client.close();
+                setClientAccepted(false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -142,7 +140,6 @@ public final class NetworkService implements Runnable {
                     Protocol.toOutputStream(data, output);
                 }
                 log.info("Write socket was closed", port);
-                clientAccepted = false;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -151,6 +148,7 @@ public final class NetworkService implements Runnable {
         public void shutdown() {
             try {
                 client.close();
+                setClientAccepted(false);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -169,13 +167,13 @@ public final class NetworkService implements Runnable {
         @Override
         public void run() {
             while (!listener.isClosed()) {
-                if (!clientAccepted) {
+                if (!isClientAccepted()) {
                     Data data = outputQueue.poll();
                     if (data == null) {
                         sleep();
                     }
                     else {
-                        log.debug("Data with id {} removed", data.id);
+                        log.debug("Drop data with id {}", data.id);
                     }
                 }
                 else {
@@ -184,6 +182,14 @@ public final class NetworkService implements Runnable {
             }
             log.info("Cleaner was closed", port);
         }
+    }
+
+    synchronized boolean isClientAccepted() {
+        return clientAccepted;
+    }
+
+    synchronized void setClientAccepted(boolean clientAccepted) {
+        this.clientAccepted = clientAccepted;
     }
 
     private void sleep() {

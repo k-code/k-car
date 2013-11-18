@@ -18,6 +18,8 @@ import java.util.Set;
  */
 
 public class ProxySettingsPanel extends JPanel {
+    private static final String DEFAULT_PROXY = "10.69.30.50";
+    private static final String DEFAULT_PORT = "6781";
     private JTextField proxyHost;
     private JTextField proxyPort;
     private ProxyService proxyService;
@@ -29,8 +31,8 @@ public class ProxySettingsPanel extends JPanel {
 
         JLabel proxyHostLabel = new JLabel("Proxy host");
         JLabel proxyPartLabel = new JLabel("Proxy port");
-        proxyHost = new JTextField("kornev.pro");
-        proxyPort = new JTextField("6781");
+        proxyHost = new JTextField(DEFAULT_PROXY);
+        proxyPort = new JTextField(DEFAULT_PORT);
         JButton connectButton = new JButton("Connect");
         ActionListener connectButtonListener = new ActionListener() {
             @Override

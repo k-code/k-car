@@ -9,18 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
 import pro.kornev.kcontrol.view.GBLHelper;
+import pro.kornev.kcontrol.view.panels.CustomPanel;
+import pro.kornev.kcontrol.view.panels.state.PreviewPanel;
 
-public class SettingsPanel extends JPanel {
+public class SettingsPanel extends CustomPanel {
 
     private static final long serialVersionUID = -5935642426362810839L;
 
-    public SettingsPanel() {
-        super();
-        setLayout(new GridBagLayout());
-        setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-        
-        GBLHelper c = GBLHelper.create().fillH().margin(2, 3).anchorT();
-        add(new ProxySettingsPanel(), c.weightH(0.3).setGrid(0, 0));
-        add(new JoystickSettingsPanel(), c.weightH(0.7).setGrid(1, 0));
+    public SettingsPanel(String title) {
+        super(title);
+
+        add(new ProxySettingsPanel(), getGbl().setGrid(0, 0));
+        add(new JoystickSettingsPanel(), getGbl().setGrid(1, 0));
+        add(new PreviewSettings("Preview"), getGbl().setGrid(2, 0));
     }
 }
