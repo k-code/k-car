@@ -25,14 +25,13 @@ import pro.kornev.kcar.protocol.Protocol;
  * @author vkornev
  * @since 14.10.13
  */
-public class UsbService extends Service implements NetworkListener{
+public class UsbService extends Service implements NetworkListener, SerialInputOutputManager.Listener {
     private final String TAG = UsbService.class.getSimpleName();
 
     private LogsDB db;
     private static UsbSerialDriver sDriver = null;
     private SerialInputOutputManager mSerialIoManager;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
-    private Writer writer;
     private Thread writerThread;
 
     @Override
@@ -76,7 +75,7 @@ public class UsbService extends Service implements NetworkListener{
         }
         onDeviceStateChange();
 
-        writer = new Writer();
+        Writer writer = new Writer();
         writerThread = new Thread(writer);
         writerThread.start();
     }
@@ -87,21 +86,18 @@ public class UsbService extends Service implements NetworkListener{
         writerThread.interrupt();
     }
 
-    private final SerialInputOutputManager.Listener mListener =
-            new SerialInputOutputManager.Listener() {
 
-                @Override
-                public void onRunError(Exception e) {
-                    db.putLog("Runner stopped.");
-                }
+    @Override
+    public void onRunError(Exception e) {
+        db.putLog("Runner stopped.");
+    }
 
-                @Override
-                public void onNewData(final byte[] data) {
-                    db.putLog("Read data len: " + data.length);
-                    db.putLog("Read data: " + HexDump.dumpHexString(data));
-                    State.getToControlQueue().add(Protocol.fromByteArray(data, data.length));
-                }
-            };
+    @Override
+    public void onNewData(final byte[] data) {
+        db.putLog("Read data len: " + data.length);
+        db.putLog("Read data: " + HexDump.dumpHexString(data));
+        State.getToControlQueue().add(Protocol.fromByteArray(data, data.length));
+    }
 
     private void stopIoManager() {
         if (mSerialIoManager != null) {
@@ -114,7 +110,7 @@ public class UsbService extends Service implements NetworkListener{
     private void startIoManager() {
         if (sDriver != null) {
             Log.i(TAG, "Starting io manager ..");
-            mSerialIoManager = new SerialInputOutputManager(sDriver, mListener);
+            mSerialIoManager = new SerialInputOutputManager(sDriver, this);
             mExecutor.submit(mSerialIoManager);
         }
     }
@@ -126,43 +122,45 @@ public class UsbService extends Service implements NetworkListener{
 
     @Override
     public void onDataReceived(Data data) {
-
-    }
-
-    class Writer implements Runnable {
-    Queue<Data> queue;
-    private byte[] bytes = new byte[Protocol.getMaxLength()];
-    private int TIMEOUT = 10;
-    UsbSerialDriver driver;
-
-    Writer() {
-        queue = State.getToUsbQueue();
-        driver = State.getUsbSerialDriver();
-    }
-
-    @Override
-    public void run() {
-        db.putLog("Start USB writer");
-        while (State.isServiceRunning()) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (queue.size() == 0 || driver == null) continue;
-            db.putLog("Write data to USB");
-            Data data = queue.poll();
-            int bLen = Protocol.toByteArray(data, bytes);
-            try {
-                driver.write(Arrays.copyOf(bytes, bLen), TIMEOUT);
-            } catch (IOException e) {
-                db.putLog("Error: Failed send data to USB: " + e.getMessage());
-            }
-            db.putLog(String.format("USB write: Data id: %d; cmd: %d; type: %d; bData: %d; iData: %d", data.id, data.cmd, data.type, data.bData, data.iData));
+        if (data.cmd == 1 && data.bData == 0) {
+            State.getToUsbQueue().add(data);
         }
     }
 
-}
+    class Writer implements Runnable {
+        Queue<Data> queue;
+        private byte[] bytes = new byte[Protocol.getMaxLength()];
+        private int TIMEOUT = 10;
+        UsbSerialDriver driver;
+
+        Writer() {
+            queue = State.getToUsbQueue();
+            driver = State.getUsbSerialDriver();
+        }
+
+        @Override
+        public void run() {
+            db.putLog("Start USB writer");
+            while (State.isServiceRunning()) {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (queue.size() == 0 || driver == null) continue;
+                db.putLog("Write data to USB");
+                Data data = queue.poll();
+                int bLen = Protocol.toByteArray(data, bytes);
+                try {
+                    driver.write(Arrays.copyOf(bytes, bLen), TIMEOUT);
+                } catch (IOException e) {
+                    db.putLog("Error: Failed send data to USB: " + e.getMessage());
+                }
+                db.putLog(String.format("USB write: Data id: %d; cmd: %d; type: %d; bData: %d; iData: %d", data.id, data.cmd, data.type, data.bData, data.iData));
+            }
+        }
+
+    }
 
     @Override
     public void onDestroy() {
