@@ -3,3 +3,7 @@
 *.jar
 /lib
 /build
+/classes
+/jar
+/obj
+
