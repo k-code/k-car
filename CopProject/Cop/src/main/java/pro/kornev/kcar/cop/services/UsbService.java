@@ -48,6 +48,7 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+        NetworkService.addListener(this);
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
         sDriver = State.getUsbSerialDriver();
         onResume();
@@ -122,7 +123,8 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
 
     @Override
     public void onDataReceived(Data data) {
-        if (data.cmd == 1 && data.bData == 0) {
+        if ((data.cmd == 1 && data.bData == 0)
+                || data.cmd == 3){
             State.getToUsbQueue().add(data);
         }
     }
