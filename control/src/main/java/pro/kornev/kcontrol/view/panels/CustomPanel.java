@@ -18,7 +18,7 @@ public class CustomPanel extends JPanel {
         super();
         setBorder(BorderFactory.createTitledBorder(title));
         setLayout(new GridBagLayout());
-        gbl =  GBLHelper.create().weightH(1).fillH().margin(2, 3).anchorT();
+        gbl =  GBLHelper.create().fillH().margin(2, 3).anchorT();
     }
 
     protected GBLHelper getGbl() {

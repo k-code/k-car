@@ -21,7 +21,7 @@ import java.awt.event.ActionListener;
  */
 public class PreviewSettings extends CustomPanel implements SettingsListener, ActionListener {
     private ProxyService proxyService = null;
-    private TextField fps = null;
+    private JTextField fps = null;
     private JButton resetCamera;
     private JButton apply;
 
@@ -33,13 +33,13 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         resetCamera.addActionListener(this);
         apply.addActionListener(this);
         JLabel fpsLabel = new JLabel("FPS:");
-        fps = new TextField("1");
+        fps = new JTextField("1");
 
 
         add(fpsLabel, getGbl().setGrid(0, 0).weightH(0.3));
         add(fps, getGbl().setGrid(1, 0).weightH(0.7));
-        add(apply, getGbl().setGrid(1, 1));
-        add(resetCamera, getGbl().setGrid(0, 1));
+        add(resetCamera, getGbl().setGrid(0, 1).colSpan());
+        add(apply, getGbl().setGrid(1, 2).colSpan());
         SettingService.i.addListener(this);
     }
 
@@ -58,8 +58,10 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         byte cmd;
         if (button.equals(apply)) {
             cmd = 7;
-        } else {
+        } else if (button.equals(resetCamera)) {
             cmd = 8;
+        } else {
+            return;
         }
 
         Data data = new Data();

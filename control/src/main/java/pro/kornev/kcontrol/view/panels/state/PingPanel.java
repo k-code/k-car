@@ -7,6 +7,7 @@ import pro.kornev.kcontrol.service.network.ProxyService;
 import pro.kornev.kcontrol.service.network.ProxyServiceListener;
 import pro.kornev.kcontrol.view.GBLHelper;
 import pro.kornev.kcontrol.service.SettingsListener;
+import pro.kornev.kcontrol.view.panels.CustomPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ import java.awt.event.ActionListener;
  * Date: 12.11.13
  * Time: 16:09
  */
-public class PingPanel extends JPanel {
+public class PingPanel extends CustomPanel {
     private static final String STATUS_DEFAULT = "-/-";
     private static final String STATUS_OK = "OK";
     private static final String STATUS_ERROR = "ER";
@@ -31,9 +32,7 @@ public class PingPanel extends JPanel {
     private ProxyService proxyService;
 
     public PingPanel() {
-        super();
-        setBorder(BorderFactory.createTitledBorder("Ping all systems"));
-        setLayout(new GridBagLayout());
+        super("Ping all systems");
 
         JButton pingButton = new JButton("Ping");
         JLabel proxyLabel = new JLabel("Proxy:");
@@ -44,14 +43,13 @@ public class PingPanel extends JPanel {
         androidStatus = new JLabel(STATUS_DEFAULT);
         stmStatus = new JLabel(STATUS_DEFAULT);
 
-        GBLHelper gbl = GBLHelper.create().weightH(1).fillH().margin(2, 3);
-        add(proxyLabel, gbl.setGrid(0,0));
-        add(androidLabel, gbl.setGrid(0,1));
-        add(stmLabel, gbl.setGrid(0,2));
-        add(proxyStatus, gbl.setGrid(1,0));
-        add(androidStatus, gbl.setGrid(1,1));
-        add(stmStatus, gbl.setGrid(1,2));
-        add(pingButton, gbl.setGrid(0,3).colSpan());
+        add(proxyLabel, getGbl().setGrid(0,0));
+        add(androidLabel, getGbl().setGrid(0,1));
+        add(stmLabel, getGbl().setGrid(0,2));
+        add(proxyStatus, getGbl().setGrid(1,0));
+        add(androidStatus, getGbl().setGrid(1,1));
+        add(stmStatus, getGbl().setGrid(1,2));
+        add(pingButton, getGbl().setGrid(0,3).colSpan());
 
         ActionListener pingButtonListener = new ActionListener() {
             @Override
