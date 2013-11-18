@@ -68,7 +68,7 @@ public class LogsDB extends SQLiteOpenHelper {
         return result;
     }
 
-    public long putLog(String logData) {
+    public synchronized long putLog(String logData) {
         if (!State.isLogsEnabled()) return 0;
 
         SQLiteDatabase db = getWritableDatabase();

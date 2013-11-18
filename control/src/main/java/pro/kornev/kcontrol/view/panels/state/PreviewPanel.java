@@ -12,6 +12,8 @@ import sun.awt.image.ByteArrayImageSource;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -21,15 +23,26 @@ import java.io.*;
  * Date: 15.11.13
  * Time: 16:19
  */
-public class PreviewPanel extends CustomPanel implements SettingsListener, ProxyServiceListener{
-    private JLabel label;
+public class PreviewPanel extends CustomPanel implements SettingsListener, ProxyServiceListener, ActionListener {
+    private static final String START_PREVIEW = "Start preview";
+    private static final String STOP_PREVIEW = "Stop preview";
+    private boolean isStartPreview = false;
+    private JButton startPreviewButton;
+    private ProxyService proxyService;
+    private JPanel preview;
 
     public PreviewPanel(String title) {
         super(title);
         SettingService.i.addListener(this);
-        label = new JLabel("qwew");
-        label.setMaximumSize(new Dimension(200, 200));
-        add(label);
+        preview = new JPanel(new FlowLayout());
+
+        preview.setPreferredSize(new Dimension(640, 480));
+        preview.setMaximumSize(new Dimension(200, 200));
+        preview.setMinimumSize(new Dimension(200, 200));
+        add(preview, getGbl().setGrid(0, 0).fillB());
+        startPreviewButton = new JButton(isStartPreview ? STOP_PREVIEW : START_PREVIEW);
+        startPreviewButton.addActionListener(this);
+        add(startPreviewButton, getGbl().setGrid(0, 1));
     }
 
     @Override
@@ -39,11 +52,12 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     @Override
     public void changeProxy(ProxyService proxyService) {
         proxyService.addListener(this);
+        this.proxyService = proxyService;
     }
 
     @Override
     public void onPackageReceive(Data data) {
-        if (data.cmd != 5) return;
+        if (data.cmd != 5 || !preview.isShowing()) return;
 
         InputStream in = new ByteArrayInputStream(data.aData);
         BufferedImage bufImage = null;
@@ -52,11 +66,27 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (bufImage == null) {
+            return;
+        }
 
-        label.getGraphics().drawImage(bufImage, 0, 0, null);
-        label.repaint();
-        label.setIcon(new ImageIcon(bufImage));
-        label.setText(String.valueOf(data.aSize));
-        repaint();
+        preview.getGraphics().drawImage(bufImage, 0, 0, bufImage.getWidth(), bufImage.getHeight(), null);
+        //preview.repaint();
+        //label.setIcon(new ImageIcon(bufImage));
+        //repaint();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Data data = new Data();
+        data.id = 334;
+        data.cmd = 6;
+        data.type = 0;
+        data.bData = isStartPreview ? (byte)0 : (byte)1;
+        proxyService.send(data);
+        isStartPreview = !isStartPreview;
+        startPreviewButton.setText(isStartPreview ? STOP_PREVIEW : START_PREVIEW);
+    }
+
+
 }

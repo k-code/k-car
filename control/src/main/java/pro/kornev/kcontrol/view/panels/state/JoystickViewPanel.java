@@ -43,24 +43,24 @@ public class JoystickViewPanel extends CustomPanel {
 
 	private void initAxisLabels() {
         JLabel axisLabelY = new JLabel("Y:");
-		this.add(axisLabelY, gbl.setGrid(0, 0));
+		this.add(axisLabelY, getGbl().setGrid(0, 0));
         JLabel axisLabelX = new JLabel("X:");
-		this.add(axisLabelX, gbl.setGrid(0, 1));
+		this.add(axisLabelX, getGbl().setGrid(0, 1));
         JLabel axisLabelZ = new JLabel("Z:");
-		this.add(axisLabelZ, gbl.setGrid(2, 0));
+		this.add(axisLabelZ, getGbl().setGrid(2, 0));
         JLabel axisLabelR = new JLabel("R:");
-		this.add(axisLabelR, gbl.setGrid(2, 1));
+		this.add(axisLabelR, getGbl().setGrid(2, 1));
 	}
 	
 	private void initAxisValues() {
         axisValueY = new JLabel("0");
-        this.add(axisValueY, gbl.setGrid(1, 0));
+        this.add(axisValueY, getGbl().setGrid(1, 0));
 		axisValueX = new JLabel("0");
-		this.add(axisValueX, gbl.setGrid(1, 1));
+		this.add(axisValueX, getGbl().setGrid(1, 1));
 		axisValueZ = new JLabel("0");
-		this.add(axisValueZ, gbl.setGrid(3, 0));
+		this.add(axisValueZ, getGbl().setGrid(3, 0));
 		axisValueR = new JLabel("0");
-		this.add(axisValueR, gbl.setGrid(3, 1));
+		this.add(axisValueR, getGbl().setGrid(3, 1));
 	}
 
     private void addChangeSettingsListener() {

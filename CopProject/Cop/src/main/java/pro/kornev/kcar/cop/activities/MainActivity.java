@@ -56,6 +56,7 @@ public class MainActivity extends Activity {
     public void onServiceRunClick(View v) {
         if (State.isServiceRunning()) {
             State.setServiceRunning(false);
+            NetworkService.removeAllListeners();
         }
         else {
             EditText proxy = (EditText)findViewById(R.id.maProxyIp);

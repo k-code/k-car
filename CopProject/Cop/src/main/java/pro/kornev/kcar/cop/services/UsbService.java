@@ -25,7 +25,7 @@ import pro.kornev.kcar.protocol.Protocol;
  * @author vkornev
  * @since 14.10.13
  */
-public class UsbService extends Service {
+public class UsbService extends Service implements NetworkListener{
     private final String TAG = UsbService.class.getSimpleName();
 
     private LogsDB db;
@@ -124,7 +124,12 @@ public class UsbService extends Service {
         startIoManager();
     }
 
-class Writer implements Runnable {
+    @Override
+    public void onDataReceived(Data data) {
+
+    }
+
+    class Writer implements Runnable {
     Queue<Data> queue;
     private byte[] bytes = new byte[Protocol.getMaxLength()];
     private int TIMEOUT = 10;

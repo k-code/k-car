@@ -52,7 +52,6 @@
         </activity>
         <service android:name=".services.UsbService" />
         <service android:name=".services.NetworkService" />
-        <service android:name=".services.DistributionService" />
         <service android:name=".services.VideoService" />
     </application>
 
