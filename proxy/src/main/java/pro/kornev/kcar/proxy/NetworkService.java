@@ -88,11 +88,6 @@ public final class NetworkService implements Runnable {
                 DataInputStream input = new DataInputStream(client.getInputStream());
 
                 while (!client.isClosed()) {
-                    if (input.available() == 0) {
-                        sleep();
-                        continue;
-                    }
-
                     Data data = Protocol.fromInputStream(input);
                     log.debug("Read command: " + data.cmd);
                     inputQueue.add(data);
@@ -106,18 +101,21 @@ public final class NetworkService implements Runnable {
                         outputQueue.add(response);
                     }
                 }
-                log.info("Read socket was closed", port);
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Reader exception", e);
+            } finally {
+                shutdown();
+                log.info("Read socket was closed", port);
             }
         }
 
         public void shutdown() {
             try {
                 client.close();
-                setClientAccepted(false);
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                setClientAccepted(false);
             }
         }
     }
@@ -153,18 +151,21 @@ public final class NetworkService implements Runnable {
                     log.debug("Write command: " + data.cmd);
                     Protocol.toOutputStream(data, output);
                 }
-                log.info("Write socket was closed", port);
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Writer exception", e);
+            } finally {
+                shutdown();
+                log.info("Write socket was closed", port);
             }
         }
 
         public void shutdown() {
             try {
                 client.close();
-                setClientAccepted(false);
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                setClientAccepted(false);
             }
         }
     }

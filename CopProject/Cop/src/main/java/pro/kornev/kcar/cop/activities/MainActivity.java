@@ -1,24 +1,13 @@
 package pro.kornev.kcar.cop.activities;
 
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
-import android.hardware.usb.UsbDevice;
-import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-
-import java.io.IOException;
 
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
@@ -38,21 +27,25 @@ public class MainActivity extends Activity {
         State.setLogsEnabled(true);
     }
 
+    @SuppressWarnings("unused")
     public void testProtocolClick(View v) {
         Intent intent = new Intent(this, TestProtocolActivity.class);
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void chooseUsbDeviceClick(View v) {
         Intent intent = new Intent(this, UsbDevicesActivity.class);
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void onShowLogsClick(View v) {
         Intent intent = new Intent(this, LogsActivity.class);
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public void onServiceRunClick(View v) {
         if (State.isServiceRunning()) {
             State.setServiceRunning(false);
