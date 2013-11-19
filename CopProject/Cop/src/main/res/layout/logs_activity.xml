@@ -37,7 +37,8 @@
         android:text="Auto scroll"
         android:id="@+id/laAutoScrollCheckBox"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:checked="true" />
 
 
 </RelativeLayout>

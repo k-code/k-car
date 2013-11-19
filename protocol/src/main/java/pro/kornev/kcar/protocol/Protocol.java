@@ -32,7 +32,7 @@ public class Protocol {
     public static Data fromInputStream(DataInputStream inputStream) throws IOException {
         byte[] buf = new byte[getMaxLength()];
         int bufLen = 0;
-        while (inputStream.available() > 0) {
+        while (bufLen == 0) {
             if (inputStream.readByte() == STREAM_HEADER[0] &&
                     inputStream.readByte() == STREAM_HEADER[1] &&
                     inputStream.readByte() == STREAM_HEADER[2] &&

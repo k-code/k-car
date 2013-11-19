@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +24,7 @@ import pro.kornev.kcar.cop.providers.LogsDB;
 
 public class LogsActivity extends Activity {
     private Handler handler = new Handler();
-    private LogsViewUpdater logsViewUpdater;
+    private volatile LogsViewUpdater logsViewUpdater;
     private LogsDB db;
     private ScheduledThreadPoolExecutor executor;
     private TextView text;
@@ -32,20 +35,18 @@ public class LogsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logs_activity);
-        executor = new ScheduledThreadPoolExecutor(1);
         db = new LogsDB(getApplicationContext());
         text = (TextView) findViewById(R.id.laText);
-        logsViewUpdater = new LogsViewUpdater(text, handler, db);
         autoScroll = (CheckBox)findViewById(R.id.laAutoScrollCheckBox);
         scrollView = (ScrollView) findViewById(R.id.laScroll);
     }
 
     @Override
-    protected void onStart() {
+    protected void onResume() {
         super.onResume();
         Log.d("DEBUG", "la start");
-        clear(false);
         runDbReader();
+        clear(false);
     }
 
     @Override
@@ -109,6 +110,8 @@ public class LogsActivity extends Activity {
     }
 
     private void runDbReader() {
+        logsViewUpdater = new LogsViewUpdater(text, handler, db);
+        executor = new ScheduledThreadPoolExecutor(1);
         executor.scheduleAtFixedRate(logsViewUpdater, 0, 100, TimeUnit.MILLISECONDS);
     }
 
@@ -117,6 +120,8 @@ public class LogsActivity extends Activity {
         if (clearDb) {
             db.clearLogs();
         }
-        logsViewUpdater.setLastRecordId(0);
+        if (logsViewUpdater != null) {
+            logsViewUpdater.setLastRecordId(0);
+        }
     }
 }

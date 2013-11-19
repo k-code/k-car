@@ -3,20 +3,11 @@ package pro.kornev.kcar.cop.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,12 +88,12 @@ public class NetworkService extends Service {
             db.putLog("Start network reader");
             try {
                 DataInputStream input = new DataInputStream(client.getInputStream());
-                while (State.isServiceRunning() && client.isConnected()) {
-                    if (input.available() == 0) {
+                while (State.isServiceRunning() && !client.isClosed()) {
+                    /*if (input.available() == 0) {
                         input.readByte();
                         sleep(1);
                         continue;
-                    }
+                    }*/
 
                     Data data = Protocol.fromInputStream(input);
 

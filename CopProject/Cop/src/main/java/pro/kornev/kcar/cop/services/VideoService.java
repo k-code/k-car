@@ -2,12 +2,12 @@ package pro.kornev.kcar.cop.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.IBinder;
-import android.view.SurfaceView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,6 +28,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
     private boolean isStartPreview = false;
     private CameraPreview surfaceView;
     private Camera.Size size;
+    private int previewFormat = ImageFormat.NV21;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -73,7 +74,11 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
 
     private synchronized void startPreview() {
         if (isStartPreview) return;
-        mCamera.startPreview();
+        try {
+            mCamera.startPreview();
+        } catch (RuntimeException e) {
+            return;
+        }
         isStartPreview = true;
     }
 
@@ -108,11 +113,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
         if (System.currentTimeMillis() - lastFrameTime < 1000 / getFps()) {
             return;
         }
-        Camera.Parameters parameters = camera.getParameters();
-        Camera.Size size = parameters.getPreviewSize();
-        if (size == null) return;
-
-        YuvImage image = new YuvImage(buf, parameters.getPreviewFormat(), size.width, size.height, null);
+        YuvImage image = new YuvImage(buf, previewFormat, size.width, size.height, null);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), 90, baos);
@@ -136,6 +137,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
             int minFps = supportedFps.get(0)[0];
             parameters.setPreviewFpsRange(minFps, minFps);
         }*/
+        previewFormat = parameters.getPreviewFormat();
         List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
         if (sizes != null && !sizes.isEmpty()) {
             size = sizes.get(0);
@@ -168,7 +170,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
     }
 
     private synchronized void setFps(int fps) {
-        this.fps = fps;
+        this.fps = fps > 0 ? fps : 1;
     }
 
     private void initCamera() {
