@@ -142,7 +142,7 @@ public class NetworkService extends Service {
                         continue;
                     }
                     Data data = queue.poll();
-                    db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
+                    db.putLog(String.format("NW: id: %d; cmd: %d", data.id, data.cmd));
 
                     Protocol.toOutputStream(data, output);
                 }

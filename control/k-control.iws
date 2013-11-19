@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/activities/LogsActivity.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/activities/LogsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" afterPath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/VideoService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/VideoService.java" />
+    <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="Fixed android camera preview. Show bit rate">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-control.iws" afterPath="$PROJECT_DIR$/k-control.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/res/layout/logs_activity.xml" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/res/layout/logs_activity.xml" />
     </list>
     <ignored path="k-control.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384845395524" ignored="false" />
+    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384856233956" ignored="false" />
     <file path="/pom.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384244564635" ignored="false" />
     <file path="/DriverJoystickListener.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384227835674" ignored="false" />
     <file path="/MainWindow.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384746711828" ignored="false" />
     <file path="/ProxySettingsPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384760499552" ignored="false" />
     <file path="/SettingsPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384746735935" ignored="false" />
     <file path="/GBLHelper.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384229713365" ignored="false" />
-    <file path="/NetworkService.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384751647580" ignored="false" />
+    <file path="/NetworkService.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384856096982" ignored="false" />
     <file path="/RelationsController.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384323751892" ignored="false" />
     <file path="/PingPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384767318911" ignored="false" />
     <file path="/StatePanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384312336581" ignored="false" />
@@ -110,7 +106,7 @@
       <file leaf-file-name="PreviewPanel.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PreviewPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="11" selection-start="2453" selection-end="2453" vertical-scroll-proportion="0.4234079">
+            <state line="78" column="17" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.6299484">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -923,7 +919,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PreviewPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="11" selection-start="2453" selection-end="2453" vertical-scroll-proportion="0.4234079">
+        <state line="78" column="17" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.6299484">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
