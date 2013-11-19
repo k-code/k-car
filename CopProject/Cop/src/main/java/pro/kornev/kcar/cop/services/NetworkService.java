@@ -53,16 +53,32 @@ public class NetworkService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
+                while (State.isServiceRunning()) {
                     db.putLog("Connect to: " + State.getProxyServer() + ":" + 6780);
-                    Log.d("DEBUG", "Connect to: " + State.getProxyServer() + ":" + 6780);
-                    Socket s = new Socket(State.getProxyServer(), 6780);
-                    Writer l = new Writer(s);
-                    new Thread(l).start();
-                    Reader r = new Reader(s);
-                    new Thread(r).start();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    Socket s;
+                    try {
+                        s = new Socket(State.getProxyServer(), 6780);
+                    } catch (IOException e) {
+                        db.putLog("Failed connect to server: " + e.getMessage());
+                        sleep(1000); // wait 1 seconds and if isServiceRunning then try reconnect
+                        continue;
+                    }
+
+                    Writer writer = new Writer(s);
+                    new Thread(writer).start();
+
+                    Reader reader = new Reader(s);
+                    Thread readerThread = new Thread(reader);
+                    readerThread.start();
+                    db.putLog("Connect to " +s.getInetAddress().toString() + " is successful");
+                    try {
+                        readerThread.join(); // Work wile reader is working
+                        s.close(); // Close socket and try reconnect
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();
@@ -78,12 +94,13 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
+            db.putLog("Start network reader");
             try {
                 DataInputStream input = new DataInputStream(client.getInputStream());
-                while (State.isServiceRunning()) {
-
+                while (State.isServiceRunning() && client.isConnected()) {
                     if (input.available() == 0) {
-                        sleep();
+                        input.readByte();
+                        sleep(1);
                         continue;
                     }
 
@@ -102,9 +119,15 @@ public class NetworkService extends Service {
                         l.onDataReceived(data);
                     }
                 }
-                client.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                db.putLog("Stop network reader");
+                try {
+                    client.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -119,11 +142,12 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
+            db.putLog("Start network writer");
             try {
                 DataOutputStream output = new DataOutputStream(client.getOutputStream());
-                while (State.isServiceRunning()) {
+                while (State.isServiceRunning() && !client.isClosed()) {
                     if (queue.isEmpty()) {
-                        sleep();
+                        sleep(1);
                         continue;
                     }
                     Data data = queue.poll();
@@ -135,6 +159,7 @@ public class NetworkService extends Service {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            db.putLog("Stop network writer");
         }
     }
 
@@ -144,9 +169,9 @@ public class NetworkService extends Service {
         State.setServiceRunning(false);
     }
 
-    private void sleep() {
+    private void sleep(int ms) {
         try {
-            Thread.sleep(100);
+            Thread.sleep(ms);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

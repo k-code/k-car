@@ -10,13 +10,18 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Date: 17.10.13
  * Time: 20:29
  */
-public final class Proxy {
+public final class Proxy implements Runnable {
+    private static NetworkService copService;
+    private static NetworkService controlService;
+
     public static void main(String[] args) {
+        Runtime.getRuntime().addShutdownHook(new Thread(new Proxy()));
+
         Queue<Data> fromCopToControlQueue = new LinkedBlockingQueue<Data>();
         Queue<Data> fromControlToCopQueue = new LinkedBlockingQueue<Data>();
 
-        NetworkService copService = new NetworkService(6780, fromCopToControlQueue, fromControlToCopQueue);
-        NetworkService controlService = new NetworkService(6781, fromControlToCopQueue, fromCopToControlQueue);
+        copService = new NetworkService(6780, fromCopToControlQueue, fromControlToCopQueue);
+        controlService = new NetworkService(6781, fromControlToCopQueue, fromCopToControlQueue);
 
         Thread control = new Thread(controlService);
         Thread cop = new Thread(copService);
@@ -30,5 +35,11 @@ public final class Proxy {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void run() {
+        copService.shutdown();
+        controlService.shutdown();
     }
 }

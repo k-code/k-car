@@ -42,15 +42,15 @@ public class LogsActivity extends Activity {
 
     @Override
     protected void onStart() {
-        super.onStart();
+        super.onResume();
         Log.d("DEBUG", "la start");
         clear(false);
         runDbReader();
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         Log.d("DEBUG", "la stop");
         executor.shutdown();
     }

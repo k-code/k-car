@@ -17,14 +17,13 @@ import java.util.Queue;
  * Time: 20:32
  */
 public final class NetworkService implements Runnable {
-    private static final int MAX_ERRORS = 10;
-
     private final Logger log;
     private int port;
     private Queue<Data> inputQueue;
     private Queue<Data> outputQueue;
     private Reader reader = null;
     private Writer writer = null;
+    private Cleaner cleaner = null;
     private boolean clientAccepted = false;
 
     public NetworkService(int port, Queue<Data> inputQueue, Queue<Data> outputQueue) {
@@ -40,9 +39,16 @@ public final class NetworkService implements Runnable {
             log.info("Run listener on port {}", port);
             ServerSocket listener = new ServerSocket(port);
             log.debug("Start cleaner", port);
-            new Thread(new Cleaner(listener)).start();
+            cleaner = new Cleaner(listener);
+            new Thread(cleaner).start();
             while (!listener.isClosed()) {
-                Socket client = listener.accept();
+                Socket client;
+                try {
+                    client = listener.accept();
+                } catch (IOException e) {
+                    log.error("Failed accept client.", e);
+                    continue;
+                }
                 log.info("Client accepted");
 
                 log.debug("Shutdown reader and writer");
@@ -61,6 +67,7 @@ public final class NetworkService implements Runnable {
                 log.debug("Paused cleaner");
                 setClientAccepted(true);
             }
+            log.info("Listener on port {} is closed", port);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,6 +120,13 @@ public final class NetworkService implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void shutdown() {
+        log.info("Shutdown server on port" + port);
+        if (reader != null) reader.shutdown();
+        if (writer != null) writer.shutdown();
+        if (cleaner != null) cleaner.shutdown();
     }
 
     class Writer implements Runnable {
@@ -181,6 +195,14 @@ public final class NetworkService implements Runnable {
                 }
             }
             log.info("Cleaner was closed", port);
+        }
+
+        public void shutdown() {
+            try {
+                listener.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
