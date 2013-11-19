@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 public class PreviewSettings extends CustomPanel implements SettingsListener, ActionListener {
     private ProxyService proxyService = null;
     private JTextField fps = null;
+    private JTextField quality = null;
     private JButton resetCamera;
     private JButton apply;
 
@@ -34,12 +35,15 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         apply.addActionListener(this);
         JLabel fpsLabel = new JLabel("FPS:");
         fps = new JTextField("1");
-
+        JLabel qualityLabel = new JLabel("Quality:");
+        quality = new JTextField("50");
 
         add(fpsLabel, getGbl().setGrid(0, 0).weightH(0.3));
         add(fps, getGbl().setGrid(1, 0).weightH(0.7));
-        add(resetCamera, getGbl().setGrid(0, 1).colSpan());
-        add(apply, getGbl().setGrid(1, 2).colSpan());
+        add(qualityLabel, getGbl().setGrid(0, 1));
+        add(quality, getGbl().setGrid(1, 1));
+        add(resetCamera, getGbl().setGrid(0, 2).colSpan());
+        add(apply, getGbl().setGrid(2, 3).colSpan());
         SettingService.i.addListener(this);
     }
 
@@ -55,20 +59,28 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton)e.getSource();
-        byte cmd;
-        if (button.equals(apply)) {
-            cmd = 7;
-        } else if (button.equals(resetCamera)) {
-            cmd = 8;
-        } else {
+        if (button.equals(resetCamera)) {
+            Data data = new Data();
+            data.id = 334;
+            data.cmd = 8;
+            data.type = 0;
+            data.bData = Byte.valueOf(fps.getText());
+            proxyService.send(data);
             return;
         }
 
         Data data = new Data();
         data.id = 335;
-        data.cmd = cmd;
+        data.cmd = 7;
         data.type = 0;
         data.bData = Byte.valueOf(fps.getText());
+        proxyService.send(data);
+
+        data = new Data();
+        data.id = 336;
+        data.cmd = 11;
+        data.type = 0;
+        data.bData = Byte.valueOf(quality.getText());
         proxyService.send(data);
     }
 }

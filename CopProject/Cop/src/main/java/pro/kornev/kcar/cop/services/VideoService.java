@@ -29,6 +29,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
     private CameraPreview surfaceView;
     private Camera.Size size;
     private int previewFormat = ImageFormat.NV21;
+    private int quality = 50;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -105,6 +106,9 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
         } else  if (data.cmd == 8) {
             db.putLog("Reset camera");
             initCamera();
+        } else if (data.cmd == 11) {
+            db.putLog("Set quality to " + data.bData);
+            setQuality(data.bData);
         }
     }
 
@@ -116,7 +120,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
         YuvImage image = new YuvImage(buf, previewFormat, size.width, size.height, null);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), 90, baos);
+        image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), getQuality(), baos);
 
         byte[] aData = baos.toByteArray();
 
@@ -152,12 +156,13 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
 
         try {
             surfaceView.setCamera(mCamera);
-            SurfaceTexture surfaceTexture = new SurfaceTexture(10);
+            SurfaceTexture surfaceTexture = new SurfaceTexture(0);
             mCamera.setPreviewTexture(surfaceTexture);
             surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
                 @Override
                 public void onFrameAvailable(SurfaceTexture surfaceTexture) {
                     surfaceTexture.getTransformMatrix(new float[16]);
+                    surfaceTexture.updateTexImage();
                 }
             });
         } catch (IOException e) {
@@ -171,6 +176,14 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
 
     private synchronized void setFps(int fps) {
         this.fps = fps > 0 ? fps : 1;
+    }
+
+    private synchronized int getQuality() {
+        return quality;
+    }
+
+    private synchronized void setQuality(int quality) {
+        this.quality = quality;
     }
 
     private void initCamera() {

@@ -19,11 +19,11 @@ import java.util.Queue;
 public final class NetworkService implements Runnable {
     private final Logger log;
     private int port;
-    private Queue<Data> inputQueue;
-    private Queue<Data> outputQueue;
-    private Reader reader = null;
-    private Writer writer = null;
-    private Cleaner cleaner = null;
+    private volatile Queue<Data> inputQueue;
+    private volatile Queue<Data> outputQueue;
+    private volatile Reader reader = null;
+    private volatile Writer writer = null;
+    private volatile Cleaner cleaner = null;
     private boolean clientAccepted = false;
 
     public NetworkService(int port, Queue<Data> inputQueue, Queue<Data> outputQueue) {
