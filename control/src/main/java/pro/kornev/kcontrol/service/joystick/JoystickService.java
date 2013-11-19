@@ -23,6 +23,29 @@ public class JoystickService implements JoystickListener, SettingsListener {
 
     @Override
     public void changeJoystick(KJoystick j) {
+        byte leftMotor = (byte)(j.getY() * 50);
+        byte rightMotor = (byte)(j.getY() * 50);
+
+        if (leftMotor > 0) {
+            leftMotor += 50;
+        }
+        if (rightMotor > 0) {
+            rightMotor += 50;
+        }
+
+        Data data = new Data();
+        data.id = 12;
+        data.cmd = 45;
+        data.type = 0;
+        data.bData = leftMotor;
+        proxyService.send(data);
+
+        data = new Data();
+        data.id = 13;
+        data.cmd = 46;
+        data.type = 0;
+        data.bData = rightMotor;
+        proxyService.send(data);
     }
 
     @Override
@@ -38,7 +61,7 @@ public class JoystickService implements JoystickListener, SettingsListener {
     @Override
     public void joystickButtonChanged(Joystick joystick) {
         int buttons = joystick.getButtons();
-        if ((buttons & Joystick.BUTTON1) > 0) {
+        if ((buttons & Joystick.BUTTON1) == Joystick.BUTTON1) {
             Data data = new Data();
             data.id = 1;
             data.cmd = 2;

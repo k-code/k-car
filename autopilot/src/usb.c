@@ -61,13 +61,15 @@ void USB_read(uint8_t *buf, uint32_t len) {
 			LEDS_live(LEDS_On);
 		}
 	} else if (data.cmd == 3) {
-		PROTOCOL_data data = PROTOCOL_empty_data;
 		data.id = 12;
 		data.cmd = 4;
 		data.type = 1;
 		data.iData = US_distance;
 		USB_write(data);
-	} else if (data.cmd == 9) {
+	} else if (data.cmd == 45) {
+		MOTORS_LMS(data.bData);
+	} else if (data.cmd == 46) {
+		MOTORS_RMS(data.bData);
 	}
 	/*
 	dataStackType tmp;
