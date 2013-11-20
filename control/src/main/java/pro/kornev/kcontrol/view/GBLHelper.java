@@ -71,7 +71,7 @@ public class GBLHelper extends GridBagConstraints {
         this.weighty = weigth;
         return this;
     }
-    
+
     public GBLHelper anchorT() {
         this.anchor = GridBagConstraints.FIRST_LINE_START;
         if (this.weighty == 0) {
@@ -79,7 +79,15 @@ public class GBLHelper extends GridBagConstraints {
         }
         return this;
     }
-    
+
+    public GBLHelper anchorB() {
+        this.anchor = GridBagConstraints.LAST_LINE_START;
+        if (this.weighty == 0) {
+            this.weighty = 0.01;
+        }
+        return this;
+    }
+
     public GBLHelper margin(int top, int right, int bottom, int left) {
         this.insets = new Insets(top, left, bottom, right);
         return this;

@@ -132,11 +132,11 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
 
     private void setupCamera(Camera mCamera) {
         Camera.Parameters parameters = mCamera.getParameters();
-        List<int[]> supportedFps = parameters.getSupportedPreviewFpsRange();
+        /*List<int[]> supportedFps = parameters.getSupportedPreviewFpsRange();
         if (supportedFps != null) {
             int minFps = supportedFps.get(0)[0];
             parameters.setPreviewFpsRange(minFps, minFps);
-        }
+        }*/
         previewFormat = parameters.getPreviewFormat();
         List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
         if (sizes != null && !sizes.isEmpty()) {

@@ -34,7 +34,10 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     private ProxyService proxyService;
     private JPanel preview;
     private JLabel bitRate;
+    private JLabel fpsLabel;
     private Canvas canvas;
+    private long lastSec = 0;
+    private int fps = 0;
 
     public PreviewPanel() {
         super("Android camera preview");
@@ -51,7 +54,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         canvas.setMaximumSize(maxSize);
 
         preview.add(canvas);
-        add(preview, getGbl().setGrid(0, 0).fillB());
+        add(preview, getGbl().setGrid(0, 0).fillB().rowSpan(3));
         startPreviewButton = new JButton(isStartPreview ? STOP_PREVIEW : START_PREVIEW);
         startPreviewButton.addActionListener(this);
 
@@ -59,7 +62,11 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         bitRate.setPreferredSize(new Dimension(30, 15));
         JLabel bitRateLabel = new JLabel("Bit rate (bytes):");
 
-        add(startPreviewButton, getGbl().setGrid(0, 1));
+        fpsLabel = new JLabel("0");
+        add(new JLabel("FPS:"), getGbl().setGrid(1, 1));
+        add(fpsLabel, getGbl().setGrid(2,1));
+
+        add(startPreviewButton, getGbl().setGrid(1, 2).anchorB());
         add(bitRateLabel, getGbl().setGrid(1,0));
         add(bitRate, getGbl().setGrid(2,0));
     }
@@ -93,6 +100,13 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
         canvas.setSize(bufImage.getWidth(), bufImage.getHeight());
         canvas.getGraphics().drawImage(bufImage, 0, 0, null);
+
+        if (lastSec < System.currentTimeMillis() - 1000) {
+            lastSec = System.currentTimeMillis();
+            fpsLabel.setText(String.valueOf(fps));
+            fps = 0;
+        }
+        fps++;
     }
 
     @Override

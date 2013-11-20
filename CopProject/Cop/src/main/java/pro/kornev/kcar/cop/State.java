@@ -1,14 +1,10 @@
 package pro.kornev.kcar.cop;
 
-import android.hardware.Camera;
-
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import pro.kornev.kcar.cop.services.CameraPreview;
-import pro.kornev.kcar.cop.services.VideoService;
 import pro.kornev.kcar.protocol.Data;
 
 /**
@@ -22,9 +18,7 @@ public class State {
     private static boolean isLogsEnabled;
     private static String proxyServer;
     private static Queue<Data> toControlQueue = new LinkedBlockingQueue<Data>();
-    private static Queue<Data> fromControlQueue = new LinkedBlockingQueue<Data>();
-    private static Queue<Data> toUsbQueue = fromControlQueue;
-    private static Queue<Data> fromUsbQueue = toControlQueue;
+    private static Queue<Data> toUsbQueue = new LinkedBlockingQueue<Data>();
 
     public static UsbSerialDriver getUsbSerialDriver() {
         return usbSerialDriver;
@@ -62,15 +56,7 @@ public class State {
         return toControlQueue;
     }
 
-    public static Queue<Data> getFromControlQueue() {
-        return fromControlQueue;
-    }
-
     public static Queue<Data> getToUsbQueue() {
         return toUsbQueue;
-    }
-
-    public static Queue<Data> getFromUsbQueue() {
-        return fromUsbQueue;
     }
 }

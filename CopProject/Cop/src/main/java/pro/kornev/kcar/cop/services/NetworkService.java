@@ -44,7 +44,6 @@ public class NetworkService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        Toast.makeText(this, "Network service starting", Toast.LENGTH_SHORT).show();
         try {
             if (controller != null) {
                 Socket s = controller.getSocket();
@@ -63,27 +62,39 @@ public class NetworkService extends Service {
             db.putLog("NS start error: " + e.getMessage());
             e.printStackTrace();
         }
+        Toast.makeText(this, "Network service starting", Toast.LENGTH_SHORT).show();
         return START_STICKY;
     }
 
     class Controller implements Runnable {
         private volatile Socket socket;
+
         @Override
         public void run() {
             Thread readerThread = null;
             Thread writerThread = null;
+            Cleaner cleaner = null;
             while (State.isServiceRunning()) {
-                db.putLog("Connect to: " + State.getProxyServer() + ":" + PROXY_PORT);
+                db.putLog("NS Start cleaner");
+                if (cleaner == null) {
+                    cleaner = new Cleaner();
+                    new Thread(cleaner).start();
+                }
+                db.putLog("NS Connect to: " + State.getProxyServer() + ":" + PROXY_PORT);
                 try {
                     setSocket(new Socket(State.getProxyServer(), PROXY_PORT));
                 } catch (Exception e) {
-                    db.putLog("Failed connect to server: " + e.getMessage());
+                    db.putLog("NS Failed connect to server: " + e.getMessage());
                     /** wait {@link NetworkService#PROXY_RECONNECT_TIMEOUT} seconds and if isServiceRunning then try reconnect */
                     sleep(PROXY_RECONNECT_TIMEOUT);
                     continue;
                 }
 
                 try {
+                    db.putLog("NS Stop cleaner");
+                    cleaner.setWork(false);
+                    cleaner = null;
+
                     Writer writer = new Writer(getSocket());
                     writerThread = new Thread(writer);
                     writerThread.start();
@@ -91,7 +102,7 @@ public class NetworkService extends Service {
                     Reader reader = new Reader(getSocket());
                     readerThread = new Thread(reader);
                     readerThread.start();
-                    db.putLog("Connect to " +getSocket().getInetAddress().toString() + " is successful");
+                    db.putLog("NS Connect to " +getSocket().getInetAddress().toString() + " is successful");
                     readerThread.join(); // Work wile reader is working
                     getSocket().close(); // Close socket and try reconnect
                 } catch (InterruptedException e) {
@@ -123,13 +134,13 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
-            db.putLog("Start network reader");
+            db.putLog("NR Start network reader");
             try {
                 DataInputStream input = new DataInputStream(client.getInputStream());
                 while (State.isServiceRunning() && !client.isClosed()) {
                     Data data = Protocol.fromInputStream(input);
 
-                    db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
+                    db.putLog(String.format("NR got data id: %d; cmd: %d", data.id, data.cmd));
                     if (data.cmd == Protocol.Cmd.ping() && data.bData == 0) {
                         Data response = new Data();
                         response.id = data.id;
@@ -146,7 +157,7 @@ public class NetworkService extends Service {
                 db.putLog("NR error: " + e.getMessage());
                 e.printStackTrace();
             }
-            db.putLog("Stop network reader");
+            db.putLog("NR Stop network reader");
             try {
                 client.close();
             } catch (Exception ignored) {
@@ -166,7 +177,7 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
-            db.putLog("Start network writer");
+            db.putLog("NW Start network writer");
             try {
                 DataOutputStream output = new DataOutputStream(client.getOutputStream());
                 while (State.isServiceRunning() && !client.isClosed()) {
@@ -176,7 +187,7 @@ public class NetworkService extends Service {
                     }
                     Data data = queue.poll();
                     data.id = id++;
-                    db.putLog(String.format("NW: id: %d; cmd: %d", data.id, data.cmd));
+                    db.putLog(String.format("NW wrote date id: %d; cmd: %d", data.id, data.cmd));
 
                     Protocol.toOutputStream(data, output);
                 }
@@ -186,7 +197,29 @@ public class NetworkService extends Service {
             } catch (Exception e) {
                 db.putLog("NW error: " + e.getMessage());
             }
-            db.putLog("Stop network writer");
+            db.putLog("NW Stop network writer");
+        }
+    }
+
+    class Cleaner implements Runnable {
+        private boolean isWork = true;
+
+        @Override
+        public void run() {
+            Queue<Data> queue = State.getToControlQueue();
+            while (State.isServiceRunning() && isWork()) {
+                db.putLog("NC clear queue");
+                queue.clear();
+                sleep(1000);
+            }
+        }
+
+        public synchronized boolean isWork() {
+            return isWork;
+        }
+
+        public synchronized void setWork(boolean isWork) {
+            this.isWork = isWork;
         }
     }
 

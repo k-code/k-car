@@ -10,6 +10,7 @@ import pro.kornev.kcontrol.view.panels.CustomPanel;
 import pro.kornev.kcontrol.service.SettingsListener;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.concurrent.*;
 
 public class DistanceViewPanel extends CustomPanel implements ProxyServiceListener, SettingsListener {
@@ -29,6 +30,7 @@ public class DistanceViewPanel extends CustomPanel implements ProxyServiceListen
         JLabel distanceLabel = new JLabel("Distance to barrier:");
 		this.add(distanceLabel, getGbl().setGrid(0, 0));
 		distanceValue = new JLabel("0");
+        distanceValue.setPreferredSize(new Dimension(30, 15));
 		this.add(distanceValue, getGbl().setGrid(1, 0));
         SettingService.i.addListener(this);
 	}
