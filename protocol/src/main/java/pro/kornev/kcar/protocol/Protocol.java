@@ -1,16 +1,14 @@
 package pro.kornev.kcar.protocol;
 
 import java.io.*;
-import java.nio.ByteBuffer;
 
 /**
  * User: vkornev
  * Date: 02.10.13
  * Time: 10:34
  */
+@SuppressWarnings("unused")
 public class Protocol {
-    public static final byte[] STREAM_HEADER = {0x12, 0x34, 0x56, 0x78};
-
     static {
         System.loadLibrary("protocol");
     }
@@ -19,6 +17,44 @@ public class Protocol {
     native public static Data fromByteArray(byte[] buf, int len);
     native public static byte getVersion();
     native public static int getMaxLength();
+    native public static byte byteType();
+    native public static byte intType();
+    native public static byte arrayType();
+
+    public static class Cmd {
+        static {
+            System.loadLibrary("protocol");
+        }
+        // Commands categories
+        // System
+        native public static byte reservedFirst();
+        native public static byte reservedLast();
+        // COP
+        native public static byte copFirst();
+        native public static byte copLast();
+        // Autopilot
+        native public static byte autoFirst();
+        native public static byte autoLast();
+
+        // Commands
+        // System
+        native public static byte error();
+        native public static byte ping();
+        //COP
+        native public static byte camReset();
+        native public static byte camFps();
+        native public static byte camQuality();
+        native public static byte camPreviewState();
+        native public static byte camPreviewImg();
+        //Autopilot
+        native public static byte autoLiveLed();
+        native public static byte autoUsReq();
+        native public static byte autoUsRes();
+        native public static byte autoLMS();
+        native public static byte autoRMS();
+    }
+
+    public static final byte[] STREAM_HEADER = {0x12, 0x34, 0x56, 0x78};
 
     public static void toOutputStream(Data data, DataOutputStream outputStream) throws IOException {
         byte[] dataBuf = new byte[getMaxLength()];
@@ -38,7 +74,6 @@ public class Protocol {
                     inputStream.readByte() == STREAM_HEADER[2] &&
                     inputStream.readByte() == STREAM_HEADER[3]) {
                 bufLen = inputStream.readInt();
-                break;
             }
         }
         int readBytes = 0;

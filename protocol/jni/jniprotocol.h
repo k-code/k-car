@@ -39,6 +39,185 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_getVersion
 JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_getMaxLength
   (JNIEnv *, jclass);
 
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol
+ * Method:    byteType
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_byteType
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol
+ * Method:    intType
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_intType
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol
+ * Method:    arrayType
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_arrayType
+  (JNIEnv *, jclass);
+
+#ifdef __cplusplus
+}
+#endif
+#endif
+/* Header for class pro_kornev_kcar_protocol_Protocol_Cmd */
+
+#ifndef _Included_pro_kornev_kcar_protocol_Protocol_Cmd
+#define _Included_pro_kornev_kcar_protocol_Protocol_Cmd
+#ifdef __cplusplus
+extern "C" {
+#endif
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    reservedFirst
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_reservedFirst
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    reservedLast
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_reservedLast
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    copFirst
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_copFirst
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    copLast
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_copLast
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoFirst
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoFirst
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoLast
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLast
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    error
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_error
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    ping
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_ping
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    camReset
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camReset
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    camFps
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camFps
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    camQuality
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camQuality
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    camPreviewState
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewState
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    camPreviewImg
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewImg
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoLiveLed
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLiveLed
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoUsReq
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoUsReq
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoUsRes
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoUsRes
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoLMS
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLMS
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoRMS
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoRMS
+  (JNIEnv *, jclass);
+
 #ifdef __cplusplus
 }
 #endif

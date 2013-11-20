@@ -106,3 +106,88 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_getVersion(JNIEnv
 JNIEXPORT jint JNICALL Java_pro_kornev_kcar_protocol_Protocol_getMaxLength(JNIEnv *env, jclass jc) {
     return (jint)PROTOCOL_MAX_FRAME_SIZE;
 }
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_byteType(JNIEnv *e, jclass c) {
+    return (jbyte)DATA_TYPE_CHAR;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_intType(JNIEnv *e, jclass c) {
+    return (jbyte)DATA_TYPE_INT;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_arrayType(JNIEnv *e, jclass c) {
+    return (jbyte)DATA_TYPE_ARRAY;
+}
+
+//Commands
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_reservedFirst(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_RESERVED_F;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_reservedLast(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_RESERVED_L;
+}
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_copFirst(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_COM_COP_F;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_copLast(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_COM_COP_L;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoFirst(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_COM_AUTO_F;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLast(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_COM_AUTO_L;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_error(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_ERROR;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_ping(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_PING;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camReset(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_RESET;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camFps(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_FPS;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camQuality(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_QUALITY;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewState(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_PREVIEW_STATE;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewImg(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_PREVIEW_IMG;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLiveLed(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_LIVE_LED;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoUsReq(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_DISTANCE_REQ;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoUsRes(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_DISTANCE_RES;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLMS(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_LMS;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoRMS(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_RMS;
+}
+

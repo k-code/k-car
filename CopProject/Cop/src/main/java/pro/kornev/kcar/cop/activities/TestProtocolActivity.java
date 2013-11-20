@@ -23,7 +23,6 @@ public class TestProtocolActivity extends Activity {
         TextView text = (TextView)findViewById(R.id.tpTextView);
         text.append(String.format("Version: %02x\n", Protocol.getVersion()));
 
-
         Data data = new Data();
         data.id = 1;
         data.cmd = 2;

@@ -51,6 +51,8 @@ public class ProtocolTest {
         for (int i=0; i<len; i++) {
             System.out.print(String.format("%02X ", buf[i]));
         }
+        System.out.println();
+
         Data newData = Protocol.fromByteArray(buf, len);
 
         assertNotNull("Array is null", newData.aData);
@@ -82,5 +84,30 @@ public class ProtocolTest {
             assertEquals(data.cmd, newData.cmd);
         }
 
+    }
+
+    @Test
+    public void testNativeMethods () {
+        assertTrue(Protocol.byteType() == 0);
+        assertTrue(Protocol.intType() > 0);
+        assertTrue(Protocol.arrayType() > 0);
+        assertTrue(Protocol.Cmd.reservedFirst() == 0);
+        assertTrue(Protocol.Cmd.reservedLast() > 0);
+        assertTrue(Protocol.Cmd.copFirst() > 0);
+        assertTrue(Protocol.Cmd.copLast() > 0);
+        assertTrue(Protocol.Cmd.autoFirst() > 0);
+        assertTrue(Protocol.Cmd.autoLast() > 0);
+        assertTrue(Protocol.Cmd.error() == 0);
+        assertTrue(Protocol.Cmd.ping() > 0);
+        assertTrue(Protocol.Cmd.camPreviewState() > 0);
+        assertTrue(Protocol.Cmd.camPreviewImg() > 0);
+        assertTrue(Protocol.Cmd.camQuality() > 0);
+        assertTrue(Protocol.Cmd.camFps() > 0);
+        assertTrue(Protocol.Cmd.camReset() > 0);
+        assertTrue(Protocol.Cmd.autoUsReq() > 0);
+        assertTrue(Protocol.Cmd.autoUsRes() > 0);
+        assertTrue(Protocol.Cmd.autoLiveLed() > 0);
+        assertTrue(Protocol.Cmd.autoLMS() > 0);
+        assertTrue(Protocol.Cmd.autoRMS() > 0);
     }
 }

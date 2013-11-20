@@ -1,6 +1,7 @@
 package pro.kornev.kcontrol.view.panels.state;
 
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.SettingsListener;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
@@ -75,7 +76,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
     @Override
     public void onPackageReceive(Data data) {
-        if (data.cmd != 5 || !preview.isShowing()) return;
+        if (data.cmd != Protocol.Cmd.camPreviewImg() || !preview.isShowing()) return;
 
         InputStream in = new ByteArrayInputStream(data.aData);
         BufferedImage bufImage = null;
@@ -97,9 +98,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     @Override
     public void actionPerformed(ActionEvent e) {
         Data data = new Data();
-        data.id = 334;
-        data.cmd = 6;
-        data.type = 0;
+        data.cmd = Protocol.Cmd.camPreviewState();
         data.bData = isStartPreview ? (byte)0 : (byte)1;
         proxyService.send(data);
         isStartPreview = !isStartPreview;

@@ -1,12 +1,42 @@
 #ifndef __PROTOCOL_H
 #define __PROTOCOL_H
 
-#define PROTOCOL_MAX_FRAME_SIZE 102400
-#define PROTOCOL_VERSION 0x01
+#define PROTOCOL_MAX_FRAME_SIZE     102400
+#define PROTOCOL_VERSION            0x01
 
-#define DATA_TYPE_CHAR 0x00
-#define DATA_TYPE_INT 0x01
-#define DATA_TYPE_ARRAY 0x02
+#define DATA_TYPE_CHAR              0x00
+#define DATA_TYPE_INT               0x01
+#define DATA_TYPE_ARRAY             0x02
+
+// Commands categories
+// Reserved for system commands
+#define PROTOCOL_CMD_RESERVED_F     0
+#define PROTOCOL_CMD_RESERVED_L     9
+// Command for rend data between control and cop
+#define PROTOCOL_CMD_COM_COP_F      10
+#define PROTOCOL_CMD_COM_COP_L      49
+// Command for rend data between control and autopilot
+#define PROTOCOL_CMD_COM_AUTO_F     50
+#define PROTOCOL_CMD_COM_AUTO_L     89
+
+// Commands
+// System
+#define PROTOCOL_CMD_ERROR          0
+#define PROTOCOL_CMD_PING           1
+
+// For COP
+#define PROTOCOL_CMD_CAM_RESET      10
+#define PROTOCOL_CMD_CAM_FPS        11
+#define PROTOCOL_CMD_CAM_QUALITY    12
+#define PROTOCOL_CMD_PREVIEW_STATE  13
+#define PROTOCOL_CMD_PREVIEW_IMG    14
+
+// For autopilot
+#define PROTOCOL_CMD_LIVE_LED       50
+#define PROTOCOL_CMD_DISTANCE_REQ   51
+#define PROTOCOL_CMD_DISTANCE_RES   52
+#define PROTOCOL_CMD_LMS            53
+#define PROTOCOL_CMD_RMS            54
 
 typedef unsigned char t_byte;
 typedef unsigned int t_int;

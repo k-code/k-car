@@ -1,6 +1,7 @@
 package pro.kornev.kcontrol.view.panels.state;
 
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
@@ -44,7 +45,7 @@ public class DistanceViewPanel extends CustomPanel implements ProxyServiceListen
 
     @Override
     public void onPackageReceive(Data data) {
-        if (data.cmd != 4) {
+        if (data.cmd != Protocol.Cmd.autoUsRes()) {
             return;
         }
         distanceValue.setText(String.valueOf(data.iData));
@@ -58,10 +59,7 @@ public class DistanceViewPanel extends CustomPanel implements ProxyServiceListen
                 return;
             }
             Data data = new Data();
-            data.id = 1;
-            data.cmd = 3;
-            data.type = 0;
-            data.bData = 0;
+            data.cmd = Protocol.Cmd.autoUsReq();
             proxyService.send(data);
         }
     }

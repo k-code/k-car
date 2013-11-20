@@ -23,8 +23,12 @@ import pro.kornev.kcar.protocol.Protocol;
  * @since 17.10.13
  */
 public class NetworkService extends Service {
+    private static final int PROXY_PORT = 6780;
+    private static final int PROXY_RECONNECT_TIMEOUT = 10000;
     private LogsDB db;
     private static List<NetworkListener> listeners = new ArrayList<NetworkListener>();
+    private Thread controllerThread;
+    private Controller controller;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,43 +45,77 @@ public class NetworkService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         Toast.makeText(this, "Network service starting", Toast.LENGTH_SHORT).show();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (State.isServiceRunning()) {
-                    db.putLog("Connect to: " + State.getProxyServer() + ":" + 6780);
-                    Socket s;
-                    try {
-                        s = new Socket(State.getProxyServer(), 6780);
-                    } catch (IOException e) {
-                        db.putLog("Failed connect to server: " + e.getMessage());
-                        sleep(1000); // wait 1 seconds and if isServiceRunning then try reconnect
-                        continue;
-                    }
-
-                    Writer writer = new Writer(s);
-                    new Thread(writer).start();
-
-                    Reader reader = new Reader(s);
-                    Thread readerThread = new Thread(reader);
-                    readerThread.start();
-                    db.putLog("Connect to " +s.getInetAddress().toString() + " is successful");
-                    try {
-                        readerThread.join(); // Work wile reader is working
-                        s.close(); // Close socket and try reconnect
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        try {
+            if (controller != null) {
+                Socket s = controller.getSocket();
+                while (s != null && !s.isClosed()) {
+                    s.close();
+                    sleep(1); // wait while socket will close and threads will stop
+                }
+                while (controllerThread != null && controllerThread.isAlive()) {
+                    controllerThread.interrupt();
                 }
             }
-        }).start();
+            controller = new Controller();
+            controllerThread = new Thread(controller);
+            controllerThread.start();
+        } catch (Exception e) {
+            db.putLog("NS start error: " + e.getMessage());
+            e.printStackTrace();
+        }
         return START_STICKY;
     }
 
+    class Controller implements Runnable {
+        private volatile Socket socket;
+        @Override
+        public void run() {
+            Thread readerThread = null;
+            Thread writerThread = null;
+            while (State.isServiceRunning()) {
+                db.putLog("Connect to: " + State.getProxyServer() + ":" + PROXY_PORT);
+                try {
+                    setSocket(new Socket(State.getProxyServer(), PROXY_PORT));
+                } catch (Exception e) {
+                    db.putLog("Failed connect to server: " + e.getMessage());
+                    /** wait {@link NetworkService#PROXY_RECONNECT_TIMEOUT} seconds and if isServiceRunning then try reconnect */
+                    sleep(PROXY_RECONNECT_TIMEOUT);
+                    continue;
+                }
+
+                try {
+                    Writer writer = new Writer(getSocket());
+                    writerThread = new Thread(writer);
+                    writerThread.start();
+
+                    Reader reader = new Reader(getSocket());
+                    readerThread = new Thread(reader);
+                    readerThread.start();
+                    db.putLog("Connect to " +getSocket().getInetAddress().toString() + " is successful");
+                    readerThread.join(); // Work wile reader is working
+                    getSocket().close(); // Close socket and try reconnect
+                } catch (InterruptedException e) {
+                    readerThread.interrupt();
+                    writerThread.interrupt();
+                    return;
+                } catch (Exception e) {
+                    db.putLog("NS start error: " + e.getMessage());
+                }
+                sleep(PROXY_RECONNECT_TIMEOUT);
+            }
+        }
+
+        public synchronized Socket getSocket() {
+            return socket;
+        }
+
+        public synchronized void setSocket(Socket socket) {
+            this.socket = socket;
+        }
+    }
+
     class Reader implements Runnable {
-        Socket client;
+        private volatile Socket client;
 
         Reader(Socket s) {
             client = s;
@@ -89,16 +127,10 @@ public class NetworkService extends Service {
             try {
                 DataInputStream input = new DataInputStream(client.getInputStream());
                 while (State.isServiceRunning() && !client.isClosed()) {
-                    /*if (input.available() == 0) {
-                        input.readByte();
-                        sleep(1);
-                        continue;
-                    }*/
-
                     Data data = Protocol.fromInputStream(input);
 
                     db.putLog(String.format("NR: id: %d; cmd: %d", data.id, data.cmd));
-                    if (data.cmd == 1 && data.bData == 0) {
+                    if (data.cmd == Protocol.Cmd.ping() && data.bData == 0) {
                         Data response = new Data();
                         response.id = data.id;
                         response.cmd = data.cmd;
@@ -110,22 +142,23 @@ public class NetworkService extends Service {
                         l.onDataReceived(data);
                     }
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
+                db.putLog("NR error: " + e.getMessage());
                 e.printStackTrace();
-            } finally {
-                db.putLog("Stop network reader");
-                try {
-                    client.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            }
+            db.putLog("Stop network reader");
+            try {
+                client.close();
+            } catch (Exception ignored) {
             }
         }
     }
 
     class Writer implements Runnable {
-        Socket client;
-        Queue<Data> queue;
+        private volatile Socket client;
+        private Queue<Data> queue;
+        private int id = 0;
+
         Writer(Socket s) {
             client = s;
             queue = State.getToControlQueue();
@@ -142,13 +175,16 @@ public class NetworkService extends Service {
                         continue;
                     }
                     Data data = queue.poll();
+                    data.id = id++;
                     db.putLog(String.format("NW: id: %d; cmd: %d", data.id, data.cmd));
 
                     Protocol.toOutputStream(data, output);
                 }
-                client.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                if (!client.isClosed()) {
+                    client.close();
+                }
+            } catch (Exception e) {
+                db.putLog("NW error: " + e.getMessage());
             }
             db.putLog("Stop network writer");
         }
@@ -163,8 +199,7 @@ public class NetworkService extends Service {
     private void sleep(int ms) {
         try {
             Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ignored) {
         }
     }
 

@@ -1,6 +1,5 @@
 package pro.kornev.kcontrol.service.network;
 
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pro.kornev.kcar.protocol.Data;
@@ -24,7 +23,6 @@ public final class ProxyService {
 
     private Queue<Data> inputQueue;
     private Queue<Data> outputQueue;
-    private Gson gson;
     private Socket client;
     private Set<ProxyServiceListener> listeners;
 
@@ -33,7 +31,6 @@ public final class ProxyService {
         this.outputQueue = new LinkedBlockingQueue<>();
         this.listeners = new HashSet<>();
 
-        gson = new Gson();
         client = null;
 
         log.debug("Connect to host {} on port {}", host, port);
@@ -100,6 +97,7 @@ public final class ProxyService {
     }
 
     private class Writer implements Runnable {
+        private int id = 0;
 
         @Override
         public void run() {
@@ -113,6 +111,7 @@ public final class ProxyService {
                         continue;
                     }
                     log.debug("Write command: " + data.cmd);
+                    data.id = id++;
                     Protocol.toOutputStream(data, output);
                 }
                 log.debug("Write socket closed");
@@ -128,6 +127,7 @@ public final class ProxyService {
         public void run() {
             while (!client.isClosed()) {
                 if (inputQueue.isEmpty()) {
+                    sleep();
                     continue;
                 }
                 Data data = inputQueue.poll();

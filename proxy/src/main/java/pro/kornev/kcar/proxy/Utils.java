@@ -6,7 +6,7 @@ package pro.kornev.kcar.proxy;
  * Date: 20.11.13
  * Time: 10:51
  */
-public class Utils {
+public final class Utils {
 
     public static void sleep(int ms) {
         try {

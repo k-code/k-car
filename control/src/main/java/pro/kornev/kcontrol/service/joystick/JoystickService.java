@@ -3,6 +3,7 @@ package pro.kornev.kcontrol.service.joystick;
 import com.centralnexus.input.Joystick;
 import com.centralnexus.input.JoystickListener;
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.SettingsListener;
 import pro.kornev.kcontrol.service.network.ProxyServiceListener;
@@ -34,16 +35,12 @@ public class JoystickService implements JoystickListener, SettingsListener {
         }
 
         Data data = new Data();
-        data.id = 12;
-        data.cmd = 45;
-        data.type = 0;
+        data.cmd = Protocol.Cmd.autoLMS();
         data.bData = leftMotor;
         proxyService.send(data);
 
         data = new Data();
-        data.id = 13;
-        data.cmd = 46;
-        data.type = 0;
+        data.cmd = Protocol.Cmd.autoRMS();
         data.bData = rightMotor;
         proxyService.send(data);
     }
@@ -63,9 +60,7 @@ public class JoystickService implements JoystickListener, SettingsListener {
         int buttons = joystick.getButtons();
         if ((buttons & Joystick.BUTTON1) == Joystick.BUTTON1) {
             Data data = new Data();
-            data.id = 1;
-            data.cmd = 2;
-            data.type = 0;
+            data.cmd = Protocol.Cmd.autoLiveLed();
             data.bData = (byte) (liveLed ? 0 : 1);
             proxyService.send(data);
             liveLed = !liveLed;

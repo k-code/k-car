@@ -73,6 +73,13 @@ public final class NetworkService implements Runnable {
         }
     }
 
+    public void shutdown() {
+        log.info("Shutdown server on port" + port);
+        if (reader != null) reader.shutdown();
+        if (writer != null) writer.shutdown();
+        if (cleaner != null) cleaner.shutdown();
+    }
+
     class Reader implements Runnable {
         private final Logger log;
         private Socket client;
@@ -92,7 +99,7 @@ public final class NetworkService implements Runnable {
                     log.debug("Read command: " + data.cmd);
                     inputQueue.add(data);
 
-                    if (data.cmd == 1 && data.bData == 0) {
+                    if (data.cmd == Protocol.Cmd.ping() && data.bData == 0) {
                         Data response = new Data();
                         response.id = data.id;
                         response.cmd = data.cmd;
@@ -118,13 +125,6 @@ public final class NetworkService implements Runnable {
                 setClientAccepted(false);
             }
         }
-    }
-
-    public void shutdown() {
-        log.info("Shutdown server on port" + port);
-        if (reader != null) reader.shutdown();
-        if (writer != null) writer.shutdown();
-        if (cleaner != null) cleaner.shutdown();
     }
 
     class Writer implements Runnable {

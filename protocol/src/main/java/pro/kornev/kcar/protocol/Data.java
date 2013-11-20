@@ -15,4 +15,14 @@ public class Data {
     public int iData;
     public int aSize;
     public byte[] aData;
+
+    public Data() {
+        id=0;
+        cmd=0;
+        type=0;
+        bData=0;
+        iData=0;
+        aSize=0;
+        aData=null;
+    }
 }

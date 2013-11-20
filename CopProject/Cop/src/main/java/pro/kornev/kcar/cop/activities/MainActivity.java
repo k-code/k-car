@@ -1,6 +1,7 @@
 package pro.kornev.kcar.cop.activities;
 
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -8,9 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
+import pro.kornev.kcar.cop.services.CameraPreview;
 import pro.kornev.kcar.cop.services.NetworkService;
 import pro.kornev.kcar.cop.services.UsbService;
 import pro.kornev.kcar.cop.services.VideoService;

@@ -1,6 +1,7 @@
 package pro.kornev.kcontrol.view.panels.settings;
 
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.SettingsListener;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
@@ -24,11 +25,10 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
     private JTextField fps = null;
     private JTextField quality = null;
     private JButton resetCamera;
-    private JButton apply;
 
     public PreviewSettings(String title) {
         super(title);
-        apply = new JButton("Apply");
+        JButton apply = new JButton("Apply");
         apply.addActionListener(this);
         resetCamera = new JButton("Reset camera");
         resetCamera.addActionListener(this);
@@ -42,8 +42,12 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         add(fps, getGbl().setGrid(1, 0).weightH(0.7));
         add(qualityLabel, getGbl().setGrid(0, 1));
         add(quality, getGbl().setGrid(1, 1));
-        add(resetCamera, getGbl().setGrid(0, 2).colSpan());
-        add(apply, getGbl().setGrid(2, 3).colSpan());
+
+        JPanel buttons = new JPanel(new GridBagLayout());
+        buttons.add(resetCamera, getGbl().setGrid(0, 0));
+        buttons.add(apply, getGbl().setGrid(1, 0));
+        add(buttons, getGbl().setGrid(0,2).colSpan());
+
         SettingService.i.addListener(this);
     }
 
@@ -61,25 +65,18 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         JButton button = (JButton)e.getSource();
         if (button.equals(resetCamera)) {
             Data data = new Data();
-            data.id = 334;
-            data.cmd = 8;
-            data.type = 0;
-            data.bData = Byte.valueOf(fps.getText());
+            data.cmd = Protocol.Cmd.camReset();
             proxyService.send(data);
             return;
         }
 
         Data data = new Data();
-        data.id = 335;
-        data.cmd = 7;
-        data.type = 0;
+        data.cmd = Protocol.Cmd.camFps();
         data.bData = Byte.valueOf(fps.getText());
         proxyService.send(data);
 
         data = new Data();
-        data.id = 336;
-        data.cmd = 11;
-        data.type = 0;
+        data.cmd = Protocol.Cmd.camQuality();
         data.bData = Byte.valueOf(quality.getText());
         proxyService.send(data);
     }

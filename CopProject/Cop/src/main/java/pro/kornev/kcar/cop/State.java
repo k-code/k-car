@@ -7,6 +7,7 @@ import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import pro.kornev.kcar.cop.services.CameraPreview;
 import pro.kornev.kcar.cop.services.VideoService;
 import pro.kornev.kcar.protocol.Data;
 

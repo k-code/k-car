@@ -123,8 +123,8 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
 
     @Override
     public void onDataReceived(Data data) {
-        if ((data.cmd == 1 && data.bData == 0)
-                || data.cmd == 3){
+        if ((data.cmd == Protocol.Cmd.ping() && data.bData == 0)
+                || (data.cmd >= Protocol.Cmd.autoFirst() && data.cmd <= Protocol.Cmd.autoLast())) {
             State.getToUsbQueue().add(data);
         }
     }

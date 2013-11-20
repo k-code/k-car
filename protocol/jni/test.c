@@ -5,6 +5,7 @@
 #define _DEBUG
 
 void testArrayData();
+void testConstants();
 
 int main() {
     PROTOCOL_data data;
@@ -52,6 +53,7 @@ int main() {
     printf("end\n");
 
     testArrayData();
+    testConstants();
 }
 
 void testArrayData() {
@@ -90,5 +92,11 @@ void testArrayData() {
     }
     printf("\n");
 
+    printf("end\n");
+}
+
+void testConstants() {
+    printf("--- Test constants\n");
+    printf("%d\n", PROTOCOL_CMD_PING);
     printf("end\n");
 }

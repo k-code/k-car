@@ -1,6 +1,7 @@
 package pro.kornev.kcontrol.view.panels.state;
 
 import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
@@ -79,7 +80,7 @@ public class PingPanel extends CustomPanel {
     private ProxyServiceListener proxyServiceListener = new ProxyServiceListener() {
         @Override
         public void onPackageReceive(Data data) {
-            if (data.cmd != 1) {
+            if (data.cmd != Protocol.Cmd.ping()) {
                 return;
             }
             if (data.bData == 1) {
@@ -103,10 +104,7 @@ public class PingPanel extends CustomPanel {
             stmStatus.setText(STATUS_DEFAULT);
 
             Data data = new Data();
-            data.id = 1;
-            data.cmd = 1;
-            data.type = 0;
-            data.bData = 0;
+            data.cmd = Protocol.Cmd.ping();
 
             proxyService.send(data);
 
