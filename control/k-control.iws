@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="Fixed android camera preview. Show bit rate">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" afterPath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-control.iws" afterPath="$PROJECT_DIR$/k-control.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proxy/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/../proxy/src/main/resources/logback.xml" />
     </list>
     <ignored path="k-control.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384856233956" ignored="false" />
+    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384915303799" ignored="false" />
     <file path="/pom.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384244564635" ignored="false" />
     <file path="/DriverJoystickListener.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384227835674" ignored="false" />
     <file path="/MainWindow.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384746711828" ignored="false" />
@@ -44,6 +44,7 @@
     <file path="$MAVEN_REPOSITORY$/pro/kornev/kcar.protocol/1.0-SNAPSHOT/kcar.protocol-1.0-SNAPSHOT.jar!/pro/kornev/kcar/protocol/Protocol.class" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384744764622" ignored="false" />
     <file path="/PreviewSettings.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384861857376" ignored="false" />
     <file path="/CustomPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384755483635" ignored="false" />
+    <file path="/logback.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384918644282" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +59,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -95,6 +95,7 @@
     </breakpoint_any>
     <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -108,9 +109,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PreviewPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="78" column="17" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -118,7 +117,7 @@
       <file leaf-file-name="PreviewSettings.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="32" selection-start="2663" selection-end="2663" vertical-scroll-proportion="0.9483649">
+            <state line="83" column="32" selection-start="2663" selection-end="2663" vertical-scroll-proportion="1.3786575">
               <folding />
             </state>
           </provider>
@@ -301,6 +300,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -570,7 +570,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -588,9 +587,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Application.Runner">
     <configuration default="false" name="Runner" type="Application" factoryName="Application" temporary="true">
@@ -751,7 +750,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -923,15 +922,13 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/state/PreviewPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="78" column="17" selection-start="2707" selection-end="2707" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="32" selection-start="2663" selection-end="2663" vertical-scroll-proportion="0.9483649">
+        <state line="83" column="32" selection-start="2663" selection-end="2663" vertical-scroll-proportion="1.3786575">
           <folding />
         </state>
       </provider>

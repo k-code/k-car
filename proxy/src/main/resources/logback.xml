@@ -21,7 +21,7 @@
 		</encoder>
 	</appender>
 
-    <logger class="pro.kornev" level="debug" />
+    <logger name="mainLogger" class="pro.kornev" level="debug" />
 
 	<!-- Root Logger -->
 	<root level="debug">
