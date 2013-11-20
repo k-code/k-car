@@ -2,19 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="Fixed android camera preview. Show bit rate">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" afterPath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/NetworkService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/Proxy.java" afterPath="$PROJECT_DIR$/../proxy/src/main/java/pro/kornev/kcar/proxy/Proxy.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-control.iws" afterPath="$PROJECT_DIR$/k-control.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../proxy/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/../proxy/src/main/resources/logback.xml" />
     </list>
     <ignored path="k-control.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384915303799" ignored="false" />
+    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384918724793" ignored="false" />
     <file path="/pom.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384244564635" ignored="false" />
     <file path="/DriverJoystickListener.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384227835674" ignored="false" />
     <file path="/MainWindow.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384746711828" ignored="false" />
     <file path="/ProxySettingsPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384760499552" ignored="false" />
     <file path="/SettingsPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384746735935" ignored="false" />
     <file path="/GBLHelper.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384229713365" ignored="false" />
-    <file path="/NetworkService.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384858918898" ignored="false" />
+    <file path="/NetworkService.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384919630929" ignored="false" />
     <file path="/RelationsController.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384323751892" ignored="false" />
     <file path="/PingPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384767318911" ignored="false" />
     <file path="/StatePanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384312336581" ignored="false" />
@@ -45,6 +47,8 @@
     <file path="/PreviewSettings.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384861857376" ignored="false" />
     <file path="/CustomPanel.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384755483635" ignored="false" />
     <file path="/logback.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384918644282" ignored="false" />
+    <file path="/Proxy.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384919528083" ignored="false" />
+    <file path="/Utils.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384919513667" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

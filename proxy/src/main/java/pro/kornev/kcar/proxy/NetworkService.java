@@ -1,6 +1,5 @@
 package pro.kornev.kcar.proxy;
 
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pro.kornev.kcar.protocol.Data;
@@ -51,11 +50,12 @@ public final class NetworkService implements Runnable {
                 }
                 log.info("Client accepted");
 
-                log.debug("Shutdown reader and writer");
                 if (reader != null) {
+                    log.debug("Shutdown reader");
                     reader.shutdown();
                 }
                 if (writer != null) {
+                    log.debug("Shutdown writer");
                     writer.shutdown();
                 }
 
@@ -102,7 +102,7 @@ public final class NetworkService implements Runnable {
                     }
                 }
             } catch (IOException e) {
-                log.error("Reader exception", e);
+                log.error("Reader exception {}", e.getMessage());
             } finally {
                 shutdown();
                 log.info("Read socket was closed", port);
@@ -144,7 +144,7 @@ public final class NetworkService implements Runnable {
                 while (!client.isClosed()) {
                     Data data = outputQueue.poll();
                     if (data == null) {
-                        sleep();
+                        Utils.sleep(1);
                         continue;
                     }
 
@@ -185,14 +185,14 @@ public final class NetworkService implements Runnable {
                 if (!isClientAccepted()) {
                     Data data = outputQueue.poll();
                     if (data == null) {
-                        sleep();
+                        Utils.sleep(1);
                     }
                     else {
                         log.debug("Drop data with id {}", data.id);
                     }
                 }
                 else {
-                    sleep();
+                    Utils.sleep(100);
                 }
             }
             log.info("Cleaner was closed", port);
@@ -213,13 +213,5 @@ public final class NetworkService implements Runnable {
 
     synchronized void setClientAccepted(boolean clientAccepted) {
         this.clientAccepted = clientAccepted;
-    }
-
-    private void sleep() {
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
