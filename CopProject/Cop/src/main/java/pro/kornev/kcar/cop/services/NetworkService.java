@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class NetworkService extends Service {
     private LogsDB db;
     private static List<NetworkListener> listeners = new ArrayList<NetworkListener>();
     private Thread controllerThread;
-    private Controller controller;
+    private boolean writerRunning = false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -45,18 +44,11 @@ public class NetworkService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         try {
-            if (controller != null) {
-                Socket s = controller.getSocket();
-                while (s != null && !s.isClosed()) {
-                    s.close();
-                    sleep(1); // wait while socket will close and threads will stop
-                }
-                while (controllerThread != null && controllerThread.isAlive()) {
-                    controllerThread.interrupt();
-                }
+            if (controllerThread != null && controllerThread.isAlive()) {
+                db.putLog("NS Start error: controller already run");
+                return START_NOT_STICKY;
             }
-            controller = new Controller();
-            controllerThread = new Thread(controller);
+            controllerThread = new Thread(new Controller());
             controllerThread.start();
         } catch (Exception e) {
             db.putLog("NS start error: " + e.getMessage());
@@ -71,8 +63,6 @@ public class NetworkService extends Service {
 
         @Override
         public void run() {
-            Thread readerThread = null;
-            Thread writerThread = null;
             Cleaner cleaner = null;
             while (State.isServiceRunning()) {
                 db.putLog("NS Start cleaner");
@@ -92,32 +82,26 @@ public class NetworkService extends Service {
 
                 try {
                     db.putLog("NS Stop cleaner");
-                    cleaner.setWork(false);
+                    cleaner.stop();
                     cleaner = null;
 
-                    Writer writer = new Writer(getSocket());
-                    writerThread = new Thread(writer);
+                    setWriterRunning(true);
+                    Writer writer = new Writer(socket);
+                    Thread writerThread = new Thread(writer);
                     writerThread.start();
-
-                    Reader reader = new Reader(getSocket());
-                    readerThread = new Thread(reader);
+                    Reader reader = new Reader(socket);
+                    Thread readerThread = new Thread(reader);
                     readerThread.start();
-                    db.putLog("NS Connect to " +getSocket().getInetAddress().toString() + " is successful");
-                    readerThread.join(); // Work wile reader is working
-                    getSocket().close(); // Close socket and try reconnect
-                } catch (InterruptedException e) {
-                    readerThread.interrupt();
-                    writerThread.interrupt();
-                    return;
-                } catch (Exception e) {
-                    db.putLog("NS start error: " + e.getMessage());
-                }
-                sleep(PROXY_RECONNECT_TIMEOUT);
-            }
-        }
 
-        public synchronized Socket getSocket() {
-            return socket;
+                    db.putLog("NS Connect to " +socket.getInetAddress() + " is successful");
+                    readerThread.join(); // Work wile reader is working
+                    closeSocket(socket); // Close socket and waite while writer is closed
+                    writerThread.join(); // Wait while writer was stopped
+                    db.putLog("NS reader and writer was closed");
+                } catch (Exception e) {
+                    db.putLog("NS run reader and writer was filed: " + e.getMessage());
+                }
+            }
         }
 
         public synchronized void setSocket(Socket socket) {
@@ -137,7 +121,7 @@ public class NetworkService extends Service {
             db.putLog("NR Start network reader");
             try {
                 DataInputStream input = new DataInputStream(client.getInputStream());
-                while (State.isServiceRunning() && !client.isClosed()) {
+                while (State.isServiceRunning()) {
                     Data data = Protocol.fromInputStream(input);
 
                     db.putLog(String.format("NR got data id: %d; cmd: %d", data.id, data.cmd));
@@ -157,11 +141,9 @@ public class NetworkService extends Service {
                 db.putLog("NR error: " + e.getMessage());
                 e.printStackTrace();
             }
+            setWriterRunning(false);
             db.putLog("NR Stop network reader");
-            try {
-                client.close();
-            } catch (Exception ignored) {
-            }
+            closeSocket(client);
         }
     }
 
@@ -180,7 +162,7 @@ public class NetworkService extends Service {
             db.putLog("NW Start network writer");
             try {
                 DataOutputStream output = new DataOutputStream(client.getOutputStream());
-                while (State.isServiceRunning() && !client.isClosed()) {
+                while (isWriterRunning()) {
                     if (queue.isEmpty()) {
                         sleep(1);
                         continue;
@@ -198,6 +180,7 @@ public class NetworkService extends Service {
                 db.putLog("NW error: " + e.getMessage());
             }
             db.putLog("NW Stop network writer");
+            closeSocket(client);
         }
     }
 
@@ -214,12 +197,12 @@ public class NetworkService extends Service {
             }
         }
 
-        public synchronized boolean isWork() {
+        private synchronized boolean isWork() {
             return isWork;
         }
 
-        public synchronized void setWork(boolean isWork) {
-            this.isWork = isWork;
+        public synchronized void stop() {
+            isWork = false;
         }
     }
 
@@ -242,5 +225,22 @@ public class NetworkService extends Service {
 
     public static void removeAllListeners() {
         listeners.clear();
+    }
+
+    private synchronized boolean isWriterRunning() {
+        return writerRunning;
+    }
+
+    public void setWriterRunning(boolean writerRunning) {
+        this.writerRunning = writerRunning;
+    }
+
+    private synchronized void closeSocket(Socket socket) {
+        if (!socket.isClosed()) {
+            try {
+                socket.close();
+            } catch (Exception ignored) {
+            }
+        }
     }
 }

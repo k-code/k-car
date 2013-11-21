@@ -99,14 +99,16 @@ public class ProtocolTest {
         assertTrue(Protocol.Cmd.autoLast() > 0);
         assertTrue(Protocol.Cmd.error() == 0);
         assertTrue(Protocol.Cmd.ping() > 0);
-        assertTrue(Protocol.Cmd.camPreviewState() > 0);
-        assertTrue(Protocol.Cmd.camPreviewImg() > 0);
+        assertTrue(Protocol.Cmd.camState() > 0);
+        assertTrue(Protocol.Cmd.camImg() > 0);
+        assertTrue(Protocol.Cmd.camFlash() > 0);
         assertTrue(Protocol.Cmd.camQuality() > 0);
         assertTrue(Protocol.Cmd.camFps() > 0);
-        assertTrue(Protocol.Cmd.camReset() > 0);
+        assertTrue(Protocol.Cmd.camSizeList() > 0);
+        assertTrue(Protocol.Cmd.camSizeSet() > 0);
         assertTrue(Protocol.Cmd.autoUsReq() > 0);
         assertTrue(Protocol.Cmd.autoUsRes() > 0);
-        assertTrue(Protocol.Cmd.autoLiveLed() > 0);
+        assertTrue(Protocol.Cmd.autoTriggerLed() > 0);
         assertTrue(Protocol.Cmd.autoLMS() > 0);
         assertTrue(Protocol.Cmd.autoRMS() > 0);
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.util.SparseArray;
 
 import pro.kornev.kcar.cop.State;
@@ -68,8 +69,9 @@ public class LogsDB extends SQLiteOpenHelper {
         return result;
     }
 
-    public synchronized long putLog(String logData) {
-        if (!State.isLogsEnabled()) return 0;
+    public synchronized void putLog(String logData) {
+        Log.w("KCAR", logData);
+        if (!State.isLogsEnabled()) return;
 
         SQLiteDatabase db = getWritableDatabase();
         if (db == null || db.isReadOnly()) {
@@ -77,10 +79,8 @@ public class LogsDB extends SQLiteOpenHelper {
         }
         ContentValues values = new ContentValues(1);
         values.put(COLUMNS[1], logData);
-        long id = db.insert(TABLE_NAME, null, values);
+        db.insert(TABLE_NAME, null, values);
         db.close();
-
-        return id;
     }
 
     public void clearLogs() {

@@ -27,10 +27,10 @@ public class JoystickService implements JoystickListener, SettingsListener {
         byte leftMotor = (byte)(j.getY() * 50);
         byte rightMotor = (byte)(j.getY() * 50);
 
-        if (leftMotor > 0) {
+        if (leftMotor >= 0) {
             leftMotor += 50;
         }
-        if (rightMotor > 0) {
+        if (rightMotor >= 0) {
             rightMotor += 50;
         }
 

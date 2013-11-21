@@ -83,7 +83,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
     @Override
     public void onPackageReceive(Data data) {
-        if (data.cmd != Protocol.Cmd.camPreviewImg() || !preview.isShowing()) return;
+        if (data.cmd != Protocol.Cmd.camImg() || !preview.isShowing()) return;
 
         InputStream in = new ByteArrayInputStream(data.aData);
         BufferedImage bufImage = null;
@@ -112,7 +112,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     @Override
     public void actionPerformed(ActionEvent e) {
         Data data = new Data();
-        data.cmd = Protocol.Cmd.camPreviewState();
+        data.cmd = Protocol.Cmd.camState();
         data.bData = isStartPreview ? (byte)0 : (byte)1;
         proxyService.send(data);
         isStartPreview = !isStartPreview;

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import pro.kornev.kcar.cop.R;
@@ -19,6 +18,7 @@ public class TestProtocolActivity extends Activity {
         setContentView(R.layout.test_protocol);
     }
 
+    @SuppressWarnings("unused")
     public void protocolButtonClick(View view) {
         TextView text = (TextView)findViewById(R.id.tpTextView);
         text.append(String.format("Version: %02x\n", Protocol.getVersion()));

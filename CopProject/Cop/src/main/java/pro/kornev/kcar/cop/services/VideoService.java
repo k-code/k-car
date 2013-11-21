@@ -1,7 +1,9 @@
 package pro.kornev.kcar.cop.services;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
@@ -10,6 +12,7 @@ import android.hardware.Camera;
 import android.os.IBinder;
 
 import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 import pro.kornev.kcar.cop.State;
@@ -21,15 +24,17 @@ import pro.kornev.kcar.protocol.Protocol;
  *
  */
 public class VideoService extends Service implements NetworkListener, Camera.PreviewCallback, Camera.ErrorCallback {
-    private Camera mCamera;
+    private LogsDB db;
+    private volatile Camera mCamera;
+    private volatile boolean startPreview = false;
     private int fps = 1;
     private long lastFrameTime = 0;
-    private LogsDB db;
-    private boolean isStartPreview = false;
     private Camera.Size size;
     private int previewFormat = ImageFormat.NV21;
     private int quality = 50;
     private CameraPreview cameraPreview = null;
+    private boolean isFlashAvailable = false;
+    private boolean isFlashOn = false;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -40,7 +45,6 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
     public boolean onUnbind(Intent intent) {
         super.onUnbind(intent);
         stopPreview();
-        releaseCamera();
         return true;
     }
 
@@ -48,9 +52,15 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         db = new LogsDB(getApplicationContext());
-        NetworkService.addListener(this);
+        Context context = getApplicationContext();
 
-        initCamera();
+        if (context != null) {
+        cameraPreview = new CameraPreview(context);
+            if (context.getPackageManager() != null) {
+                isFlashAvailable = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+            }
+        }
+        NetworkService.addListener(this);
 
         return START_STICKY;
     }
@@ -61,7 +71,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
         if (data.cmd < Protocol.Cmd.copFirst() || data.cmd > Protocol.Cmd.copLast()) {
             return;
         }
-        if (data.cmd == Protocol.Cmd.camPreviewState()) {
+        if (data.cmd == Protocol.Cmd.camState()) {
             if (data.bData == 0) {
                 db.putLog("Stop preview");
                 stopPreview();
@@ -69,21 +79,51 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
                 db.putLog("Start preview");
                 startPreview();
             }
-        } else  if (data.cmd == Protocol.Cmd.camFps()) {
+        } else if (data.cmd == Protocol.Cmd.camFps()) {
             db.putLog("Set FPS to " + data.bData);
             setFps(data.bData);
-        } else  if (data.cmd == Protocol.Cmd.camReset()) {
-            db.putLog("Reset camera");
-            initCamera();
         } else if (data.cmd == Protocol.Cmd.camQuality()) {
             db.putLog("Set quality to " + data.bData);
             setQuality(data.bData);
+        } else if (data.cmd == Protocol.Cmd.camFlash()) {
+            db.putLog("Set flash to " + data.bData);
+            setFlash(data.bData);
+        } else if (data.cmd == Protocol.Cmd.camSizeList()) {
+            db.putLog("Send camera preview sizes");
+            Camera.Parameters parameters = getCamera().getParameters();
+            List<Camera.Size> sizes = parameters.getSupportedPreviewSizes();
+            if (sizes == null || sizes.isEmpty()) {
+                data = new Data();
+                data.cmd = Protocol.Cmd.error();
+                data.bData = Protocol.Cmd.camSizeList();
+                State.getToControlQueue().add(data);
+                return;
+            }
+            ByteBuffer bb = ByteBuffer.allocate(sizes.size() * 8);
+            for (Camera.Size size: sizes) {
+                bb.putInt(size.width);
+                bb.putInt(size.height);
+            }
+            data = new Data();
+            data.cmd = Protocol.Cmd.camSizeList();
+            data.type = Protocol.arrayType();
+            data.aData = bb.array();
+            data.aSize = data.aData.length;
+            State.getToControlQueue().add(data);
+        } else if (data.cmd == Protocol.Cmd.camSizeSet()) {
+            db.putLog("Set cam size");
+            ByteBuffer bb = ByteBuffer.wrap(data.aData);
+            size = getSize(bb.getInt(), bb.getInt());
+            resetCamera();
         }
     }
 
     // Camera listener
     @Override
     public void onPreviewFrame(byte[] buf, Camera camera) {
+        if (!State.isServiceRunning()) {
+            stopPreview();
+        }
         if (System.currentTimeMillis() - lastFrameTime < 1000 / getFps()) {
             return;
         }
@@ -95,7 +135,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
         byte[] aData = baos.toByteArray();
 
         Data data = new Data();
-        data.cmd = Protocol.Cmd.camPreviewImg();
+        data.cmd = Protocol.Cmd.camImg();
         data.type = Protocol.arrayType();
         data.aSize = aData.length;
         data.aData = aData;
@@ -103,18 +143,30 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
         lastFrameTime = System.currentTimeMillis();
     }
 
-    private void releaseCamera(){
-        if (mCamera != null){
+    @Override
+    public void onError(int error, Camera camera) {
+        stopPreview();
+        startPreview();
+        Data data = new Data();
+        data.cmd = Protocol.Cmd.error();
+        data.bData = Protocol.Cmd.camState();
+        State.getToControlQueue().add(data);
+    }
+
+    private synchronized void releaseCamera() {
+        try {
             mCamera.release();
             mCamera = null;
+        } catch (Exception ignored) {
         }
     }
 
     private synchronized void startPreview() {
         try {
-            if (isStartPreview) return;
-            mCamera.startPreview();
-            isStartPreview = true;
+            if (isStartPreview()) return;
+            initCamera();
+            getCamera().startPreview();
+            setStartPreview(true);
         } catch (Exception e) {
             db.putLog("Failed start camera preview: " + e.getMessage());
         }
@@ -122,9 +174,10 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
 
     private synchronized void stopPreview() {
         try {
-            if (!isStartPreview) return;
-            mCamera.stopPreview();
-            isStartPreview = false;
+            if (!isStartPreview()) return;
+            getCamera().stopPreview();
+            releaseCamera();
+            setStartPreview(false);
         } catch (Exception e) {
             db.putLog("Failed stop camera preview: " + e.getMessage());
         }
@@ -138,32 +191,22 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
             parameters.setPreviewFpsRange(minFps, minFps);
         }*/
         previewFormat = parameters.getPreviewFormat();
-        List<Camera.Size> sizes = parameters.getSupportedPictureSizes();
-        if (sizes != null && !sizes.isEmpty()) {
-            size = sizes.get(0);
-            for (Camera.Size s: sizes) {
-                if (size.width > s.width) {
-                    size = s;
-                }
-            }
-            parameters.setPreviewSize(size.width, size.height);
+        if (size == null) {
+            size = getSize(0, 0);
         }
-        mCamera.setParameters(parameters);
+        parameters.setPreviewSize(size.width, size.height);
+        if (isFlashAvailable && isFlashOn) {
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        }
+        getCamera().setParameters(parameters);
     }
 
     private void initCamera() {
         try {
-            if (mCamera != null) {
-                stopPreview();
-                releaseCamera();
-            }
-            mCamera = Camera.open();
-            setupCamera(mCamera);
-            if (cameraPreview == null) {
-                cameraPreview = new CameraPreview(getApplicationContext(), mCamera);
-            } else {
-                cameraPreview.setCamera(mCamera);
-            }
+            stopPreview();
+            Camera camera = getCamera();
+            setupCamera(camera);
+            cameraPreview.setCamera(camera);
             SurfaceTexture surfaceTexture = new SurfaceTexture(0);
             surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
                 @Override
@@ -171,9 +214,11 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
                     surfaceTexture.getTransformMatrix(new float[16]);
                 }
             });
-            mCamera.setPreviewTexture(surfaceTexture);
-            mCamera.setPreviewCallback(this);
-            mCamera.setErrorCallback(this);
+            if (camera != null) {
+                camera.setPreviewTexture(surfaceTexture);
+                camera.setPreviewCallback(this);
+                camera.setErrorCallback(this);
+            }
         } catch (Exception e) {
             db.putLog("Failed init camera: " +e.getMessage());
             e.printStackTrace();
@@ -198,13 +243,50 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
         this.quality = quality;
     }
 
-    @Override
-    public void onError(int error, Camera camera) {
-        initCamera();
-        startPreview();
-        Data data = new Data();
-        data.cmd = Protocol.Cmd.error();
-        data.bData = Protocol.Cmd.camPreviewImg();
-        State.getToControlQueue().add(data);
+    private synchronized void setFlash(byte state) {
+        isFlashOn = state != 0;
+        resetCamera();
+    }
+
+    private synchronized boolean isStartPreview() {
+        return startPreview;
+    }
+
+    private synchronized void setStartPreview(boolean startPreview) {
+        this.startPreview = startPreview;
+    }
+
+    private void resetCamera() {
+        if (isStartPreview()) {
+            stopPreview();
+            startPreview();
+        }
+    }
+
+    private Camera.Size getSize(int w, int h) {
+        List<Camera.Size> sizes = getCamera().getParameters().getSupportedPreviewSizes();
+        Camera.Size minSize = null;
+        if (sizes != null && !sizes.isEmpty()) {
+            minSize = sizes.get(0);
+            for (Camera.Size size: sizes) {
+                if (size.width == w && size.height == h) {
+                    return size;
+                }
+                if (minSize.width > size.width) {
+                    minSize = size;
+                }
+            }
+        }
+        return minSize;
+    }
+
+    private synchronized Camera getCamera() {
+        try {
+            if (mCamera == null) {
+                mCamera = Camera.open();
+            }
+        } catch (Exception ignore) {
+        }
+        return mCamera;
     }
 }

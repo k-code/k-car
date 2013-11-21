@@ -15,20 +15,19 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private static final String TAG = CameraPreview.class.getCanonicalName(); private SurfaceHolder mHolder;
     private Camera mCamera;
 
-    public CameraPreview(Context context, Camera camera) {
+    public CameraPreview(Context context) {
         super(context);
-        mCamera = camera;
 
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
         mHolder = getHolder();
         assert mHolder != null;
         mHolder.addCallback(this);
-        try {
+        /*try {
             mCamera.setPreviewDisplay(mHolder);
         } catch (IOException e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
-        }
+        }*/
         // deprecated setting, but required on Android versions prior to 3.0
         //mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
     }
