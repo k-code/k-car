@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:id="@+id/laText"
-            android:scrollbars="vertical" />
+            android:scrollbars="vertical"
+            android:typeface="monospace" />
     </ScrollView>
     <Button
         android:layout_width="150dp"

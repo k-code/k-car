@@ -25,8 +25,9 @@ public class MainActivity extends Activity {
         runButton = (Button)findViewById(R.id.maRunButton);
         setRunButtonText();
         State.setLogsEnabled(true);
-        Intent videoServiceIntent = new Intent(this, VideoService.class);
-        startService(videoServiceIntent);
+        CheckBox logsEnabled = (CheckBox)findViewById(R.id.maEnableLogsCheckBox);
+        State.setLogsEnabled(logsEnabled.isChecked());
+        onServiceRunClick(null);
     }
 
     @SuppressWarnings("unused")
@@ -51,22 +52,12 @@ public class MainActivity extends Activity {
     public void onServiceRunClick(View v) {
         if (State.isServiceRunning()) {
             State.setServiceRunning(false);
-            NetworkService.removeAllListeners();
-        }
-        else {
+        } else {
             EditText proxy = (EditText)findViewById(R.id.maProxyIp);
-            if (proxy.getText() == null || proxy.getText().toString().length() == 0) {
-                return;
+            if (proxy.getText() != null) {
+                State.setProxyServer(proxy.getText().toString());
             }
-            State.setProxyServer(proxy.getText().toString());
-            State.setServiceRunning(true);
-
-            if (State.getUsbSerialDriver() != null) {
-                Intent usbServiceIntent = new Intent(this, UsbService.class);
-                startService(usbServiceIntent);
-            }
-            Intent networkServiceIntent = new Intent(this, NetworkService.class);
-            startService(networkServiceIntent);
+            startServices();
         }
         setRunButtonText();
     }
@@ -89,5 +80,15 @@ public class MainActivity extends Activity {
         else {
             runButton.setText("Run services");
         }
+    }
+
+    private void startServices() {
+        State.setServiceRunning(true);
+        Intent videoServiceIntent = new Intent(this, VideoService.class);
+        startService(videoServiceIntent);
+        Intent usbServiceIntent = new Intent(this, UsbService.class);
+        startService(usbServiceIntent);
+        Intent networkServiceIntent = new Intent(this, NetworkService.class);
+        startService(networkServiceIntent);
     }
 }

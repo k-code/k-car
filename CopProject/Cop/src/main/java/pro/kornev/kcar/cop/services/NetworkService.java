@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Queue;
 
 import pro.kornev.kcar.cop.State;
+import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
@@ -55,6 +56,7 @@ public class NetworkService extends Service {
             e.printStackTrace();
         }
         Toast.makeText(this, "Network service starting", Toast.LENGTH_SHORT).show();
+        db.putLog("NS Is running");
         return START_STICKY;
     }
 
@@ -65,7 +67,7 @@ public class NetworkService extends Service {
         public void run() {
             Cleaner cleaner = null;
             while (State.isServiceRunning()) {
-                db.putLog("NS Start cleaner");
+                db.putLog("NS Starting cleaner");
                 if (cleaner == null) {
                     cleaner = new Cleaner();
                     new Thread(cleaner).start();
@@ -76,12 +78,12 @@ public class NetworkService extends Service {
                 } catch (Exception e) {
                     db.putLog("NS Failed connect to server: " + e.getMessage());
                     /** wait {@link NetworkService#PROXY_RECONNECT_TIMEOUT} seconds and if isServiceRunning then try reconnect */
-                    sleep(PROXY_RECONNECT_TIMEOUT);
+                    Utils.sleep(PROXY_RECONNECT_TIMEOUT);
                     continue;
                 }
 
                 try {
-                    db.putLog("NS Stop cleaner");
+                    db.putLog("NS Stopping cleaner");
                     cleaner.stop();
                     cleaner = null;
 
@@ -93,7 +95,6 @@ public class NetworkService extends Service {
                     Thread readerThread = new Thread(reader);
                     readerThread.start();
 
-                    db.putLog("NS Connect to " +socket.getInetAddress() + " is successful");
                     readerThread.join(); // Work wile reader is working
                     closeSocket(socket); // Close socket and waite while writer is closed
                     writerThread.join(); // Wait while writer was stopped
@@ -164,7 +165,7 @@ public class NetworkService extends Service {
                 DataOutputStream output = new DataOutputStream(client.getOutputStream());
                 while (isWriterRunning()) {
                     if (queue.isEmpty()) {
-                        sleep(1);
+                        Utils.sleep(1);
                         continue;
                     }
                     Data data = queue.poll();
@@ -191,10 +192,11 @@ public class NetworkService extends Service {
         public void run() {
             Queue<Data> queue = State.getToControlQueue();
             while (State.isServiceRunning() && isWork()) {
-                db.putLog("NC clear queue");
+                db.putLog("NC Clear queue");
                 queue.clear();
-                sleep(1000);
+                Utils.sleep(1000);
             }
+            db.putLog("NC Was closed");
         }
 
         private synchronized boolean isWork() {
@@ -210,13 +212,6 @@ public class NetworkService extends Service {
     public void onDestroy() {
         Toast.makeText(this, "Network service done", Toast.LENGTH_SHORT).show();
         State.setServiceRunning(false);
-    }
-
-    private void sleep(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException ignored) {
-        }
     }
 
     public static void addListener(NetworkListener listener) {

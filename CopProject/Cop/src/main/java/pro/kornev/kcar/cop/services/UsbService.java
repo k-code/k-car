@@ -3,7 +3,6 @@ package pro.kornev.kcar.cop.services;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
@@ -17,6 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import pro.kornev.kcar.cop.State;
+import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
@@ -26,13 +26,11 @@ import pro.kornev.kcar.protocol.Protocol;
  * @since 14.10.13
  */
 public class UsbService extends Service implements NetworkListener, SerialInputOutputManager.Listener {
-    private final String TAG = UsbService.class.getSimpleName();
-
+    private static final int DRIVER_SCAN_TIMEOUT = 1000;
     private LogsDB db;
-    private static UsbSerialDriver sDriver = null;
-    private SerialInputOutputManager mSerialIoManager;
+    //private static UsbSerialDriver sDriver = null;
+    private volatile SerialInputOutputManager mSerialIoManager;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
-    private Thread writerThread;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -50,74 +48,42 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
         super.onStartCommand(intent, flags, startId);
         NetworkService.addListener(this);
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
-        sDriver = State.getUsbSerialDriver();
-        onResume();
+        new Thread(new Controller()).start();
+        db.putLog("US Is running");
         return START_STICKY;
     }
 
-    protected void onResume() {
-        db.putLog("Resumed, sDriver=" + sDriver);
-        if (sDriver == null) {
-            db.putLog("No serial device.");
-        } else {
-            try {
-                sDriver.open();
-            } catch (IOException e) {
-                db.putLog("Error setting up device: " + e.getMessage());
-                try {
-                    sDriver.close();
-                } catch (IOException ignored) {
-                }
-                sDriver = null;
-                return;
-            }
-            db.putLog("Serial device: " + sDriver.getClass().getSimpleName());
-        }
-        onDeviceStateChange();
-
-        Writer writer = new Writer();
-        writerThread = new Thread(writer);
-        writerThread.start();
-    }
-
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        super.onTaskRemoved(rootIntent);
-        writerThread.interrupt();
-    }
-
-
     @Override
     public void onRunError(Exception e) {
-        db.putLog("Runner stopped.");
+        db.putLog("US Runner stopped.");
     }
 
     @Override
     public void onNewData(final byte[] data) {
-        db.putLog("Read data len: " + data.length);
-        db.putLog("Read data: " + HexDump.dumpHexString(data));
+        db.putLog("US Read data len: " + data.length);
+        db.putLog("US Read data: " + HexDump.dumpHexString(data));
         State.getToControlQueue().add(Protocol.fromByteArray(data, data.length));
     }
 
     private void stopIoManager() {
         if (mSerialIoManager != null) {
-            Log.i(TAG, "Stopping io manager ..");
+            db.putLog("US Stopping io manager ..");
             mSerialIoManager.stop();
             mSerialIoManager = null;
         }
     }
 
-    private void startIoManager() {
-        if (sDriver != null) {
-            Log.i(TAG, "Starting io manager ..");
-            mSerialIoManager = new SerialInputOutputManager(sDriver, this);
+    private void startIoManager(UsbSerialDriver driver) {
+        if (driver != null) {
+            db.putLog("US Starting io manager ..");
+            mSerialIoManager = new SerialInputOutputManager(driver, this);
             mExecutor.submit(mSerialIoManager);
         }
     }
 
-    private void onDeviceStateChange() {
+    private void onDeviceStateChange(UsbSerialDriver driver) {
         stopIoManager();
-        startIoManager();
+        startIoManager(driver);
     }
 
     @Override
@@ -128,39 +94,93 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
         }
     }
 
+    class Controller implements Runnable {
+        private UsbSerialDriver driver = null;
+        private Writer writer = null;
+
+        @Override
+        public void run() {
+            db.putLog("US Running Controller");
+            while (State.isServiceRunning()) {
+                UsbSerialDriver newDriver = State.getUsbSerialDriver();
+                if (newDriver == null || newDriver.equals(driver)) {
+                    //db.putLog("No serial device.");
+                    Utils.sleep(DRIVER_SCAN_TIMEOUT);
+                    continue;
+                }
+                driver = newDriver;
+                try {
+                    db.putLog("US Usb device found");
+                    driver.open();
+                    db.putLog("US Serial device: " + driver.getClass().getSimpleName());
+
+                    if (writer != null) {
+                        db.putLog("US Stopping Writer");
+                        writer.stop();
+                    }
+
+                    onDeviceStateChange(driver);
+
+                    db.putLog("US Starting Writer");
+                    writer = new Writer(driver);
+                    Thread writerThread = new Thread(writer);
+                    writerThread.start();
+                } catch (Exception e) {
+                    db.putLog("US Error: " + e.getMessage());
+                    try {
+                        driver.close();
+                    } catch (IOException ignored) {
+                    }
+                    Utils.sleep(DRIVER_SCAN_TIMEOUT);
+                }
+            }
+            if (writer != null) {
+                writer.stop();
+            }
+        }
+    }
+
     class Writer implements Runnable {
-        Queue<Data> queue;
+        private Queue<Data> queue;
         private byte[] bytes = new byte[Protocol.getMaxLength()];
         private int TIMEOUT = 10;
-        UsbSerialDriver driver;
+        private UsbSerialDriver driver;
+        private boolean working;
 
-        Writer() {
+        Writer(UsbSerialDriver driver) {
             queue = State.getToUsbQueue();
-            driver = State.getUsbSerialDriver();
+            this.driver = driver;
+            this.working = true;
         }
 
         @Override
         public void run() {
-            db.putLog("Start USB writer");
-            while (State.isServiceRunning()) {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            db.putLog("UW Start USB writer");
+
+            while (isWorking()) {
+                if (queue.size() == 0) {
+                    Utils.sleep(1);
+                    continue;
                 }
-                if (queue.size() == 0 || driver == null) continue;
-                db.putLog("Write data to USB");
                 Data data = queue.poll();
+                db.putLog("UW Write data cmd: " + data.cmd);
                 int bLen = Protocol.toByteArray(data, bytes);
                 try {
                     driver.write(Arrays.copyOf(bytes, bLen), TIMEOUT);
                 } catch (IOException e) {
                     db.putLog("Error: Failed send data to USB: " + e.getMessage());
                 }
-                db.putLog(String.format("USB write: Data id: %d; cmd: %d; type: %d; bData: %d; iData: %d", data.id, data.cmd, data.type, data.bData, data.iData));
             }
+            db.putLog("UW Was stopped");
         }
 
+        public synchronized void stop() {
+            this.working = false;
+        }
+
+        private synchronized boolean isWorking() {
+            return working;
+        }
     }
 
     @Override
