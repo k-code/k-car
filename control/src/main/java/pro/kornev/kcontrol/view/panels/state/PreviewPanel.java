@@ -26,8 +26,6 @@ import java.io.*;
 public class PreviewPanel extends CustomPanel implements SettingsListener, ProxyServiceListener, ActionListener {
     private static final String START_PREVIEW = "Start preview";
     private static final String STOP_PREVIEW = "Stop preview";
-    private static final Dimension minSize = new Dimension(32, 24);
-    private static final Dimension preferredSize = new Dimension(320, 240);
     private static final Dimension maxSize = new Dimension(640, 480);
     private boolean isStartPreview = false;
     private JButton startPreviewButton;
@@ -42,19 +40,11 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     public PreviewPanel() {
         super("Android camera preview");
         SettingService.i.addListener(this);
-        preview = new JPanel(null);
+        preview = new JPanel(new FlowLayout(FlowLayout.LEFT));
         canvas = new Canvas();
 
-        preview.setMinimumSize(minSize);
-        preview.setPreferredSize(preferredSize);
-        preview.setMaximumSize(maxSize);
-
-        canvas.setMinimumSize(minSize);
-        canvas.setPreferredSize(preferredSize);
-        canvas.setMaximumSize(maxSize);
-
         preview.add(canvas);
-        add(preview, getGbl().setGrid(0, 0).fillB().rowSpan(3));
+        add(preview, getGbl().setGrid(0, 0).fillB().rowSpan(3).weightH(1));
         startPreviewButton = new JButton(isStartPreview ? STOP_PREVIEW : START_PREVIEW);
         startPreviewButton.addActionListener(this);
 
@@ -98,8 +88,18 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
         bitRate.setText(String.valueOf(data.aSize));
 
-        canvas.setSize(bufImage.getWidth(), bufImage.getHeight());
-        canvas.getGraphics().drawImage(bufImage, 0, 0, null);
+        Dimension size = new Dimension(bufImage.getWidth(), bufImage.getHeight());
+        if (size.height > maxSize.height) {
+            size = maxSize;
+        }
+        if (preview.getSize() != size) {
+            preview.setSize(size);
+        }
+        if (canvas.getSize() != size) {
+            canvas.setSize(size);
+        }
+        size = canvas.getSize();
+        canvas.getGraphics().drawImage(bufImage, 0, 0, size.width, size.height, null);
 
         if (lastSec < System.currentTimeMillis() - 1000) {
             lastSec = System.currentTimeMillis();
@@ -111,6 +111,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (proxyService == null) return;
         Data data = new Data();
         data.cmd = Protocol.Cmd.camState();
         data.bData = isStartPreview ? (byte)0 : (byte)1;

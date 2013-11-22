@@ -83,6 +83,7 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
     }
 
     private void getSizes() {
+        if (proxyService == null) return;
         Data data = new Data();
         data.cmd = Protocol.Cmd.camSizeList();
         proxyService.send(data);

@@ -17,6 +17,6 @@ public class SystemStatePanel extends CustomPanel {
         add(new PingPanel(), getGbl().setGrid(0,0));
         add(new JoystickViewPanel(), getGbl().setGrid(1,0));
         add(new DistanceViewPanel(), getGbl().setGrid(2,0));
-        add(new PreviewPanel(), getGbl().setGrid(0,1).colSpan(2));
+        add(new PreviewPanel(), getGbl().setGrid(0,1).colSpan().fillB().weightV(0.1));
     }
 }

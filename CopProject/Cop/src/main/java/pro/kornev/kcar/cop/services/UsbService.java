@@ -66,8 +66,7 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
                 db.putLog("Error setting up device: " + e.getMessage());
                 try {
                     sDriver.close();
-                } catch (IOException e2) {
-                    // Ignore.
+                } catch (IOException ignored) {
                 }
                 sDriver = null;
                 return;
