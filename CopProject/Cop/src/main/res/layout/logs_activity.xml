@@ -21,7 +21,8 @@
             android:text=""
             android:id="@+id/laText"
             android:scrollbars="vertical"
-            android:typeface="monospace" />
+            android:typeface="monospace"
+            android:textSize="12sp" />
     </ScrollView>
     <Button
         android:layout_width="150dp"

@@ -87,6 +87,7 @@ public class NetworkService extends Service {
                     cleaner.stop();
                     cleaner = null;
 
+                    db.putLog("NS Starting reader and writer");
                     setWriterRunning(true);
                     Writer writer = new Writer(socket);
                     Thread writerThread = new Thread(writer);
@@ -96,7 +97,7 @@ public class NetworkService extends Service {
                     readerThread.start();
 
                     readerThread.join(); // Work wile reader is working
-                    closeSocket(socket); // Close socket and waite while writer is closed
+                    closeSocket(socket); // Close socket and white while writer is closed
                     writerThread.join(); // Wait while writer was stopped
                     db.putLog("NS reader and writer was closed");
                 } catch (Exception e) {
