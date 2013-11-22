@@ -60,7 +60,7 @@ public class JoystickService implements JoystickListener, SettingsListener {
         int buttons = joystick.getButtons();
         if ((buttons & Joystick.BUTTON1) == Joystick.BUTTON1) {
             Data data = new Data();
-            data.cmd = Protocol.Cmd.autoLiveLed();
+            data.cmd = Protocol.Cmd.autoTriggerLed();
             data.bData = (byte) (liveLed ? 0 : 1);
             proxyService.send(data);
             liveLed = !liveLed;
