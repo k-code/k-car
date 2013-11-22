@@ -41,13 +41,15 @@ public class Protocol {
         native public static byte error();
         native public static byte ping();
         //COP
-        native public static byte camReset();
+        native public static byte camState();
+        native public static byte camImg();
         native public static byte camFps();
         native public static byte camQuality();
-        native public static byte camPreviewState();
-        native public static byte camPreviewImg();
+        native public static byte camFlash();
+        native public static byte camSizeList();
+        native public static byte camSizeSet();
         //Autopilot
-        native public static byte autoLiveLed();
+        native public static byte autoTriggerLed();
         native public static byte autoUsReq();
         native public static byte autoUsRes();
         native public static byte autoLMS();

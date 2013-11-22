@@ -1,7 +1,6 @@
 package pro.kornev.kcar.cop.activities;
 
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -9,11 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
-import pro.kornev.kcar.cop.services.CameraPreview;
 import pro.kornev.kcar.cop.services.NetworkService;
 import pro.kornev.kcar.cop.services.UsbService;
 import pro.kornev.kcar.cop.services.VideoService;
@@ -28,6 +25,9 @@ public class MainActivity extends Activity {
         runButton = (Button)findViewById(R.id.maRunButton);
         setRunButtonText();
         State.setLogsEnabled(true);
+        CheckBox logsEnabled = (CheckBox)findViewById(R.id.maEnableLogsCheckBox);
+        State.setLogsEnabled(logsEnabled.isChecked());
+        onServiceRunClick(null);
     }
 
     @SuppressWarnings("unused")
@@ -52,25 +52,12 @@ public class MainActivity extends Activity {
     public void onServiceRunClick(View v) {
         if (State.isServiceRunning()) {
             State.setServiceRunning(false);
-            NetworkService.removeAllListeners();
-        }
-        else {
+        } else {
             EditText proxy = (EditText)findViewById(R.id.maProxyIp);
-            if (proxy.getText() == null || proxy.getText().toString().length() == 0) {
-                // TODO : show error message
-                return;
+            if (proxy.getText() != null) {
+                State.setProxyServer(proxy.getText().toString());
             }
-            State.setProxyServer(proxy.getText().toString());
-            State.setServiceRunning(true);
-
-            if (State.getUsbSerialDriver() != null) {
-                Intent usbServiceIntent = new Intent(this, UsbService.class);
-                startService(usbServiceIntent);
-            }
-            Intent videoServiceIntent = new Intent(this, VideoService.class);
-            startService(videoServiceIntent);
-            Intent networkServiceIntent = new Intent(this, NetworkService.class);
-            startService(networkServiceIntent);
+            startServices();
         }
         setRunButtonText();
     }
@@ -93,5 +80,15 @@ public class MainActivity extends Activity {
         else {
             runButton.setText("Run services");
         }
+    }
+
+    private void startServices() {
+        State.setServiceRunning(true);
+        Intent videoServiceIntent = new Intent(this, VideoService.class);
+        startService(videoServiceIntent);
+        Intent usbServiceIntent = new Intent(this, UsbService.class);
+        startService(usbServiceIntent);
+        Intent networkServiceIntent = new Intent(this, NetworkService.class);
+        startService(networkServiceIntent);
     }
 }

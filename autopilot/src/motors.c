@@ -119,11 +119,11 @@ static void initPins() {
 
 void MOTORS_LMS(uint8_t speed) {
 	if (speed >= 50) {
-		TIM_SetCompare1(TIM3, speed);
-		GPIO_ResetBits(GPIOB, GPIO_Pin_6);
-		GPIO_SetBits(GPIOB, GPIO_Pin_7);
+		TIM_SetCompare1(TIM3, (speed-50) * 20);
+		GPIO_SetBits(GPIOB, GPIO_Pin_6);
+		GPIO_ResetBits(GPIOB, GPIO_Pin_7);
 	} else {
-		TIM_SetCompare1(TIM3, speed);
+		TIM_SetCompare1(TIM3, speed * 20);
 		GPIO_ResetBits(GPIOB, GPIO_Pin_6);
 		GPIO_SetBits(GPIOB, GPIO_Pin_7);
 	}
@@ -131,12 +131,12 @@ void MOTORS_LMS(uint8_t speed) {
 
 void MOTORS_RMS(uint8_t speed) {
 	if (speed >= 50) {
-		TIM_SetCompare2(TIM3, speed);
-		GPIO_ResetBits(GPIOB, GPIO_Pin_6);
-		GPIO_SetBits(GPIOB, GPIO_Pin_7);
+        TIM_SetCompare2(TIM3, (speed-50) * 20);
+        GPIO_SetBits(GPIOB, GPIO_Pin_8);
+        GPIO_ResetBits(GPIOB, GPIO_Pin_9);
 	} else {
-		TIM_SetCompare1(TIM3, speed);
-		GPIO_ResetBits(GPIOB, GPIO_Pin_6);
-		GPIO_SetBits(GPIOB, GPIO_Pin_7);
+        TIM_SetCompare2(TIM3, speed * 20);
+        GPIO_ResetBits(GPIOB, GPIO_Pin_8);
+        GPIO_SetBits(GPIOB, GPIO_Pin_9);
 	}
 }

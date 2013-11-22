@@ -140,10 +140,18 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_ping
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
- * Method:    camReset
+ * Method:    camState
  * Signature: ()B
  */
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camReset
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camState
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    camImg
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camImg
   (JNIEnv *, jclass);
 
 /*
@@ -164,26 +172,34 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camQuali
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
- * Method:    camPreviewState
+ * Method:    camFlash
  * Signature: ()B
  */
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewState
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camFlash
   (JNIEnv *, jclass);
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
- * Method:    camPreviewImg
+ * Method:    camSizeList
  * Signature: ()B
  */
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewImg
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camSizeList
   (JNIEnv *, jclass);
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
- * Method:    autoLiveLed
+ * Method:    camSizeSet
  * Signature: ()B
  */
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLiveLed
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camSizeSet
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    autoTriggerLed
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoTriggerLed
   (JNIEnv *, jclass);
 
 /*

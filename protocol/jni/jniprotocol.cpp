@@ -151,10 +151,6 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_ping(JNI
     return (jbyte)PROTOCOL_CMD_PING;
 }
 
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camReset(JNIEnv *e, jclass c) {
-    return (jbyte)PROTOCOL_CMD_CAM_RESET;
-}
-
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camFps(JNIEnv *e, jclass c) {
     return (jbyte)PROTOCOL_CMD_CAM_FPS;
 }
@@ -163,16 +159,28 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camQuali
     return (jbyte)PROTOCOL_CMD_CAM_QUALITY;
 }
 
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewState(JNIEnv *e, jclass c) {
-    return (jbyte)PROTOCOL_CMD_PREVIEW_STATE;
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camState(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_STATE;
 }
 
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camPreviewImg(JNIEnv *e, jclass c) {
-    return (jbyte)PROTOCOL_CMD_PREVIEW_IMG;
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camImg(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_IMG;
 }
 
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoLiveLed(JNIEnv *e, jclass c) {
-    return (jbyte)PROTOCOL_CMD_LIVE_LED;
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camFlash(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_FLASH;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camSizeList(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_SIZE_LIST;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camSizeSet(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_CAM_SIZE_SET;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoTriggerLed(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_TRIGGER_LED;
 }
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoUsReq(JNIEnv *e, jclass c) {

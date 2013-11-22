@@ -1,5 +1,6 @@
 package pro.kornev.kcar.cop.activities;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -10,15 +11,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import pro.kornev.kcar.cop.R;
-import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.providers.LogData;
 import pro.kornev.kcar.cop.providers.LogsDB;
 
@@ -56,6 +53,7 @@ public class LogsActivity extends Activity {
         executor.shutdown();
     }
 
+    @SuppressWarnings("unused")
     public void onClearButtonClick(View v) {
         clear(true);
     }
