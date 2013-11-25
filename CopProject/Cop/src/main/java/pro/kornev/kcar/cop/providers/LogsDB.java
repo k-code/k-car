@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v7.appcompat.R;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -26,9 +27,11 @@ public class LogsDB extends SQLiteOpenHelper {
     final String[] COLUMNS = {"_id", "log"};
     final String SELECTIONS = "_id > ?";
     final String LIMIT = "10";
+    final ConfigDB config;
 
     public LogsDB(Context context) {
         super(context, DB_NAME, null, DB_VER);
+        config = new ConfigDB(context);
     }
 
     @Override
@@ -71,7 +74,7 @@ public class LogsDB extends SQLiteOpenHelper {
 
     public synchronized void putLog(String logData) {
         Log.w("KCAR", logData);
-        if (!State.isLogsEnabled()) return;
+        if (!config.isLogsEnabled()) return;
 
         SQLiteDatabase db = getWritableDatabase();
         if (db == null || db.isReadOnly()) {

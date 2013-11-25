@@ -1,8 +1,13 @@
 package pro.kornev.kcar.cop.activities;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Handler;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -11,23 +16,46 @@ import android.widget.EditText;
 
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.State;
-import pro.kornev.kcar.cop.services.NetworkService;
-import pro.kornev.kcar.cop.services.UsbService;
-import pro.kornev.kcar.cop.services.VideoService;
+import pro.kornev.kcar.cop.providers.ConfigDB;
+import pro.kornev.kcar.cop.services.CopService;
 
 public class MainActivity extends Activity {
     private Button runButton;
+    private CopService copService;
+    private Intent copServiceIntent;
+    private boolean copBound = false;
+    private Handler handler = new Handler();
+    private ConfigDB configDB;
+    private EditText proxy;
+    private CheckBox logsEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         runButton = (Button)findViewById(R.id.maRunButton);
-        setRunButtonText();
-        State.setLogsEnabled(true);
-        CheckBox logsEnabled = (CheckBox)findViewById(R.id.maEnableLogsCheckBox);
-        State.setLogsEnabled(logsEnabled.isChecked());
-        onServiceRunClick(null);
+        updateServiceState();
+        logsEnabled = (CheckBox)findViewById(R.id.maEnableLogsCheckBox);
+        proxy = (EditText)findViewById(R.id.maProxy);
+        configDB = new ConfigDB(this);
+        logsEnabled.setChecked(configDB.isLogsEnabled());
+        proxy.setText(configDB.getProxy());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        copServiceIntent = new Intent(this, CopService.class);
+        bindService(copServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (copBound) {
+            unbindService(mConnection);
+            copBound = false;
+        }
     }
 
     @SuppressWarnings("unused")
@@ -50,21 +78,21 @@ public class MainActivity extends Activity {
 
     @SuppressWarnings("unused")
     public void onServiceRunClick(View v) {
-        if (State.isServiceRunning()) {
-            State.setServiceRunning(false);
+        if (copBound && copService.isRunning()) {
+            copService.stop();
         } else {
-            EditText proxy = (EditText)findViewById(R.id.maProxyIp);
-            if (proxy.getText() != null) {
-                State.setProxyServer(proxy.getText().toString());
-            }
-            startServices();
+            startService(copServiceIntent);
         }
-        setRunButtonText();
+        updateServiceState();
     }
 
     public void onEnableLogsClick(View v) {
-        CheckBox cb = (CheckBox)v;
-        State.setLogsEnabled(cb.isChecked());
+        configDB.setLogsEnabled(logsEnabled.isChecked());
+    }
+
+    public void onProxyButtonClick(View v) {
+        assert proxy.getText() != null;
+        configDB.setProxy(proxy.getText().toString());
     }
 
     @Override
@@ -73,22 +101,44 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    private void setRunButtonText() {
-        if (State.isServiceRunning()) {
-            runButton.setText("Stop services");
-        }
-        else {
-            runButton.setText("Run services");
-        }
+    private void updateServiceState() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100); //wait while service was started or stopped
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (copBound && copService.isRunning()) {
+                    runButton.setText("Stop services");
+
+                }
+                else {
+                    runButton.setText("Run services");
+                }
+            }
+        });
     }
 
-    private void startServices() {
-        State.setServiceRunning(true);
-        Intent videoServiceIntent = new Intent(this, VideoService.class);
-        startService(videoServiceIntent);
-        Intent usbServiceIntent = new Intent(this, UsbService.class);
-        startService(usbServiceIntent);
-        Intent networkServiceIntent = new Intent(this, NetworkService.class);
-        startService(networkServiceIntent);
-    }
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            CopService.CopBinder binder = (CopService.CopBinder) service;
+            copService = binder.getService();
+            if (!copService.isRunning()) {
+                startService(copServiceIntent);
+            }
+            copBound = true;
+            updateServiceState();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            copBound = false;
+            updateServiceState();
+        }
+    };
 }

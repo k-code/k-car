@@ -104,9 +104,7 @@ public class UsbDevicesActivity extends Activity {
                     UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                        if(device != null){
-                            State.setUsbSerialDriver(UsbSerialProber.probeSingleDevice(mUsbManager, device).get(0));
-                        }
+                        Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         Toast.makeText(context, "Permission restricted", Toast.LENGTH_SHORT).show();

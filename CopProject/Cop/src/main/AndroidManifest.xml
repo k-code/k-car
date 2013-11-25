@@ -4,8 +4,12 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-feature android:name="android.hardware.usb.host" android:required="true" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -51,9 +55,13 @@
             android:name="pro.kornev.kcar.cop.activities.LogsActivity"
             android:label="@string/title_activity_run" >
         </activity>
-        <service android:name=".services.UsbService" />
-        <service android:name=".services.NetworkService" />
-        <service android:name=".services.VideoService" />
+
+        <service android:name="pro.kornev.kcar.cop.services.CopService" />
+
+        <activity
+            android:name="pro.kornev.kcar.cop.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

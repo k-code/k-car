@@ -1,11 +1,11 @@
 package pro.kornev.kcar.cop.services;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
+import android.content.Context;
+import android.hardware.usb.UsbManager;
 import android.widget.Toast;
 
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
+import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.HexDump;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
@@ -25,32 +25,21 @@ import pro.kornev.kcar.protocol.Protocol;
  * @author vkornev
  * @since 14.10.13
  */
-public class UsbService extends Service implements NetworkListener, SerialInputOutputManager.Listener {
+public class UsbService implements NetworkListener, SerialInputOutputManager.Listener {
     private static final int DRIVER_SCAN_TIMEOUT = 1000;
-    private LogsDB db;
-    //private static UsbSerialDriver sDriver = null;
+    private final LogsDB db;
     private volatile SerialInputOutputManager mSerialIoManager;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
+    private CopService copService;
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public UsbService(CopService copService) {
+        this.copService = copService;
+        db = new LogsDB(this.copService);
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        db = new LogsDB(getApplicationContext());
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStartCommand(intent, flags, startId);
-        NetworkService.addListener(this);
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
+    public void start() {
         new Thread(new Controller()).start();
         db.putLog("US Is running");
-        return START_STICKY;
     }
 
     @Override
@@ -94,6 +83,11 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
         }
     }
 
+    private UsbSerialDriver getDriver() {
+        UsbManager mUsbManager = (UsbManager) copService.getSystemService(Context.USB_SERVICE);
+        return UsbSerialProber.findFirstDevice(mUsbManager);
+    }
+
     class Controller implements Runnable {
         private UsbSerialDriver driver = null;
         private Writer writer = null;
@@ -101,10 +95,10 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
         @Override
         public void run() {
             db.putLog("US Running Controller");
-            while (State.isServiceRunning()) {
-                UsbSerialDriver newDriver = State.getUsbSerialDriver();
+            while (copService.isRunning()) {
+                UsbSerialDriver newDriver = getDriver();
                 if (newDriver == null || newDriver.equals(driver)) {
-                    //db.putLog("No serial device.");
+                    db.putLog("US No serial device.");
                     Utils.sleep(DRIVER_SCAN_TIMEOUT);
                     continue;
                 }
@@ -137,6 +131,7 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
             if (writer != null) {
                 writer.stop();
             }
+            db.putLog("US Controller stopped");
         }
     }
 
@@ -181,11 +176,5 @@ public class UsbService extends Service implements NetworkListener, SerialInputO
         private synchronized boolean isWorking() {
             return working;
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
-        State.setServiceRunning(false);
     }
 }

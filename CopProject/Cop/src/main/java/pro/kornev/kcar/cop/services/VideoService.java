@@ -1,6 +1,5 @@
 package pro.kornev.kcar.cop.services;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,7 +8,6 @@ import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
-import android.os.IBinder;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
@@ -23,7 +21,7 @@ import pro.kornev.kcar.protocol.Protocol;
 /**
  *
  */
-public class VideoService extends Service implements NetworkListener, Camera.PreviewCallback, Camera.ErrorCallback {
+public class VideoService implements NetworkListener, Camera.PreviewCallback, Camera.ErrorCallback {
     private LogsDB db;
     private volatile Camera mCamera;
     private volatile boolean startPreview = false;
@@ -36,35 +34,27 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
     private CameraPreview cameraPreview = null;
     private boolean isFlashAvailable = false;
     private boolean isFlashOn = false;
+    private final CopService copService;
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    public VideoService(CopService cs) {
+        copService = cs;
+        db = new LogsDB(copService);
     }
 
-    @Override
-    public boolean onUnbind(Intent intent) {
-        super.onUnbind(intent);
-        stopPreview();
-        return true;
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStartCommand(intent, flags, startId);
-        Context context = getApplicationContext();
-        db = new LogsDB(context);
-
-        if (context != null) {
-            cameraPreview = new CameraPreview(context);
-            if (context.getPackageManager() != null) {
-                isFlashAvailable = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+    public void start() {
+        if (copService != null) {
+            cameraPreview = new CameraPreview(copService);
+            if (copService.getPackageManager() != null) {
+                isFlashAvailable = copService.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
             }
         }
         sizes = getCamera().getParameters().getSupportedPreviewSizes();
-        NetworkService.addListener(this);
         db.putLog("VS Is running");
-        return START_STICKY;
+    }
+
+    public synchronized void stop() {
+        stopPreview();
+        mCamera.release();
     }
 
     // Network listener
@@ -122,7 +112,7 @@ public class VideoService extends Service implements NetworkListener, Camera.Pre
     // Camera listener
     @Override
     public void onPreviewFrame(byte[] buf, Camera camera) {
-        if (!State.isServiceRunning()) {
+        if (!copService.isRunning()) {
             stopPreview();
             return;
         }
