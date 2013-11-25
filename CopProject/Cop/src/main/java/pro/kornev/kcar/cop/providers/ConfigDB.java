@@ -31,7 +31,7 @@ public class ConfigDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
-        initConfig();
+        initConfig(db);
     }
 
     @Override
@@ -40,8 +40,7 @@ public class ConfigDB extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private void initConfig() {
-        SQLiteDatabase db = getWritableDatabase();
+    private void initConfig(SQLiteDatabase db) {
         if (db == null || db.isReadOnly()) {
             throw new IllegalStateException("Database " + DB_NAME + "is can't be write");
         }
@@ -50,7 +49,6 @@ public class ConfigDB extends SQLiteOpenHelper {
         values.put(COLUMNS[1], 1);
         values.put(COLUMNS[2], "kornev.pro");
         db.insert(TABLE_NAME, null, values);
-        db.close();
     }
 
     public boolean isLogsEnabled() {

@@ -24,6 +24,7 @@ public class JoystickService implements JoystickListener, SettingsListener {
 
     @Override
     public void changeJoystick(KJoystick j) {
+        if (proxyService == null) return;
         byte leftMotor = (byte)(j.getY() * 50);
         byte rightMotor = (byte)(j.getY() * 50);
 

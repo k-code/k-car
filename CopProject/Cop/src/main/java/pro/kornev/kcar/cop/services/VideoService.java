@@ -160,6 +160,9 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
         if (isFlashAvailable && isFlashOn) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         }
+        else {
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        }
         camera.setParameters(parameters);
     }
 

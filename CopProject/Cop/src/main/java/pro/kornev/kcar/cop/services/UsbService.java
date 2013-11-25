@@ -26,7 +26,7 @@ import pro.kornev.kcar.protocol.Protocol;
  * @since 14.10.13
  */
 public class UsbService implements NetworkListener, SerialInputOutputManager.Listener {
-    private static final int DRIVER_SCAN_TIMEOUT = 1000;
+    private static final int DRIVER_SCAN_TIMEOUT = 30000;
     private final LogsDB db;
     private volatile SerialInputOutputManager mSerialIoManager;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -96,13 +96,16 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
         public void run() {
             db.putLog("US Running Controller");
             while (copService.isRunning()) {
-                UsbSerialDriver newDriver = getDriver();
-                if (newDriver == null || newDriver.equals(driver)) {
-                    db.putLog("US No serial device.");
-                    Utils.sleep(DRIVER_SCAN_TIMEOUT);
-                    continue;
+                try {
+                    driver = getDriver();
+                    if (driver == null) {
+                        db.putLog("US No serial device.");
+                        Utils.sleep(DRIVER_SCAN_TIMEOUT);
+                        continue;
+                    }
+                } catch (Throwable e) {
+                    db.putLog("US Get device error: " + e.getMessage());
                 }
-                driver = newDriver;
                 try {
                     db.putLog("US Usb device found");
                     driver.open();
@@ -119,6 +122,7 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
                     writer = new Writer(driver);
                     Thread writerThread = new Thread(writer);
                     writerThread.start();
+                    writerThread.join();
                 } catch (Exception e) {
                     db.putLog("US Error: " + e.getMessage());
                     try {
