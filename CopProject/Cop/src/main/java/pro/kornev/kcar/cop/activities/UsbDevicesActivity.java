@@ -1,12 +1,8 @@
 package pro.kornev.kcar.cop.activities;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
@@ -17,29 +13,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.hoho.android.usbserial.driver.UsbSerialProber;
 
 import java.util.Map;
 
 import pro.kornev.kcar.cop.R;
-import pro.kornev.kcar.cop.State;
+import pro.kornev.kcar.cop.services.UsbPermissionReceiver;
 
 public class UsbDevicesActivity extends Activity {
-    private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
-    private PendingIntent mPermissionIntent;
     private UsbManager mUsbManager;
+    private UsbPermissionReceiver usbPermissionReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usb_devices_activity);
-
         mUsbManager = (UsbManager) getSystemService(Context.USB_SERVICE);
-        mPermissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
-        IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
-        registerReceiver(mUsbReceiver, filter);
+        usbPermissionReceiver = new UsbPermissionReceiver(this);
         refresh();
     }
 
@@ -82,7 +71,7 @@ public class UsbDevicesActivity extends Activity {
         dlgAlert.setMessage(deviceName);
         dlgAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                mUsbManager.requestPermission(device, mPermissionIntent);
+                mUsbManager.requestPermission(device, usbPermissionReceiver.getPermissionIntent());
                 finish();
             }
         });
@@ -94,23 +83,4 @@ public class UsbDevicesActivity extends Activity {
         dlgAlert.setCancelable(true);
         dlgAlert.create().show();
     }
-
-    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
-
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (ACTION_USB_PERMISSION.equals(action)) {
-                synchronized (this) {
-                    UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
-
-                    if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
-                        Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(context, "Permission restricted", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }
-    };
 }

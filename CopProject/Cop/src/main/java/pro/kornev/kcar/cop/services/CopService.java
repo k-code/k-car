@@ -15,6 +15,7 @@ public class CopService extends Service {
     private final IBinder mBinder = new CopBinder();
     private boolean running = false;
     private VideoService videoService;
+    private NetworkService networkService;
 
     @Override
     public void onCreate() {
@@ -35,7 +36,7 @@ public class CopService extends Service {
         setRunning(true);
         //startDebugThread();
 
-        NetworkService networkService = new NetworkService(this);
+        networkService = new NetworkService(this);
         videoService = new VideoService(this);
         UsbService usbService = new UsbService(this);
 
@@ -81,6 +82,7 @@ public class CopService extends Service {
 
     public synchronized void stop() {
         setRunning(false);
+        networkService.stop();
         videoService.stop();
         stopSelf();
     }

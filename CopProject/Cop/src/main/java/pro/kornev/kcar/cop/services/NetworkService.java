@@ -26,6 +26,7 @@ public class NetworkService implements Runnable {
     private List<NetworkListener> listeners = new ArrayList<NetworkListener>();
     private boolean writerRunning = false;
     private CopService copService;
+    private volatile Socket socket;
 
     public NetworkService(CopService cs) {
         this.copService = cs;
@@ -42,7 +43,6 @@ public class NetworkService implements Runnable {
     public void run() {
         log.putLog("NS Running");
         Cleaner cleaner = null;
-        Socket socket;
         while (copService.isRunning()) {
             log.putLog("NS Starting cleaner");
             if (cleaner == null) {
@@ -85,6 +85,10 @@ public class NetworkService implements Runnable {
 
     public void addListener(NetworkListener listener) {
         listeners.add(listener);
+    }
+
+    public void stop() {
+        closeSocket(socket);
     }
 
     class Reader implements Runnable {

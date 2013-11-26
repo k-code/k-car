@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(100); //wait while service was started or stopped
+                    Thread.sleep(200); //wait while service was started or stopped
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
