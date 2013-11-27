@@ -50,6 +50,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
         bitRate = new JLabel("0");
         bitRate.setPreferredSize(new Dimension(30, 15));
+        bitRate.setMinimumSize(bitRate.getPreferredSize());
         JLabel bitRateLabel = new JLabel("Bit rate (bytes):");
 
         fpsLabel = new JLabel("0");

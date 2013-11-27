@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.providers.LogsDB;
@@ -27,12 +26,14 @@ public class NetworkService implements Runnable {
     private boolean writerRunning = false;
     private CopService copService;
     private volatile Socket socket;
+    private final Queue<Data> outputQueue;
 
     public NetworkService(CopService cs) {
         this.copService = cs;
         log = new LogsDB(copService);
         log.putLog("NS Created");
         config = new ConfigDB(copService);
+        outputQueue = copService.getToControlQueue();
     }
 
     public void start() {
@@ -46,7 +47,7 @@ public class NetworkService implements Runnable {
         while (copService.isRunning()) {
             log.putLog("NS Starting cleaner");
             if (cleaner == null) {
-                cleaner = new Cleaner();
+                cleaner = new Cleaner(outputQueue);
                 new Thread(cleaner).start();
             }
             log.putLog("NS Connect to: " + config.getProxy() + ":" + PROXY_PORT);
@@ -66,7 +67,7 @@ public class NetworkService implements Runnable {
 
                 log.putLog("NS Starting reader and writer");
                 setWriterRunning(true);
-                Writer writer = new Writer(socket);
+                Writer writer = new Writer(socket, outputQueue);
                 Thread writerThread = new Thread(writer);
                 writerThread.start();
                 Reader reader = new Reader(socket);
@@ -113,7 +114,7 @@ public class NetworkService implements Runnable {
                         response.cmd = data.cmd;
                         response.type = data.type;
                         response.bData = 2;
-                        State.getToControlQueue().add(response);
+                        outputQueue.add(response);
                     }
                     for (NetworkListener l: listeners) {
                         l.onDataReceived(data);
@@ -131,12 +132,12 @@ public class NetworkService implements Runnable {
 
     class Writer implements Runnable {
         private volatile Socket client;
-        private Queue<Data> queue;
+        private Queue<Data> outputQueue;
         private int id = 0;
 
-        Writer(Socket s) {
+        Writer(Socket s, Queue<Data> q) {
             client = s;
-            queue = State.getToControlQueue();
+            outputQueue = q;
         }
 
         @Override
@@ -145,11 +146,11 @@ public class NetworkService implements Runnable {
             try {
                 DataOutputStream output = new DataOutputStream(client.getOutputStream());
                 while (isWriterRunning()) {
-                    if (queue.isEmpty()) {
+                    if (outputQueue.isEmpty()) {
                         Utils.sleep(1);
                         continue;
                     }
-                    Data data = queue.poll();
+                    Data data = outputQueue.poll();
                     data.id = id++;
                     log.putLog(String.format("NW wrote date id: %d; cmd: %d", data.id, data.cmd));
 
@@ -168,13 +169,17 @@ public class NetworkService implements Runnable {
 
     class Cleaner implements Runnable {
         private boolean isWork = true;
+        private final Queue<Data> outputQueue;
+
+        Cleaner(Queue<Data> outputQueue) {
+            this.outputQueue = outputQueue;
+        }
 
         @Override
         public void run() {
-            Queue<Data> queue = State.getToControlQueue();
             while (copService.isRunning() && isWork()) {
-                log.putLog("NC Clear queue");
-                queue.clear();
+                log.putLog("NC Clear outputQueue");
+                outputQueue.clear();
                 Utils.sleep(1000);
             }
             log.putLog("NC Was closed");
@@ -198,11 +203,11 @@ public class NetworkService implements Runnable {
     }
 
     private synchronized void closeSocket(Socket socket) {
-        if (!socket.isClosed()) {
-            try {
-                socket.close();
-            } catch (Exception ignored) {
+        try {
+            if (!socket.isClosed()) {
+                    socket.close();
             }
+        } catch (Exception ignored) {
         }
     }
 }

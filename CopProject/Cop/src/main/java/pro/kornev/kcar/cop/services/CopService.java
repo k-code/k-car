@@ -5,14 +5,21 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.protocol.Data;
 
 /**
  *
  */
 public class CopService extends Service {
-    private LogsDB log;
+    private final Queue<Data> toControlQueue = new LinkedBlockingQueue<Data>();
+    private final Queue<Data> toUsbQueue = new LinkedBlockingQueue<Data>();
     private final IBinder mBinder = new CopBinder();
+    private LogsDB log;
     private boolean running = false;
     private VideoService videoService;
     private NetworkService networkService;
@@ -87,6 +94,14 @@ public class CopService extends Service {
         stopSelf();
     }
 
+    public Queue<Data> getToControlQueue() {
+        return toControlQueue;
+    }
+
+    public Queue<Data> getToUsbQueue() {
+        return toUsbQueue;
+    }
+
     private synchronized void setRunning(boolean running) {
         this.running = running;
     }
@@ -98,12 +113,8 @@ public class CopService extends Service {
             public void run() {
                 int i=0;
                 while(isRunning()) {
-                    try {
-                        log.putLog("i = " + i++);
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    log.putLog("i = " + i++);
+                    Utils.sleep(1000);
                 }
             }
         }).start();

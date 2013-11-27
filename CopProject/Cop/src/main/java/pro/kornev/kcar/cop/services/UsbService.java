@@ -16,7 +16,6 @@ import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.providers.LogsDB;
@@ -31,6 +30,8 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     private static final int DRIVER_SCAN_TIMEOUT = 1000;
     private final LogsDB log;
     private final ConfigDB config;
+    private final Queue<Data> outputQueue;
+    private final Queue<Data> inputQueue;
     private volatile SerialInputOutputManager mSerialIoManager;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private CopService copService;
@@ -41,6 +42,8 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
         log = new LogsDB(this.copService);
         config = new ConfigDB(this.copService);
         usbPermissionReceiver = new UsbPermissionReceiver(this.copService);
+        outputQueue = copService.getToUsbQueue();
+        inputQueue = copService.getToControlQueue();
     }
 
     public void start() {
@@ -57,7 +60,7 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     public void onNewData(final byte[] data) {
         log.putLog("US Read data len: " + data.length);
         log.putLog("US Read data: " + HexDump.dumpHexString(data));
-        State.getToControlQueue().add(Protocol.fromByteArray(data, data.length));
+        inputQueue.add(Protocol.fromByteArray(data, data.length));
     }
 
     private void stopIoManager() {
@@ -85,7 +88,7 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     public void onDataReceived(Data data) {
         if ((data.cmd == Protocol.Cmd.ping() && data.bData == 0)
                 || (data.cmd >= Protocol.Cmd.autoFirst() && data.cmd <= Protocol.Cmd.autoLast())) {
-            State.getToUsbQueue().add(data);
+            outputQueue.add(data);
         }
     }
 
@@ -137,7 +140,7 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
                     onDeviceStateChange(driver);
 
                     log.putLog("US Starting Writer");
-                    writer = new Writer(driver);
+                    writer = new Writer(driver, outputQueue);
                     Thread writerThread = new Thread(writer);
                     writerThread.start();
                     writerThread.join();
@@ -158,14 +161,14 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     }
 
     class Writer implements Runnable {
-        private Queue<Data> queue;
+        private Queue<Data> outputQueue;
         private byte[] bytes = new byte[Protocol.getMaxLength()];
         private int TIMEOUT = 10;
         private UsbSerialDriver driver;
         private boolean working;
 
-        Writer(UsbSerialDriver driver) {
-            queue = State.getToUsbQueue();
+        Writer(UsbSerialDriver driver, Queue<Data> q) {
+            outputQueue = q;
             this.driver = driver;
             this.working = true;
         }
@@ -175,16 +178,16 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
             log.putLog("UW Start USB writer");
 
             while (isWorking()) {
-                if (queue.size() == 0) {
-                    Utils.sleep(1);
-                    continue;
-                }
-                Data data = queue.poll();
-                log.putLog("UW Write data cmd: " + data.cmd);
-                int bLen = Protocol.toByteArray(data, bytes);
                 try {
+                    if (outputQueue.size() == 0) {
+                        Utils.sleep(1);
+                        continue;
+                    }
+                    Data data = outputQueue.poll();
+                    log.putLog("UW Write data cmd: " + data.cmd);
+                    int bLen = Protocol.toByteArray(data, bytes);
                     driver.write(Arrays.copyOf(bytes, bLen), TIMEOUT);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     log.putLog("Error: Failed send data to USB: " + e.getMessage());
                 }
             }
