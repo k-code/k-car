@@ -4,9 +4,7 @@ import com.centralnexus.input.Joystick;
 import com.centralnexus.input.JoystickListener;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
-import pro.kornev.kcontrol.service.SettingService;
 import pro.kornev.kcontrol.service.SettingsListener;
-import pro.kornev.kcontrol.service.network.ProxyServiceListener;
 import pro.kornev.kcontrol.service.network.ProxyService;
 
 /**
