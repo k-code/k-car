@@ -15,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import pro.kornev.kcar.cop.R;
-import pro.kornev.kcar.cop.State;
+import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.services.CopService;
 
@@ -105,11 +105,7 @@ public class MainActivity extends Activity {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(200); //wait while service was started or stopped
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Utils.sleep(200); //wait while service was started or stopped
                 if (copBound && copService.isRunning()) {
                     runButton.setText("Stop services");
 
@@ -128,9 +124,6 @@ public class MainActivity extends Activity {
         public void onServiceConnected(ComponentName className, IBinder service) {
             CopService.CopBinder binder = (CopService.CopBinder) service;
             copService = binder.getService();
-            if (!copService.isRunning()) {
-                startService(copServiceIntent);
-            }
             copBound = true;
             updateServiceState();
         }

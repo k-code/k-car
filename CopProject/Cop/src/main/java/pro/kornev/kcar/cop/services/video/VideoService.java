@@ -1,7 +1,5 @@
-package pro.kornev.kcar.cop.services;
+package pro.kornev.kcar.cop.services.video;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
@@ -12,9 +10,12 @@ import android.hardware.Camera;
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.Queue;
 
-import pro.kornev.kcar.cop.State;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.cop.services.CopService;
+import pro.kornev.kcar.cop.services.network.NetworkListener;
+import pro.kornev.kcar.cop.services.network.NetworkService;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
@@ -22,34 +23,40 @@ import pro.kornev.kcar.protocol.Protocol;
  *
  */
 public class VideoService implements NetworkListener, Camera.PreviewCallback, Camera.ErrorCallback {
-    private LogsDB db;
+    private final CopService copService;
+    private final LogsDB log;
+
     private volatile Camera mCamera;
     private volatile boolean startPreview = false;
+    private volatile List<Camera.Size> sizes;
+    private volatile Camera.Size size;
+    private volatile int previewFormat = ImageFormat.NV21;
+
     private int quality = 50;
     private int fps = 1;
     private long lastFrameTime = 0;
-    private List<Camera.Size> sizes;
-    private Camera.Size size;
-    private volatile int previewFormat = ImageFormat.NV21;
     private CameraPreview cameraPreview = null;
     private boolean isFlashAvailable = false;
     private boolean isFlashOn = false;
-    private final CopService copService;
 
     public VideoService(CopService cs) {
         copService = cs;
-        db = new LogsDB(copService);
+        log = new LogsDB(copService);
     }
 
     public void start() {
-        if (copService != null) {
-            cameraPreview = new CameraPreview(copService);
-            if (copService.getPackageManager() != null) {
-                isFlashAvailable = copService.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+        try {
+            if (copService != null) {
+                cameraPreview = new CameraPreview(copService);
+                if (copService.getPackageManager() != null) {
+                    isFlashAvailable = copService.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+                }
             }
+            sizes = getCamera().getParameters().getSupportedPreviewSizes();
+            log.putLog("VS Is running");
+        } catch (Throwable e) {
+            log.putLog("VS Start was failed: " + e.getMessage());
         }
-        sizes = getCamera().getParameters().getSupportedPreviewSizes();
-        db.putLog("VS Is running");
     }
 
     public synchronized void stop() {
@@ -65,33 +72,33 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
         }
         if (data.cmd == Protocol.Cmd.camState()) {
             if (data.bData == 0) {
-                db.putLog("VS Stop preview");
+                log.putLog("VS Stop preview");
                 stopPreview();
             } else {
-                db.putLog("VS Start preview");
+                log.putLog("VS Start preview");
                 startPreview();
             }
         } else if (data.cmd == Protocol.Cmd.camFps()) {
-            db.putLog("VS Set FPS to " + data.bData);
+            log.putLog("VS Set FPS to " + data.bData);
             setFps(data.bData);
         } else if (data.cmd == Protocol.Cmd.camQuality()) {
-            db.putLog("VS Set quality to " + data.bData);
+            log.putLog("VS Set quality to " + data.bData);
             setQuality(data.bData);
         } else if (data.cmd == Protocol.Cmd.camFlash()) {
-            db.putLog("VS Set flash to " + data.bData);
+            log.putLog("VS Set flash to " + data.bData);
             isFlashOn = data.bData != 0;
             resetCamera();
         } else if (data.cmd == Protocol.Cmd.camSizeList()) {
-            db.putLog("VS Send camera preview sizes");
+            log.putLog("VS Send camera preview sizes");
             if (sizes == null || sizes.isEmpty()) {
                 data = new Data();
                 data.cmd = Protocol.Cmd.error();
                 data.bData = Protocol.Cmd.camSizeList();
-                State.getToControlQueue().add(data);
+                write(data);
                 return;
             }
             ByteBuffer bb = ByteBuffer.allocate(sizes.size() * 8);
-            for (Camera.Size size: sizes) {
+            for (Camera.Size size : sizes) {
                 bb.putInt(size.width);
                 bb.putInt(size.height);
             }
@@ -100,9 +107,9 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
             data.type = Protocol.arrayType();
             data.aData = bb.array();
             data.aSize = data.aData.length;
-            State.getToControlQueue().add(data);
+            write(data);
         } else if (data.cmd == Protocol.Cmd.camSizeSet()) {
-            db.putLog("VS Set cam size");
+            log.putLog("VS Set cam size");
             ByteBuffer bb = ByteBuffer.wrap(data.aData);
             size = getSize(bb.getInt(), bb.getInt(), sizes);
             resetCamera();
@@ -112,36 +119,42 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
     // Camera listener
     @Override
     public void onPreviewFrame(byte[] buf, Camera camera) {
-        if (!copService.isRunning()) {
-            stopPreview();
-            return;
+        try {
+            if (!copService.isRunning()) {
+                stopPreview();
+                return;
+            }
+            if (System.currentTimeMillis() - lastFrameTime < 1000 / getFps()) {
+                camera.addCallbackBuffer(buf);
+                return;
+            }
+            YuvImage image = new YuvImage(buf, previewFormat, size.width, size.height, null);
+            camera.addCallbackBuffer(buf);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), getQuality(), baos);
+
+            byte[] aData = baos.toByteArray();
+
+            Data data = new Data();
+            data.cmd = Protocol.Cmd.camImg();
+            data.type = Protocol.arrayType();
+            data.aSize = aData.length;
+            data.aData = aData;
+            write(data);
+            lastFrameTime = System.currentTimeMillis();
+        } catch (Throwable e) {
+            log.putLog("VS Frame error: " + e.getMessage());
         }
-        if (System.currentTimeMillis() - lastFrameTime < 1000 / getFps()) {
-            return;
-        }
-        YuvImage image = new YuvImage(buf, previewFormat, size.width, size.height, null);
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), getQuality(), baos);
-
-        byte[] aData = baos.toByteArray();
-
-        Data data = new Data();
-        data.cmd = Protocol.Cmd.camImg();
-        data.type = Protocol.arrayType();
-        data.aSize = aData.length;
-        data.aData = aData;
-        State.getToControlQueue().add(data);
-        lastFrameTime = System.currentTimeMillis();
     }
 
     @Override
     public void onError(int error, Camera camera) {
-        db.putLog("VS Camera error: " + error);
+        log.putLog("VS Camera error: " + error);
         Data data = new Data();
         data.cmd = Protocol.Cmd.error();
         data.bData = Protocol.Cmd.camState();
-        State.getToControlQueue().add(data);
+        write(data);
         resetCamera();
     }
 
@@ -159,8 +172,7 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
         parameters.setPreviewSize(size.width, size.height);
         if (isFlashAvailable && isFlashOn) {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        }
-        else {
+        } else {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         }
         camera.setParameters(parameters);
@@ -169,19 +181,17 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
     private void initCamera(Camera camera) {
         try {
             setupParameters(camera);
-            cameraPreview.setCamera(camera);
+            //cameraPreview.setCamera(camera);
             SurfaceTexture surfaceTexture = new SurfaceTexture(0);
-            surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
-                @Override
-                public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                    surfaceTexture.getTransformMatrix(new float[16]);
-                }
-            });
             camera.setPreviewTexture(surfaceTexture);
-            camera.setPreviewCallback(this);
+            camera.setPreviewCallbackWithBuffer(this);
+            int previewBufSize = size.height * size.width * ImageFormat.getBitsPerPixel(previewFormat) / 8;
+            for (int i=0; i < 20; i++) {
+                camera.addCallbackBuffer(new byte[previewBufSize]);
+            }
             camera.setErrorCallback(this);
-        } catch (Exception e) {
-            db.putLog("VS Failed init camera: " +e.getMessage());
+        } catch (Throwable e) {
+            log.putLog("VS Failed init camera: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -214,7 +224,7 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
         Camera.Size minSize = null;
         if (sizes != null && !sizes.isEmpty()) {
             minSize = sizes.get(0);
-            for (Camera.Size size: sizes) {
+            for (Camera.Size size : sizes) {
                 if (size.width == w && size.height == h) {
                     return size;
                 }
@@ -232,7 +242,7 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
                 mCamera = Camera.open();
             }
             mCamera.lock();
-        } catch (Exception ignore) {
+        } catch (Throwable ignore) {
         }
         return mCamera;
     }
@@ -242,7 +252,7 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
             if (mCamera != null) {
                 mCamera.unlock();
             }
-        } catch (Exception ignored) {
+        } catch (Throwable ignored) {
         }
     }
 
@@ -261,9 +271,9 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
             initCamera(camera);
             camera.startPreview();
             setStartPreview(true);
-            db.putLog("VS Preview was started");
-        } catch (Exception e) {
-            db.putLog("VS Failed start camera preview: " + e.getMessage());
+            log.putLog("VS Preview was started");
+        } catch (Throwable e) {
+            log.putLog("VS Failed start camera preview: " + e.getMessage());
         }
     }
 
@@ -273,9 +283,16 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
             getCamera().stopPreview();
             releaseCamera();
             setStartPreview(false);
-            db.putLog("VS Preview was stopped");
-        } catch (Exception e) {
-            db.putLog("Failed stop camera preview: " + e.getMessage());
+            log.putLog("VS Preview was stopped");
+        } catch (Throwable e) {
+            log.putLog("Failed stop camera preview: " + e.getMessage());
         }
+    }
+
+    private void write(Data data) {
+        if (copService.getNetworkService() == null) {
+            return;
+        }
+        copService.getNetworkService().write(data);
     }
 }

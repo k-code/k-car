@@ -5,11 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v7.appcompat.R;
 import android.util.Log;
 import android.util.SparseArray;
-
-import pro.kornev.kcar.cop.State;
 
 /**
  * @author vkornev

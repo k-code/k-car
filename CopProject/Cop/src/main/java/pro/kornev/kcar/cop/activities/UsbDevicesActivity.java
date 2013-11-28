@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.Map;
 
 import pro.kornev.kcar.cop.R;
-import pro.kornev.kcar.cop.services.UsbPermissionReceiver;
+import pro.kornev.kcar.cop.services.usb.UsbPermissionReceiver;
 
 public class UsbDevicesActivity extends Activity {
     private UsbManager mUsbManager;

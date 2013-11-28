@@ -1,4 +1,4 @@
-package pro.kornev.kcar.cop.services;
+package pro.kornev.kcar.cop.services.usb;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
