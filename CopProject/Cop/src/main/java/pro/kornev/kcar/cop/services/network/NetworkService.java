@@ -75,12 +75,13 @@ public class NetworkService extends Service implements Runnable, NetworkListener
                 Thread readerThread = new Thread(reader);
                 readerThread.start();
                 readerThread.join(); // Work wile reader is working
-                stop(); // Try to close socket
+                closeSocket(getSocket()); // Try to close socket
                 log.putLog("NS reader and writer was closed");
             } catch (Exception e) {
                 log.putLog("NS run reader and writer was filed: " + e.getMessage());
             }
         }
+        log.putLog("NS Stopped");
     }
 
     @Override

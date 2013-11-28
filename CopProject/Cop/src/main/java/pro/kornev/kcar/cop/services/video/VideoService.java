@@ -60,8 +60,10 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
     }
 
     public synchronized void stop() {
-        stopPreview();
-        mCamera.release();
+        try {
+            stopPreview();
+            mCamera.release();
+        } catch (Exception ignored) {}
     }
 
     // Network listener
@@ -125,11 +127,11 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
                 return;
             }
             if (System.currentTimeMillis() - lastFrameTime < 1000 / getFps()) {
-                camera.addCallbackBuffer(buf);
+                //camera.addCallbackBuffer(buf);
                 return;
             }
             YuvImage image = new YuvImage(buf, previewFormat, size.width, size.height, null);
-            camera.addCallbackBuffer(buf);
+            //camera.addCallbackBuffer(buf);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             image.compressToJpeg(new Rect(0, 0, image.getWidth(), image.getHeight()), getQuality(), baos);
@@ -181,14 +183,15 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
     private void initCamera(Camera camera) {
         try {
             setupParameters(camera);
-            //cameraPreview.setCamera(camera);
+            cameraPreview.setCamera(camera);
             SurfaceTexture surfaceTexture = new SurfaceTexture(0);
             camera.setPreviewTexture(surfaceTexture);
-            camera.setPreviewCallbackWithBuffer(this);
+            camera.setPreviewCallback(this);
+            /*camera.setPreviewCallbackWithBuffer(this);
             int previewBufSize = size.height * size.width * ImageFormat.getBitsPerPixel(previewFormat) / 8;
-            for (int i=0; i < 20; i++) {
+            for (int i=0; i < 3; i++) {
                 camera.addCallbackBuffer(new byte[previewBufSize]);
-            }
+            }*/
             camera.setErrorCallback(this);
         } catch (Throwable e) {
             log.putLog("VS Failed init camera: " + e.getMessage());
