@@ -2,7 +2,7 @@
 #define __PROTOCOL_H
 
 #define PROTOCOL_MAX_FRAME_SIZE     102400
-#define PROTOCOL_VERSION            0x02
+#define PROTOCOL_VERSION            0x01
 
 #define DATA_TYPE_CHAR              0x00
 #define DATA_TYPE_INT               0x01

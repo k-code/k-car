@@ -1,4 +1,4 @@
-package pro.kornev.kcar.cop.services;
+package pro.kornev.kcar.cop.services.network;
 
 import pro.kornev.kcar.protocol.Data;
 

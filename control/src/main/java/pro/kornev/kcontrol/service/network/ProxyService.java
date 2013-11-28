@@ -27,6 +27,7 @@ public final class ProxyService {
     private Set<ProxyServiceListener> listeners;
 
     public ProxyService(String host, int port) {
+        log.info("Protocol version: {}", Protocol.getVersion());
         this.inputQueue = new LinkedBlockingQueue<>();
         this.outputQueue = new LinkedBlockingQueue<>();
         this.listeners = new HashSet<>();

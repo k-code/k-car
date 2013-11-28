@@ -1,7 +1,10 @@
 package pro.kornev.kcar.cop.services;
 
 import android.app.Service;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 
@@ -10,18 +13,23 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.cop.services.network.NetworkBinder;
+import pro.kornev.kcar.cop.services.network.NetworkService;
+import pro.kornev.kcar.cop.services.usb.UsbService;
+import pro.kornev.kcar.cop.services.video.VideoService;
 import pro.kornev.kcar.protocol.Data;
 
 /**
  *
  */
 public class CopService extends Service {
-    private final Queue<Data> toControlQueue = new LinkedBlockingQueue<Data>();
     private final Queue<Data> toUsbQueue = new LinkedBlockingQueue<Data>();
     private final IBinder mBinder = new CopBinder();
     private LogsDB log;
     private boolean running = false;
     private VideoService videoService;
+    private UsbService usbService;
+    private Intent networkServiceIntent;
     private NetworkService networkService;
 
     @Override
@@ -29,6 +37,7 @@ public class CopService extends Service {
         super.onCreate();
         log = new LogsDB(this);
         log.putLog("CS Created");
+        networkServiceIntent = new Intent(this, NetworkService.class);
     }
 
     @Override
@@ -43,16 +52,12 @@ public class CopService extends Service {
         setRunning(true);
         //startDebugThread();
 
-        networkService = new NetworkService(this);
         videoService = new VideoService(this);
-        UsbService usbService = new UsbService(this);
-
-        networkService.addListener(videoService);
-        networkService.addListener(usbService);
+        usbService = new UsbService(this);
+        bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();
         videoService.start();
-        networkService.start();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -60,7 +65,7 @@ public class CopService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        setRunning(false);
+        stop();
         log.putLog("CS Destroyed");
     }
 
@@ -73,7 +78,7 @@ public class CopService extends Service {
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         super.onTaskRemoved(rootIntent);
-        setRunning(false);
+        stop();
         log.putLog("CS Task removed");
     }
 
@@ -89,17 +94,18 @@ public class CopService extends Service {
 
     public synchronized void stop() {
         setRunning(false);
-        networkService.stop();
+        try {
+            unbindService(networkServiceConnection);
+        } catch (Exception ignored) {}
         videoService.stop();
         stopSelf();
     }
-
-    public Queue<Data> getToControlQueue() {
-        return toControlQueue;
-    }
-
     public Queue<Data> getToUsbQueue() {
         return toUsbQueue;
+    }
+
+    public NetworkService getNetworkService() {
+        return networkService;
     }
 
     private synchronized void setRunning(boolean running) {
@@ -119,4 +125,21 @@ public class CopService extends Service {
             }
         }).start();
     }
+
+    private ServiceConnection networkServiceConnection  = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            networkService = ((NetworkBinder)service).getService();
+            if (!networkService.isRunning()) {
+                networkService.addListener(videoService);
+                networkService.addListener(usbService);
+                startService(networkServiceIntent);
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 }

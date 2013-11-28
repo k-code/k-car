@@ -44,22 +44,22 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         canvas = new Canvas();
 
         preview.add(canvas);
-        add(preview, getGbl().setGrid(0, 0).fillB().rowSpan(3).weightH(1));
+        add(preview, getGbl().setGrid(0, 0).fillB().rowSpan(3).weightH(0.6));
         startPreviewButton = new JButton(isStartPreview ? STOP_PREVIEW : START_PREVIEW);
         startPreviewButton.addActionListener(this);
 
         bitRate = new JLabel("0");
         bitRate.setPreferredSize(new Dimension(30, 15));
         bitRate.setMinimumSize(bitRate.getPreferredSize());
-        JLabel bitRateLabel = new JLabel("Bit rate (bytes):");
+
+        add(new JLabel("Bit rate (bytes):"), getGbl().setGrid(1,0).weightH(0.2));
+        add(bitRate, getGbl().setGrid(2,0).weightH(0.2));
 
         fpsLabel = new JLabel("0");
         add(new JLabel("FPS:"), getGbl().setGrid(1, 1));
         add(fpsLabel, getGbl().setGrid(2,1));
 
-        add(startPreviewButton, getGbl().setGrid(1, 2).anchorB());
-        add(bitRateLabel, getGbl().setGrid(1,0));
-        add(bitRate, getGbl().setGrid(2,0));
+        add(startPreviewButton, getGbl().setGrid(1, 2).anchorB().colSpan(2));
     }
 
     @Override

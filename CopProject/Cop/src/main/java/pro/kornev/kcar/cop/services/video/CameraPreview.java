@@ -1,4 +1,4 @@
-package pro.kornev.kcar.cop.services;
+package pro.kornev.kcar.cop.services.video;
 
 import android.content.Context;
 import android.hardware.Camera;
@@ -12,7 +12,8 @@ import java.io.IOException;
  *
  */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
-    private static final String TAG = CameraPreview.class.getCanonicalName(); private SurfaceHolder mHolder;
+    private static final String TAG = CameraPreview.class.getCanonicalName();
+    private SurfaceHolder mHolder;
     private Camera mCamera;
 
     public CameraPreview(Context context) {

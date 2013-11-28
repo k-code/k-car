@@ -1,4 +1,4 @@
-package pro.kornev.kcar.cop.services;
+package pro.kornev.kcar.cop.services.usb;
 
 import android.content.Context;
 import android.hardware.usb.UsbDevice;
@@ -19,6 +19,8 @@ import java.util.concurrent.Executors;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.cop.services.CopService;
+import pro.kornev.kcar.cop.services.network.NetworkListener;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
@@ -31,7 +33,6 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     private final LogsDB log;
     private final ConfigDB config;
     private final Queue<Data> outputQueue;
-    private final Queue<Data> inputQueue;
     private volatile SerialInputOutputManager mSerialIoManager;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private CopService copService;
@@ -43,7 +44,6 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
         config = new ConfigDB(this.copService);
         usbPermissionReceiver = new UsbPermissionReceiver(this.copService);
         outputQueue = copService.getToUsbQueue();
-        inputQueue = copService.getToControlQueue();
     }
 
     public void start() {
@@ -60,7 +60,7 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     public void onNewData(final byte[] data) {
         log.putLog("US Read data len: " + data.length);
         log.putLog("US Read data: " + HexDump.dumpHexString(data));
-        inputQueue.add(Protocol.fromByteArray(data, data.length));
+        write(Protocol.fromByteArray(data, data.length));
     }
 
     private void stopIoManager() {
@@ -201,5 +201,9 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
         private synchronized boolean isWorking() {
             return working;
         }
+    }
+
+    private void write(Data data) {
+        copService.getNetworkService().write(data);
     }
 }

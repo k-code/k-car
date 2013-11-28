@@ -58,6 +58,7 @@
         </activity>
 
         <service android:name="pro.kornev.kcar.cop.services.CopService" />
+        <service android:name="pro.kornev.kcar.cop.services.network.NetworkService" />
 
         <receiver android:enabled="true" android:name="pro.kornev.kcar.cop.services.BootUpReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
