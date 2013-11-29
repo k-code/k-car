@@ -2,7 +2,7 @@ package pro.kornev.kcar.cop.services.network;
 
 import android.os.Binder;
 
-public class NetworkBinder extends Binder {
+public final class NetworkBinder extends Binder {
     private final NetworkService networkService;
 
     NetworkBinder(NetworkService networkService) {
@@ -10,6 +10,6 @@ public class NetworkBinder extends Binder {
     }
 
     public NetworkService getService() {
-            return networkService;
-        }
+        return networkService;
     }
+}

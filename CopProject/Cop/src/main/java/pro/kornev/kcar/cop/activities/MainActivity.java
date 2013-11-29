@@ -17,6 +17,7 @@ import android.widget.EditText;
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
+import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.CopService;
 
 public class MainActivity extends Activity {
@@ -86,10 +87,12 @@ public class MainActivity extends Activity {
         updateServiceState();
     }
 
+    @SuppressWarnings("unused")
     public void onEnableLogsClick(View v) {
         configDB.setLogsEnabled(logsEnabled.isChecked());
     }
 
+    @SuppressWarnings("unused")
     public void onProxyButtonClick(View v) {
         assert proxy.getText() != null;
         configDB.setProxy(proxy.getText().toString());

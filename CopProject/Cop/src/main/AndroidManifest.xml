@@ -28,15 +28,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat" >
+        android:theme="@style/Theme.AppCompat">
         <activity
             android:name="pro.kornev.kcar.cop.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-
+                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
 
@@ -57,8 +55,10 @@
             android:label="@string/title_activity_run" >
         </activity>
 
-        <service android:name="pro.kornev.kcar.cop.services.CopService" />
-        <service android:name="pro.kornev.kcar.cop.services.network.NetworkService" />
+        <service android:name="pro.kornev.kcar.cop.services.CopService"
+            android:isolatedProcess="false" />
+        <service android:name="pro.kornev.kcar.cop.services.network.NetworkService"
+            android:isolatedProcess="false" />
 
         <receiver android:enabled="true" android:name="pro.kornev.kcar.cop.services.BootUpReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">

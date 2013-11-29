@@ -8,22 +8,17 @@ import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
 
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
-
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.network.NetworkBinder;
 import pro.kornev.kcar.cop.services.network.NetworkService;
 import pro.kornev.kcar.cop.services.usb.UsbService;
 import pro.kornev.kcar.cop.services.video.VideoService;
-import pro.kornev.kcar.protocol.Data;
 
 /**
  *
  */
 public class CopService extends Service {
-    private final Queue<Data> toUsbQueue = new LinkedBlockingQueue<Data>();
     private final IBinder mBinder = new CopBinder();
     private LogsDB log;
     private boolean running = false;
@@ -96,12 +91,18 @@ public class CopService extends Service {
         setRunning(false);
         try {
             unbindService(networkServiceConnection);
+            networkService.stop();
+            videoService.stop();
+            usbService.stop();
         } catch (Exception ignored) {}
-        videoService.stop();
         stopSelf();
     }
-    public Queue<Data> getToUsbQueue() {
-        return toUsbQueue;
+
+    public void restartUsbService() {
+        if (usbService != null) {
+            usbService.stop();
+            usbService.start();
+        }
     }
 
     public NetworkService getNetworkService() {
@@ -119,8 +120,8 @@ public class CopService extends Service {
             public void run() {
                 int i=0;
                 while(isRunning()) {
-                    log.putLog("i = " + i++);
-                    Utils.sleep(1000);
+                    log.putLog("CS i = " + i++);
+                    Utils.sleep(2000);
                 }
             }
         }).start();
@@ -131,9 +132,9 @@ public class CopService extends Service {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             networkService = ((NetworkBinder)service).getService();
+            networkService.addListener(videoService);
+            networkService.addListener(usbService);
             if (!networkService.isRunning()) {
-                networkService.addListener(videoService);
-                networkService.addListener(usbService);
                 startService(networkServiceIntent);
             }
         }

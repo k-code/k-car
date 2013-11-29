@@ -6,13 +6,10 @@ import android.hardware.usb.UsbManager;
 
 import com.hoho.android.usbserial.driver.UsbSerialDriver;
 import com.hoho.android.usbserial.driver.UsbSerialProber;
-import com.hoho.android.usbserial.util.HexDump;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,10 +27,11 @@ import pro.kornev.kcar.protocol.Protocol;
  */
 public class UsbService implements NetworkListener, SerialInputOutputManager.Listener {
     private static final int DRIVER_SCAN_TIMEOUT = 1000;
+    private static final int WRITE_TIMEOUT = 1000;
     private final LogsDB log;
     private final ConfigDB config;
-    private final Queue<Data> outputQueue;
     private volatile SerialInputOutputManager mSerialIoManager;
+    private volatile UsbSerialDriver driver;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     private CopService copService;
     private UsbPermissionReceiver usbPermissionReceiver;
@@ -43,52 +41,67 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
         log = new LogsDB(this.copService);
         config = new ConfigDB(this.copService);
         usbPermissionReceiver = new UsbPermissionReceiver(this.copService);
-        outputQueue = copService.getToUsbQueue();
     }
 
     public void start() {
-        new Thread(new Controller()).start();
+        driver = getDriver();
+        if (driver == null) {
+            log.putLog("US Failed get USB driver");
+            return;
+        }
+        startIoManager(driver);
         log.putLog("US Is running");
+    }
+
+    public void stop() {
+        stopIoManager();
     }
 
     @Override
     public void onRunError(Exception e) {
-        log.putLog("US Runner stopped.");
+        log.putLog("US Run error: " + e.getMessage());
+        Utils.sleep(DRIVER_SCAN_TIMEOUT);
+        start();
     }
 
     @Override
-    public void onNewData(final byte[] data) {
-        log.putLog("US Read data len: " + data.length);
-        log.putLog("US Read data: " + HexDump.dumpHexString(data));
-        write(Protocol.fromByteArray(data, data.length));
+    public void onNewData(final byte[] buf) {
+        Data data = Protocol.fromByteArray(buf, buf.length);
+        log.putLog("US Receive data: cmd=" + data.cmd);
+        sendToNetwork(data);
     }
 
     private void stopIoManager() {
-        if (mSerialIoManager != null) {
-            log.putLog("US Stopping io manager ..");
-            mSerialIoManager.stop();
-            mSerialIoManager = null;
-        }
+        try {
+            if (mSerialIoManager != null) {
+                log.putLog("US Stopping io manager ..");
+                mSerialIoManager.stop();
+                mSerialIoManager = null;
+            }
+            if (driver != null) {
+                driver.close();
+            }
+        } catch (Exception ignored) {}
     }
 
     private void startIoManager(UsbSerialDriver driver) {
-        if (driver != null) {
-            log.putLog("US Starting io manager ..");
-            mSerialIoManager = new SerialInputOutputManager(driver, this);
-            mExecutor.submit(mSerialIoManager);
+        try {
+            if (driver != null) {
+                driver.open();
+                log.putLog("US Starting io manager ..");
+                mSerialIoManager = new SerialInputOutputManager(driver, this);
+                mExecutor.submit(mSerialIoManager);
+            }
+        } catch (Exception e) {
+            log.putLog("US Start IO manager is failed: " + e.getMessage());
         }
-    }
-
-    private void onDeviceStateChange(UsbSerialDriver driver) {
-        stopIoManager();
-        startIoManager(driver);
     }
 
     @Override
     public void onDataReceived(Data data) {
         if ((data.cmd == Protocol.Cmd.ping() && data.bData == 0)
                 || (data.cmd >= Protocol.Cmd.autoFirst() && data.cmd <= Protocol.Cmd.autoLast())) {
-            outputQueue.add(data);
+            write(data);
         }
     }
 
@@ -109,101 +122,20 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
         return UsbSerialProber.probeSingleDevice(mUsbManager, usbDevice).get(0);
     }
 
-    class Controller implements Runnable {
-        private UsbSerialDriver driver = null;
-        private Writer writer = null;
-
-        @Override
-        public void run() {
-            log.putLog("US Running Controller");
-            while (copService.isRunning()) {
-                try {
-                    driver = getDriver();
-                    if (driver == null) {
-                        log.putLog("US No serial device.");
-                        Utils.sleep(DRIVER_SCAN_TIMEOUT);
-                        continue;
-                    }
-                } catch (Throwable e) {
-                    log.putLog("US Get device error: " + e.getMessage());
-                }
-                try {
-                    log.putLog("US Usb device found");
-                    driver.open();
-                    log.putLog("US Serial device: " + driver.getClass().getSimpleName());
-
-                    if (writer != null) {
-                        log.putLog("US Stopping Writer");
-                        writer.stop();
-                    }
-
-                    onDeviceStateChange(driver);
-
-                    log.putLog("US Starting Writer");
-                    writer = new Writer(driver, outputQueue);
-                    Thread writerThread = new Thread(writer);
-                    writerThread.start();
-                    writerThread.join();
-                } catch (Exception e) {
-                    log.putLog("US Error: " + e.getMessage());
-                    try {
-                        driver.close();
-                    } catch (IOException ignored) {
-                    }
-                    Utils.sleep(DRIVER_SCAN_TIMEOUT);
-                }
-            }
-            if (writer != null) {
-                writer.stop();
-            }
-            log.putLog("US Controller stopped");
-        }
-    }
-
-    class Writer implements Runnable {
-        private Queue<Data> outputQueue;
-        private byte[] bytes = new byte[Protocol.getMaxLength()];
-        private int TIMEOUT = 10;
-        private UsbSerialDriver driver;
-        private boolean working;
-
-        Writer(UsbSerialDriver driver, Queue<Data> q) {
-            outputQueue = q;
-            this.driver = driver;
-            this.working = true;
-        }
-
-        @Override
-        public void run() {
-            log.putLog("UW Start USB writer");
-
-            while (isWorking()) {
-                try {
-                    if (outputQueue.size() == 0) {
-                        Utils.sleep(1);
-                        continue;
-                    }
-                    Data data = outputQueue.poll();
-                    log.putLog("UW Write data cmd: " + data.cmd);
-                    int bLen = Protocol.toByteArray(data, bytes);
-                    driver.write(Arrays.copyOf(bytes, bLen), TIMEOUT);
-                } catch (Exception e) {
-                    log.putLog("Error: Failed send data to USB: " + e.getMessage());
-                }
-            }
-            log.putLog("UW Was stopped");
-        }
-
-        public synchronized void stop() {
-            this.working = false;
-        }
-
-        private synchronized boolean isWorking() {
-            return working;
-        }
+    private void sendToNetwork(Data data) {
+        copService.getNetworkService().write(data);
     }
 
     private void write(Data data) {
-        copService.getNetworkService().write(data);
+        try {
+            if (driver == null) return;
+            byte[] buf = new byte[Protocol.getMaxLength()];
+            log.putLog("UW Write data cmd: " + data.cmd);
+            int bLen = Protocol.toByteArray(data, buf);
+            driver.write(Arrays.copyOf(buf, bLen), WRITE_TIMEOUT);
+        } catch (Exception e) {
+            log.putLog("UW Failed write data: " + e.getMessage());
+        }
+
     }
 }

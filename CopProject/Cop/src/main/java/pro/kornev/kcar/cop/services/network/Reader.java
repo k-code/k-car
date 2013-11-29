@@ -4,7 +4,6 @@ import android.content.Context;
 
 import java.io.DataInputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 import pro.kornev.kcar.cop.providers.LogsDB;
@@ -20,6 +19,7 @@ final class Reader implements Runnable {
         this.socket = socket;
         this.listeners = listeners;
         log = new LogsDB(context);
+        log.putLog("NR Created");
     }
 
     @Override
@@ -31,7 +31,7 @@ final class Reader implements Runnable {
                 Data data = Protocol.fromInputStream(input);
 
                 log.putLog(String.format("NR got data id: %d; cmd: %d", data.id, data.cmd));
-                for (NetworkListener l : getListeners()) {
+                for (NetworkListener l : listeners) {
                     l.onDataReceived(data);
                 }
             }
@@ -41,13 +41,5 @@ final class Reader implements Runnable {
         }
         log.putLog("NR Stop network reader");
         NetworkService.closeSocket(socket);
-    }
-
-    public synchronized void addListener(NetworkListener listener) {
-        listeners.add(listener);
-    }
-
-    private synchronized List<NetworkListener> getListeners() {
-        return listeners;
     }
 }

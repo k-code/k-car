@@ -17,11 +17,9 @@ import pro.kornev.kcar.cop.providers.ConfigDB;
 public class UsbPermissionReceiver extends BroadcastReceiver {
     private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
     private PendingIntent mPermissionIntent;
-    private ConfigDB config;
 
     public UsbPermissionReceiver(Context context) {
         mPermissionIntent = PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0);
-        config = new ConfigDB(context);
         IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
         context.registerReceiver(this, filter);
     }
@@ -39,7 +37,6 @@ public class UsbPermissionReceiver extends BroadcastReceiver {
 
                 if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                     Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show();
-                    config.setUsbDevice(device.getDeviceName());
                 }
                 else {
                     Toast.makeText(context, "Permission restricted", Toast.LENGTH_SHORT).show();

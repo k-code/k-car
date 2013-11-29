@@ -19,7 +19,7 @@ import pro.kornev.kcar.protocol.Protocol;
  * @author vkornev
  * @since 17.10.13
  */
-public class NetworkService extends Service implements Runnable, NetworkListener {
+public final class NetworkService extends Service implements Runnable, NetworkListener {
     private static final int PROXY_PORT = 6780;
     private static final int PROXY_RECONNECT_TIMEOUT = 10000;
 
@@ -45,11 +45,13 @@ public class NetworkService extends Service implements Runnable, NetworkListener
 
     @Override
     public IBinder onBind(Intent intent) {
+        log.putLog("NS onBind");
         return binder;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        log.putLog("NS onStartCommand");
         start();
         return super.onStartCommand(intent, flags, startId);
     }
@@ -87,6 +89,7 @@ public class NetworkService extends Service implements Runnable, NetworkListener
     @Override
     public void onDataReceived(Data data) {
         if (data.cmd == Protocol.Cmd.ping() && data.bData == 0) {
+            log.putLog("NS Send ping response");
             Data response = new Data();
             response.id = data.id;
             response.cmd = data.cmd;
@@ -97,8 +100,13 @@ public class NetworkService extends Service implements Runnable, NetworkListener
     }
 
     public synchronized void stop() {
-        closeSocket(getSocket());
-        isRunning = false;
+        try {
+            log.putLog("NS Stopping...");
+            isRunning = false;
+            closeSocket(getSocket());
+            stopSelf();
+        } catch (Exception ignored) {
+        }
     }
 
     public synchronized boolean isRunning() {
@@ -106,6 +114,8 @@ public class NetworkService extends Service implements Runnable, NetworkListener
     }
 
     public void addListener(NetworkListener listener) {
+        if (listeners.contains(listener)) return;
+        log.putLog("NS Add listener " + listener.getClass().getSimpleName());
         listeners.add(listener);
     }
 
@@ -123,6 +133,7 @@ public class NetworkService extends Service implements Runnable, NetworkListener
     }
 
     private synchronized void start() {
+        log.putLog("NS Starting...");
         new Thread(this).start();
         isRunning = true;
     }

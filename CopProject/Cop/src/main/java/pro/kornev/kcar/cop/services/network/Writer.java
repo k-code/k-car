@@ -5,9 +5,7 @@ import android.content.Context;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Queue;
 
-import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
@@ -28,10 +26,9 @@ final class Writer {
 
     public synchronized void write(Data data) {
         try {
-            if (!socket.isClosed()) {
+            if (socket != null && !socket.isClosed()) {
                 data.id = id++;
-                log.putLog(String.format("NW wrote data id: %d; cmd: %d", data.id, data.cmd));
-
+                log.putLog(String.format("NW write data id: %d; cmd: %d", data.id, data.cmd));
                 Protocol.toOutputStream(data, output);
             } else {
                 log.putLog(String.format("NW skip data cmd: %d", data.cmd));
