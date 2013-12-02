@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteException;
 
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.network.NetworkBinder;
 import pro.kornev.kcar.cop.services.network.NetworkService;
+import pro.kornev.kcar.cop.services.support.IWakeUpBinder;
+import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
+import pro.kornev.kcar.cop.services.support.UncaughtException;
 import pro.kornev.kcar.cop.services.usb.UsbService;
 import pro.kornev.kcar.cop.services.video.VideoService;
 
@@ -26,10 +30,12 @@ public class CopService extends Service {
     private UsbService usbService;
     private Intent networkServiceIntent;
     private NetworkService networkService;
+    private IWakeUpCallback wakeUpCallback;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
         log = new LogsDB(this);
         log.putLog("CS Created");
         networkServiceIntent = new Intent(this, NetworkService.class);
@@ -38,14 +44,22 @@ public class CopService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         log.putLog("CS Binging...");
+        if ("a".equals(intent.getStringExtra("a"))) {
+            return wakeUpBinder;
+        }
         return mBinder;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         log.putLog("CS Starting...");
+        if (isRunning()) {
+            log.putLog("Already running");
+            stopSelf();
+            return START_NOT_STICKY;
+        }
         setRunning(true);
-        //startDebugThread();
+        startDebugThread();
 
         videoService = new VideoService(this);
         usbService = new UsbService(this);
@@ -94,6 +108,7 @@ public class CopService extends Service {
             networkService.stop();
             videoService.stop();
             usbService.stop();
+            wakeUpCallback.stop();
         } catch (Exception ignored) {}
         stopSelf();
     }
@@ -121,11 +136,27 @@ public class CopService extends Service {
                 int i=0;
                 while(isRunning()) {
                     log.putLog("CS i = " + i++);
-                    Utils.sleep(2000);
+                    if (i==10) {
+                        i = i/0;
+                    }
+                    Utils.sleep(1000);
                 }
             }
         }).start();
     }
+
+    private IWakeUpBinder.Stub wakeUpBinder = new IWakeUpBinder.Stub() {
+
+        @Override
+        public boolean isRunning() throws RemoteException {
+            return CopService.this.isRunning();
+        }
+
+        @Override
+        public void setCallback(IWakeUpCallback callback) throws RemoteException {
+            wakeUpCallback = callback;
+        }
+    };
 
     private ServiceConnection networkServiceConnection  = new ServiceConnection() {
 

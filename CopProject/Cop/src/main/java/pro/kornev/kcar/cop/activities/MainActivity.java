@@ -18,6 +18,7 @@ import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.services.CopService;
+import pro.kornev.kcar.cop.services.support.WakeUpService;
 
 public class MainActivity extends Activity {
     private Button runButton;
@@ -40,6 +41,7 @@ public class MainActivity extends Activity {
         configDB = new ConfigDB(this);
         logsEnabled.setChecked(configDB.isLogsEnabled());
         proxy.setText(configDB.getProxy());
+        startService(new Intent(this, WakeUpService.class));
     }
 
     @Override

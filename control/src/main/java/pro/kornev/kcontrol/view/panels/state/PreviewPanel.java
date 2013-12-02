@@ -27,7 +27,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     private static final String START_PREVIEW = "Start preview";
     private static final String STOP_PREVIEW = "Stop preview";
     private static final Dimension maxSize = new Dimension(640, 480);
-    private boolean isStartPreview = false;
+    private static boolean isStartPreview = false;
     private JButton startPreviewButton;
     private ProxyService proxyService;
     private JPanel preview;
@@ -45,7 +45,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
         preview.add(canvas);
         add(preview, getGbl().setGrid(0, 0).fillB().rowSpan(3).weightH(0.6));
-        startPreviewButton = new JButton(isStartPreview ? STOP_PREVIEW : START_PREVIEW);
+        startPreviewButton = new JButton(isStartPreview() ? STOP_PREVIEW : START_PREVIEW);
         startPreviewButton.addActionListener(this);
 
         bitRate = new JLabel("0");
@@ -115,11 +115,17 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         if (proxyService == null) return;
         Data data = new Data();
         data.cmd = Protocol.Cmd.camState();
-        data.bData = isStartPreview ? (byte)0 : (byte)1;
+        data.bData = isStartPreview() ? (byte)0 : (byte)1;
         proxyService.send(data);
-        isStartPreview = !isStartPreview;
-        startPreviewButton.setText(isStartPreview ? STOP_PREVIEW : START_PREVIEW);
+        setStartPreview(!isStartPreview());
+        startPreviewButton.setText(isStartPreview() ? STOP_PREVIEW : START_PREVIEW);
     }
 
+    public synchronized static boolean isStartPreview() {
+        return isStartPreview;
+    }
 
+    private synchronized static void setStartPreview(boolean startPreview) {
+        isStartPreview = startPreview;
+    }
 }

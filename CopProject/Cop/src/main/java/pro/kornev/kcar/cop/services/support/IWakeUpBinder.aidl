@@ -1,6 +1,8 @@
 package pro.kornev.kcar.cop.services.support;
 
+import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
+
 interface IWakeUpBinder {
     boolean isRunning();
-    void stop();
+    void setCallback(IWakeUpCallback callback);
 }

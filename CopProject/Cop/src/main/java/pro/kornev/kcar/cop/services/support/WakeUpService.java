@@ -9,7 +9,6 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import pro.kornev.kcar.cop.Utils;
-import pro.kornev.kcar.cop.services.CopService;
 
 /**
  *
@@ -20,23 +19,16 @@ public class WakeUpService extends Service implements Runnable {
     private Intent copServiceIntent;
     private IWakeUpBinder copService;
 
-    private final IWakeUpBinder.Stub binder = new IWakeUpBinder.Stub() {
-        @Override
-        public boolean isRunning() throws RemoteException {
-            return WakeUpService.this.isRunning();
-        }
-
-        @Override
-        public void stop() throws RemoteException {
-            setRunning(false);
-        }
-    };
-
     private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.w(TAG, "Bound to COP service");
             copService = IWakeUpBinder.Stub.asInterface(service);
+            try {
+                copService.setCallback(wakeUpCallback);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -46,12 +38,21 @@ public class WakeUpService extends Service implements Runnable {
         }
     };
 
+    private final IWakeUpCallback.Stub wakeUpCallback = new IWakeUpCallback.Stub() {
+        @Override
+        public void stop() throws RemoteException {
+            Log.w(TAG, "Stopping..");
+            setRunning(false);
+            stopSelf();
+        }
+    };
+
     @Override
     public void onCreate() {
         super.onCreate();
-        copServiceIntent = new Intent("pro.kornev.kcar.cop.services.support.WakeUpService");
-        copServiceIntent.putExtra("type", IWakeUpBinder.class.getName());
-        copServiceIntent.setAction("a");
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
+        copServiceIntent = new Intent("pro.kornev.kcar.cop.COP");
+        copServiceIntent.putExtra("a", "a");
         Log.w(TAG, "Created");
     }
 
@@ -71,29 +72,41 @@ public class WakeUpService extends Service implements Runnable {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.w(TAG, "On bind: " + intent.getComponent());
-        return binder;
+        return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.w(TAG, "Destroyed");
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        Log.w(TAG, "Task removed");
     }
 
     @Override
     public void run() {
-        try {
             while (isRunning()) {
-                if (copService != null) {
-                    if (!copService.isRunning()) {
-                        Log.w(TAG, "Starting COP service...");
-                        startService(copServiceIntent);
+                try {
+                    Log.w(TAG, "Check COP service state");
+                    if (copService != null) {
+                        if (!copService.isRunning()) {
+                            Log.w(TAG, "Starting COP service...");
+                            startService(copServiceIntent);
+                        }
                     }
-                }
-                else {
-                    Log.w(TAG, "Binding to COP service...");
-                    bindService(copServiceIntent, connection, BIND_AUTO_CREATE);
+                    else {
+                        Log.w(TAG, "Binding to COP service...");
+                        bindService(copServiceIntent, connection, BIND_AUTO_CREATE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 Utils.sleep(5000);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private synchronized boolean isRunning() {

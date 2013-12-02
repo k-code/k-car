@@ -126,7 +126,7 @@ public class VideoService implements NetworkListener, Camera.PreviewCallback, Ca
             if (System.currentTimeMillis() - lastFrameTime < 1000 / getFps()) {
                 return;
             }
-            log.putLog("VS P    review frame taken");
+            log.putLog("VS Preview frame taken");
             YuvImage image = new YuvImage(buf, previewFormat, size.width, size.height, null);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

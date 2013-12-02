@@ -9,8 +9,6 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.widget.Toast;
 
-import pro.kornev.kcar.cop.providers.ConfigDB;
-
 /**
  *
  */

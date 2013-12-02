@@ -8,6 +8,7 @@ import pro.kornev.kcontrol.service.joystick.KJoystick;
 import pro.kornev.kcontrol.service.network.ProxyService;
 import pro.kornev.kcontrol.service.network.ProxyServiceListener;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
+import pro.kornev.kcontrol.view.panels.state.PreviewPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -90,7 +91,15 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
     }
 
     private void apply() {
-        Data data = new Data();
+        Data data;
+        if (PreviewPanel.isStartPreview()) {
+            data = new Data();
+            data.cmd = Protocol.Cmd.camState();
+            data.bData = (byte)0;
+            //proxyService.send(data);
+        }
+
+        data = new Data();
         data.cmd = Protocol.Cmd.camFps();
         data.bData = Byte.valueOf(fps.getText());
         proxyService.send(data);
@@ -116,6 +125,13 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         data.aData = bb.array();
         data.aSize = data.aData.length;
         proxyService.send(data);
+
+        if (PreviewPanel.isStartPreview()) {
+            data = new Data();
+            data.cmd = Protocol.Cmd.camState();
+            data.bData = (byte)1;
+            //proxyService.send(data);
+        }
     }
 
     @Override
