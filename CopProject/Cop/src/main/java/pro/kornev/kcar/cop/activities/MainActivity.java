@@ -41,7 +41,6 @@ public class MainActivity extends Activity {
         configDB = new ConfigDB(this);
         logsEnabled.setChecked(configDB.isLogsEnabled());
         proxy.setText(configDB.getProxy());
-        startService(new Intent(this, WakeUpService.class));
     }
 
     @Override
@@ -84,6 +83,7 @@ public class MainActivity extends Activity {
             copService.stop();
         } else {
             startService(copServiceIntent);
+            startService(new Intent(this, WakeUpService.class));
         }
         updateServiceState();
     }

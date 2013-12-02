@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -102,6 +103,8 @@ public class WakeUpService extends Service implements Runnable {
                         Log.w(TAG, "Binding to COP service...");
                         bindService(copServiceIntent, connection, BIND_AUTO_CREATE);
                     }
+                } catch (DeadObjectException e) {
+                    copService = null;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

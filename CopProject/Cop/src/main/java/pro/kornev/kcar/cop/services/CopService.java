@@ -59,7 +59,7 @@ public class CopService extends Service {
             return START_NOT_STICKY;
         }
         setRunning(true);
-        startDebugThread();
+        //startDebugThread();
 
         videoService = new VideoService(this);
         usbService = new UsbService(this);
