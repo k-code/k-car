@@ -4,8 +4,6 @@
       <root url="jar://$PROJECT_DIR$/Cop/lib/usb.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/../../usb-serial-for-android/UsbSerialLibrary/src" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

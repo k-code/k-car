@@ -1,10 +1,11 @@
-package pro.kornev.kcar.cop.services;
+package pro.kornev.kcar.cop.services.support;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.cop.services.CopService;
 
 /**
  *

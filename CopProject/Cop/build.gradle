@@ -20,6 +20,11 @@ android {
         minSdkVersion 16
         targetSdkVersion 17
     }
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/java']
+        }
+    }
 }
 
 dependencies {

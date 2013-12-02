@@ -60,7 +60,7 @@
         <service android:name="pro.kornev.kcar.cop.services.network.NetworkService"
             android:isolatedProcess="false" />
 
-        <receiver android:enabled="true" android:name="pro.kornev.kcar.cop.services.BootUpReceiver"
+        <receiver android:enabled="true" android:name=".services.support.BootUpReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 
             <intent-filter>

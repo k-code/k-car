@@ -4,8 +4,6 @@
       <root url="jar://$PROJECT_DIR$/Cop/lib/protocol.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/../protocol/src/main/java" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

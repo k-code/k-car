@@ -37,7 +37,6 @@ final class Reader implements Runnable {
             }
         } catch (Exception e) {
             log.putLog("NR error: " + e.getMessage());
-            e.printStackTrace();
         }
         log.putLog("NR Stop network reader");
         NetworkService.closeSocket(socket);

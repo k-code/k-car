@@ -17,7 +17,6 @@ import android.widget.EditText;
 import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
-import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.CopService;
 
 public class MainActivity extends Activity {
