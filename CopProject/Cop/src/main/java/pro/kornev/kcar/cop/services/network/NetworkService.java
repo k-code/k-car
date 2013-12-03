@@ -7,6 +7,9 @@ import android.os.IBinder;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
@@ -23,11 +26,14 @@ import pro.kornev.kcar.protocol.Protocol;
 public final class NetworkService extends Service implements Runnable, NetworkListener {
     private static final int PROXY_PORT = 6780;
     private static final int PROXY_RECONNECT_TIMEOUT = 10000;
+    private static final int PROXY_PING_DELAY = 60;
 
     private List<NetworkListener> listeners;
     private IBinder binder;
     private LogsDB log;
     private ConfigDB config;
+    private ScheduledExecutorService executorService;
+
 
     private volatile Socket socket;
     private volatile Writer writer;
@@ -104,6 +110,7 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
         try {
             log.putLog("NS Stopping...");
             isRunning = false;
+            executorService.shutdown();
             closeSocket(getSocket());
             stopSelf();
         } catch (Exception ignored) {
@@ -138,6 +145,8 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
         Thread thread = new Thread(this);
         thread.setUncaughtExceptionHandler(new UncaughtException());
         thread.start();
+        executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleWithFixedDelay(new PingTask(this), PROXY_PING_DELAY, PROXY_PING_DELAY, TimeUnit.SECONDS);
         isRunning = true;
     }
 

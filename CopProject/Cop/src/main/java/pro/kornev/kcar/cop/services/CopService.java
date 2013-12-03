@@ -43,7 +43,7 @@ public class CopService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        log.putLog("CS Binging...");
+        log.putLog("CS Binding...");
         if ("a".equals(intent.getStringExtra("a"))) {
             return wakeUpBinder;
         }

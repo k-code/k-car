@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import pro.kornev.kcar.cop.Utils;
+import pro.kornev.kcar.cop.providers.LogsDB;
 
 /**
  *
@@ -19,6 +20,7 @@ public class WakeUpService extends Service implements Runnable {
     private boolean running = false;
     private Intent copServiceIntent;
     private IWakeUpBinder copService;
+    private LogsDB log;
 
     private final ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -52,9 +54,10 @@ public class WakeUpService extends Service implements Runnable {
     public void onCreate() {
         super.onCreate();
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
+        log = new LogsDB(this);
         copServiceIntent = new Intent("pro.kornev.kcar.cop.COP");
         copServiceIntent.putExtra("a", "a");
-        Log.w(TAG, "Created");
+        log.putLog("Created");
     }
 
     @Override
