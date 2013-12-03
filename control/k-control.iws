@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="Improve stability of COP">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/support/WakeUpService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/support/WakeUpService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-control.iws" afterPath="$PROJECT_DIR$/k-control.iws" />
     </list>
     <ignored path="k-control.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -117,7 +118,7 @@
       <file leaf-file-name="PreviewSettings.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="12" selection-start="4309" selection-end="4309" vertical-scroll-proportion="0.9484536">
+            <state line="132" column="12" selection-start="4309" selection-end="4309" vertical-scroll-proportion="0.87113404">
               <folding />
             </state>
           </provider>
@@ -930,7 +931,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/settings/PreviewSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="12" selection-start="4309" selection-end="4309" vertical-scroll-proportion="0.9484536">
+        <state line="132" column="12" selection-start="4309" selection-end="4309" vertical-scroll-proportion="0.87113404">
           <folding />
         </state>
       </provider>

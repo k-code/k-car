@@ -55,10 +55,16 @@
             android:label="@string/title_activity_run" >
         </activity>
 
-        <service android:name="pro.kornev.kcar.cop.services.CopService" />
-        <service android:name="pro.kornev.kcar.cop.services.network.NetworkService" />
+        <service android:name="pro.kornev.kcar.cop.services.CopService"
+            android:permission="pro.kornev.kcar.cop.services.CopService" >
+            <intent-filter>
+                <action android:name="pro.kornev.kcar.cop.services.CopService" />
+            </intent-filter>
+        </service>
+        <service android:name="pro.kornev.kcar.cop.services.network.NetworkService"
+            android:isolatedProcess="false" />
         <service android:name="pro.kornev.kcar.cop.services.support.WakeUpService"
-            android:process=":wu" />
+            android:process=":ws" />
 
         <receiver android:enabled="true" android:name=".services.support.BootUpReceiver"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">

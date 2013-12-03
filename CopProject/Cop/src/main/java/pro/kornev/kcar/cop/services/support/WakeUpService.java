@@ -11,6 +11,7 @@ import android.util.Log;
 
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.cop.services.CopService;
 
 /**
  *
@@ -25,7 +26,7 @@ public class WakeUpService extends Service implements Runnable {
     private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            Log.w(TAG, "Bound to COP service");
+            log.putLog("WS Bound to COP service");
             copService = IWakeUpBinder.Stub.asInterface(service);
             try {
                 copService.setCallback(wakeUpCallback);
@@ -36,7 +37,7 @@ public class WakeUpService extends Service implements Runnable {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.w(TAG, "Unbound from COP service");
+            log.putLog("WS Unbound from COP service");
             copService = null;
         }
     };
@@ -44,7 +45,7 @@ public class WakeUpService extends Service implements Runnable {
     private final IWakeUpCallback.Stub wakeUpCallback = new IWakeUpCallback.Stub() {
         @Override
         public void stop() throws RemoteException {
-            Log.w(TAG, "Stopping..");
+            log.putLog("WS Stopping..");
             setRunning(false);
             stopSelf();
         }
@@ -55,22 +56,22 @@ public class WakeUpService extends Service implements Runnable {
         super.onCreate();
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
         log = new LogsDB(this);
-        copServiceIntent = new Intent("pro.kornev.kcar.cop.COP");
+        copServiceIntent = new Intent(CopService.class.getName());
         copServiceIntent.putExtra("a", "a");
-        log.putLog("Created");
+        log.putLog("WS Created");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.w(TAG, "Starting");
+        log.putLog("WS Starting");
         if (isRunning()) {
-            Log.w(TAG, "Already started");
+            Log.w(TAG, "WS Already started");
             stopSelf();
             return START_NOT_STICKY;
         }
         setRunning(true);
         new Thread(this).start();
-        Log.w(TAG, "Started");
+        log.putLog("WS Started");
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -82,31 +83,32 @@ public class WakeUpService extends Service implements Runnable {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.w(TAG, "Destroyed");
+        log.putLog("WS Destroyed");
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         super.onTaskRemoved(rootIntent);
-        Log.w(TAG, "Task removed");
+        log.putLog("WS Task removed");
     }
 
     @Override
     public void run() {
             while (isRunning()) {
                 try {
-                    Log.w(TAG, "Check COP service state");
+                    log.putLog("WS Check COP service state");
                     if (copService != null) {
                         if (!copService.isRunning()) {
-                            Log.w(TAG, "Starting COP service...");
+                            log.putLog("WS Starting COP service...");
                             startService(copServiceIntent);
                         }
                     }
                     else {
-                        Log.w(TAG, "Binding to COP service...");
+                        log.putLog("WS Binding to COP service...");
                         bindService(copServiceIntent, connection, BIND_AUTO_CREATE);
                     }
                 } catch (DeadObjectException e) {
+                    log.putLog("WS Binding error: " + e.getMessage());
                     copService = null;
                 } catch (Exception e) {
                     e.printStackTrace();
