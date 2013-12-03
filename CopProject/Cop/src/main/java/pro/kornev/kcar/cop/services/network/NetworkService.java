@@ -12,6 +12,7 @@ import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.CopService;
+import pro.kornev.kcar.cop.services.support.UncaughtException;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
@@ -134,7 +135,9 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
 
     private synchronized void start() {
         log.putLog("NS Starting...");
-        new Thread(this).start();
+        Thread thread = new Thread(this);
+        thread.setUncaughtExceptionHandler(new UncaughtException());
+        thread.start();
         isRunning = true;
     }
 
