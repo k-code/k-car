@@ -7,7 +7,6 @@ import android.content.ServiceConnection;
 import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
@@ -17,7 +16,7 @@ import pro.kornev.kcar.cop.services.CopService;
  *
  */
 public class WakeUpService extends Service implements Runnable {
-    private static final String TAG = "WakeUpService";
+    private static final int CHECK_SERVICE_STATE_INTERVAL = 60000;
     private boolean running = false;
     private Intent copServiceIntent;
     private IWakeUpBinder copService;
@@ -28,6 +27,9 @@ public class WakeUpService extends Service implements Runnable {
         public void onServiceConnected(ComponentName name, IBinder service) {
             log.putLog("WS Bound to COP service");
             copService = IWakeUpBinder.Stub.asInterface(service);
+            if (!copService.isRunning()) {
+                startService(copServiceIntent);
+            }
             try {
                 copService.setCallback(wakeUpCallback);
             } catch (RemoteException e) {
@@ -65,7 +67,7 @@ public class WakeUpService extends Service implements Runnable {
     public int onStartCommand(Intent intent, int flags, int startId) {
         log.putLog("WS Starting");
         if (isRunning()) {
-            Log.w(TAG, "WS Already started");
+            log.putLog("WS Already started");
             stopSelf();
             return START_NOT_STICKY;
         }
@@ -113,7 +115,7 @@ public class WakeUpService extends Service implements Runnable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Utils.sleep(5000);
+                Utils.sleep(CHECK_SERVICE_STATE_INTERVAL);
             }
     }
 
