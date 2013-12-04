@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -72,7 +73,6 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
                 setSocket(new Socket(config.getProxy(), PROXY_PORT));
             } catch (Exception e) {
                 log.putLog("NS Failed connect to server: " + e.getMessage());
-                /** wait {@link NetworkService#PROXY_RECONNECT_TIMEOUT} seconds and if {@link CopService#isRunning()} then try reconnect */
                 Utils.sleep(PROXY_RECONNECT_TIMEOUT);
                 continue;
             }
@@ -88,6 +88,7 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
                 log.putLog("NS reader and writer was closed");
             } catch (Exception e) {
                 log.putLog("NS run reader and writer was filed: " + e.getMessage());
+                Utils.sleep(PROXY_RECONNECT_TIMEOUT);
             }
         }
         log.putLog("NS Stopped");
@@ -156,6 +157,11 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
 
     private synchronized void setSocket(Socket socket) {
         this.socket = socket;
+        try {
+            this.socket.setKeepAlive(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private synchronized Writer getWriter() {

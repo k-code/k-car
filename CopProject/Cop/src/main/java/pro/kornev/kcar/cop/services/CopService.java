@@ -23,7 +23,10 @@ import pro.kornev.kcar.cop.services.video.VideoService;
  *
  */
 public class CopService extends Service {
+    public static final String EXTRA_BINDER = "BINDER";
+
     private final IBinder mBinder = new CopBinder();
+
     private LogsDB log;
     private boolean running = false;
     private VideoService videoService;
@@ -44,7 +47,7 @@ public class CopService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         log.putLog("CS Binding...");
-        if ("a".equals(intent.getStringExtra("a"))) {
+        if (IWakeUpBinder.class.getName().equals(intent.getStringExtra(EXTRA_BINDER))) {
             return wakeUpBinder;
         }
         return mBinder;

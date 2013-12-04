@@ -26,13 +26,14 @@ public class WakeUpService extends Service implements Runnable {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             log.putLog("WS Bound to COP service");
-            copService = IWakeUpBinder.Stub.asInterface(service);
-            if (!copService.isRunning()) {
-                startService(copServiceIntent);
-            }
             try {
+                copService = IWakeUpBinder.Stub.asInterface(service);
+                if (!copService.isRunning()) {
+                    startService(copServiceIntent);
+                }
                 copService.setCallback(wakeUpCallback);
-            } catch (RemoteException e) {
+            } catch (Exception e) {
+                log.putLog("WS Filed connect to COP service: " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -59,7 +60,7 @@ public class WakeUpService extends Service implements Runnable {
         Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
         log = new LogsDB(this);
         copServiceIntent = new Intent(CopService.class.getName());
-        copServiceIntent.putExtra("a", "a");
+        copServiceIntent.putExtra(CopService.EXTRA_BINDER, IWakeUpBinder.class.getName());
         log.putLog("WS Created");
     }
 

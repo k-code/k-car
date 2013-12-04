@@ -61,8 +61,7 @@
                 <action android:name="pro.kornev.kcar.cop.services.CopService" />
             </intent-filter>
         </service>
-        <service android:name="pro.kornev.kcar.cop.services.network.NetworkService"
-            android:isolatedProcess="false" />
+        <service android:name="pro.kornev.kcar.cop.services.network.NetworkService" />
         <service android:name="pro.kornev.kcar.cop.services.support.WakeUpService"
             android:process=":ws" />
 

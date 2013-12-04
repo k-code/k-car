@@ -14,9 +14,7 @@ public class BootUpReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        new LogsDB(context).putLog("BU Start COP service");
-        Intent serviceIntent = new Intent(context, CopService.class);
-        context.startService(serviceIntent);
+        new LogsDB(context).putLog("BU Start WakeUp service");
+        context.startService(new Intent(context, WakeUpService.class));
     }
-
 }

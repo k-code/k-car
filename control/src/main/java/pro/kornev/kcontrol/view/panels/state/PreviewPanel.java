@@ -27,7 +27,9 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
     private static final String START_PREVIEW = "Start preview";
     private static final String STOP_PREVIEW = "Stop preview";
     private static final Dimension maxSize = new Dimension(640, 480);
+
     private static boolean isStartPreview = false;
+
     private JButton startPreviewButton;
     private ProxyService proxyService;
     private JPanel preview;
@@ -43,6 +45,8 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         preview = new JPanel(new FlowLayout(FlowLayout.LEFT));
         canvas = new Canvas();
 
+        preview.setSize(maxSize);
+        canvas.setSize(maxSize);
         preview.add(canvas);
         add(preview, getGbl().setGrid(0, 0).fillB().rowSpan(3).weightH(0.6));
         startPreviewButton = new JButton(isStartPreview() ? STOP_PREVIEW : START_PREVIEW);
@@ -92,12 +96,6 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         Dimension size = new Dimension(bufImage.getWidth(), bufImage.getHeight());
         if (size.height > maxSize.height) {
             size = maxSize;
-        }
-        if (preview.getSize() != size) {
-            preview.setSize(size);
-        }
-        if (canvas.getSize() != size) {
-            canvas.setSize(size);
         }
         size = canvas.getSize();
         canvas.getGraphics().drawImage(bufImage, 0, 0, size.width, size.height, null);

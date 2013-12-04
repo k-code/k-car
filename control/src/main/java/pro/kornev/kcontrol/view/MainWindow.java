@@ -11,8 +11,8 @@ import pro.kornev.kcontrol.view.panels.state.SystemStatePanel;
 
 public final class MainWindow extends JFrame implements Runnable {
     private static final long serialVersionUID = 6690894233205194578L;
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 750;
 
     @Override
     public void run() {
@@ -23,7 +23,6 @@ public final class MainWindow extends JFrame implements Runnable {
         setLayout(new BorderLayout());
         Dimension size = new Dimension(WIDTH, HEIGHT);
         setPreferredSize(size);
-        //setMinimumSize(size);
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
 
