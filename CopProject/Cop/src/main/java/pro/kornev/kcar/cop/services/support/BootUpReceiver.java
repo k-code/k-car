@@ -10,7 +10,7 @@ import pro.kornev.kcar.cop.services.CopService;
 /**
  *
  */
-public class BootUpReceiver extends BroadcastReceiver {
+public final class BootUpReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {

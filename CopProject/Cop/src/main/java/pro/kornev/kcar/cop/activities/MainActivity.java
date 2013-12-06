@@ -18,7 +18,7 @@ import pro.kornev.kcar.cop.R;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.services.CopService;
-import pro.kornev.kcar.cop.services.support.UncaughtException;
+import pro.kornev.kcar.cop.services.support.ProcessKillerException;
 import pro.kornev.kcar.cop.services.support.WakeUpService;
 
 public class MainActivity extends Activity {
@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
+        Thread.setDefaultUncaughtExceptionHandler(new ProcessKillerException());
         setContentView(R.layout.activity_main);
         runButton = (Button)findViewById(R.id.maRunButton);
         updateServiceState();

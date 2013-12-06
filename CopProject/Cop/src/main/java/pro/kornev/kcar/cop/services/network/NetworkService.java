@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -15,8 +14,7 @@ import java.util.concurrent.TimeUnit;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.providers.LogsDB;
-import pro.kornev.kcar.cop.services.CopService;
-import pro.kornev.kcar.cop.services.support.UncaughtException;
+import pro.kornev.kcar.cop.services.support.ProcessKillerException;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
@@ -144,7 +142,7 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
     private synchronized void start() {
         log.putLog("NS Starting...");
         Thread thread = new Thread(this);
-        thread.setUncaughtExceptionHandler(new UncaughtException());
+        thread.setUncaughtExceptionHandler(new ProcessKillerException());
         thread.start();
         executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.scheduleWithFixedDelay(new PingTask(this), PROXY_PING_DELAY, PROXY_PING_DELAY, TimeUnit.SECONDS);

@@ -15,7 +15,7 @@ import pro.kornev.kcar.cop.services.CopService;
 /**
  *
  */
-public class WakeUpService extends Service implements Runnable {
+public final class WakeUpService extends Service implements Runnable {
     private static final int CHECK_SERVICE_STATE_INTERVAL = 60000;
     private boolean running = false;
     private Intent copServiceIntent;
@@ -57,7 +57,7 @@ public class WakeUpService extends Service implements Runnable {
     @Override
     public void onCreate() {
         super.onCreate();
-        Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
+        Thread.setDefaultUncaughtExceptionHandler(new ProcessKillerException());
         log = new LogsDB(this);
         copServiceIntent = new Intent(CopService.class.getName());
         copServiceIntent.putExtra(CopService.EXTRA_BINDER, IWakeUpBinder.class.getName());

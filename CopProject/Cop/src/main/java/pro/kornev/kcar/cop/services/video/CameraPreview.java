@@ -13,7 +13,7 @@ import pro.kornev.kcar.cop.providers.LogsDB;
 /**
  *
  */
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
+public final class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder holder;
     private Camera camera;
     private final LogsDB log;

@@ -19,7 +19,7 @@ import pro.kornev.kcar.protocol.Protocol;
 /**
  *
  */
-public class VideoService implements NetworkListener, Camera.PreviewCallback, Camera.ErrorCallback {
+public final class VideoService implements NetworkListener, Camera.PreviewCallback, Camera.ErrorCallback {
     private final CopService copService;
     private final LogsDB log;
 

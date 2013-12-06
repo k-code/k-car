@@ -15,14 +15,14 @@ import pro.kornev.kcar.cop.services.network.NetworkBinder;
 import pro.kornev.kcar.cop.services.network.NetworkService;
 import pro.kornev.kcar.cop.services.support.IWakeUpBinder;
 import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
-import pro.kornev.kcar.cop.services.support.UncaughtException;
+import pro.kornev.kcar.cop.services.support.ProcessKillerException;
 import pro.kornev.kcar.cop.services.usb.UsbService;
 import pro.kornev.kcar.cop.services.video.VideoService;
 
 /**
  *
  */
-public class CopService extends Service {
+public final class CopService extends Service {
     public static final String EXTRA_BINDER = "BINDER";
 
     private final IBinder mBinder = new CopBinder();
@@ -38,7 +38,7 @@ public class CopService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Thread.setDefaultUncaughtExceptionHandler(new UncaughtException());
+        Thread.setDefaultUncaughtExceptionHandler(new ProcessKillerException());
         log = new LogsDB(this);
         log.putLog("CS Created");
         networkServiceIntent = new Intent(this, NetworkService.class);

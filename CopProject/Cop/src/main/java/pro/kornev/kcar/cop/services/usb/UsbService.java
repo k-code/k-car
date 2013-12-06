@@ -9,12 +9,10 @@ import com.hoho.android.usbserial.driver.UsbSerialProber;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 
 import java.util.Arrays;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import pro.kornev.kcar.cop.Utils;
-import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.CopService;
 import pro.kornev.kcar.cop.services.network.NetworkListener;
@@ -25,11 +23,12 @@ import pro.kornev.kcar.protocol.Protocol;
  * @author vkornev
  * @since 14.10.13
  */
-public class UsbService implements NetworkListener, SerialInputOutputManager.Listener {
+public final class UsbService implements NetworkListener, SerialInputOutputManager.Listener {
     private static final int DRIVER_SCAN_TIMEOUT = 1000;
     private static final int WRITE_TIMEOUT = 1000;
+    private static final int USB_VENDOR_ID = 0x1d50;
+    private static final int USB_PRODUCT_ID = 0x602f;
     private final LogsDB log;
-    private final ConfigDB config;
     private volatile SerialInputOutputManager mSerialIoManager;
     private volatile UsbSerialDriver driver;
     private final ExecutorService mExecutor = Executors.newSingleThreadExecutor();
@@ -39,7 +38,6 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     public UsbService(CopService copService) {
         this.copService = copService;
         log = new LogsDB(this.copService);
-        config = new ConfigDB(this.copService);
         usbPermissionReceiver = new UsbPermissionReceiver(this.copService);
     }
 
@@ -106,20 +104,32 @@ public class UsbService implements NetworkListener, SerialInputOutputManager.Lis
     }
 
     private UsbSerialDriver getDriver() {
-        String usbDeviceName = config.getUsbDevice();
-        if (usbDeviceName == null) return null;
-        UsbManager mUsbManager = (UsbManager) copService.getSystemService(Context.USB_SERVICE);
-        Map<String, UsbDevice> usbDeviceList = mUsbManager.getDeviceList();
-        if (usbDeviceList == null || usbDeviceList.isEmpty()) return null;
-        UsbDevice usbDevice = usbDeviceList.get(usbDeviceName);
-        if (usbDevice == null) return null;
-        if (!mUsbManager.hasPermission(usbDevice)) {
-            mUsbManager.requestPermission(usbDevice, usbPermissionReceiver.getPermissionIntent());
-            if (!mUsbManager.hasPermission(usbDevice)) {
+        try {
+            UsbManager usbManager = (UsbManager) copService.getSystemService(Context.USB_SERVICE);
+            if (usbManager.getDeviceList() == null || usbManager.getDeviceList().isEmpty()) {
                 return null;
             }
+            UsbDevice usbDevice = null;
+            for (UsbDevice device: usbManager.getDeviceList().values()) {
+                if (device.getVendorId() == USB_VENDOR_ID && device.getProductId() == USB_PRODUCT_ID) {
+                    usbDevice = device;
+                    break;
+                }
+            }
+            if (usbDevice == null) {
+                return null;
+            }
+            if (!usbManager.hasPermission(usbDevice)) {
+                usbManager.requestPermission(usbDevice, usbPermissionReceiver.getPermissionIntent());
+                if (!usbManager.hasPermission(usbDevice)) {
+                    return null;
+                }
+            }
+            return UsbSerialProber.probeSingleDevice(usbManager, usbDevice).get(0);
+        } catch (Exception e) {
+            log.putLog("US Failed get driver: " + e.getMessage());
+            return null;
         }
-        return UsbSerialProber.probeSingleDevice(mUsbManager, usbDevice).get(0);
     }
 
     private void sendToNetwork(Data data) {

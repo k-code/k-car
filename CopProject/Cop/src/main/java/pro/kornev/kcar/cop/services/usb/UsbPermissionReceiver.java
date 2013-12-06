@@ -12,7 +12,7 @@ import android.widget.Toast;
 /**
  *
  */
-public class UsbPermissionReceiver extends BroadcastReceiver {
+public final class UsbPermissionReceiver extends BroadcastReceiver {
     private static final String ACTION_USB_PERMISSION = "com.android.example.USB_PERMISSION";
     private PendingIntent mPermissionIntent;
 
