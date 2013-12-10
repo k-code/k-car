@@ -178,6 +178,9 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camSizeL
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camSizeSet(JNIEnv *e, jclass c) {
     return (jbyte)PROTOCOL_CMD_CAM_SIZE_SET;
 }
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLight(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_SENS_LIGHT;
+}
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoTriggerLed(JNIEnv *e, jclass c) {
     return (jbyte)PROTOCOL_CMD_TRIGGER_LED;

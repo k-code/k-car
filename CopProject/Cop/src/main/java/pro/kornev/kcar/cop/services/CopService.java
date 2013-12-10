@@ -13,6 +13,7 @@ import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.network.NetworkBinder;
 import pro.kornev.kcar.cop.services.network.NetworkService;
+import pro.kornev.kcar.cop.services.sensors.LightService;
 import pro.kornev.kcar.cop.services.support.IWakeUpBinder;
 import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
 import pro.kornev.kcar.cop.services.support.ProcessKillerException;
@@ -34,6 +35,7 @@ public final class CopService extends Service {
     private Intent networkServiceIntent;
     private NetworkService networkService;
     private IWakeUpCallback wakeUpCallback;
+    private LightService lightService;
 
     @Override
     public void onCreate() {
@@ -66,6 +68,7 @@ public final class CopService extends Service {
 
         videoService = new VideoService(this);
         usbService = new UsbService(this);
+        lightService = new LightService(this);
         bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();

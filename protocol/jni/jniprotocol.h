@@ -196,6 +196,14 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_camSizeS
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    sensLight
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLight
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
  * Method:    autoTriggerLed
  * Signature: ()B
  */
