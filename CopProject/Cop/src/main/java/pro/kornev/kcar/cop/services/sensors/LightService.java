@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import pro.kornev.kcar.cop.services.CopService;
@@ -30,7 +31,7 @@ public final class LightService implements NetworkListener, SensorEventListener 
 
     @Override
     public void onDataReceived(Data data) {
-        if (data.cmd == Protocol.Cmd.ping()) {
+        if (data.cmd == Protocol.Cmd.sensLight()) {
             data.iData = light.get();
             write(data);
         }

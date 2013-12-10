@@ -37,14 +37,12 @@ public class ConfigDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
         initConfig(db);
-        db.close();
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DROP_TABLE);
         onCreate(db);
-        db.close();
     }
 
     private void initConfig(SQLiteDatabase db) {
@@ -110,7 +108,6 @@ public class ConfigDB extends SQLiteOpenHelper {
         if ( !cursor.moveToFirst() ) {
             return null;
         }
-        db.close();
         return cursor;
     }
 
@@ -120,6 +117,5 @@ public class ConfigDB extends SQLiteOpenHelper {
             throw new IllegalStateException("Database " + DB_NAME + "is can't be write");
         }
         db.update(TABLE_NAME, value, " _id = ?", new String[]{"1"});
-        db.close();
     }
 }

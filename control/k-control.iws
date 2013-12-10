@@ -2,13 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="Improve stability of COP">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/LightService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/AccelerationService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/lib/protocol.jar" afterPath="$PROJECT_DIR$/../CopProject/Cop/lib/protocol.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/providers/ConfigDB.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/providers/ConfigDB.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/CopService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/CopService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/LightService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/LightService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/src/main/java/pro/kornev/kcar/protocol/Protocol.java" afterPath="$PROJECT_DIR$/../protocol/src/main/java/pro/kornev/kcar/protocol/Protocol.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/jni/jniprotocol.cpp" afterPath="$PROJECT_DIR$/../protocol/jni/jniprotocol.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/jni/jniprotocol.h" afterPath="$PROJECT_DIR$/../protocol/jni/jniprotocol.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-control.iws" afterPath="$PROJECT_DIR$/k-control.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../autopilot/inc/protocol.h" afterPath="$PROJECT_DIR$/../autopilot/inc/protocol.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/jni/protocol.h" afterPath="$PROJECT_DIR$/../protocol/jni/protocol.h" />
     </list>
     <ignored path="k-control.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386662913577" ignored="false" />
+    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386673140695" ignored="false" />
     <file path="/pom.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384244564635" ignored="false" />
     <file path="/DriverJoystickListener.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384227835674" ignored="false" />
     <file path="/MainWindow.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384746711828" ignored="false" />
@@ -47,9 +55,9 @@
     <file path="/logback.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384918644282" ignored="false" />
     <file path="/Proxy.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384919528083" ignored="false" />
     <file path="/Utils.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384925939698" ignored="false" />
-    <file path="/protocol.h" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1385022915512" ignored="false" />
-    <file path="/Protocol.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1385023364229" ignored="false" />
-    <file path="/jniprotocol.cpp" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1385023221723" ignored="false" />
+    <file path="/protocol.h" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386673173007" ignored="false" />
+    <file path="/Protocol.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386673157967" ignored="false" />
+    <file path="/jniprotocol.cpp" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386673214415" ignored="false" />
     <file path="/ProxyService.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1385618212103" ignored="false" />
     <file path="/Data.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384923851029" ignored="false" />
     <file path="/ProtocolTest.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1385023477318" ignored="false" />
@@ -164,7 +172,7 @@
       <file leaf-file-name="MainWindow.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="147" selection-start="687" selection-end="687" vertical-scroll-proportion="0.353139">
+            <state line="21" column="147" selection-start="687" selection-end="687" vertical-scroll-proportion="0.5412371">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -313,7 +321,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -545,6 +552,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -562,9 +570,9 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RunManager" selected="Application.Runner">
     <configuration default="false" name="Runner" type="Application" factoryName="Application" temporary="true">
@@ -713,8 +721,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -724,13 +733,12 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39807898" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -894,7 +902,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="147" selection-start="687" selection-end="687" vertical-scroll-proportion="0.353139">
+        <state line="21" column="147" selection-start="687" selection-end="687" vertical-scroll-proportion="0.5412371">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

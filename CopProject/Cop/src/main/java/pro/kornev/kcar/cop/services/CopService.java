@@ -13,6 +13,7 @@ import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.network.NetworkBinder;
 import pro.kornev.kcar.cop.services.network.NetworkService;
+import pro.kornev.kcar.cop.services.sensors.AccelerationService;
 import pro.kornev.kcar.cop.services.sensors.LightService;
 import pro.kornev.kcar.cop.services.support.IWakeUpBinder;
 import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
@@ -36,6 +37,7 @@ public final class CopService extends Service {
     private NetworkService networkService;
     private IWakeUpCallback wakeUpCallback;
     private LightService lightService;
+    private AccelerationService accelerationService;
 
     @Override
     public void onCreate() {
@@ -69,10 +71,13 @@ public final class CopService extends Service {
         videoService = new VideoService(this);
         usbService = new UsbService(this);
         lightService = new LightService(this);
+        accelerationService = new AccelerationService(this);
         bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();
         videoService.start();
+        lightService.start();
+        accelerationService.start();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -115,6 +120,8 @@ public final class CopService extends Service {
             videoService.stop();
             usbService.stop();
             wakeUpCallback.stop();
+            lightService.stop();
+            accelerationService.stop();
         } catch (Exception ignored) {}
         stopSelf();
     }
@@ -171,6 +178,7 @@ public final class CopService extends Service {
             networkService = ((NetworkBinder)service).getService();
             networkService.addListener(videoService);
             networkService.addListener(usbService);
+            networkService.addListener(lightService);
             if (!networkService.isRunning()) {
                 startService(networkServiceIntent);
             }

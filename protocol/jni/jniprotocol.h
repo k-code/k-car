@@ -204,6 +204,14 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLigh
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    sensAxis
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensAxis
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
  * Method:    autoTriggerLed
  * Signature: ()B
  */
