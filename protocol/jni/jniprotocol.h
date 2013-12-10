@@ -212,6 +212,14 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensAxis
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    sensMagnetic
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagnetic
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
  * Method:    autoTriggerLed
  * Signature: ()B
  */

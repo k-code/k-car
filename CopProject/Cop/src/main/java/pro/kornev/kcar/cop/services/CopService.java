@@ -15,6 +15,7 @@ import pro.kornev.kcar.cop.services.network.NetworkBinder;
 import pro.kornev.kcar.cop.services.network.NetworkService;
 import pro.kornev.kcar.cop.services.sensors.AccelerationService;
 import pro.kornev.kcar.cop.services.sensors.LightService;
+import pro.kornev.kcar.cop.services.sensors.MagneticService;
 import pro.kornev.kcar.cop.services.support.IWakeUpBinder;
 import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
 import pro.kornev.kcar.cop.services.support.ProcessKillerException;
@@ -38,6 +39,7 @@ public final class CopService extends Service {
     private IWakeUpCallback wakeUpCallback;
     private LightService lightService;
     private AccelerationService accelerationService;
+    private MagneticService magneticService;
 
     @Override
     public void onCreate() {
@@ -72,11 +74,13 @@ public final class CopService extends Service {
         usbService = new UsbService(this);
         lightService = new LightService(this);
         accelerationService = new AccelerationService(this);
+        magneticService = new MagneticService(this);
         bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();
         videoService.start();
         lightService.start();
+        magneticService.start();
         accelerationService.start();
 
         return super.onStartCommand(intent, flags, startId);
@@ -121,6 +125,7 @@ public final class CopService extends Service {
             usbService.stop();
             wakeUpCallback.stop();
             lightService.stop();
+            magneticService.stop();
             accelerationService.stop();
         } catch (Exception ignored) {}
         stopSelf();

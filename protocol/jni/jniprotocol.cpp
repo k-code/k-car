@@ -187,6 +187,10 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensAxis
     return (jbyte)PROTOCOL_CMD_SENS_AXIS;
 }
 
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagnetic(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_SENS_MAGNETIC;
+}
+
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoTriggerLed(JNIEnv *e, jclass c) {
     return (jbyte)PROTOCOL_CMD_TRIGGER_LED;
 }
