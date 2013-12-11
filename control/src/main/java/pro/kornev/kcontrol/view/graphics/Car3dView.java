@@ -127,7 +127,8 @@ public class Car3dView implements GLEventListener {
         float x = -WIDTH/2; //width
         float z = -LENGTH/2; //length
         float y = HEIGHT; //height
-        gl.glColor4f(0.5f, 0.5f, 1, 1);
+
+        gl.glColor4f(0.5f, 0.5f, 1, 0.5f);
 
         gl.glBegin(GL2.GL_QUADS);
 
@@ -142,6 +143,8 @@ public class Car3dView implements GLEventListener {
         y -= HEIGHT;
         x -= WIDTH;
 
+        gl.glColor4f(0.5f, 1f, 0.5f, 0.5f);
+
         gl.glVertex3d(x, y, z); // 1
         z += LENGTH;
         gl.glVertex3d(x, y, z);
@@ -150,6 +153,8 @@ public class Car3dView implements GLEventListener {
         z -= LENGTH;
         gl.glVertex3d(x, y, z); // 2
 
+        gl.glColor4f(1f, 0.5f, 0.5f, 0.5f);
+
         gl.glVertex3d(x, y, z); // 2
         y += HEIGHT;
         gl.glVertex3d(x, y, z);
@@ -158,13 +163,15 @@ public class Car3dView implements GLEventListener {
         y -= HEIGHT;
         gl.glVertex3d(x, y, z); // 3
 
-        gl.glVertex3d(x, y, z); // 3
+        /*gl.glVertex3d(x, y, z); // 3
         y += HEIGHT;
         gl.glVertex3d(x, y, z);
         x -= WIDTH;
         gl.glVertex3d(x, y, z);
         y -= HEIGHT;
-        gl.glVertex3d(x, y, z); // 4
+        gl.glVertex3d(x, y, z); // 4*/
+
+        x -= WIDTH;
 
         gl.glVertex3d(x, y, z); // 4
         y += HEIGHT;

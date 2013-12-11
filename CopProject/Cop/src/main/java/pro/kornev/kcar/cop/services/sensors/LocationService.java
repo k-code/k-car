@@ -17,7 +17,7 @@ import pro.kornev.kcar.protocol.Protocol;
 /**
  *
  */
-public class LocationService implements NetworkListener, LocationListener {
+public final class LocationService implements NetworkListener, LocationListener {
     private final LocationManager locationManager;
     private final CopService copService;
     private final double[] location = {0, 0};

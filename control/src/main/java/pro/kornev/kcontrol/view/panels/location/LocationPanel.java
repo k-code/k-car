@@ -68,7 +68,7 @@ public class LocationPanel extends CustomPanel implements ActionListener, Settin
                 data.cmd = Protocol.Cmd.sensAxis();
                 proxyService.send(data);
             }
-        }, 100, 200, TimeUnit.MILLISECONDS);
+        }, 100, 1000, TimeUnit.MILLISECONDS);
     }
 
     @Override

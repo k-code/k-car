@@ -1,31 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="Improve stability of COP">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/location/LocationPanel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/LocationService.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/AccelerationService.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Copter2dPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Copter3dView.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/RotorView.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Copter3dPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/lib/protocol.jar" afterPath="$PROJECT_DIR$/../CopProject/Cop/lib/protocol.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/CopService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/CopService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/GBLHelper.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/GBLHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/MainWindow.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/OrientationService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/OrientationService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/src/main/java/pro/kornev/kcar/protocol/Protocol.java" afterPath="$PROJECT_DIR$/../protocol/src/main/java/pro/kornev/kcar/protocol/Protocol.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/install_maven_dependencies.sh" afterPath="$PROJECT_DIR$/lib/install_maven_dependencies.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/jni/jniprotocol.cpp" afterPath="$PROJECT_DIR$/../protocol/jni/jniprotocol.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/jni/jniprotocol.h" afterPath="$PROJECT_DIR$/../protocol/jni/jniprotocol.h" />
+    <list default="true" id="8da7c8e1-7258-41ec-a8f7-1419a52a7362" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dView.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/location/LocationPanel.java" afterPath="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/location/LocationPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/LocationService.java" afterPath="$PROJECT_DIR$/../CopProject/Cop/src/main/java/pro/kornev/kcar/cop/services/sensors/LocationService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/k-control.iws" afterPath="$PROJECT_DIR$/k-control.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../autopilot/inc/protocol.h" afterPath="$PROJECT_DIR$/../autopilot/inc/protocol.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../protocol/jni/protocol.h" afterPath="$PROJECT_DIR$/../protocol/jni/protocol.h" />
     </list>
     <ignored path="k-control.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386756705299" ignored="false" />
+    <file path="/Dummy.txt" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386758572073" ignored="false" />
     <file path="/pom.xml" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384244564635" ignored="false" />
     <file path="/DriverJoystickListener.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1384227835674" ignored="false" />
     <file path="/MainWindow.java" changelist="8da7c8e1-7258-41ec-a8f7-1419a52a7362" time="1386741122980" ignored="false" />
@@ -155,7 +139,7 @@
       <file leaf-file-name="LocationPanel.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/location/LocationPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="12" selection-start="3678" selection-end="3678" vertical-scroll-proportion="0.8391377">
+            <state line="70" column="18" selection-start="2600" selection-end="2600" vertical-scroll-proportion="0.80099505">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2274#2591#0" expanded="true" />
@@ -206,7 +190,7 @@
       <file leaf-file-name="Car3dView.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0">
+            <state line="130" column="39" selection-start="3381" selection-end="3381" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#418#445#0" expanded="true" />
@@ -266,8 +250,8 @@
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/GBLHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Copter3dView.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Copter3dPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dView.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dView.java" />
         <option value="$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/location/LocationPanel.java" />
       </list>
     </option>
@@ -811,7 +795,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -826,7 +810,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946378" sideWeight="0.67129135" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2498618" sideWeight="0.67129135" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498618" sideWeight="0.67129135" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -983,9 +967,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jogamp/jogl/1.0/jogl-1.0.jar!/javax/media/opengl/fixedfunc/GLPointerFunc.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="9" selection-start="819" selection-end="819" vertical-scroll-proportion="-12.72">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/graphics/Car3dView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="665" selection-end="665" vertical-scroll-proportion="0.0">
+        <state line="130" column="39" selection-start="3381" selection-end="3381" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#418#445#0" expanded="true" />
@@ -996,7 +987,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pro/kornev/kcontrol/view/panels/location/LocationPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="12" selection-start="3678" selection-end="3678" vertical-scroll-proportion="0.8391377">
+        <state line="70" column="18" selection-start="2600" selection-end="2600" vertical-scroll-proportion="0.80099505">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2274#2591#0" expanded="true" />
