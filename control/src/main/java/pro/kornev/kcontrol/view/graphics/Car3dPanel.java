@@ -12,26 +12,24 @@ import pro.kornev.kcontrol.view.panels.GraphicPanel;
 
 import com.jogamp.opengl.util.FPSAnimator;
 
-public class Copter3dPanel extends GraphicPanel {
+public class Car3dPanel extends GraphicPanel {
     private static final long serialVersionUID = 2219431191224761363L;
     private static final int FPS = 80;
+
+    private Car3dView car3dView;
     
-    private FPSAnimator animator;
-    private GLCanvas canvas;
-    private Copter3dView copter3d;
-    
-    public Copter3dPanel() {
+    public Car3dPanel() {
         super();
         name = "3D simulator";
         setLayout(new GridBagLayout());
 
-        canvas = new GLCanvas(createGLCapabilities());
+        GLCanvas canvas = new GLCanvas(createGLCapabilities());
         add(canvas, GBLHelper.create().fillB());
-        
-        animator = new FPSAnimator(FPS);
-        copter3d = new Copter3dView();
 
-        canvas.addGLEventListener(copter3d);
+        FPSAnimator animator = new FPSAnimator(FPS);
+        car3dView = new Car3dView();
+
+        canvas.addGLEventListener(car3dView);
         
         animator.add(canvas);
 
@@ -49,7 +47,7 @@ public class Copter3dPanel extends GraphicPanel {
         return capabilities;
     }
     
-    public Copter3dView getCopter3dView() {
-        return copter3d;
+    public Car3dView getCar3dView() {
+        return car3dView;
     }
 }

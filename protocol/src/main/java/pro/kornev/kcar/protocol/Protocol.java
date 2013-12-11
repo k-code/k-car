@@ -51,6 +51,7 @@ public class Protocol {
         native public static byte sensLight();
         native public static byte sensAxis();
         native public static byte sensMagnetic();
+        native public static byte sensGps();
         //Autopilot
         native public static byte autoTriggerLed();
         native public static byte autoUsReq();

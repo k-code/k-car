@@ -35,6 +35,7 @@
 #define PROTOCOL_CMD_SENS_LIGHT     17
 #define PROTOCOL_CMD_SENS_AXIS      18
 #define PROTOCOL_CMD_SENS_MAGNETIC  19
+#define PROTOCOL_CMD_SENS_GPS       20
 
 // For autopilot
 #define PROTOCOL_CMD_TRIGGER_LED    50

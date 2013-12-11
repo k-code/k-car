@@ -3,7 +3,7 @@ package pro.kornev.kcontrol.view;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class GBLHelper extends GridBagConstraints {
+public final class GBLHelper extends GridBagConstraints {
     private static final long serialVersionUID = -8218771576922362754L;
 
     private GBLHelper() {

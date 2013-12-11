@@ -13,8 +13,8 @@ import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.network.NetworkBinder;
 import pro.kornev.kcar.cop.services.network.NetworkService;
-import pro.kornev.kcar.cop.services.sensors.AccelerationService;
 import pro.kornev.kcar.cop.services.sensors.LightService;
+import pro.kornev.kcar.cop.services.sensors.LocationService;
 import pro.kornev.kcar.cop.services.sensors.OrientationService;
 import pro.kornev.kcar.cop.services.support.IWakeUpBinder;
 import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
@@ -38,8 +38,8 @@ public final class CopService extends Service {
     private NetworkService networkService;
     private IWakeUpCallback wakeUpCallback;
     private LightService lightService;
-    private AccelerationService accelerationService;
-    private OrientationService magneticService;
+    private OrientationService orientationService;
+    private LocationService locationService;
 
     @Override
     public void onCreate() {
@@ -73,15 +73,15 @@ public final class CopService extends Service {
         videoService = new VideoService(this);
         usbService = new UsbService(this);
         lightService = new LightService(this);
-        accelerationService = new AccelerationService(this);
-        magneticService = new OrientationService(this);
+        orientationService = new OrientationService(this);
+        locationService = new LocationService(this);
         bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();
         videoService.start();
         lightService.start();
-        magneticService.start();
-        accelerationService.start();
+        orientationService.start();
+        locationService.start();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -120,14 +120,14 @@ public final class CopService extends Service {
         setRunning(false);
         try {
             unbindService(networkServiceConnection);
-            networkService.stop();
-            videoService.stop();
-            usbService.stop();
             wakeUpCallback.stop();
-            lightService.stop();
-            magneticService.stop();
-            accelerationService.stop();
         } catch (Exception ignored) {}
+        networkService.stop();
+        videoService.stop();
+        usbService.stop();
+        lightService.stop();
+        orientationService.stop();
+        locationService.stop();
         stopSelf();
     }
 
@@ -184,6 +184,8 @@ public final class CopService extends Service {
             networkService.addListener(videoService);
             networkService.addListener(usbService);
             networkService.addListener(lightService);
+            networkService.addListener(locationService);
+            networkService.addListener(orientationService);
             if (!networkService.isRunning()) {
                 startService(networkServiceIntent);
             }

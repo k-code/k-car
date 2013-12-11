@@ -220,6 +220,14 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagn
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    sensGps
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensGps
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
  * Method:    autoTriggerLed
  * Signature: ()B
  */

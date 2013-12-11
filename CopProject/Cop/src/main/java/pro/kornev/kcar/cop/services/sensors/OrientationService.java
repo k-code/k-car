@@ -5,7 +5,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
+
+import java.nio.ByteBuffer;
 
 import pro.kornev.kcar.cop.services.CopService;
 import pro.kornev.kcar.cop.services.network.NetworkListener;
@@ -26,6 +27,7 @@ public final class OrientationService implements NetworkListener, SensorEventLis
     private final float[] magnetic = {0 ,0 ,0};
     private final float[] R = new float[9];
     private final float[] I = new float[9];
+    private final float[] O = new float[3];
 
     public OrientationService(CopService copService) {
         this.copService = copService;
@@ -36,8 +38,15 @@ public final class OrientationService implements NetworkListener, SensorEventLis
 
     @Override
     public void onDataReceived(Data data) {
-        if (data.cmd == Protocol.Cmd.sensMagnetic()) {
-            data.bData = (byte)SensorManager.getInclination(I);
+        if (data.cmd == Protocol.Cmd.sensAxis()) {
+            ByteBuffer bb = ByteBuffer.allocate(Float.SIZE / 8 * 3);
+            bb.putFloat(O[0]);
+            bb.putFloat(O[1]);
+            bb.putFloat(O[2]);
+            byte[] buf = bb.array();
+            data.type = Protocol.arrayType();
+            data.aSize = buf.length;
+            data.aData = buf;
             write(data);
         }
     }
@@ -62,7 +71,8 @@ public final class OrientationService implements NetworkListener, SensorEventLis
                 break;
         }
         SensorManager.getRotationMatrix(R, I, acceleration, magnetic);
-        Log.w("INC", String.format("%f", SensorManager.getInclination(I)));
+        SensorManager.getOrientation(R, O);
+        //Log.w("INC", String.format("%f %f %f", O[0] * 180 / Math.PI, O[1] * 180 / Math.PI, O[2] * 180 / Math.PI));
     }
 
     @Override
