@@ -15,14 +15,6 @@
 #endif /* USB_OTG_HS_INTERNAL_DMA_ENABLED */
 __ALIGN_BEGIN USB_OTG_CORE_HANDLE  USB_OTG_dev __ALIGN_END;
 
-typedef struct dataStackType {
-	PROTOCOL_data data;
-	struct dataStackType *next;
-} dataStackType;
-
-dataStackType *stackHead = NULL;
-dataStackType *stackTail = NULL;
-
 void USB_init() {
 	/* USB configuration */
 	USBD_Init(&USB_OTG_dev,
@@ -30,22 +22,21 @@ void USB_init() {
 		&USR_desc,
 		&USBD_CDC_cb,
 		&USR_cb);
+
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+    GPIO_InitTypeDef gpio;
+    GPIO_StructInit(&gpio);
+    gpio.GPIO_Mode = GPIO_Mode_OUT;
+    gpio.GPIO_Pin = USB_POWER_PIN;
+    GPIO_Init(USB_POWER_BUS, &gpio);
+
+    GPIO_ResetBits(USB_POWER_BUS, USB_POWER_PIN);
 }
 
 void USB_write(PROTOCOL_data data) {
 	uint8_t buf[64];
 	uint32_t len = PROTOCOL_toByteArray(data, buf);
     VCP_DataTx(buf, len);
-}
-
-PROTOCOL_data USB_nextData() {
-	PROTOCOL_data data = {0,0,0,0,0};//PROTOCOL_emptyData;
-	if (stackHead == NULL) {
-		return data;
-	}
-	data = stackHead->data;
-	stackHead = stackHead->next;
-	return data;
 }
 
 void USB_read(uint8_t *buf, uint32_t len) {
@@ -55,7 +46,7 @@ void USB_read(uint8_t *buf, uint32_t len) {
 	} else if (data.cmd == PROTOCOL_CMD_PING) {
 		data.bData = 3;
 		USB_write(data);
-	} else if (data.cmd == PROTOCOL_CMD_LIVE_LED) {
+	} else if (data.cmd == PROTOCOL_CMD_TRIGGER_LED) {
 		if (data.bData == 0) {
 			LEDS_live(LEDS_Off);
 		}
@@ -73,16 +64,13 @@ void USB_read(uint8_t *buf, uint32_t len) {
 	} else if (data.cmd == PROTOCOL_CMD_RMS) {
 		MOTORS_RMS(data.bData);
 	}
-	/*
-	dataStackType tmp;
-	tmp.data = data;
-
-	if (stackHead) {
-		stackTail->next = &tmp;
-		stackTail = &tmp;
-	}
-	else {
-		stackHead = stackTail = &tmp;
-	}*/
 }
 
+
+void USB_power(uint8_t power) {
+	if (power == 0) {
+		GPIO_ResetBits(USB_POWER_BUS, USB_POWER_PIN);
+	} else {
+		GPIO_SetBits(USB_POWER_BUS, USB_POWER_PIN);
+	}
+}
