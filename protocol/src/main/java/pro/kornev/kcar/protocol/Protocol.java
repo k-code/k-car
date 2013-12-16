@@ -49,9 +49,10 @@ public class Protocol {
         native public static byte camSizeList();
         native public static byte camSizeSet();
         native public static byte sensLight();
-        native public static byte sensAxis();
+        native public static byte sensOrient();
         native public static byte sensMagnetic();
         native public static byte sensGps();
+        native public static byte sensLocation();
         //Autopilot
         native public static byte autoTriggerLed();
         native public static byte autoUsReq();

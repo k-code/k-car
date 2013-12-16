@@ -29,8 +29,8 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
     private JCheckBox flash;
     private JComboBox<PreviewSize> sizes;
 
-    public PreviewSettings(String title) {
-        super(title);
+    public PreviewSettings() {
+        super("Preview settings");
         JButton apply = new JButton("Apply");
         apply.addActionListener(this);
         JLabel fpsLabel = new JLabel("FPS:");

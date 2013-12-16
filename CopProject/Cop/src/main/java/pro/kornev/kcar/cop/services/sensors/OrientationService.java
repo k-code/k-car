@@ -38,7 +38,7 @@ public final class OrientationService implements NetworkListener, SensorEventLis
 
     @Override
     public void onDataReceived(Data data) {
-        if (data.cmd == Protocol.Cmd.sensAxis()) {
+        if (data.cmd == Protocol.Cmd.sensOrient()) {
             ByteBuffer bb = ByteBuffer.allocate(Float.SIZE / 8 * 3);
             bb.putFloat(O[0]);
             bb.putFloat(O[1]);
@@ -72,7 +72,6 @@ public final class OrientationService implements NetworkListener, SensorEventLis
         }
         SensorManager.getRotationMatrix(R, I, acceleration, magnetic);
         SensorManager.getOrientation(R, O);
-        //Log.w("INC", String.format("%f %f %f", O[0] * 180 / Math.PI, O[1] * 180 / Math.PI, O[2] * 180 / Math.PI));
     }
 
     @Override

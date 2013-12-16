@@ -13,7 +13,7 @@ import java.util.Set;
  * Date: 13.11.13
  * Time: 15:13
  */
-public enum  SettingService {
+public enum SettingService {
     i;
     private Set<SettingsListener> settingsListeners;
     private JoystickService joystickService;

@@ -204,10 +204,10 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLigh
 
 /*
  * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
- * Method:    sensAxis
+ * Method:    sensOrient
  * Signature: ()B
  */
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensAxis
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensOrient
   (JNIEnv *, jclass);
 
 /*
@@ -224,6 +224,14 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagn
  * Signature: ()B
  */
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensGps
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     pro_kornev_kcar_protocol_Protocol_Cmd
+ * Method:    sensLocation
+ * Signature: ()B
+ */
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLocation
   (JNIEnv *, jclass);
 
 /*

@@ -93,11 +93,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
 
         bitRate.setText(String.valueOf(data.aSize));
 
-        Dimension size = new Dimension(bufImage.getWidth(), bufImage.getHeight());
-        if (size.height > maxSize.height) {
-            size = maxSize;
-        }
-        size = canvas.getSize();
+        Dimension size = canvas.getSize();
         canvas.getGraphics().drawImage(bufImage, 0, 0, size.width, size.height, null);
 
         if (lastSec < System.currentTimeMillis() - 1000) {

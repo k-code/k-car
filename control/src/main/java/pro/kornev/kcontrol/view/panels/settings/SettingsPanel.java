@@ -21,6 +21,7 @@ public class SettingsPanel extends CustomPanel {
 
         add(new ProxySettingsPanel(), getGbl().setGrid(0, 0));
         add(new JoystickSettingsPanel(), getGbl().setGrid(1, 0));
-        add(new PreviewSettings("Preview"), getGbl().setGrid(2, 0));
+        add(new PreviewSettings(), getGbl().setGrid(2, 0));
+        add(new GpsSettings(), getGbl().setGrid(2, 1));
     }
 }

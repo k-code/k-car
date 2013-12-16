@@ -183,8 +183,8 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLigh
     return (jbyte)PROTOCOL_CMD_SENS_LIGHT;
 }
 
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensAxis(JNIEnv *e, jclass c) {
-    return (jbyte)PROTOCOL_CMD_SENS_AXIS;
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensOrient(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_SENS_ORIENT;
 }
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagnetic(JNIEnv *e, jclass c) {
@@ -193,6 +193,10 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagn
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensGps(JNIEnv *e, jclass c) {
     return (jbyte)PROTOCOL_CMD_SENS_GPS;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLocation(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_SENS_LOCATION;
 }
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoTriggerLed(JNIEnv *e, jclass c) {
