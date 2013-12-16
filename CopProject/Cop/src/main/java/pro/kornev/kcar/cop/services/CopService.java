@@ -5,13 +5,18 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.location.LocationManager;
 import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteException;
 
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.network.NetworkBinder;
+import pro.kornev.kcar.cop.services.network.NetworkListener;
 import pro.kornev.kcar.cop.services.network.NetworkService;
 import pro.kornev.kcar.cop.services.sensors.LightService;
 import pro.kornev.kcar.cop.services.sensors.LocationService;
@@ -21,11 +26,13 @@ import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
 import pro.kornev.kcar.cop.services.support.ProcessKillerException;
 import pro.kornev.kcar.cop.services.usb.UsbService;
 import pro.kornev.kcar.cop.services.video.VideoService;
+import pro.kornev.kcar.protocol.Data;
+import pro.kornev.kcar.protocol.Protocol;
 
 /**
  *
  */
-public final class CopService extends Service {
+public final class CopService extends Service implements NetworkListener {
     public static final String EXTRA_BINDER = "BINDER";
 
     private final IBinder mBinder = new CopBinder();
@@ -78,10 +85,6 @@ public final class CopService extends Service {
         bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();
-        videoService.start();
-        lightService.start();
-        orientationService.start();
-        locationService.start();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -104,6 +107,29 @@ public final class CopService extends Service {
         super.onTaskRemoved(rootIntent);
         stop();
         log.putLog("CS Task removed");
+    }
+
+    @Override
+    public void onDataReceived(Data data) {
+        if (data.type != Protocol.byteType() ||
+                (data.bData != Protocol.Req.off() && data.bData != Protocol.Req.on()))
+            return;
+
+        CustomService service = null;
+        if (data.cmd == Protocol.Cmd.sensOrient()) {
+            service = orientationService;
+        } else if (data.cmd == Protocol.Cmd.sensLocation()) {
+            service = locationService;
+        } else if (data.cmd == Protocol.Cmd.sensLight()) {
+            service = lightService;
+        } else if (data.cmd == Protocol.Cmd.camState()) {
+            service = videoService;
+        }
+        if (service == null) return;
+        Message mes = new Message();
+        mes.obj = service;
+        mes.arg1 = data.bData;
+        customServiceHandler.sendMessage(mes);
     }
 
     public class CopBinder extends Binder {
@@ -181,11 +207,8 @@ public final class CopService extends Service {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             networkService = ((NetworkBinder)service).getService();
-            networkService.addListener(videoService);
+            networkService.addListener(CopService.this);
             networkService.addListener(usbService);
-            networkService.addListener(lightService);
-            networkService.addListener(locationService);
-            networkService.addListener(orientationService);
             if (!networkService.isRunning()) {
                 startService(networkServiceIntent);
             }
@@ -195,4 +218,23 @@ public final class CopService extends Service {
         public void onServiceDisconnected(ComponentName name) {
         }
     };
+
+    private Handler customServiceHandler = new Handler(new Handler.Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            if (msg.obj == null) return false;
+            CustomService service = (CustomService) msg.obj;
+            if (msg.arg1 == Protocol.Req.off()) {
+                service.stop();
+                if (networkService != null) {
+                    networkService.removeListener(service);
+                }
+            } else if (msg.arg1 == Protocol.Req.on()) {
+                service.start();
+                networkService.addListener(service);
+            }
+            return false;
+        }
+    });
 }

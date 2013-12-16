@@ -70,9 +70,11 @@ public class LocationPanel extends CustomPanel implements ActionListener, Settin
                 }
                 Data data = new Data();
                 data.cmd = Protocol.Cmd.sensOrient();
+                data.bData = Protocol.Req.get();
                 proxyService.send(data);
                 data = new Data();
                 data.cmd = Protocol.Cmd.sensLocation();
+                data.bData = Protocol.Req.get();
                 proxyService.send(data);
             }
         }, 100, 500, TimeUnit.MILLISECONDS);
@@ -141,6 +143,8 @@ public class LocationPanel extends CustomPanel implements ActionListener, Settin
         this.proxyService = proxyService;
         this.proxyService.addListener(this);
     }
+
+
 
     private String getMapServerUrl(double latitude, double longitude, int zoom) {
         return String.format(MAP_SERVER_URL, longitude, latitude, longitude, latitude, zoom);

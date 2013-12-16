@@ -118,6 +118,20 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_arrayType(JNIEnv 
     return (jbyte)DATA_TYPE_ARRAY;
 }
 
+// Requests
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Req_off(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_REQ_OFF;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Req_on(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_REQ_ON;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Req_get(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_REQ_GET;
+}
+
 //Commands
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_reservedFirst(JNIEnv *e, jclass c) {

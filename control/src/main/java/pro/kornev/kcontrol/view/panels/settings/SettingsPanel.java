@@ -1,16 +1,6 @@
 package pro.kornev.kcontrol.view.panels.settings;
 
-import java.awt.GridBagLayout;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.border.EtchedBorder;
-
-import pro.kornev.kcontrol.view.GBLHelper;
 import pro.kornev.kcontrol.view.panels.CustomPanel;
-import pro.kornev.kcontrol.view.panels.state.PreviewPanel;
 
 public class SettingsPanel extends CustomPanel {
 
@@ -22,6 +12,6 @@ public class SettingsPanel extends CustomPanel {
         add(new ProxySettingsPanel(), getGbl().setGrid(0, 0));
         add(new JoystickSettingsPanel(), getGbl().setGrid(1, 0));
         add(new PreviewSettings(), getGbl().setGrid(2, 0));
-        add(new GpsSettings(), getGbl().setGrid(2, 1));
+        add(new SensorsSettings(), getGbl().setGrid(2, 1));
     }
 }

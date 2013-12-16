@@ -61,6 +61,12 @@ public class Protocol {
         native public static byte autoRMS();
     }
 
+    public static class Req {
+        native public static byte off();
+        native public static byte on();
+        native public static byte get();
+    }
+
     public static final byte[] STREAM_HEADER = {0x12, 0x34, 0x56, 0x78};
 
     public static void toOutputStream(Data data, DataOutputStream outputStream) throws IOException {

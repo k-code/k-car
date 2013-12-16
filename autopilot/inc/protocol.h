@@ -19,6 +19,11 @@
 #define PROTOCOL_CMD_COM_AUTO_F     50
 #define PROTOCOL_CMD_COM_AUTO_L     89
 
+// Requests
+#define PROTOCOL_REQ_OFF            0
+#define PROTOCOL_REQ_ON             1
+#define PROTOCOL_REQ_GET            2
+
 // Commands
 // System
 #define PROTOCOL_CMD_ERROR          0

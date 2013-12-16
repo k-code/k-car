@@ -109,7 +109,7 @@ public class PreviewPanel extends CustomPanel implements SettingsListener, Proxy
         if (proxyService == null) return;
         Data data = new Data();
         data.cmd = Protocol.Cmd.camState();
-        data.bData = isStartPreview() ? (byte)0 : (byte)1;
+        data.bData = isStartPreview() ? (byte) 3 : (byte)4;
         proxyService.send(data);
         setStartPreview(!isStartPreview());
         startPreviewButton.setText(isStartPreview() ? STOP_PREVIEW : START_PREVIEW);

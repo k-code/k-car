@@ -11,19 +11,20 @@ import android.os.Message;
 import java.nio.ByteBuffer;
 
 import pro.kornev.kcar.cop.services.CopService;
-import pro.kornev.kcar.cop.services.network.NetworkListener;
+import pro.kornev.kcar.cop.services.CustomService;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
 /**
  *
  */
-public final class LocationService implements NetworkListener, LocationListener {
+public final class LocationService implements LocationListener, CustomService {
     private final LocationManager locationManager;
     private final CopService copService;
     private volatile double latitude = 0;
     private volatile double longitude = 0;
     private volatile String locationProvider = LocationManager.NETWORK_PROVIDER;
+    private volatile boolean running = false;
 
     public LocationService(CopService copService) {
         this.copService = copService;
@@ -32,11 +33,11 @@ public final class LocationService implements NetworkListener, LocationListener 
 
     @Override
     public void onDataReceived(Data data) {
-        if (data.cmd == Protocol.Cmd.sensGps()) {
+        if (data.cmd == Protocol.Cmd.sensGps() && data.bData != Protocol.Req.get()) {
             Message msg = new Message();
             msg.arg1 = data.bData;
             handler.sendMessage(msg);
-        } else if (data.cmd == Protocol.Cmd.sensLocation()) {
+        } else if (data.cmd == Protocol.Cmd.sensLocation() && data.bData == Protocol.Req.get()) {
             ByteBuffer bb = ByteBuffer.allocate(Double.SIZE / 8 * 2);
             synchronized (this) {
                 bb.putDouble(latitude);
@@ -71,12 +72,18 @@ public final class LocationService implements NetworkListener, LocationListener 
 
     }
 
-    public void start() {
+    public boolean start() {
+        if (running) return false;
         locationManager.requestLocationUpdates(locationProvider, 0, 0, this);
+        running = true;
+        return true;
     }
 
-    public void stop() {
+    public boolean stop() {
+        if (!running) return false;
         locationManager.removeUpdates(this);
+        running = false;
+        return true;
     }
 
     private void write (Data data) {
@@ -91,9 +98,9 @@ public final class LocationService implements NetworkListener, LocationListener 
         @Override
         public boolean handleMessage(Message msg) {
             stop();
-            if (msg.arg1==0) {
+            if (msg.arg1 == Protocol.Req.off()) {
                 locationProvider = LocationManager.NETWORK_PROVIDER;
-            } else {
+            } else if (msg.arg1 == Protocol.Req.on()) {
                 locationProvider = LocationManager.GPS_PROVIDER;
             }
             start();
