@@ -17,9 +17,9 @@ public class Car3dView implements GLEventListener {
     private GLU glu;
     private int w, h;
 
-    private int xAngle = 0;
-    private int yAngle = 0;
-    private int zAngle = 0;
+    private volatile int xAngle = 0;
+    private volatile int yAngle = 0;
+    private volatile int zAngle = 0;
 
     @Override
     public void init(GLAutoDrawable drawable) {
@@ -30,7 +30,7 @@ public class Car3dView implements GLEventListener {
         glu = new GLU();
 
         gl.glShadeModel(GL2.GL_SMOOTH);
-        gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        gl.glClearColor(0.9f, 0.9f, 0.8f, 0.0f);
         gl.glClearDepth(1.0f);
         gl.glEnable(GL.GL_DEPTH_TEST);
         gl.glDepthFunc(GL.GL_LEQUAL);
@@ -42,6 +42,7 @@ public class Car3dView implements GLEventListener {
         xAngle = angle;
     }
 
+    @SuppressWarnings("unused")
     public void setYAngle(int angle) {
         yAngle = -angle;
     }
@@ -67,7 +68,7 @@ public class Car3dView implements GLEventListener {
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
         glu.gluPerspective(45.0f, (float) w / (float) h, 0.1f, 100.0f);
-        gl.glTranslatef(0f, 0f, -6f);
+        gl.glTranslatef(0f, -0.7f, -4f);
 
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
@@ -163,14 +164,6 @@ public class Car3dView implements GLEventListener {
         y -= HEIGHT;
         gl.glVertex3d(x, y, z); // 3
 
-        /*gl.glVertex3d(x, y, z); // 3
-        y += HEIGHT;
-        gl.glVertex3d(x, y, z);
-        x -= WIDTH;
-        gl.glVertex3d(x, y, z);
-        y -= HEIGHT;
-        gl.glVertex3d(x, y, z); // 4*/
-
         x -= WIDTH;
 
         gl.glVertex3d(x, y, z); // 4
@@ -180,6 +173,16 @@ public class Car3dView implements GLEventListener {
         gl.glVertex3d(x, y, z);
         y -= HEIGHT;
         gl.glVertex3d(x, y, z); // 5
+
+        gl.glColor4f(0.5f, 1f, 1f, 0.5f);
+
+        gl.glVertex3d(x, y, z); // 5
+        y += HEIGHT;
+        gl.glVertex3d(x, y, z);
+        x += WIDTH;
+        gl.glVertex3d(x, y, z);
+        y -= HEIGHT;
+        gl.glVertex3d(x, y, z); // 2
 
         gl.glEnd();
     }

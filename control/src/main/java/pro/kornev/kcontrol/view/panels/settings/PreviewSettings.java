@@ -24,15 +24,17 @@ import java.nio.ByteBuffer;
  */
 public class PreviewSettings extends CustomPanel implements SettingsListener, ActionListener, ProxyServiceListener {
     private ProxyService proxyService = null;
+    private JCheckBox state;
     private JTextField fps = null;
     private JTextField quality = null;
     private JCheckBox flash;
     private JComboBox<PreviewSize> sizes;
 
-    public PreviewSettings(String title) {
-        super(title);
+    public PreviewSettings() {
+        super("Preview settings");
         JButton apply = new JButton("Apply");
         apply.addActionListener(this);
+        state = new JCheckBox("Camera switch on");
         JLabel fpsLabel = new JLabel("FPS:");
         fps = new JTextField("1");
         JLabel qualityLabel = new JLabel("Quality:");
@@ -43,6 +45,8 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         JButton getSizes = new JButton("get");
 
         int y = 0;
+        add(state, getGbl().setGrid(0, y++));
+
         add(fpsLabel, getGbl().setGrid(0, y).weightH(0.2));
         add(fps, getGbl().setGrid(1, y++).weightH(0.8));
 
@@ -95,9 +99,16 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         if (PreviewPanel.isStartPreview()) {
             data = new Data();
             data.cmd = Protocol.Cmd.camState();
-            data.bData = (byte)0;
+            data.bData = Protocol.Req.off();
             proxyService.send(data);
         }
+
+        data = new Data();
+        data.cmd = Protocol.Cmd.camState();
+        data.bData = state.isSelected() ? Protocol.Req.on() : Protocol.Req.off();
+        proxyService.send(data);
+
+        if (!state.isSelected()) return;
 
         data = new Data();
         data.cmd = Protocol.Cmd.camFps();
@@ -129,7 +140,7 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         if (PreviewPanel.isStartPreview()) {
             data = new Data();
             data.cmd = Protocol.Cmd.camState();
-            data.bData = (byte)1;
+            data.bData = Protocol.Req.on();
             proxyService.send(data);
         }
     }

@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import pro.kornev.kcar.cop.Utils;
 import pro.kornev.kcar.cop.providers.ConfigDB;
 import pro.kornev.kcar.cop.providers.LogsDB;
+import pro.kornev.kcar.cop.services.CustomService;
 import pro.kornev.kcar.cop.services.support.ProcessKillerException;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
@@ -22,7 +23,7 @@ import pro.kornev.kcar.protocol.Protocol;
  * @author vkornev
  * @since 17.10.13
  */
-public final class NetworkService extends Service implements Runnable, NetworkListener {
+public final class NetworkService extends Service implements Runnable, CustomService {
     private static final int PROXY_PORT = 6780;
     private static final int PROXY_RECONNECT_TIMEOUT = 10000;
     private static final int PROXY_PING_DELAY = 60;
@@ -105,7 +106,7 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
         }
     }
 
-    public synchronized void stop() {
+    public synchronized boolean stop() {
         try {
             log.putLog("NS Stopping...");
             isRunning = false;
@@ -114,6 +115,7 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
             stopSelf();
         } catch (Exception ignored) {
         }
+        return true;
     }
 
     public synchronized boolean isRunning() {
@@ -124,6 +126,13 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
         if (listeners.contains(listener)) return;
         log.putLog("NS Add listener " + listener.getClass().getSimpleName());
         listeners.add(listener);
+    }
+
+    public void removeListener(NetworkListener listener) {
+        if (listeners.contains(listener)) {
+            listeners.remove(listener);
+            log.putLog("NS remove listener " + listener.getClass().getSimpleName());
+        }
     }
 
     public void write(Data data) {
@@ -139,14 +148,20 @@ public final class NetworkService extends Service implements Runnable, NetworkLi
         }
     }
 
-    private synchronized void start() {
-        log.putLog("NS Starting...");
-        Thread thread = new Thread(this);
-        thread.setUncaughtExceptionHandler(new ProcessKillerException());
-        thread.start();
-        executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleWithFixedDelay(new PingTask(this), PROXY_PING_DELAY, PROXY_PING_DELAY, TimeUnit.SECONDS);
-        isRunning = true;
+    public synchronized boolean start() {
+        try {
+            log.putLog("NS Starting...");
+            Thread thread = new Thread(this);
+            thread.setUncaughtExceptionHandler(new ProcessKillerException());
+            thread.start();
+            executorService = Executors.newSingleThreadScheduledExecutor();
+            executorService.scheduleWithFixedDelay(new PingTask(this), PROXY_PING_DELAY, PROXY_PING_DELAY, TimeUnit.SECONDS);
+            isRunning = true;
+        } catch (Exception e) {
+            log.putLog("NS Filed start: " + e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     private synchronized Socket getSocket() {

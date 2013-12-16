@@ -9,14 +9,14 @@ import android.hardware.SensorManager;
 import java.nio.ByteBuffer;
 
 import pro.kornev.kcar.cop.services.CopService;
-import pro.kornev.kcar.cop.services.network.NetworkListener;
+import pro.kornev.kcar.cop.services.CustomService;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
 /**
  *
  */
-public final class OrientationService implements NetworkListener, SensorEventListener {
+public final class OrientationService implements SensorEventListener, CustomService {
     private static final float ALPHA = 0.75f;
     private final CopService copService;
     private final SensorManager sensorManager;
@@ -28,6 +28,7 @@ public final class OrientationService implements NetworkListener, SensorEventLis
     private final float[] R = new float[9];
     private final float[] I = new float[9];
     private final float[] O = new float[3];
+    private volatile boolean running = false;
 
     public OrientationService(CopService copService) {
         this.copService = copService;
@@ -38,7 +39,7 @@ public final class OrientationService implements NetworkListener, SensorEventLis
 
     @Override
     public void onDataReceived(Data data) {
-        if (data.cmd == Protocol.Cmd.sensAxis()) {
+        if (data.cmd == Protocol.Cmd.sensOrient() && data.bData == Protocol.Req.get()) {
             ByteBuffer bb = ByteBuffer.allocate(Float.SIZE / 8 * 3);
             bb.putFloat(O[0]);
             bb.putFloat(O[1]);
@@ -72,7 +73,6 @@ public final class OrientationService implements NetworkListener, SensorEventLis
         }
         SensorManager.getRotationMatrix(R, I, acceleration, magnetic);
         SensorManager.getOrientation(R, O);
-        //Log.w("INC", String.format("%f %f %f", O[0] * 180 / Math.PI, O[1] * 180 / Math.PI, O[2] * 180 / Math.PI));
     }
 
     @Override
@@ -80,14 +80,20 @@ public final class OrientationService implements NetworkListener, SensorEventLis
 
     }
 
-    public void start() {
+    public boolean start() {
+        if (running) return false;
         sensorManager.registerListener(this, magneticSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        running = true;
+        return true;
     }
 
-    public void stop() {
+    public boolean stop() {
+        if (!running) return false;
         sensorManager.unregisterListener(this, magneticSensor);
         sensorManager.unregisterListener(this, accelerometer);
+        running = false;
+        return true;
     }
 
     private void write (Data data) {

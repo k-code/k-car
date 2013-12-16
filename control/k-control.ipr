@@ -316,6 +316,7 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/jogamp/jogl/1.0/jogl-1.0-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jogl-java-src.zip!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.slf4j:jcl-over-slf4j:1.6.4">

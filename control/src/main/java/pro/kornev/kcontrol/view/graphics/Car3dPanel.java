@@ -33,7 +33,7 @@ public class Car3dPanel extends GraphicPanel {
         
         animator.add(canvas);
 
-        canvas.setMinimumSize(new Dimension());  
+        //canvas.setMinimumSize(new Dimension());
         animator.start();
     }
     

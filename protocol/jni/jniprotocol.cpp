@@ -118,6 +118,20 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_arrayType(JNIEnv 
     return (jbyte)DATA_TYPE_ARRAY;
 }
 
+// Requests
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Req_off(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_REQ_OFF;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Req_on(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_REQ_ON;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Req_get(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_REQ_GET;
+}
+
 //Commands
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_reservedFirst(JNIEnv *e, jclass c) {
@@ -183,8 +197,8 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLigh
     return (jbyte)PROTOCOL_CMD_SENS_LIGHT;
 }
 
-JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensAxis(JNIEnv *e, jclass c) {
-    return (jbyte)PROTOCOL_CMD_SENS_AXIS;
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensOrient(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_SENS_ORIENT;
 }
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagnetic(JNIEnv *e, jclass c) {
@@ -193,6 +207,10 @@ JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensMagn
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensGps(JNIEnv *e, jclass c) {
     return (jbyte)PROTOCOL_CMD_SENS_GPS;
+}
+
+JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_sensLocation(JNIEnv *e, jclass c) {
+    return (jbyte)PROTOCOL_CMD_SENS_LOCATION;
 }
 
 JNIEXPORT jbyte JNICALL Java_pro_kornev_kcar_protocol_Protocol_00024Cmd_autoTriggerLed(JNIEnv *e, jclass c) {

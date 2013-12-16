@@ -12,14 +12,14 @@ import java.util.List;
 
 import pro.kornev.kcar.cop.providers.LogsDB;
 import pro.kornev.kcar.cop.services.CopService;
-import pro.kornev.kcar.cop.services.network.NetworkListener;
+import pro.kornev.kcar.cop.services.CustomService;
 import pro.kornev.kcar.protocol.Data;
 import pro.kornev.kcar.protocol.Protocol;
 
 /**
  *
  */
-public final class VideoService implements NetworkListener, Camera.PreviewCallback, Camera.ErrorCallback {
+public final class VideoService implements Camera.PreviewCallback, Camera.ErrorCallback, CustomService {
     private final CopService copService;
     private final LogsDB log;
 
@@ -28,6 +28,7 @@ public final class VideoService implements NetworkListener, Camera.PreviewCallba
     private volatile List<Camera.Size> sizes;
     private volatile Camera.Size size;
     private volatile int previewFormat = ImageFormat.NV21;
+    private volatile boolean running = false;
 
     private int quality = 50;
     private int fps = 1;
@@ -42,7 +43,8 @@ public final class VideoService implements NetworkListener, Camera.PreviewCallba
         log.putLog("VS Created");
     }
 
-    public void start() {
+    public boolean start() {
+        if (running) return false;
         try {
             if (copService != null) {
                 cameraPreview = new CameraPreview(copService);
@@ -52,17 +54,24 @@ public final class VideoService implements NetworkListener, Camera.PreviewCallba
             }
             sizes = getCamera().getParameters().getSupportedPreviewSizes();
             log.putLog("VS Is running");
+            running = true;
+            return true;
         } catch (Throwable e) {
             log.putLog("VS Start was failed: " + e.getMessage());
+            return false;
         }
     }
 
-    public synchronized void stop() {
+    public synchronized boolean stop() {
+        if (!running) return false;
         try {
             stopPreview();
             mCamera.release();
         } catch (Exception ignored) {}
+        mCamera = null;
         log.putLog("VS Stopped");
+        running = false;
+        return true;
     }
 
     // Network listener
@@ -72,10 +81,10 @@ public final class VideoService implements NetworkListener, Camera.PreviewCallba
             return;
         }
         if (data.cmd == Protocol.Cmd.camState()) {
-            if (data.bData == 0) {
+            if (data.bData == 3) {
                 log.putLog("VS Stop preview");
                 stopPreview();
-            } else {
+            } else if (data.bData == 4) {
                 log.putLog("VS Start preview");
                 startPreview();
             }
