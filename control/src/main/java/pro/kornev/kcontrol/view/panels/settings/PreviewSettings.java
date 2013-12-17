@@ -99,7 +99,7 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         if (PreviewPanel.isStartPreview()) {
             data = new Data();
             data.cmd = Protocol.Cmd.camState();
-            data.bData = Protocol.Req.off();
+            data.bData = 3;
             proxyService.send(data);
         }
 
@@ -140,7 +140,7 @@ public class PreviewSettings extends CustomPanel implements SettingsListener, Ac
         if (PreviewPanel.isStartPreview()) {
             data = new Data();
             data.cmd = Protocol.Cmd.camState();
-            data.bData = Protocol.Req.on();
+            data.bData = 4;
             proxyService.send(data);
         }
     }
