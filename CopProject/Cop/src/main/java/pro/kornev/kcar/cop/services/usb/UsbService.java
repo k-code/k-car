@@ -47,7 +47,6 @@ public final class UsbService implements NetworkListener, SerialInputOutputManag
             log.putLog("US Failed get USB driver");
             return;
         }
-        startIoManager(driver);
         log.putLog("US Is running");
     }
 
@@ -125,7 +124,9 @@ public final class UsbService implements NetworkListener, SerialInputOutputManag
                     return null;
                 }
             }
-            return UsbSerialProber.probeSingleDevice(usbManager, usbDevice).get(0);
+            UsbSerialDriver driver = UsbSerialProber.probeSingleDevice(usbManager, usbDevice).get(0);
+            startIoManager(driver);
+            return driver;
         } catch (Exception e) {
             log.putLog("US Failed get driver: " + e.getMessage());
             return null;
@@ -138,13 +139,17 @@ public final class UsbService implements NetworkListener, SerialInputOutputManag
 
     private void write(Data data) {
         try {
-            if (driver == null) return;
+            if (driver == null) {
+                driver = getDriver();
+                if (driver == null) return;
+            }
             byte[] buf = new byte[Protocol.getMaxLength()];
             log.putLog("UW Write data cmd: " + data.cmd);
             int bLen = Protocol.toByteArray(data, buf);
             driver.write(Arrays.copyOf(buf, bLen), WRITE_TIMEOUT);
         } catch (Exception e) {
             log.putLog("UW Failed write data: " + e.getMessage());
+            driver = getDriver(); // try reconnect to device
         }
 
     }
