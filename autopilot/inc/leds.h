@@ -8,10 +8,10 @@
 #ifndef LEDS_H_
 #define LEDS_H_
 
+#include "stm32f4xx.h"
+
 #define LEDS_Off 0
 #define LEDS_On 1
-
-#include "stm32f4xx.h"
 
 void LEDS_init();
 void LEDS_live(uint8_t state);

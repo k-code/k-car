@@ -11,9 +11,12 @@
 #include "stm32f4xx.h"
 #include "protocol.h"
 
+#define USB_POWER_PIN GPIO_Pin_8
+#define USB_POWER_BUS GPIOA
+
 void USB_init();
 void USB_write(PROTOCOL_data data);
-PROTOCOL_data USB_nextData();
 void USB_read(uint8_t *, uint32_t);
+void USB_power(uint8_t);
 
 #endif /* USB_H_ */
