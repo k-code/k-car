@@ -104,7 +104,8 @@ public class UpdateService implements CustomService, Runnable {
             String path = (outputFile).getAbsolutePath();
 
             if (ShellInterface.isSuAvailable()) {
-                ShellInterface.runCommand("pm install -r "+path);
+                ShellInterface.runCommand("pm install -r /sdcard/Download/cop.apk && "
+                    + "am start -n \"pro.kornev.kcar.cop/pro.kornev.kcar.cop.activities.MainActivity\" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER");
             }
         } catch (Exception e) {
             Log.e("UpdateAPP", "Update error! " + e.getMessage());
