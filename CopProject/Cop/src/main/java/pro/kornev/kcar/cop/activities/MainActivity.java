@@ -131,6 +131,9 @@ public class MainActivity extends Activity {
             CopService.CopBinder binder = (CopService.CopBinder) service;
             copService = binder.getService();
             copBound = true;
+            if (!copService.isRunning()) {
+                startService(copServiceIntent);
+            }
             updateServiceState();
         }
 
