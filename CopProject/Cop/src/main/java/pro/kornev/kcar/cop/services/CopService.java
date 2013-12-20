@@ -84,7 +84,7 @@ public final class CopService extends Service implements NetworkListener {
         lightService = new LightService(this);
         orientationService = new OrientationService(this);
         locationService = new LocationService(this);
-        updateService = new UpdateService();
+        updateService = new UpdateService(this);
         bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();
