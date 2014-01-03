@@ -24,6 +24,7 @@ import pro.kornev.kcar.cop.services.sensors.OrientationService;
 import pro.kornev.kcar.cop.services.support.IWakeUpBinder;
 import pro.kornev.kcar.cop.services.support.IWakeUpCallback;
 import pro.kornev.kcar.cop.services.support.ProcessKillerException;
+import pro.kornev.kcar.cop.services.support.UpdateService;
 import pro.kornev.kcar.cop.services.usb.UsbService;
 import pro.kornev.kcar.cop.services.video.VideoService;
 import pro.kornev.kcar.protocol.Data;
@@ -47,6 +48,7 @@ public final class CopService extends Service implements NetworkListener {
     private LightService lightService;
     private OrientationService orientationService;
     private LocationService locationService;
+    private UpdateService updateService;
 
     @Override
     public void onCreate() {
@@ -82,9 +84,11 @@ public final class CopService extends Service implements NetworkListener {
         lightService = new LightService(this);
         orientationService = new OrientationService(this);
         locationService = new LocationService(this);
+        updateService = new UpdateService(this);
         bindService(networkServiceIntent, networkServiceConnection, Context.BIND_AUTO_CREATE);
 
         usbService.start();
+        updateService.start();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -154,6 +158,7 @@ public final class CopService extends Service implements NetworkListener {
         lightService.stop();
         orientationService.stop();
         locationService.stop();
+        updateService.stop();
         stopSelf();
     }
 

@@ -110,11 +110,9 @@ public final class WakeUpService extends Service implements Runnable {
                         log.putLog("WS Binding to COP service...");
                         bindService(copServiceIntent, connection, BIND_AUTO_CREATE);
                     }
-                } catch (DeadObjectException e) {
+                } catch (Exception e) {
                     log.putLog("WS Binding error: " + e.getMessage());
                     copService = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
                 Utils.sleep(CHECK_SERVICE_STATE_INTERVAL);
             }
