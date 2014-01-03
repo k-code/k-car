@@ -39,6 +39,10 @@ void LEDS_trigger(uint8_t state) {
 	}
 }
 
+uint8_t LEDS_live_state() {
+	return GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_12);
+}
+
 uint8_t LEDS_trigger_state() {
 	return GPIO_ReadOutputDataBit(GPIOD, GPIO_Pin_13);
 }

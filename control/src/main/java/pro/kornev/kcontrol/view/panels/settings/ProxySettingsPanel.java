@@ -18,7 +18,7 @@ import java.util.Set;
  */
 
 public class ProxySettingsPanel extends JPanel {
-    private static final String DEFAULT_PROXY = "10.69.30.50";
+    private static final String DEFAULT_PROXY = "10.0.0.23";
     private static final String DEFAULT_PORT = "6781";
     private JTextField proxyHost;
     private JTextField proxyPort;

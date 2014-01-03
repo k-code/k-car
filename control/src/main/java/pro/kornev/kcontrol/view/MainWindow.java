@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.*;
 
+import pro.kornev.kcontrol.view.panels.drive.DrivePanel;
 import pro.kornev.kcontrol.view.panels.location.LocationPanel;
 import pro.kornev.kcontrol.view.panels.settings.SettingsPanel;
 import pro.kornev.kcontrol.view.panels.state.SystemStatePanel;
@@ -31,6 +32,7 @@ public final class MainWindow extends JFrame implements Runnable {
         mainTabbedPane.add("State view", new SystemStatePanel());
         mainTabbedPane.add("Settings panel", new SettingsPanel(null));
         mainTabbedPane.add("Location view", new LocationPanel());
+        mainTabbedPane.add("Drive view", new DrivePanel());
 
         mainPanel.add(mainTabbedPane, GBLHelper.create().setGrid(0, 0).fillB().anchorT().colSpan().fillB());
 

@@ -16,6 +16,7 @@
 void LEDS_init();
 void LEDS_live(uint8_t state);
 void LEDS_trigger(uint8_t state);
+uint8_t LEDS_live_state();
 uint8_t LEDS_trigger_state();
 
 

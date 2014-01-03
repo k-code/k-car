@@ -29,7 +29,10 @@ int main(void) {
 	//int x = 500;
 
 	do {
-		TIME_delay(1000);
+		//TIME_delay(1000);
+
+		for (int i=0; i < 10000000; i++) {}
+		LEDS_live(!LEDS_live_state());
 		/*if (US_distance > 30) {
 			MOTORS_forward(1000);
 		}
@@ -51,6 +54,10 @@ int main(void) {
 		TIME_delay(1000);
 		MOTORS_forward(x);
 		x+= 10;*/
+		USB_power(1);
+		//TIME_delay(100);
+		for (int i=0; i < 10000000; i++) {}
+		USB_power(0);
 
 	} while (1);
 }

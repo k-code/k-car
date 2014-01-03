@@ -47,8 +47,8 @@
 #define PROTOCOL_CMD_TRIGGER_LED    50
 #define PROTOCOL_CMD_DISTANCE_REQ   51
 #define PROTOCOL_CMD_DISTANCE_RES   52
-#define PROTOCOL_CMD_LMS            53
-#define PROTOCOL_CMD_RMS            54
+#define PROTOCOL_CMD_DIRECT         53
+#define PROTOCOL_CMD_ROTATE         54
 
 typedef unsigned char t_byte;
 typedef unsigned int t_int;

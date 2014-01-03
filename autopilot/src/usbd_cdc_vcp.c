@@ -27,6 +27,8 @@
 #include "usbd_cdc_vcp.h"
 #include "usbd_cdc_core.h"
 #include "usb.h"
+#include "leds.h"
+#include "time.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -130,6 +132,7 @@ static uint16_t VCP_Ctrl (uint32_t Cmd, uint8_t* Buf, uint32_t Len)
     break;
   }
 
+	LEDS_trigger(LEDS_On);
   return USBD_OK;
 }
 
